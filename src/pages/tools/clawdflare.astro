@@ -7,20 +7,37 @@ import Tool from '../../layouts/Tool.astro';
   pip="pip install clawdflare"
   role="MCP Server"
   repo="clawdflare"
-  description="Cloudflare zone auditing from your terminal. DNS, SSL, firewall rules, cache."
+  description="Opinionated Cloudflare MCP server — audit and fix your zones with a read/write security split."
 >
   <h2>What it does</h2>
-  <p>clawdflare is an MCP server for auditing and managing Cloudflare zones. Check DNS records, SSL settings, firewall rules, and cache configuration — all through Claude Code tool calls.</p>
+  <p>AI agents are great at reading infrastructure and telling you what's wrong. They're less great at having unsupervised write access to your DNS. clawdflare splits the difference: read operations are free, write operations require a PIN via macOS popup. The agent never sees the write token.</p>
 
   <h2>Key features</h2>
   <ul>
-    <li><strong>Zone listing</strong> — see all zones in your Cloudflare account</li>
-    <li><strong>DNS audit</strong> — review records, find misconfigurations</li>
-    <li><strong>SSL check</strong> — verify certificate status and mode</li>
-    <li><strong>Firewall rules</strong> — inspect WAF and security settings</li>
-    <li><strong>Cache</strong> — review and purge cache settings</li>
+    <li><strong>Read/write split</strong> — read token in env, write token encrypted on disk, decrypted only with PIN</li>
+    <li><strong>Zone audit</strong> — check DNS records, SSL settings, and security against best practices</li>
+    <li><strong>Fix mode</strong> — dry-run shows what would change, --apply requires PIN confirmation</li>
+    <li><strong>SSL status</strong> — certificate mode, edge certs, HSTS</li>
+    <li><strong>Cache management</strong> — purge cache with PIN confirmation</li>
+    <li><strong>CLI + MCP</strong> — use from terminal or as Claude Code MCP server</li>
   </ul>
 
   <h2>Install</h2>
-  <pre><code>pip install clawdflare</code></pre>
+  <pre><code>pip install clawdflare
+export CLOUDFLARE_API_TOKEN="your-read-only-token"
+clawdflare setup-token  # encrypt write token with PIN</code></pre>
+
+  <h2>Usage</h2>
+  <pre><code># CLI
+clawdflare zones                     # list all zones
+clawdflare audit example.com         # audit against best practices
+clawdflare fix example.com           # dry-run: show what would change
+clawdflare fix example.com --apply   # apply fixes (PIN required)
+clawdflare dns-records example.com   # list DNS records
+clawdflare ssl-status example.com    # SSL/TLS summary
+
+# MCP — add to Claude Code
+clawdflare serve</code></pre>
+
+  <p>Read operations use CLOUDFLARE_API_TOKEN from env. Write operations decrypt a separate token with a macOS PIN popup. The agent never sees the write credentials.</p>
 </Tool>

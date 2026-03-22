@@ -7,20 +7,42 @@ import Tool from '../../layouts/Tool.astro';
   pip="pip install apple-a-day"
   role="Agent Tool"
   repo="apple-a-day"
-  description="Mac health toolkit for AI agents. Disk, battery, memory, thermals. Zero dependencies."
+  description="Agent-native Mac health toolkit. 9 checks, zero dependencies, plain english."
 >
   <h2>What it does</h2>
-  <p>AI agents run on machines. Machines have disk space, battery, memory, and thermal limits. apple-a-day gives agents awareness of the Mac they're running on — so they can check before doing something that would fill the disk or overheat the CPU.</p>
+  <p>AI agents run on machines. Machines have disk space, memory pressure, crash loops, and security gaps. apple-a-day gives agents awareness of the Mac they're running on — 9 checks, every finding with a severity, plain-english explanation, and fix command.</p>
 
-  <h2>Key features</h2>
+  <h2>What it checks</h2>
   <ul>
-    <li><strong>Disk space</strong> — available space, largest directories, cleanup suggestions</li>
-    <li><strong>Battery</strong> — charge level, power source, cycle count</li>
-    <li><strong>Memory</strong> — RAM usage, swap pressure</li>
-    <li><strong>Thermals</strong> — CPU temperature, fan speed</li>
-    <li><strong>Zero dependencies</strong> — pure Python, no compiled extensions</li>
+    <li><strong>Crash loops</strong> — services dying repeatedly via DiagnosticReports</li>
+    <li><strong>Kernel panics</strong> — panic logs decoded into human-readable causes</li>
+    <li><strong>Dylib health</strong> — broken dynamic library links after brew upgrades</li>
+    <li><strong>Memory pressure</strong> — RAM pressure level and swap usage</li>
+    <li><strong>Disk health</strong> — APFS state, free space, Time Machine snapshot bloat</li>
+    <li><strong>Launch agents</strong> — crash-looping, rogue, or forgotten launchd services</li>
+    <li><strong>Homebrew</strong> — outdated packages, doctor warnings, broken links</li>
+    <li><strong>Security</strong> — SIP, Gatekeeper, FileVault, XProtect freshness</li>
+    <li><strong>Network</strong> — Wi-Fi signal quality, speed test, responsiveness</li>
   </ul>
 
   <h2>Install</h2>
   <pre><code>pip install apple-a-day</code></pre>
+
+  <h2>Usage</h2>
+  <pre><code># CLI — run all checks
+aad checkup
+
+# Structured JSON for agent parsing
+aad checkup --json --min-severity warning --fields severity,summary,fix
+
+# Python — programmatic access
+from apple_a_day.runner import run_all_checks
+
+report = run_all_checks()
+for r in report.results:
+    for f in r.findings:
+        if f.severity.value == "critical":
+            print(f.summary, f.fix)</code></pre>
+
+  <p>Zero dependencies. Pure Python. Every finding includes a severity, a plain-english explanation, and a fix command the agent can run.</p>
 </Tool>

@@ -7,18 +7,32 @@ import Tool from '../../layouts/Tool.astro';
   pip="pip install eidos-mcp-registry"
   role="MCP Server"
   repo="eidos-mcp-registry"
-  description="MCP server scoping — right tools for the right project, no tool pollution."
+  description="MCP server management for developers who work across dozens of repos. Scope, deploy, audit."
 >
   <h2>What it does</h2>
-  <p>When you have dozens of MCP servers installed, every project sees every tool — even irrelevant ones. eidos-mcp-registry scopes which MCP servers are active per project, reducing tool pollution and keeping agent context clean.</p>
+  <p>You have 20+ MCP servers installed. You work across 100+ repos. Every server leaks into every project — staging credentials visible in client repos, internal tools cluttering projects that don't need them, Claude burning thousands of tokens evaluating 200+ tools when it only needs 20. The registry fixes this.</p>
 
   <h2>Key features</h2>
   <ul>
-    <li><strong>Per-project scoping</strong> — only load the MCP servers a project actually needs</li>
-    <li><strong>Registry management</strong> — add, remove, list registered servers</li>
-    <li><strong>Clean context</strong> — agents see fewer, more relevant tools</li>
+    <li><strong>Group-based scoping</strong> — organize servers by client, team, or project. Client A's repos only see Client A's tools</li>
+    <li><strong>One-click deploy</strong> — write .mcp.json to every repo in a group. Merge-safe: hand-edits preserved</li>
+    <li><strong>Secrets masking</strong> — API keys automatically replaced with $VAR references. Secrets never touch disk</li>
+    <li><strong>Scope audit</strong> — see which servers are leaking to unintended projects. One-click fix</li>
+    <li><strong>Token budget</strong> — see exactly how many tokens you're burning on tool schemas</li>
+    <li><strong>Snapshot + rollback</strong> — every deploy creates a restore point</li>
+    <li><strong>280+ tests</strong> — unit, API, and E2E (Playwright)</li>
   </ul>
 
   <h2>Install</h2>
   <pre><code>pip install eidos-mcp-registry</code></pre>
+
+  <h2>The lifecycle</h2>
+  <pre><code># 1. Scan — discovers servers from claude mcp list + project configs
+# 2. Assign — drag servers into groups (each group = a set of repos)
+# 3. Deploy — write .mcp.json to every repo in a group
+# 4. Promote — remove from global config, only exist where assigned
+
+Scan -> Assign -> Deploy -> Promote</code></pre>
+
+  <p>Built for Claude Code. Local UI for organizing, deploying, and auditing MCP server configs across your entire workspace.</p>
 </Tool>

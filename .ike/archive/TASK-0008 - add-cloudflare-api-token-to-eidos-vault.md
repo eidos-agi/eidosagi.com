@@ -11,5 +11,6 @@ definition-of-done:
   - clawdflare added to .mcp.json or global settings
   - Can modify DNS records via MCP
 visionlog_goal_id: GOAL-001
+updated: '2026-03-22'
 ---
 Create a Cloudflare API token scoped to eidosagi.com DNS, store in eidos-vault at infra/cloudflare/api-token. Then configure clawdflare as an MCP server so DNS changes can be automated.
