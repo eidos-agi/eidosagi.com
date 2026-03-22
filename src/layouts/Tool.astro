@@ -126,5 +126,10 @@ const { name, pip, role, repo, description } = Astro.props;
 
   @media (max-width: 768px) {
     .tool-hero { padding-top: var(--space-8); }
+    .tool-hero h1 { font-size: var(--text-2xl); }
+    .tool-actions { flex-direction: column; align-items: flex-start; }
+    .tool-pip { font-size: var(--text-sm); overflow-x: auto; max-width: 100%; }
+    .tool-content pre { font-size: var(--text-xs); }
+    .page { padding: 0 var(--space-4); }
   }
 </style>
