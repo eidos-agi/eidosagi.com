@@ -2,7 +2,7 @@
 id: "GOAL-004"
 type: "goal"
 title: "Enterprise section"
-status: "locked"
+status: "complete"
 date: "2026-03-22"
 depends_on: ["GOAL-001"]
 unlocks: []

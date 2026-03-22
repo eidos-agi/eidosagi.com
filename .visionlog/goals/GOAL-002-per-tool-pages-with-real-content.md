@@ -2,7 +2,7 @@
 id: "GOAL-002"
 type: "goal"
 title: "Per-tool pages with real content"
-status: "locked"
+status: "complete"
 date: "2026-03-22"
 depends_on: ["GOAL-001"]
 unlocks: []

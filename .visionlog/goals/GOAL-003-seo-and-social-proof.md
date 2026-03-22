@@ -2,7 +2,7 @@
 id: "GOAL-003"
 type: "goal"
 title: "SEO and social proof"
-status: "locked"
+status: "in-progress"
 date: "2026-03-22"
 depends_on: ["GOAL-002"]
 unlocks: []

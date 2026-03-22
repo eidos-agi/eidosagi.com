@@ -105,6 +105,13 @@ pre {
 
 pre code { background: none; padding: 0; }
 
+/* Page container — shared across all pages */
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+}
+
 /* Focus states — keyboard navigation */
 :focus-visible {
   outline: 2px solid var(--color-primary);

@@ -2,7 +2,7 @@
 id: "GOAL-001"
 type: "goal"
 title: "Landing page at production quality"
-status: "in-progress"
+status: "complete"
 date: "2026-03-22"
 depends_on: []
 unlocks: []
