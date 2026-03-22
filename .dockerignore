@@ -1,0 +1,10 @@
+.git
+.env*
+node_modules
+.astro
+.ike
+.visionlog
+.claude
+feedback.jsonl
+*.md
+!README.md
