@@ -1,0 +1,130 @@
+/* ============================================================
+   tokens.css — Eidos AGI Design System
+   "A well-organized workshop, not a showroom."
+
+   Era anchors:
+   - Swiss International Style (structure, grid, conviction)
+   - 1970s workshop warmth (texture, earth tones, evidence of hand)
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   COLOR
+   Warm dark. Not the cold blue-black of every dev tools site.
+   Think: a workshop at night with warm overhead light.
+   ------------------------------------------------------------ */
+
+:root {
+  --color-bg:        #161210;   /* warm near-black, brown not blue */
+  --color-surface:   #1e1a17;   /* raised surfaces — walnut, not steel */
+  --color-text:      #dcd5cb;   /* warm cream, not cold white */
+  --color-muted:     #7a7068;   /* warm mid-tone, clay not slate */
+  --color-primary:   #c4935a;   /* amber brass — the main accent */
+  --color-secondary: #7a8c72;   /* sage green — the book's sage, it works */
+  --color-command:   #b8c4a0;   /* muted green for code/commands */
+  --color-danger:    #c4694f;   /* terracotta — the book's terracotta */
+}
+
+
+/* ------------------------------------------------------------
+   TYPE SCALE
+   Major Third ratio (1.25), 16px base.
+   ------------------------------------------------------------ */
+
+:root {
+  --text-xs:    0.64rem;
+  --text-sm:    0.80rem;
+  --text-base:  1.00rem;
+  --text-md:    1.25rem;
+  --text-lg:    1.56rem;
+  --text-xl:    1.95rem;
+  --text-2xl:   2.44rem;
+  --text-3xl:   3.05rem;
+  --text-4xl:   3.81rem;
+}
+
+
+/* ------------------------------------------------------------
+   SPACING — 8-point grid
+   ------------------------------------------------------------ */
+
+:root {
+  --space-1:    0.25rem;
+  --space-2:    0.5rem;
+  --space-3:    0.75rem;
+  --space-4:    1rem;
+  --space-6:    1.5rem;
+  --space-8:    2rem;
+  --space-12:   3rem;
+  --space-16:   4rem;
+  --space-24:   6rem;
+  --space-32:   8rem;
+}
+
+
+/* ------------------------------------------------------------
+   TYPOGRAPHY
+   Space Grotesk: geometric, technical, has character.
+   System serif for body: warm, readable, zero cost.
+   Monospace for code: the tools speak for themselves.
+   ------------------------------------------------------------ */
+
+:root {
+  --font-heading:  'Space Grotesk', system-ui, sans-serif;
+  --font-body:     'Space Grotesk', system-ui, sans-serif;
+  --font-mono:     'SF Mono', 'Cascadia Code', 'Fira Code', ui-monospace, monospace;
+
+  --weight-regular:   400;
+  --weight-medium:    500;
+  --weight-bold:      700;
+
+  --leading-tight:    1.05;
+  --leading-snug:     1.2;
+  --leading-normal:   1.5;
+  --leading-relaxed:  1.7;
+
+  --measure-prose:    62ch;
+  --measure-narrow:   44ch;
+}
+
+
+/* ------------------------------------------------------------
+   BORDERS & RADIUS
+   ------------------------------------------------------------ */
+
+:root {
+  --border-color:   var(--color-muted);
+  --border-width:   1px;
+  --radius-sm:      2px;
+  --radius-md:      3px;
+}
+
+
+/* ------------------------------------------------------------
+   Z-INDEX
+   ------------------------------------------------------------ */
+
+:root {
+  --z-base:     0;
+  --z-raised:   10;
+  --z-overlay:  100;
+  --z-grain:    9999;
+}
+
+
+/* ------------------------------------------------------------
+   LIGHT MODE
+   Same workshop, lights on. Warm, not clinical.
+   ------------------------------------------------------------ */
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-bg:        #f0ebe4;
+    --color-surface:   #e4ded6;
+    --color-text:      #1e1a17;
+    --color-muted:     #8a8078;
+    --color-primary:   #9a6d35;
+    --color-secondary: #5a6c52;
+    --color-command:   #4a6a3a;
+  }
+}

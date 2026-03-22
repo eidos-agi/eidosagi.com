@@ -1,0 +1,26 @@
+---
+import Tool from '../../layouts/Tool.astro';
+---
+
+<Tool
+  name="apple-a-day"
+  pip="pip install apple-a-day"
+  role="Agent Tool"
+  repo="apple-a-day"
+  description="Mac health toolkit for AI agents. Disk, battery, memory, thermals. Zero dependencies."
+>
+  <h2>What it does</h2>
+  <p>AI agents run on machines. Machines have disk space, battery, memory, and thermal limits. apple-a-day gives agents awareness of the Mac they're running on — so they can check before doing something that would fill the disk or overheat the CPU.</p>
+
+  <h2>Key features</h2>
+  <ul>
+    <li><strong>Disk space</strong> — available space, largest directories, cleanup suggestions</li>
+    <li><strong>Battery</strong> — charge level, power source, cycle count</li>
+    <li><strong>Memory</strong> — RAM usage, swap pressure</li>
+    <li><strong>Thermals</strong> — CPU temperature, fan speed</li>
+    <li><strong>Zero dependencies</strong> — pure Python, no compiled extensions</li>
+  </ul>
+
+  <h2>Install</h2>
+  <pre><code>pip install apple-a-day</code></pre>
+</Tool>

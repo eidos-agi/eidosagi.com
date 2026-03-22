@@ -1,0 +1,24 @@
+---
+import Tool from '../../layouts/Tool.astro';
+---
+
+<Tool
+  name="eidos-mcp-registry"
+  pip="pip install eidos-mcp-registry"
+  role="MCP Server"
+  repo="eidos-mcp-registry"
+  description="MCP server scoping — right tools for the right project, no tool pollution."
+>
+  <h2>What it does</h2>
+  <p>When you have dozens of MCP servers installed, every project sees every tool — even irrelevant ones. eidos-mcp-registry scopes which MCP servers are active per project, reducing tool pollution and keeping agent context clean.</p>
+
+  <h2>Key features</h2>
+  <ul>
+    <li><strong>Per-project scoping</strong> — only load the MCP servers a project actually needs</li>
+    <li><strong>Registry management</strong> — add, remove, list registered servers</li>
+    <li><strong>Clean context</strong> — agents see fewer, more relevant tools</li>
+  </ul>
+
+  <h2>Install</h2>
+  <pre><code>pip install eidos-mcp-registry</code></pre>
+</Tool>

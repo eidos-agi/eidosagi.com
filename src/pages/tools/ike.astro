@@ -1,0 +1,45 @@
+---
+import Tool from '../../layouts/Tool.astro';
+---
+
+<Tool
+  name="ike.md"
+  pip="pip install ike-md"
+  role="Execution"
+  repo="ike.md"
+  description="Tasks, milestones, Definition of Done. Named for Eisenhower — execute at scale."
+>
+  <h2>What it does</h2>
+  <p>ike.md is the execution forge. Tasks, milestones, documents, Definition of Done. Named for Eisenhower — the man who planned D-Day and then ran the free world. Ike didn't just plan. He executed at scale, across many agents, under time pressure, with contracts that had to be honored.</p>
+
+  <h2>Key features</h2>
+  <ul>
+    <li><strong>Tasks with lifecycle</strong> — To Do → In Progress → Done, with completion notes</li>
+    <li><strong>Milestones</strong> — group tasks into deliverables</li>
+    <li><strong>Definition of Done</strong> — explicit checklist per task, not vibes</li>
+    <li><strong>Dependencies</strong> — tasks can depend on other tasks</li>
+    <li><strong>Documents</strong> — attach specs, briefs, notes to projects</li>
+    <li><strong>visionlog integration</strong> — link tasks to GOAL-xxx for traceability</li>
+    <li><strong>MCP server</strong> — agents create, edit, complete tasks through tool calls</li>
+  </ul>
+
+  <h2>Install</h2>
+  <pre><code>pip install ike-md</code></pre>
+
+  <h2>Quick start</h2>
+  <pre><code># Initialize in your project
+ike init --name "my-project"
+
+# Create tasks
+ike task create --title "Build the API" --priority high
+ike task create --title "Write tests" --depends-on TASK-0001
+
+# Work on a task
+ike task edit --id TASK-0001 --status "In Progress"
+
+# Complete with notes
+ike task complete --id TASK-0001 --notes "API deployed, 12 endpoints"</code></pre>
+
+  <h2>The trilogy</h2>
+  <p>ike.md is the final pillar. It reads visionlog's contracts (guardrails it must not violate, goals it serves) and executes within them. Every task can link back to the GOAL it serves and the research.md decision that authorized the approach.</p>
+</Tool>

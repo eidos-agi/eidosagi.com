@@ -1,0 +1,130 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  name: string;
+  pip: string;
+  role: string;
+  repo: string;
+  description: string;
+}
+
+const { name, pip, role, repo, description } = Astro.props;
+---
+
+<Base
+  title={`${name} — Eidos AGI`}
+  description={description}
+>
+  <div class="page">
+    <div class="tool-nav">
+      <a href="/">← eidos agi</a>
+      <span class="tool-role">{role}</span>
+    </div>
+
+    <header class="tool-hero">
+      <h1>{name}</h1>
+      <p class="tool-desc">{description}</p>
+      <div class="tool-actions">
+        <code class="tool-pip">{pip}</code>
+        <a href={`https://github.com/eidos-agi/${repo}`} class="tool-gh">View on GitHub</a>
+      </div>
+    </header>
+
+    <div class="tool-content">
+      <slot />
+    </div>
+
+    <footer class="foot">
+      <span>&copy; 2026 Eidos AGI</span>
+    </footer>
+  </div>
+</Base>
+
+<style is:global>
+  .tool-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--space-6) 0;
+    border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 20%, transparent);
+  }
+  .tool-nav a {
+    font-family: var(--font-heading);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+  .tool-nav a:hover { color: var(--color-primary); }
+  .tool-role {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .tool-hero {
+    padding: var(--space-16) 0 var(--space-12);
+    border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 20%, transparent);
+  }
+  .tool-hero h1 {
+    font-size: clamp(2rem, 5vw, var(--text-4xl));
+    margin-bottom: var(--space-4);
+  }
+  .tool-desc {
+    font-size: var(--text-lg);
+    color: var(--color-muted);
+    max-width: var(--measure-prose);
+    margin-bottom: var(--space-8);
+  }
+  .tool-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+  .tool-pip {
+    font-size: var(--text-base);
+    color: var(--color-command);
+    background: var(--color-surface);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    border: var(--border-width) solid color-mix(in srgb, var(--color-muted) 15%, transparent);
+  }
+  .tool-gh {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+
+  .tool-content {
+    padding: var(--space-12) 0;
+  }
+  .tool-content h2 {
+    margin-bottom: var(--space-4);
+    padding-top: var(--space-8);
+  }
+  .tool-content h2:first-child { padding-top: 0; }
+  .tool-content p {
+    max-width: var(--measure-prose);
+    margin-bottom: var(--space-4);
+    line-height: var(--leading-relaxed);
+  }
+  .tool-content ul, .tool-content ol {
+    padding-left: var(--space-6);
+    margin-bottom: var(--space-6);
+    max-width: var(--measure-prose);
+  }
+  .tool-content li {
+    margin-bottom: var(--space-2);
+    line-height: var(--leading-relaxed);
+  }
+  .tool-content pre {
+    margin-bottom: var(--space-6);
+    max-width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .tool-hero { padding-top: var(--space-8); }
+  }
+</style>

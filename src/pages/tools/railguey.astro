@@ -1,0 +1,42 @@
+---
+import Tool from '../../layouts/Tool.astro';
+---
+
+<Tool
+  name="railguey"
+  pip="pip install railguey"
+  role="MCP Server"
+  repo="railguey"
+  description="Railway deployment management from Claude Code. Deploy, rollback, logs, variables."
+>
+  <h2>What it does</h2>
+  <p>railguey is an MCP server that gives AI agents full control over Railway deployments. Create projects, deploy services, check logs, set variables, roll back — all through tool calls without leaving your terminal.</p>
+
+  <h2>Key features</h2>
+  <ul>
+    <li><strong>Multi-account</strong> — manage multiple Railway accounts and workspaces</li>
+    <li><strong>Full lifecycle</strong> — create projects, services, environments, domains</li>
+    <li><strong>Deploy + rollback</strong> — push code and roll back if it breaks</li>
+    <li><strong>Logs</strong> — build logs, deploy logs, HTTP logs with server-side filtering</li>
+    <li><strong>Doctor</strong> — workspace, service, and project-level health audits</li>
+    <li><strong>Variables</strong> — set env vars without the dashboard</li>
+    <li><strong>TOTP</strong> — built-in 2FA for Railway operations that need it</li>
+  </ul>
+
+  <h2>Install</h2>
+  <pre><code>pip install railguey</code></pre>
+
+  <h2>Usage</h2>
+  <pre><code># CLI
+railguey status ~/repos/my-app
+railguey logs ~/repos/my-app web --lines 50
+railguey deploy ~/repos/my-app web
+railguey doctor ~/repos/my-app
+
+# As MCP — agents call tools directly
+railguey_deploy   workspace: "/path" service: "web"
+railguey_status   workspace: "/path"
+railguey_doctor   workspace: "/path"</code></pre>
+
+  <p>17 GraphQL-based tools. Project-scoped tokens — no railway login needed. Same token works in local dev, CI/CD, and AI agents.</p>
+</Tool>

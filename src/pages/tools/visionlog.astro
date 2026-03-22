@@ -1,0 +1,43 @@
+---
+import Tool from '../../layouts/Tool.astro';
+---
+
+<Tool
+  name="visionlog"
+  pip="pip install visionlog-md"
+  role="Governance"
+  repo="visionlog.md"
+  description="Vision, goals, guardrails, and ADRs. The contracts all execution must honor."
+>
+  <h2>What it does</h2>
+  <p>visionlog is the static St. Peter of your project. It records what the project has committed to — the vision, the goals, the guardrails — and enforces those contracts across every agent session. If a task would violate a guardrail, St. Peter has already said no.</p>
+
+  <h2>Key features</h2>
+  <ul>
+    <li><strong>Vision documents</strong> — set the north star once, reference it everywhere</li>
+    <li><strong>Goals with DAG</strong> — goals depend on and unlock other goals</li>
+    <li><strong>Guardrails</strong> — constraints the system must never violate, with rule/why/violation examples</li>
+    <li><strong>ADRs</strong> — architectural decision records that persist across sessions</li>
+    <li><strong>SOPs</strong> — standard operating procedures agents follow consistently</li>
+    <li><strong>MCP server</strong> — agents read and write governance through tool calls</li>
+  </ul>
+
+  <h2>Install</h2>
+  <pre><code>pip install visionlog-md</code></pre>
+
+  <h2>Quick start</h2>
+  <pre><code># As MCP tool calls from an agent:
+project_set  path: "/path/to/project"    # returns project_id
+visionlog_boot  project_id: "..."        # active guardrails + goal state
+visionlog_guide  project_id: "..."       # vision + decisions + goal map
+
+# Create governance artifacts:
+vision_set       title: "..." body: "..."
+guardrail_create title: "No hard deletes"
+goal_create      title: "Launch MVP" status: "available"</code></pre>
+
+  <p>Vision remains sticky across sessions — it doesn't drift. Guardrails are active or deprecated, never deleted. ADRs are immutable once accepted — new ADRs supersede rather than overwrite.</p>
+
+  <h2>The trilogy</h2>
+  <p>visionlog is the first pillar of the Eidos trilogy. The flow is one-way: <strong>research.md</strong> earns decisions with evidence, <strong>visionlog</strong> records those decisions as contracts, and <strong>ike.md</strong> executes tasks within those contracts.</p>
+</Tool>

@@ -1,0 +1,47 @@
+---
+import Tool from '../../layouts/Tool.astro';
+---
+
+<Tool
+  name="research.md"
+  pip="pip install research-md"
+  role="Decisions"
+  repo="research.md"
+  description="Evidence-graded, phase-gated, peer-reviewed decisions. The research is the receipt."
+>
+  <h2>What it does</h2>
+  <p>research.md is the decision forge. When a question has consequences — architecture choices, technology selections, strategic bets — you run it through research.md so the evidence is recorded, the criteria are locked, and the decision is reviewable by any future agent or human.</p>
+
+  <h2>Key features</h2>
+  <ul>
+    <li><strong>Phase-gated workflow</strong> — candidates → criteria lock → scoring → decision</li>
+    <li><strong>Evidence grading</strong> — claims backed by data, not assumptions</li>
+    <li><strong>Scoring matrix</strong> — weighted criteria, transparent scoring</li>
+    <li><strong>Peer review</strong> — log reviews before finalizing</li>
+    <li><strong>Decision briefs</strong> — auto-generated summary of what was decided and why</li>
+    <li><strong>MCP server</strong> — agents drive the entire research workflow through tool calls</li>
+  </ul>
+
+  <h2>Install</h2>
+  <pre><code>pip install research-md</code></pre>
+
+  <h2>Quick start</h2>
+  <pre><code># Initialize a research project
+research init --name "Choose a database"
+
+# Add candidates
+research candidate create --title "PostgreSQL"
+research candidate create --title "SQLite"
+
+# Lock criteria (no more changes after this)
+research criteria lock
+
+# Score candidates
+research candidate score --candidate "PostgreSQL" --scores 'scalability=9,simplicity=6'
+
+# Decide
+research project decide --winner "PostgreSQL" --rationale "Needs multi-tenant RLS"</code></pre>
+
+  <h2>The trilogy</h2>
+  <p>research.md feeds visionlog. A decision earned here becomes a contract recorded as an ADR in visionlog, which ike.md then executes against. A decision skipped here is a contract that was never earned.</p>
+</Tool>
