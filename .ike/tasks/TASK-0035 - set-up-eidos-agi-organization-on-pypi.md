@@ -12,6 +12,7 @@ definition-of-done:
   - All 9 packages transferred to org
   - Org profile has description + URL + logo
   - pypi.org/org/eidos-agi/ shows all packages
+updated: '2026-03-23'
 ---
 PyPI now supports organizations. Set up the eidos-agi org so all 9 packages are owned by the org, not a personal account. This gives us a branded profile page at pypi.org/org/eidos-agi/ and lets multiple maintainers manage packages.
 
@@ -36,3 +37,5 @@ Instructions:
    - claude-session-commons
 6. Update org profile: add logo, description, links
 7. Verify: check https://pypi.org/org/eidos-agi/ shows all packages
+
+Org request submitted 2026-03-22, pending PyPI admin approval. Next: transfer 9 packages + add logo once approved.

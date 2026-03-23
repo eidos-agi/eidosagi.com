@@ -7,5 +7,6 @@ priority: high
 tags:
   - infra
   - brand
+updated: '2026-03-23'
 ---
 TASK-0035 — create org, transfer 9 packages, add logo + description. Manual task for founder.

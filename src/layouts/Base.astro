@@ -60,12 +60,8 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://eidosagi.com');
             <a href="/eidos">eidos</a>
             <a href="/trilogy">trilogy</a>
             <a href="/tools">tools</a>
-            <a href="/contract-driven-development">contracts</a>
-            <a href="/agent-identity">identity</a>
-            <a href="/memory">memory</a>
             <a href="/forges">forges</a>
             <a href="https://github.com/eidos-agi">github</a>
-            <a href="https://pypi.org/user/eidos-agi/">pypi</a>
           </nav>
           <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -80,7 +76,27 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://eidosagi.com');
       <slot />
 
       <footer class="foot">
-        <span>&copy; {new Date().getFullYear()} Eidos AGI</span>
+        <div class="foot-top">
+          <div class="foot-col">
+            <span class="foot-heading">Product</span>
+            <a href="/eidos">Eidos</a>
+            <a href="/trilogy">Trilogy</a>
+            <a href="/tools">Tools</a>
+            <a href="/forges">Forges</a>
+          </div>
+          <div class="foot-col">
+            <span class="foot-heading">Ideas</span>
+            <a href="/contract-driven-development">Contracts</a>
+            <a href="/agent-identity">Identity</a>
+            <a href="/memory">Memory</a>
+          </div>
+          <div class="foot-col">
+            <span class="foot-heading">Links</span>
+            <a href="https://github.com/eidos-agi">GitHub</a>
+            <a href="https://pypi.org/user/eidos-agi/">PyPI</a>
+          </div>
+        </div>
+        <span class="foot-copy">&copy; {new Date().getFullYear()} Eidos AGI</span>
       </footer>
     </div>
 
