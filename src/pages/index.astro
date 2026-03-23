@@ -809,56 +809,21 @@ ike.<span class="function">complete</span>(task, <span class="param">notes</span
     gap: var(--space-6);
   }
 
-  /* AI Reader Mode — structured text for LLM consumption */
-  [data-theme="ai"] {
-    --color-bg: #fff;
-    --color-surface: #fff;
-    --color-text: #000;
-    --color-muted: #000;
-    --color-primary: #000;
-    --color-secondary: #000;
-    --color-command: #000;
-    --color-danger: #000;
-  }
-  [data-theme="ai"] body { font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.5; }
-  [data-theme="ai"] body::before { display: none; }
-  [data-theme="ai"] .page { max-width: 80ch; padding: 1rem; }
-  [data-theme="ai"] * { animation: none !important; transition: none !important; border-radius: 0 !important; border-color: #ccc !important; box-shadow: none !important; backdrop-filter: none !important; }
-  [data-theme="ai"] .mark nav { gap: 1rem; }
-  [data-theme="ai"] h1, [data-theme="ai"] h2, [data-theme="ai"] h3 { font-family: inherit; font-size: inherit; font-weight: bold; letter-spacing: 0; line-height: 1.4; }
-  [data-theme="ai"] h1 { font-size: 1.1em; }
-  [data-theme="ai"] h1::before { content: "# "; }
-  [data-theme="ai"] h2 { font-size: 1em; }
-  [data-theme="ai"] h2::before { content: "## "; }
-  [data-theme="ai"] h3::before { content: "### "; }
+  /* AI Reader Mode — landing-page-specific overrides (universal rules in themes.css) */
   [data-theme="ai"] .hero { display: block; min-height: auto; padding: 1rem 0; }
   [data-theme="ai"] .hero-rule { display: none; }
-  [data-theme="ai"] .hero-muted::before { content: ""; }
-  [data-theme="ai"] .hero-viz, [data-theme="ai"] .tri-viz, [data-theme="ai"] .b-visual { display: none; }
   [data-theme="ai"] .about { display: block; padding: 0.5rem 0; border: none; }
   [data-theme="ai"] .about-aside { border: none; padding: 0.5rem 0; flex-direction: column; gap: 0.25rem; }
   [data-theme="ai"] .aside-stat { font-size: inherit; color: inherit; }
   [data-theme="ai"] .aside-stat span { display: inline; margin-left: 0.5rem; }
   [data-theme="ai"] .urgency { border: none; background: none; padding: 0.5rem 0; }
-  [data-theme="ai"] .urgency::before { content: "> "; font-weight: bold; }
   [data-theme="ai"] .urgency p { color: inherit; font-style: normal; }
-  [data-theme="ai"] .trilogy, [data-theme="ai"] .tools, [data-theme="ai"] .contribute { padding: 0.5rem 0; border: none; }
+  [data-theme="ai"] .trilogy, [data-theme="ai"] .contribute { padding: 0.5rem 0; border: none; }
   [data-theme="ai"] .trilogy-header p { display: none; }
   [data-theme="ai"] .trilogy-cards { display: block; }
   [data-theme="ai"] .tri { background: none; padding: 0.25rem 0; border: none; border-bottom: 1px solid #ccc; }
   [data-theme="ai"] .tri-num { display: none; }
-  [data-theme="ai"] .tri h3, [data-theme="ai"] .tool-card h3 { display: inline; }
-  [data-theme="ai"] .tri h3::before { content: "- "; }
-  [data-theme="ai"] .tool-card h3::before { content: "- "; }
-  [data-theme="ai"] .tri p, [data-theme="ai"] .tool-card p { display: inline; }
-  [data-theme="ai"] .tri p::before, [data-theme="ai"] .tool-card p::before { content: " — "; }
-  [data-theme="ai"] .tri code, [data-theme="ai"] .tool-card code { display: inline; }
-  [data-theme="ai"] .tri code::before, [data-theme="ai"] .tool-card code::before { content: " | "; }
-  [data-theme="ai"] .tc-role, [data-theme="ai"] .b-role { display: none; }
-  [data-theme="ai"] .contribute-btn { background: none !important; color: #000 !important; text-decoration: underline; padding: 0; }
-  [data-theme="ai"] .contribute-links { gap: 1rem; }
   [data-theme="ai"] .stats-strip { display: none; }
-  [data-theme="ai"] .foot { border: none; padding: 0.5rem 0; }
 
 
   /* ── RESPONSIVE (page-specific) ── */
