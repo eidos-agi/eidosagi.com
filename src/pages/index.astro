@@ -77,30 +77,30 @@ import Base from '../layouts/Base.astro';
       <div class="compare-grid">
         <div class="compare-col">
           <span class="compare-label">Without governance</span>
-          <pre><code># Agent decides on its own
-result = agent.run("migrate the database schema")
-# No guardrails checked
-# No decision recorded
-# No one knows what happened or why
-deploy(result)</code></pre>
+          <pre><code><span class="comment"># Agent decides on its own</span>
+result = agent.<span class="function">run</span>(<span class="string">"migrate the database schema"</span>)
+<span class="comment"># No guardrails checked</span>
+<span class="comment"># No decision recorded</span>
+<span class="comment"># No one knows what happened or why</span>
+<span class="function">deploy</span>(result)</code></pre>
         </div>
         <div class="compare-col compare-after">
           <span class="compare-label">With the trilogy</span>
-          <pre><code># Guardrails say what's allowed
-guardrails = visionlog.boot(project)
+          <pre><code><span class="comment"># Guardrails say what's allowed</span>
+guardrails = visionlog.<span class="function">boot</span>(project)
 
-# Research earns the decision
-decision = research.decide("migration strategy",
-  candidates=["blue-green", "rolling"],
-  criteria=guardrails)
+<span class="comment"># Research earns the decision</span>
+decision = research.<span class="function">decide</span>(<span class="string">"migration strategy"</span>,
+  <span class="param">candidates</span>=[<span class="string">"blue-green"</span>, <span class="string">"rolling"</span>],
+  <span class="param">criteria</span>=guardrails)
 
-# Execution tracks the work
-task = ike.create("migrate schema",
-  strategy=decision.winner,
-  definition_of_done=["tests pass", "rollback tested"])
+<span class="comment"># Execution tracks the work</span>
+task = ike.<span class="function">create</span>(<span class="string">"migrate schema"</span>,
+  <span class="param">strategy</span>=decision.winner,
+  <span class="param">definition_of_done</span>=[<span class="string">"tests pass"</span>, <span class="string">"rollback tested"</span>])
 
-agent.run(task)
-ike.complete(task, notes=agent.summary)</code></pre>
+agent.<span class="function">run</span>(task)
+ike.<span class="function">complete</span>(task, <span class="param">notes</span>=agent.summary)</code></pre>
         </div>
       </div>
     </section>

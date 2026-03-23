@@ -108,6 +108,13 @@ pre {
 
 pre code { background: none; padding: 0; }
 
+/* Syntax highlighting — CSS-only, no JS dependency */
+pre .comment { color: var(--color-muted); font-style: italic; }
+pre .keyword { color: var(--color-primary); }
+pre .string { color: var(--color-command); }
+pre .function { color: var(--color-text); }
+pre .param { color: var(--color-secondary); }
+
 /* Page container — shared across all pages */
 .page {
   max-width: 1000px;
