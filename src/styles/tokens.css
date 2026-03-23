@@ -18,7 +18,7 @@
   --color-bg:        #161210;   /* warm near-black, brown not blue */
   --color-surface:   #1e1a17;   /* raised surfaces — walnut, not steel */
   --color-text:      #dcd5cb;   /* warm cream, not cold white */
-  --color-muted:     #7a7068;   /* warm mid-tone, clay not slate */
+  --color-muted:     #8b8179;   /* warm mid-tone — WCAG AA 4.5:1 on surface */
   --color-primary:   #c4935a;   /* amber brass — the main accent */
   --color-secondary: #7a8c72;   /* sage green — the book's sage, it works */
   --color-command:   #b8c4a0;   /* muted green for code/commands */
