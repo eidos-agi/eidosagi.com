@@ -43,6 +43,27 @@ import Base from '../layouts/Base.astro';
       <p>We started building these because we were deploying agents ourselves and realized nobody had built the governance layer. The models worked. The agents ran. But there was no system for what they were allowed to do, how decisions got made, or what happened after. So we built one.</p>
     </div>
 
+    <!-- ═══ WHY CLAUDE CODE ISN'T ENOUGH ═══ -->
+    <section class="not-enough reveal">
+      <h2>Why Claude Code is not enough</h2>
+      <p>Claude Code is extraordinary at writing code, debugging, and executing tasks. But it has no memory of what your project committed to. It doesn't know your guardrails. It can't tell you why a decision was made three sessions ago. Every session starts from zero.</p>
+      <div class="ne-grid">
+        <div class="ne-item">
+          <h3>No governance</h3>
+          <p>There's no system to record guardrails, goals, or architectural decisions that persist across sessions. The agent improvises every time.</p>
+        </div>
+        <div class="ne-item">
+          <h3>No decision trail</h3>
+          <p>When the agent picks PostgreSQL over SQLite, that reasoning lives in conversation history — not in a reviewable, scored decision document.</p>
+        </div>
+        <div class="ne-item">
+          <h3>No execution tracking</h3>
+          <p>Tasks aren't tracked. There's no Definition of Done, no milestone awareness, no way to pick up where a crashed session left off.</p>
+        </div>
+      </div>
+      <p class="ne-bridge">The trilogy fills these gaps. It gives Claude Code the governance memory it doesn't have.</p>
+    </section>
+
     <!-- ═══ BEFORE/AFTER ═══ -->
     <section class="compare reveal">
       <div class="compare-grid">
@@ -282,6 +303,49 @@ ike.<span class="function">complete</span>(task, <span class="param">notes</span
     max-width: var(--measure-prose);
     padding: var(--space-8) 0;
     border-top: var(--border-width) solid color-mix(in srgb, var(--color-muted) 15%, transparent);
+  }
+
+  /* ── NOT ENOUGH ── */
+  .not-enough {
+    padding: var(--space-12) 0;
+    border-top: var(--border-width) solid color-mix(in srgb, var(--color-muted) 15%, transparent);
+  }
+  .not-enough h2 { margin-bottom: var(--space-4); }
+  .not-enough > p {
+    max-width: var(--measure-prose);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-8);
+  }
+  .ne-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+  .ne-item {
+    padding: var(--space-6);
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+  }
+  .ne-item h3 {
+    font-size: var(--text-base);
+    color: var(--color-danger);
+    margin-bottom: var(--space-2);
+  }
+  .ne-item p {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    line-height: var(--leading-relaxed);
+  }
+  .ne-bridge {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+    letter-spacing: -0.01em;
+  }
+  @media (max-width: 768px) {
+    .ne-grid { grid-template-columns: 1fr; }
   }
 
   /* ── BEFORE/AFTER ── */
