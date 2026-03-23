@@ -261,6 +261,31 @@ pre .param { color: var(--color-secondary); }
   height: 18px;
 }
 
+/* Related links — bottom of prose pages */
+.related {
+  padding: var(--space-8) 0;
+  border-top: var(--border-width) solid color-mix(in srgb, var(--color-muted) 15%, transparent);
+  margin-top: var(--space-8);
+}
+.related-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-4);
+  display: block;
+}
+.related-links {
+  display: flex;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+}
+.related-links a { color: var(--color-muted); }
+.related-links a:hover { color: var(--color-primary); }
+
 /* Footer */
 .foot {
   padding: var(--space-12) 0 var(--space-6);

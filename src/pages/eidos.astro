@@ -80,13 +80,57 @@ import Base from '../layouts/Base.astro';
 
       <section class="content-section">
         <h2>Memory</h2>
-        <p>PEFM — Poisson Emotional Forgetting Memory. Every memory carries emotional weight from real-world outcomes. Successes reinforce. Failures warn. Unused memories decay on a Poisson curve. The agent doesn't just remember — it remembers what mattered, weighted by how it turned out. Retrieval is hybrid — BM25 + vector + keyword with RRF fusion — so it finds what matters regardless of how you ask.</p>
+        <p>PEFM — Poisson Emotional Forgetting Memory. Every memory carries emotional weight from real-world outcomes. Successes reinforce. Failures warn. Unused memories decay on a Poisson curve. The agent doesn't just remember — it remembers what mattered, weighted by how it turned out.</p>
+
+        <!-- PEFM decay chart -->
+        <div class="pefm-chart">
+          <svg viewBox="0 0 400 220" fill="none" role="img" aria-label="PEFM decay chart: memory strength over time. Reinforced memories stay strong, neutral memories decay on Poisson curve, unused memories fade to near-zero.">
+            <!-- Axes -->
+            <line x1="50" y1="20" x2="50" y2="180" stroke="var(--color-muted)" stroke-width="1"/>
+            <line x1="50" y1="180" x2="380" y2="180" stroke="var(--color-muted)" stroke-width="1"/>
+            <text class="pefm-axis" x="25" y="100" text-anchor="middle" transform="rotate(-90 25 100)">strength</text>
+            <text class="pefm-axis" x="215" y="200" text-anchor="middle">time</text>
+
+            <!-- Reinforced memory (stays high, gets bumped) -->
+            <path class="pefm-line pefm-reinforced" d="M50 40 Q100 45 130 55 L135 35 Q170 40 200 50 L205 30 Q250 35 300 45 L305 28 Q350 33 375 38"/>
+            <text class="pefm-legend pefm-legend-r" x="380" y="38">reinforced</text>
+
+            <!-- Neutral memory (smooth decay) -->
+            <path class="pefm-line pefm-neutral" d="M50 40 Q100 55 140 80 Q180 105 220 125 Q260 140 300 150 Q340 156 375 158"/>
+            <text class="pefm-legend pefm-legend-n" x="380" y="158">neutral</text>
+
+            <!-- Unused memory (fast decay) -->
+            <path class="pefm-line pefm-unused" d="M50 40 Q80 70 110 110 Q140 140 170 158 Q200 168 240 172 Q280 174 375 175"/>
+            <text class="pefm-legend pefm-legend-u" x="380" y="175">unused</text>
+
+            <!-- Tick marks -->
+            <text class="pefm-tick" x="50" y="195">0</text>
+            <text class="pefm-tick" x="215" y="195">days</text>
+            <text class="pefm-tick" x="375" y="195">30</text>
+
+            <!-- Reinforcement bumps (small arrows) -->
+            <polygon class="pefm-bump" points="133,55 135,35 137,55"/>
+            <polygon class="pefm-bump" points="203,50 205,30 207,50"/>
+            <polygon class="pefm-bump" points="303,45 305,28 307,45"/>
+          </svg>
+        </div>
+
+        <p>Retrieval is hybrid — BM25 + vector + keyword with RRF fusion — so it finds what matters regardless of how you ask.</p>
       </section>
 
       <section class="content-section">
         <h2>Status</h2>
         <p>Eidos v5 is the current engine. The core loop, Pod deliberation, and PEFM memory are operational. The governance trilogy, agent identity (AID), and EidosOmni memory system are the infrastructure layers being built around it.</p>
       </section>
+      <div class="related">
+        <span class="related-label">Related</span>
+        <div class="related-links">
+          <a href="/trilogy">The Trilogy</a>
+          <a href="/agent-identity">Agent Identity</a>
+          <a href="/memory">Memory</a>
+          <a href="/contract-driven-development">Contracts</a>
+        </div>
+      </div>
     </article>
 </Base>
 
@@ -109,6 +153,20 @@ import Base from '../layouts/Base.astro';
   .pod-analogy { font-family: var(--font-mono); font-size: 8px; fill: var(--color-muted); }
   .pod-context { font-family: var(--font-body); font-size: 9px; fill: var(--color-muted); font-style: italic; }
   @keyframes pod-dash { to { stroke-dashoffset: -14; } }
+
+  .pefm-chart { margin: var(--space-8) 0; max-width: 420px; }
+  .pefm-chart svg { width: 100%; height: auto; }
+  .pefm-line { stroke-width: 2; fill: none; }
+  .pefm-reinforced { stroke: var(--color-command); }
+  .pefm-neutral { stroke: var(--color-primary); }
+  .pefm-unused { stroke: var(--color-danger); opacity: 0.7; }
+  .pefm-axis { font-family: var(--font-mono); font-size: 8px; fill: var(--color-muted); letter-spacing: 0.04em; }
+  .pefm-tick { font-family: var(--font-mono); font-size: 8px; fill: var(--color-muted); text-anchor: middle; }
+  .pefm-legend { font-family: var(--font-mono); font-size: 8px; }
+  .pefm-legend-r { fill: var(--color-command); }
+  .pefm-legend-n { fill: var(--color-primary); }
+  .pefm-legend-u { fill: var(--color-danger); }
+  .pefm-bump { fill: var(--color-command); opacity: 0.5; }
 
   @media (max-width: 768px) { .eidos-pillars { grid-template-columns: 1fr; } }
 </style>
