@@ -66,6 +66,9 @@ import Base from '../layouts/Base.astro';
       </div>
     </header>
 
+    <!-- ═══ INTRO ═══ -->
+    <p class="intro reveal">Eidos AGI is a software company that builds open-source governance infrastructure for AI agents. We make the tools that sit between "the model works" and "the model is safe to deploy."</p>
+
     <!-- ═══ BEFORE/AFTER ═══ -->
     <section class="compare reveal">
       <div class="compare-grid">
@@ -318,6 +321,16 @@ ike.complete(task, notes=agent.summary)</code></pre>
   }
 
   /* ── MARK ── */
+  /* ── INTRO ── */
+  .intro {
+    font-size: var(--text-md);
+    line-height: var(--leading-relaxed);
+    color: var(--color-muted);
+    max-width: var(--measure-prose);
+    padding: var(--space-8) 0;
+    border-top: var(--border-width) solid color-mix(in srgb, var(--color-muted) 15%, transparent);
+  }
+
   /* ── BEFORE/AFTER ── */
   .compare {
     padding: var(--space-8) 0 var(--space-16);
