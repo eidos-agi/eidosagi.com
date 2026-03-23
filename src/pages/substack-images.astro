@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+
+export const prerender = false;
+---
+
+<Base
+  title="Brand Images — Eidos AGI"
+  description="Brand images for Substack, social, and profiles."
+>
+    <article class="prose-page">
+      <header class="page-hero">
+        <h1>Brand Images</h1>
+        <p class="subtitle">Right-click to save.</p>
+      </header>
+
+      <section class="content-section">
+        <h2>Square logos</h2>
+        <div class="img-grid">
+          <div class="img-item">
+            <img src="/logo-180.png" alt="Logo 180x180" width="180" height="180" />
+            <span>180x180 — Apple touch icon</span>
+          </div>
+          <div class="img-item">
+            <img src="/logo-256.png" alt="Logo 256x256" width="256" height="256" />
+            <span>256x256 — Substack logo, PyPI org</span>
+          </div>
+          <div class="img-item">
+            <img src="/logo-800.png" alt="Logo 800x800" width="200" height="200" />
+            <span>800x800 — GitHub org, high-res</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>Banners</h2>
+        <div class="img-stack">
+          <div class="img-item">
+            <img src="/banner-1100x220.png" alt="Banner 1100x220" width="550" height="110" />
+            <span>1100x220 — Substack cover</span>
+          </div>
+          <div class="img-item">
+            <img src="/header-1500x500.png" alt="Header 1500x500" width="600" height="200" />
+            <span>1500x500 — Twitter/X header</span>
+          </div>
+          <div class="img-item">
+            <img src="/og-1200x630.png" alt="OG 1200x630" width="600" height="315" />
+            <span>1200x630 — Social share (OG image)</span>
+          </div>
+        </div>
+      </section>
+    </article>
+</Base>
+
+<style is:global>
+  .img-grid { display: flex; gap: var(--space-6); flex-wrap: wrap; align-items: flex-end; margin-top: var(--space-4); }
+  .img-stack { display: flex; flex-direction: column; gap: var(--space-6); margin-top: var(--space-4); }
+  .img-item { display: flex; flex-direction: column; gap: var(--space-2); }
+  .img-item img { border: var(--border-width) solid color-mix(in srgb, var(--color-muted) 20%, transparent); border-radius: var(--radius-md); }
+  .img-item span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); }
+</style>

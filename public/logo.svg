@@ -1,0 +1,9 @@
+<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="800" fill="#161210"/>
+  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter>
+  <rect width="800" height="800" filter="url(#n)" opacity="0.03"/>
+  <text x="400" y="340" fill="#dcd5cb" font-family="system-ui, sans-serif" font-size="200" font-weight="700" text-anchor="middle" letter-spacing="-0.04em">E</text>
+  <rect x="320" y="380" width="160" height="6" fill="#c4935a" rx="2"/>
+  <text x="400" y="480" fill="#8b8179" font-family="system-ui, sans-serif" font-size="48" font-weight="500" text-anchor="middle" letter-spacing="0.15em">EIDOS</text>
+  <text x="400" y="530" fill="#8b8179" font-family="monospace" font-size="24" text-anchor="middle" letter-spacing="0.08em">AGI</text>
+</svg>
