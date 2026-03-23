@@ -190,8 +190,12 @@ pre .param { color: var(--color-secondary); }
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-  .aid-diagram svg, .cdd-diagram svg, .trust-diagram svg {
+  .aid-diagram svg, .cdd-diagram svg, .trust-diagram svg, .tri-page-diagram svg {
     min-width: 420px;
+  }
+  /* Vertical diagrams don't need min-width override */
+  .tri-page-diagram svg {
+    min-width: auto;
   }
 
   .theme-switcher .theme-dot { display: none; }

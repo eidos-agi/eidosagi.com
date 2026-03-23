@@ -1,0 +1,147 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="The Trilogy — Eidos AGI"
+  description="Three tools enforce one contract: governance before action, evidence before decisions, tracking after execution."
+>
+    <article class="prose-page">
+      <header class="page-hero">
+        <h1>The Trilogy</h1>
+        <p class="subtitle">Governance. Decisions. Execution.</p>
+      </header>
+
+      <!-- Pipeline diagram -->
+      <div class="tri-page-diagram">
+        <svg viewBox="0 0 500 320" fill="none" role="img" aria-label="The trilogy: research.md earns decisions, visionlog records contracts, ike.md executes within them. Governance contracts feed back to govern the entire loop.">
+          <rect class="tp-node tp-n1" x="170" y="10" width="160" height="60" rx="3"/>
+          <text class="tp-label" x="250" y="47" text-anchor="middle">visionlog</text>
+          <text class="tp-sub" x="250" y="30" text-anchor="middle">GOVERNANCE</text>
+
+          <rect class="tp-node tp-n2" x="170" y="120" width="160" height="60" rx="3"/>
+          <text class="tp-label" x="250" y="157" text-anchor="middle">research.md</text>
+          <text class="tp-sub" x="250" y="140" text-anchor="middle">DECISIONS</text>
+
+          <rect class="tp-node tp-n3" x="170" y="230" width="160" height="60" rx="3"/>
+          <text class="tp-label" x="250" y="267" text-anchor="middle">ike.md</text>
+          <text class="tp-sub" x="250" y="250" text-anchor="middle">EXECUTION</text>
+
+          <!-- Arrows down -->
+          <line class="tp-arrow" x1="250" y1="70" x2="250" y2="120"/>
+          <polygon class="tp-head" points="244,114 250,124 256,114"/>
+          <line class="tp-arrow" x1="250" y1="180" x2="250" y2="230"/>
+          <polygon class="tp-head" points="244,224 250,234 256,224"/>
+
+          <!-- Feedback loop -->
+          <path class="tp-feedback" d="M330 260 Q400 260 400 200 Q400 140 400 80 Q400 40 330 40"/>
+
+          <!-- Side labels -->
+          <text class="tp-side" x="155" y="100" text-anchor="end">sets constraints</text>
+          <text class="tp-side" x="155" y="210" text-anchor="end">earns decisions</text>
+          <text class="tp-side" x="415" y="150" text-anchor="start">contracts govern</text>
+        </svg>
+      </div>
+
+      <section class="content-section">
+        <h2>The contract</h2>
+        <p>Agents don't get to skip governance, guess at decisions, or lose track of execution. The trilogy enforces that contract with three tools, each handling one concern:</p>
+        <ul class="tri-page-list">
+          <li><strong>visionlog</strong> records what the project has committed to — vision, goals, guardrails, ADRs. If a task would violate a guardrail, the answer is already no.</li>
+          <li><strong>research.md</strong> earns decisions with evidence. Candidates are scored against locked criteria. The research is the receipt.</li>
+          <li><strong>ike.md</strong> executes tasks within those contracts. Every task links to the goal it serves. Definition of Done is explicit, not assumed.</li>
+        </ul>
+      </section>
+
+      <section class="content-section">
+        <h2>The flow</h2>
+        <p>The flow is one-way: research.md earns a decision → visionlog records it as a contract (ADR, guardrail, goal) → ike.md executes tasks within those contracts. The feedback loop: governance contracts constrain all future research and execution.</p>
+        <p>A decision skipped in research.md is a contract that was never earned. A guardrail ignored in visionlog is a constraint that doesn't exist. A task without Definition of Done in ike.md is work that can't be verified.</p>
+      </section>
+
+      <section class="content-section">
+        <h2>Install</h2>
+        <pre><code>pip install visionlog-md research-md ike-md</code></pre>
+        <p>Three packages. One contract. Each is an MCP server — agents read and write governance through tool calls.</p>
+        <div class="tri-page-links">
+          <a href="/tools/visionlog">visionlog docs</a>
+          <a href="/tools/research">research.md docs</a>
+          <a href="/tools/ike">ike.md docs</a>
+        </div>
+      </section>
+    </article>
+</Base>
+
+<style is:global>
+  .tri-page-diagram {
+    margin: var(--space-4) 0 var(--space-8);
+    max-width: 500px;
+  }
+  .tri-page-diagram svg { width: 100%; height: auto; }
+  .tp-node {
+    fill: var(--color-surface);
+    stroke: color-mix(in srgb, var(--color-muted) 30%, transparent);
+    stroke-width: 1;
+  }
+  .tp-n1 { stroke: var(--color-primary); }
+  .tp-n2 { stroke: var(--color-primary); opacity: 0.8; }
+  .tp-n3 { stroke: var(--color-primary); opacity: 0.6; }
+  .tp-label {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    fill: var(--color-text);
+    font-weight: 500;
+  }
+  .tp-sub {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    fill: var(--color-primary);
+    letter-spacing: 0.1em;
+  }
+  .tp-arrow {
+    stroke: var(--color-primary);
+    stroke-width: 1.5;
+    stroke-dasharray: 4 3;
+    animation: tp-dash 1.5s linear infinite;
+  }
+  .tp-head { fill: var(--color-primary); }
+  .tp-feedback {
+    stroke: color-mix(in srgb, var(--color-primary) 30%, transparent);
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+    fill: none;
+    animation: tp-dash 3s linear infinite reverse;
+  }
+  .tp-side {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    fill: var(--color-muted);
+    letter-spacing: 0.04em;
+  }
+  @keyframes tp-dash { to { stroke-dashoffset: -14; } }
+
+  .tri-page-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-6) 0;
+  }
+  .tri-page-list li {
+    padding: var(--space-3) 0;
+    border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 10%, transparent);
+    line-height: var(--leading-relaxed);
+  }
+  .tri-page-list li strong {
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+  }
+
+  .tri-page-links {
+    display: flex;
+    gap: var(--space-6);
+    margin-top: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+  .tri-page-links a { color: var(--color-muted); }
+  .tri-page-links a:hover { color: var(--color-primary); }
+</style>
