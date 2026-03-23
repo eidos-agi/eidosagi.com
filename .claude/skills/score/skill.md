@@ -69,35 +69,102 @@ Can everyone use it?
 
 **Check**: Contrast ratios on all text-on-background pairs (4.5:1 min). Alt text on all images. Focus visible on all interactive elements. Reduced motion media query present. Color scheme media query present. Semantic HTML (nav, main, section, article, footer).
 
+## HUMAN DIMENSIONS (6 axes, 0–10 each, max 60)
+
+These measure what the engineering dimensions can't: whether a human actually wants to stay, trust, and act.
+
+### 9. TRUST (0–10)
+After reading the whole page, do you trust this org to build reliable software?
+- 0: Feels fake, anonymous, or like a weekend project claiming enterprise.
+- 5: Competent but impersonal. Could be real, could be vaporware.
+- 10: You'd bet your production stack on these people. The evidence is in the work.
+
+**Check**: Does the page show real work (repos, code examples, install commands) or just claims? Is there a human behind it (names, contact, GitHub activity)? Does the copy overpromise? Is the design quality itself evidence of care?
+
+### 10. MEMORABILITY (0–10)
+Close the tab. What do you remember? Could you describe this site to someone?
+- 0: Nothing sticks. "It was some dark site with tools."
+- 5: You remember the tagline but not why it matters.
+- 10: You remember the analogy, the visual, the feeling. You'd recognize it if you saw it again.
+
+**Check**: Is there a single image, phrase, or concept that anchors the whole site? Does the design have a signature — something no other site has? Would you remember the warm brown or just "dark mode"?
+
+### 11. EMOTIONAL ARC (0–10)
+Does the page have a narrative flow, or is it just sections stacked?
+- 0: List of features. No story. No build. No payoff.
+- 5: Logical structure but no emotional momentum. Informative, not compelling.
+- 10: The page builds — hook, context, proof, urgency, action. You feel pulled forward.
+
+**Check**: Map the page top-to-bottom. Does each section earn the next? Is there a turning point (the urgency quote, the "we don't build LLMs" punchline)? Does the ending resolve or just stop?
+
+### 12. DIFFERENTIATION (0–10)
+Could you tell this site apart from 10 other dev tools sites in a lineup?
+- 0: Interchangeable. Dark mode, sans-serif, three-column features.
+- 5: Has a color palette but no identity. Swap the logo and it could be anyone.
+- 10: Unmistakably this org. The palette, the typography, the voice, the flow diagram — it's a fingerprint.
+
+**Check**: Remove the logo and brand name. Can you still identify the site? What specific elements are unique (warm brown palette, brass accents, animated flow diagram, workshop metaphor)?
+
+### 13. DELIGHT (0–10)
+Is there anything that surprises or pleases you? A moment of "oh, nice."
+- 0: Functional. No surprise. No personality.
+- 5: One nice touch (maybe the grain texture or a hover state).
+- 10: Multiple moments of delight — the theme switcher, the animated arrows, the copy-to-clipboard, the urgency quote's bite. Rewards attention.
+
+**Check**: Count the "oh, nice" moments. Are they in the design, the copy, the interaction, or the content? Does the page reward scrolling or just endure it?
+
+### 14. URGENCY (0–10)
+After reading, do you want to try the tools NOW or "maybe later"?
+- 0: Interesting in theory. No reason to act today.
+- 5: I'd bookmark it. Might come back.
+- 10: I'm running `pip install` before I close the tab. The stakes are clear and the barrier is zero.
+
+**Check**: Is the problem stated in terms that create urgency ("probabilistic coworker with production access")? Is the install command visible and copyable within 10 seconds? Is there a reason to act now vs. later?
+
 ## Composite Score
+
+**Engineering: 8 axes × 10 = max 80**
+**Human: 6 axes × 10 = max 60**
+**Total: 14 axes × 10 = max 140**
 
 | Rating | Score | Meaning |
 |--------|-------|---------|
-| **Legendary** | 72–80 | Ship it. Tell everyone. |
-| **Badass** | 60–71 | Ship it. Fix the gaps at leisure. |
-| **Solid** | 48–59 | Almost there. 1–2 dimensions dragging. |
-| **Mid** | 36–47 | Works but doesn't impress. Needs focused work. |
-| **Blah** | 24–35 | Generic. Could be any site. |
-| **Broken** | 0–23 | Doesn't function or communicate. |
+| **Legendary** | 120–140 | The site IS the product. Ship and amplify. |
+| **Badass** | 100–119 | Strong on both sides. Ready for real traffic. |
+| **Solid** | 80–99 | Engineering done, human side needs work (or vice versa). |
+| **Mid** | 60–79 | Technically works, emotionally flat. |
+| **Blah** | 40–59 | Generic. Forgettable. |
+| **Broken** | 0–39 | Doesn't function or communicate. |
 
 ## Output Format
 
 ```
-SCORE   <total>/80 — <rating>
+SCORE   <total>/140 — <rating>
 
-  CRAFT          ██████░░░░  6/10   Token-driven, but layout is standard
-  PERFORMANCE    ██████████  10/10  0 JS, 28KB, Lighthouse 98
-  COPY           ████████░░  8/10   Voice is right, urgency line lands
-  DX             ██████░░░░  6/10   pip install visible, no examples yet
-  VISUAL         ████░░░░░░  4/10   Flow diagram works, rest is text
-  MARKETING      ██████░░░░  6/10   Value prop clear, no social proof
-  MOBILE         ████████░░  8/10   Responsive, touch targets OK
-  ACCESSIBILITY  ████████░░  8/10   Contrast passes, no focus audit yet
+  ── ENGINEERING ──
+  CRAFT          ██████░░░░  6/10
+  PERFORMANCE    ██████████  10/10
+  COPY           ████████░░  8/10
+  DX             ██████░░░░  6/10
+  VISUAL         ████░░░░░░  4/10
+  MARKETING      ██████░░░░  6/10
+  MOBILE         ████████░░  8/10
+  ACCESSIBILITY  ████████░░  8/10
+                              56/80
+
+  ── HUMAN ──
+  TRUST          ██████░░░░  6/10
+  MEMORABILITY   ████░░░░░░  4/10
+  EMOTIONAL ARC  █████░░░░░  5/10
+  DIFFERENTIATION████████░░  8/10
+  DELIGHT        █████░░░░░  5/10
+  URGENCY        ██████░░░░  6/10
+                              34/60
 
   TOP 3 FIXES (highest impact):
-  1. Add real examples to tool pages (DX +3, VISUAL +2)
-  2. Add GitHub star counts (MARKETING +2)
-  3. Audit keyboard navigation (ACCESSIBILITY +2)
+  1. ...
+  2. ...
+  3. ...
 ```
 
 ## Execution Steps

@@ -66,7 +66,40 @@ import Base from '../layouts/Base.astro';
       </div>
     </header>
 
-    <!-- ═══ THE TRILOGY — immediately after hero ═══ -->
+    <!-- ═══ BEFORE/AFTER ═══ -->
+    <section class="compare reveal">
+      <div class="compare-grid">
+        <div class="compare-col">
+          <span class="compare-label">Without governance</span>
+          <pre><code># Agent decides on its own
+result = agent.run("migrate the database schema")
+# No guardrails checked
+# No decision recorded
+# No one knows what happened or why
+deploy(result)</code></pre>
+        </div>
+        <div class="compare-col compare-after">
+          <span class="compare-label">With the trilogy</span>
+          <pre><code># Guardrails say what's allowed
+guardrails = visionlog.boot(project)
+
+# Research earns the decision
+decision = research.decide("migration strategy",
+  candidates=["blue-green", "rolling"],
+  criteria=guardrails)
+
+# Execution tracks the work
+task = ike.create("migrate schema",
+  strategy=decision.winner,
+  definition_of_done=["tests pass", "rollback tested"])
+
+agent.run(task)
+ike.complete(task, notes=agent.summary)</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ THE TRILOGY ═══ -->
     <section class="trilogy reveal">
       <div class="trilogy-header">
         <h2>The Trilogy</h2>
@@ -164,42 +197,15 @@ import Base from '../layouts/Base.astro';
       </table>
     </div>
 
-    <!-- ═══ THE REST ═══ -->
-    <section class="tools reveal">
-      <h2>More tools</h2>
-      <div class="tools-grid">
-        <a href="/tools/railguey" class="tool-card">
-          <span class="tc-role">MCP</span>
-          <h3>railguey</h3>
-          <p>Railway deploys from Claude Code.</p>
-          <code>pip install railguey</code>
-        </a>
-        <a href="/tools/clawdflare" class="tool-card">
-          <span class="tc-role">MCP</span>
-          <h3>clawdflare</h3>
-          <p>Cloudflare zone auditing.</p>
-          <code>pip install clawdflare</code>
-        </a>
-        <a href="/tools/eidos-mcp-registry" class="tool-card">
-          <span class="tc-role">MCP</span>
-          <h3>eidos-mcp-registry</h3>
-          <p>Right tools, right project.</p>
-          <code>pip install eidos-mcp-registry</code>
-        </a>
-        <a href="/tools/resume-resume" class="tool-card">
-          <span class="tc-role">Agent</span>
-          <h3>resume-resume</h3>
-          <p>Post-crash session recovery.</p>
-          <code>pip install resume-resume</code>
-        </a>
-        <a href="/tools/apple-a-day" class="tool-card">
-          <span class="tc-role">Agent</span>
-          <h3>apple-a-day</h3>
-          <p>Mac health. Zero deps.</p>
-          <code>pip install apple-a-day</code>
-        </a>
-      </div>
-    </section>
+    <!-- ═══ MORE TOOLS (compact) ═══ -->
+    <div class="more-tools reveal">
+      <span class="mt-label">Also:</span>
+      <a href="/tools/railguey">railguey</a>
+      <a href="/tools/clawdflare">clawdflare</a>
+      <a href="/tools/eidos-mcp-registry">eidos-mcp-registry</a>
+      <a href="/tools/resume-resume">resume-resume</a>
+      <a href="/tools/apple-a-day">apple-a-day</a>
+    </div>
 
     <!-- ═══ WHY — philosophy comes after the tools ═══ -->
     <section class="about reveal">
@@ -306,6 +312,40 @@ import Base from '../layouts/Base.astro';
   }
 
   /* ── MARK ── */
+  /* ── BEFORE/AFTER ── */
+  .compare {
+    padding: var(--space-8) 0 var(--space-16);
+    border-top: var(--border-width) solid color-mix(in srgb, var(--color-muted) 15%, transparent);
+  }
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+  .compare-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .compare-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-muted);
+    margin-bottom: var(--space-3);
+  }
+  .compare-after .compare-label {
+    color: var(--color-primary);
+  }
+  .compare-col pre {
+    flex: 1;
+    font-size: var(--text-xs);
+    line-height: 1.6;
+  }
+  @media (max-width: 768px) {
+    .compare-grid { grid-template-columns: 1fr; }
+  }
+
   /* ── HERO ── */
   .hero {
     display: grid;
@@ -544,53 +584,27 @@ import Base from '../layouts/Base.astro';
   }
 
   /* ── TOOLS GRID ── */
-  .tools {
-    padding: var(--space-16) 0;
-    border-top: var(--border-width) solid color-mix(in srgb, var(--color-muted) 20%, transparent);
-  }
-  .tools h2 { margin-bottom: var(--space-8); }
-  .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: var(--space-3);
-  }
-  .tool-card {
-    background: var(--color-surface);
-    border-radius: var(--radius-md);
-    padding: var(--space-4);
-    text-decoration: none;
+  /* ── MORE TOOLS (compact) ── */
+  .more-tools {
     display: flex;
-    flex-direction: column;
-    transition: transform 200ms ease;
-  }
-  .tool-card:hover { transform: translateY(-2px); }
-  .tc-role {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    color: var(--color-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: var(--space-2);
-  }
-  .tool-card h3 {
+    align-items: baseline;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    padding: var(--space-6) 0 var(--space-12);
     font-family: var(--font-mono);
     font-size: var(--text-sm);
-    font-weight: var(--weight-medium);
-    color: var(--color-text);
-    letter-spacing: 0;
-    margin-bottom: var(--space-1);
   }
-  .tool-card p {
-    font-size: var(--text-xs);
+  .mt-label {
     color: var(--color-muted);
-    line-height: var(--leading-normal);
-    margin-bottom: var(--space-2);
-    flex: 1;
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
   }
-  .tool-card code {
-    font-size: 9px;
-    color: var(--color-command);
+  .more-tools a {
+    color: var(--color-muted);
+    transition: color 150ms ease;
   }
+  .more-tools a:hover { color: var(--color-primary); }
 
   /* ── ENTERPRISE ── */
   .enterprise {
@@ -765,8 +779,8 @@ import Base from '../layouts/Base.astro';
   [data-theme="ai"] .urgency p { color: inherit; font-style: normal; }
   [data-theme="ai"] .trilogy, [data-theme="ai"] .tools, [data-theme="ai"] .contribute { padding: 0.5rem 0; border: none; }
   [data-theme="ai"] .trilogy-header p { display: none; }
-  [data-theme="ai"] .trilogy-cards, [data-theme="ai"] .tools-grid { display: block; }
-  [data-theme="ai"] .tri, [data-theme="ai"] .tool-card { background: none; padding: 0.25rem 0; border: none; border-bottom: 1px solid #ccc; }
+  [data-theme="ai"] .trilogy-cards { display: block; }
+  [data-theme="ai"] .tri { background: none; padding: 0.25rem 0; border: none; border-bottom: 1px solid #ccc; }
   [data-theme="ai"] .tri-num { display: none; }
   [data-theme="ai"] .tri h3, [data-theme="ai"] .tool-card h3 { display: inline; }
   [data-theme="ai"] .tri h3::before { content: "- "; }
