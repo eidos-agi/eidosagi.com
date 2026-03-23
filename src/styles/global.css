@@ -112,6 +112,36 @@ pre code { background: none; padding: 0; }
   padding: 0 var(--space-8);
 }
 
+/* Navigation bar — shared across all pages */
+.mark {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--space-6) 0;
+  border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 20%, transparent);
+}
+.mark > a {
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+.mark > a:hover { color: var(--color-primary); }
+.mark-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+.mark nav {
+  display: flex;
+  gap: var(--space-6);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+.mark nav a { color: var(--color-muted); }
+.mark nav a:hover { color: var(--color-primary); }
+
 /* Focus states — keyboard navigation */
 :focus-visible {
   outline: 2px solid var(--color-primary);

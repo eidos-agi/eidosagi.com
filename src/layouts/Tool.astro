@@ -17,9 +17,15 @@ const { name, pip, role, repo, description } = Astro.props;
   description={description}
 >
   <div class="page">
-    <div class="tool-nav">
-      <a href="/">← eidos agi</a>
-      <span class="tool-role">{role}</span>
+    <div class="mark">
+      <a href="/">eidos agi</a>
+      <div class="mark-right">
+        <span class="tool-role">{role}</span>
+        <nav>
+          <a href="https://github.com/eidos-agi">github</a>
+          <a href="https://pypi.org/user/eidos-agi/">pypi</a>
+        </nav>
+      </div>
     </div>
 
     <header class="tool-hero">
@@ -62,19 +68,6 @@ const { name, pip, role, repo, description } = Astro.props;
 </Base>
 
 <style is:global>
-  .tool-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: var(--space-6) 0;
-    border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 20%, transparent);
-  }
-  .tool-nav a {
-    font-family: var(--font-heading);
-    font-size: var(--text-sm);
-    color: var(--color-muted);
-  }
-  .tool-nav a:hover { color: var(--color-primary); }
   .tool-role {
     font-family: var(--font-mono);
     font-size: var(--text-xs);

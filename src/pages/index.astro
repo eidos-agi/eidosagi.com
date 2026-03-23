@@ -10,7 +10,7 @@ import Base from '../layouts/Base.astro';
   <div class="page">
 
     <!-- ═══ MARK ═══ -->
-    <div class="mark" data-component="nav">
+    <div class="mark">
       <a href="/">eidos agi</a>
       <div class="mark-right">
         <div class="theme-switcher">
@@ -36,23 +36,10 @@ import Base from '../layouts/Base.astro';
       </div>
     </div>
 
-    <!-- ═══ FEEDBACK DRAWER ═══ -->
-    <button class="fb-toggle" id="fb-toggle" title="Give feedback" aria-label="Open feedback panel">?</button>
-    <div class="fb-drawer" id="fb-drawer">
-      <div class="fb-header">
-        <span>Rate each section</span>
-        <button class="fb-close" id="fb-close">&times;</button>
-      </div>
-
-      <div class="fb-sections" id="fb-sections"></div>
-
-      <textarea class="fb-comment" id="fb-comment" placeholder="General notes (optional)" rows="2"></textarea>
-      <button class="fb-submit" id="fb-submit">Submit all feedback</button>
-      <div class="fb-count" id="fb-count"></div>
-    </div>
+    <!-- Feedback drawer removed — ADR-001 (eidosagi.com): no thumbs-up/down UI, creates heft -->
 
     <!-- ═══ HERO ═══ -->
-    <header class="hero" data-component="hero">
+    <header class="hero">
       <div class="hero-text">
         <h1>Software<br />for agents.</h1>
         <div class="hero-rule"></div>
@@ -80,7 +67,7 @@ import Base from '../layouts/Base.astro';
     </header>
 
     <!-- ═══ THE TRILOGY — immediately after hero ═══ -->
-    <section class="trilogy reveal" data-component="trilogy">
+    <section class="trilogy reveal">
       <div class="trilogy-header">
         <h2>The Trilogy</h2>
         <p>Agents need governance before they act, evidence before they decide, and tracking after they execute. Three tools enforce that contract.</p>
@@ -138,7 +125,7 @@ import Base from '../layouts/Base.astro';
     </section>
 
     <!-- ═══ THE REST ═══ -->
-    <section class="tools reveal" data-component="tools">
+    <section class="tools reveal">
       <h2>More tools</h2>
       <div class="tools-grid">
         <a href="/tools/railguey" class="tool-card">
@@ -175,7 +162,7 @@ import Base from '../layouts/Base.astro';
     </section>
 
     <!-- ═══ WHY — philosophy comes after the tools ═══ -->
-    <section class="about reveal" data-component="about">
+    <section class="about reveal">
       <div class="about-lead">
         <p>Amazon didn't create the internet. It created the trust infrastructure — reviews, ratings, guaranteed delivery — that made people willing to buy from strangers online. We're doing the same thing for AI agents.</p>
         <p class="about-punch">We don't build LLMs. We build the governance, decisions, and execution standards that make them trustworthy enough to hand real work.</p>
@@ -186,7 +173,7 @@ import Base from '../layouts/Base.astro';
       </aside>
     </section>
 
-    <section class="trust reveal" data-component="trust">
+    <section class="trust reveal">
       <h2>Built in the open</h2>
       <div class="trust-body">
         <p>If the tools that govern your agents are closed, you're trusting the vendor. If they're open, you're trusting the code. We think that's a better deal. The core is MIT-licensed and always will be.</p>
@@ -194,12 +181,12 @@ import Base from '../layouts/Base.astro';
       </div>
     </section>
 
-    <blockquote class="urgency reveal" data-component="urgency">
+    <blockquote class="urgency reveal">
       <p>Agents are getting deployed into real systems right now — if you don't give them governed tools, explicit decisions, and agent-grade interfaces, you're shipping a probabilistic coworker with production access.</p>
     </blockquote>
 
     <!-- ═══ ENTERPRISE ═══ -->
-    <section class="enterprise reveal" data-component="enterprise">
+    <section class="enterprise reveal">
       <div class="ent-grid">
         <div class="ent-text">
           <h2>Enterprise</h2>
@@ -219,7 +206,7 @@ import Base from '../layouts/Base.astro';
     </section>
 
     <!-- ═══ CONTRIBUTE ═══ -->
-    <section class="contribute reveal" data-component="contribute">
+    <section class="contribute reveal">
       <h2>Contribute</h2>
       <p>Everything is open source. Everything is MIT. If you see the gap — reach out.</p>
       <div class="contribute-links">
@@ -254,139 +241,6 @@ import Base from '../layouts/Base.astro';
   });
 
   // ── Feedback drawer ──
-  const SECTIONS = [
-    { id: 'nav', label: 'Navigation' },
-    { id: 'hero', label: 'Hero / Headline' },
-    { id: 'flow-diagram', label: 'Flow Diagram (SVG)' },
-    { id: 'about', label: 'About Copy' },
-    { id: 'urgency', label: 'Urgency Quote' },
-    { id: 'trilogy', label: 'Trilogy Cards' },
-    { id: 'trilogy-viz', label: 'Card Mini-Charts' },
-    { id: 'tools', label: 'Tools Grid' },
-    { id: 'contribute', label: 'Contribute / CTA' },
-    { id: 'palette', label: 'Color Palette' },
-    { id: 'typography', label: 'Typography / Font' },
-    { id: 'overall', label: 'Overall Vibe' },
-  ];
-
-  const toggle = document.getElementById('fb-toggle');
-  const drawer = document.getElementById('fb-drawer');
-  const closeBtn = document.getElementById('fb-close');
-  const sectionsEl = document.getElementById('fb-sections');
-  const generalComment = document.getElementById('fb-comment');
-  const submitBtn = document.getElementById('fb-submit');
-  const countEl = document.getElementById('fb-count');
-
-  toggle.addEventListener('click', () => drawer.classList.add('open'));
-  closeBtn.addEventListener('click', () => drawer.classList.remove('open'));
-
-  // Build section rows
-  const sectionState = {};
-  SECTIONS.forEach(s => {
-    sectionState[s.id] = { vote: null, comment: '' };
-
-    const row = document.createElement('div');
-    row.className = 'fb-section';
-
-    const top = document.createElement('div');
-    top.className = 'fbs-top';
-
-    const name = document.createElement('span');
-    name.className = 'fbs-name';
-    name.textContent = s.label;
-
-    const btns = document.createElement('div');
-    btns.className = 'fbs-btns';
-
-    const up = document.createElement('button');
-    up.className = 'fbs-btn';
-    up.textContent = '\u{1F44D}';
-    up.setAttribute('aria-label', 'Like ' + s.label);
-    const down = document.createElement('button');
-    down.className = 'fbs-btn';
-    down.textContent = '\u{1F44E}';
-    down.setAttribute('aria-label', 'Dislike ' + s.label);
-
-    up.addEventListener('click', () => {
-      sectionState[s.id].vote = 'up';
-      up.classList.add('fbs-selected');
-      down.classList.remove('fbs-selected');
-    });
-    down.addEventListener('click', () => {
-      sectionState[s.id].vote = 'down';
-      down.classList.add('fbs-selected');
-      up.classList.remove('fbs-selected');
-    });
-
-    btns.appendChild(up);
-    btns.appendChild(down);
-    top.appendChild(name);
-    top.appendChild(btns);
-
-    const input = document.createElement('input');
-    input.className = 'fbs-comment';
-    input.type = 'text';
-    input.placeholder = 'Notes on ' + s.label.toLowerCase() + '...';
-    input.addEventListener('input', () => {
-      sectionState[s.id].comment = input.value;
-    });
-
-    row.appendChild(top);
-    row.appendChild(input);
-    sectionsEl.appendChild(row);
-  });
-
-  // Submit
-  submitBtn.addEventListener('click', () => {
-    const entries = JSON.parse(localStorage.getItem('eidos-feedback') || '[]');
-    const batch = {
-      ts: new Date().toISOString(),
-      theme: localStorage.getItem('eidos-theme') || 'workshop',
-      page: location.pathname,
-      general: generalComment.value.trim(),
-      sections: {}
-    };
-
-    let hasVotes = false;
-    SECTIONS.forEach(s => {
-      const st = sectionState[s.id];
-      if (st.vote || st.comment) {
-        batch.sections[s.id] = { vote: st.vote, comment: st.comment };
-        hasVotes = true;
-      }
-    });
-
-    if (!hasVotes && !batch.general) return;
-
-    entries.push(batch);
-    localStorage.setItem('eidos-feedback', JSON.stringify(entries));
-
-    // Push to server
-    fetch('/api/feedback', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(batch),
-    }).catch(() => { countEl.textContent += ' (offline — saved locally)'; });
-
-    // Reset UI
-    SECTIONS.forEach(s => {
-      sectionState[s.id] = { vote: null, comment: '' };
-    });
-    sectionsEl.querySelectorAll('.fbs-btn').forEach(b => b.classList.remove('fbs-selected'));
-    sectionsEl.querySelectorAll('.fbs-comment').forEach(i => { i.value = ''; });
-    generalComment.value = '';
-
-    updateCount();
-    submitBtn.textContent = 'Logged!';
-    setTimeout(() => { submitBtn.textContent = 'Submit all feedback'; }, 1500);
-  });
-
-  function updateCount() {
-    const entries = JSON.parse(localStorage.getItem('eidos-feedback') || '[]');
-    countEl.textContent = entries.length + ' feedback entries logged';
-  }
-  updateCount();
-
   // Hamburger menu
   const hamburgerBtn = document.getElementById('hamburger');
   const navMenu = document.getElementById('nav-menu');
@@ -412,30 +266,6 @@ import Base from '../layouts/Base.astro';
   }
 
   /* ── MARK ── */
-  .mark {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: var(--space-6) 0;
-    border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 20%, transparent);
-  }
-  .mark > a {
-    font-family: var(--font-heading);
-    font-size: var(--text-md);
-    font-weight: var(--weight-bold);
-    color: var(--color-text);
-    letter-spacing: -0.02em;
-  }
-  .mark > a:hover { color: var(--color-primary); }
-  .mark nav {
-    display: flex;
-    gap: var(--space-6);
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-  }
-  .mark nav a { color: var(--color-muted); }
-  .mark nav a:hover { color: var(--color-primary); }
-
   /* ── HERO ── */
   .hero {
     display: grid;
@@ -865,220 +695,11 @@ import Base from '../layouts/Base.astro';
   [data-theme="ai"] .contribute-btn { background: none !important; color: #000 !important; text-decoration: underline; padding: 0; }
   [data-theme="ai"] .contribute-links { gap: 1rem; }
   [data-theme="ai"] .stats-strip { display: none; }
-  [data-theme="ai"] .fb-toggle, [data-theme="ai"] .fb-drawer, [data-theme="ai"] .comp-vote-bar { display: none; }
   [data-theme="ai"] .foot { border: none; padding: 0.5rem 0; }
   .theme-dot.active {
     box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
   }
 
-  /* ── FEEDBACK DRAWER ── */
-  .fb-toggle {
-    position: fixed;
-    bottom: var(--space-6);
-    right: var(--space-6);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: var(--border-width) solid color-mix(in srgb, var(--color-muted) 30%, transparent);
-    background: var(--color-surface);
-    color: var(--color-muted);
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    cursor: pointer;
-    z-index: var(--z-overlay);
-    transition: border-color 200ms ease, color 200ms ease, transform 200ms ease;
-  }
-  .fb-toggle:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-    transform: scale(1.1);
-  }
-
-  .fb-drawer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: min(360px, 92vw);
-    background: var(--color-bg);
-    border-left: var(--border-width) solid color-mix(in srgb, var(--color-muted) 15%, transparent);
-    z-index: calc(var(--z-overlay) + 1);
-    transform: translateX(100%);
-    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-  }
-  .fb-drawer.open { transform: translateX(0); }
-
-  .fb-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--space-6);
-    border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 12%, transparent);
-    position: sticky;
-    top: 0;
-    background: var(--color-bg);
-    z-index: 1;
-  }
-  .fb-header span {
-    font-family: var(--font-heading);
-    font-size: var(--text-md);
-    font-weight: var(--weight-bold);
-    color: var(--color-text);
-    letter-spacing: -0.01em;
-  }
-  .fb-close {
-    background: none;
-    border: none;
-    color: var(--color-muted);
-    font-size: var(--text-lg);
-    cursor: pointer;
-    padding: var(--space-1);
-    line-height: 1;
-    transition: color 150ms ease;
-  }
-  .fb-close:hover { color: var(--color-text); }
-
-  .fb-sections {
-    flex: 1;
-    padding: var(--space-2) var(--space-6);
-  }
-
-  .fb-section {
-    padding: var(--space-3) 0;
-    border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 8%, transparent);
-  }
-
-  .fbs-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--space-2);
-  }
-
-  .fbs-name {
-    font-family: var(--font-heading);
-    font-size: var(--text-sm);
-    font-weight: var(--weight-medium);
-    color: var(--color-text);
-    letter-spacing: -0.01em;
-  }
-
-  .fbs-btns {
-    display: flex;
-    gap: var(--space-1);
-  }
-
-  .fbs-btn {
-    background: none;
-    border: var(--border-width) solid transparent;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    font-size: 16px;
-    padding: var(--space-1) var(--space-2);
-    transition: border-color 150ms ease, background 150ms ease;
-    opacity: 0.5;
-  }
-  .fbs-btn:hover { opacity: 1; }
-  .fbs-selected {
-    opacity: 1;
-    border-color: var(--color-primary);
-    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
-  }
-
-  .fbs-comment {
-    width: 100%;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    background: var(--color-surface);
-    color: var(--color-text);
-    border: var(--border-width) solid color-mix(in srgb, var(--color-muted) 12%, transparent);
-    border-radius: var(--radius-sm);
-    padding: var(--space-2);
-    outline: none;
-    transition: border-color 150ms ease;
-  }
-  .fbs-comment:focus { border-color: var(--color-primary); }
-  .fbs-comment::placeholder { color: var(--color-muted); font-size: 11px; }
-
-  .fb-comment {
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    background: var(--color-surface);
-    color: var(--color-text);
-    border: var(--border-width) solid color-mix(in srgb, var(--color-muted) 12%, transparent);
-    border-radius: var(--radius-sm);
-    padding: var(--space-3);
-    margin: var(--space-3) var(--space-6);
-    resize: vertical;
-    outline: none;
-  }
-  .fb-comment:focus { border-color: var(--color-primary); }
-  .fb-comment::placeholder { color: var(--color-muted); }
-
-  .fb-submit {
-    font-family: var(--font-heading);
-    font-size: var(--text-sm);
-    font-weight: var(--weight-medium);
-    color: var(--color-bg);
-    background: var(--color-primary);
-    border: none;
-    padding: var(--space-3) var(--space-6);
-    margin: 0 var(--space-6) var(--space-4);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: background 150ms ease;
-  }
-  .fb-submit:hover {
-    background: color-mix(in srgb, var(--color-primary) 80%, white);
-  }
-
-  .fb-count {
-    text-align: center;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--color-muted);
-    padding-bottom: var(--space-4);
-  }
-
-  /* ── PER-COMPONENT VOTING ── */
-  .comp-vote-bar {
-    position: absolute;
-    top: var(--space-2);
-    right: var(--space-2);
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    background: color-mix(in srgb, var(--color-bg) 90%, transparent);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: var(--border-width) solid color-mix(in srgb, var(--color-muted) 15%, transparent);
-    border-radius: var(--radius-md);
-    padding: var(--space-1) var(--space-2);
-    opacity: 0;
-    transition: opacity 200ms ease;
-    z-index: var(--z-raised);
-  }
-  [data-component]:hover .comp-vote-bar { opacity: 1; }
-  .cv-label {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    color: var(--color-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-  .cv-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    padding: var(--space-1);
-    transition: transform 150ms ease;
-  }
-  .cv-btn:hover { transform: scale(1.3); }
-  .cv-voted { background: color-mix(in srgb, var(--color-primary) 15%, transparent); }
 
   /* ── RESPONSIVE ── */
   /* ── HAMBURGER ── */
