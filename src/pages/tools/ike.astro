@@ -12,6 +12,29 @@ import Tool from '../../layouts/Tool.astro';
   <h2>What it does</h2>
   <p>ike.md is the execution forge. Tasks, milestones, documents, Definition of Done. Named for Eisenhower — the man who planned D-Day and then ran the free world. Ike didn't just plan. He executed at scale, across many agents, under time pressure, with contracts that had to be honored.</p>
 
+  <div class="tool-diagram">
+    <svg viewBox="0 0 400 100" fill="none" role="img" aria-label="Task lifecycle: To Do, In Progress, Done — with dependencies between tasks and completion notes">
+      <rect class="td-node" x="20" y="25" width="90" height="50" rx="3"/>
+      <text class="td-label" x="65" y="55" text-anchor="middle">To Do</text>
+      <text class="td-sub" x="65" y="42" text-anchor="middle">QUEUED</text>
+
+      <rect class="td-node" x="155" y="25" width="90" height="50" rx="3" style="stroke:var(--color-primary)"/>
+      <text class="td-label" x="200" y="55" text-anchor="middle">In Progress</text>
+      <text class="td-sub" x="200" y="42" text-anchor="middle">EXECUTING</text>
+
+      <rect class="td-node" x="290" y="25" width="90" height="50" rx="3" style="stroke:var(--color-command)"/>
+      <text class="td-label" x="335" y="55" text-anchor="middle">Done</text>
+      <text class="td-sub" x="335" y="42" text-anchor="middle">VERIFIED</text>
+
+      <line class="td-arrow" x1="110" y1="50" x2="155" y2="50"/>
+      <polygon class="td-head" points="149,44 159,50 149,56"/>
+      <line class="td-arrow" x1="245" y1="50" x2="290" y2="50"/>
+      <polygon class="td-head" points="284,44 294,50 284,56"/>
+
+      <text class="td-side" x="200" y="90" text-anchor="middle">Definition of Done checked before completion</text>
+    </svg>
+  </div>
+
   <h2>Key features</h2>
   <ul>
     <li><strong>Tasks with lifecycle</strong> — To Do → In Progress → Done, with completion notes</li>

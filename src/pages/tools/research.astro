@@ -12,6 +12,36 @@ import Tool from '../../layouts/Tool.astro';
   <h2>What it does</h2>
   <p>research.md is the decision forge. When a question has consequences — architecture choices, technology selections, strategic bets — you run it through research.md so the evidence is recorded, the criteria are locked, and the decision is reviewable by any future agent or human.</p>
 
+  <div class="tool-diagram">
+    <svg viewBox="0 0 400 140" fill="none" role="img" aria-label="Decision phases: findings, then candidates, then peer review, then criteria lock, then scoring, then decision">
+      <rect class="td-node" x="5" y="50" width="55" height="40" rx="3"/>
+      <text class="td-label" x="32" y="74" text-anchor="middle" style="font-size:9px">Findings</text>
+
+      <rect class="td-node" x="75" y="50" width="65" height="40" rx="3"/>
+      <text class="td-label" x="107" y="74" text-anchor="middle" style="font-size:9px">Candidates</text>
+
+      <rect class="td-node" x="155" y="50" width="55" height="40" rx="3"/>
+      <text class="td-label" x="182" y="74" text-anchor="middle" style="font-size:9px">Review</text>
+
+      <rect class="td-node" x="225" y="50" width="50" height="40" rx="3" style="stroke:var(--color-primary)"/>
+      <text class="td-label" x="250" y="74" text-anchor="middle" style="font-size:9px">Lock</text>
+
+      <rect class="td-node" x="290" y="50" width="50" height="40" rx="3"/>
+      <text class="td-label" x="315" y="74" text-anchor="middle" style="font-size:9px">Score</text>
+
+      <rect class="td-node" x="355" y="50" width="50" height="40" rx="3" style="stroke:var(--color-command)"/>
+      <text class="td-label" x="380" y="74" text-anchor="middle" style="font-size:9px">Decide</text>
+
+      <line class="td-arrow" x1="60" y1="70" x2="75" y2="70"/>
+      <line class="td-arrow" x1="140" y1="70" x2="155" y2="70"/>
+      <line class="td-arrow" x1="210" y1="70" x2="225" y2="70"/>
+      <line class="td-arrow" x1="275" y1="70" x2="290" y2="70"/>
+      <line class="td-arrow" x1="340" y1="70" x2="355" y2="70"/>
+
+      <text class="td-side" x="250" y="110" text-anchor="middle">no changes after lock</text>
+    </svg>
+  </div>
+
   <h2>Key features</h2>
   <ul>
     <li><strong>Phase-gated workflow</strong> — candidates → criteria lock → scoring → decision</li>
