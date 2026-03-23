@@ -14,7 +14,7 @@ import Base from '../layouts/Base.astro';
 
       <section class="content-section">
         <h2>The pattern</h2>
-        <p>A forge is a repo that packages reusable AI agent knowledge as Claude Code skills and templates. No software. No CLI. No packages to install. Pure knowledge — markdown files with instructions and templates with variable substitution. Portable via clone and copy.</p>
+        <p>A forge is a repo that packages reusable AI agent knowledge as skills and templates. No software. No CLI. No packages to install. Pure knowledge — markdown files with instructions and templates with variable substitution. Portable via clone and copy. Works with any AI coding agent.</p>
         <p>When an agent needs to know how to do something — release a package, audit a repo, run a demo, write tests — it reads a forge skill. The skill tells it exactly what to do, in what order, with what checks. The agent doesn't improvise. It follows the forge.</p>
       </section>
 
@@ -41,27 +41,75 @@ import Base from '../layouts/Base.astro';
       </div>
 
       <section class="content-section">
-        <h2>Current forges</h2>
+        <h2>Engineering forges</h2>
+        <p>Skills for building, testing, shipping, and maintaining software.</p>
         <div class="forge-grid">
           <a href="https://github.com/eidos-agi/forge-forge" class="forge-card">
             <h3>forge-forge</h3>
-            <p>The meta-forge. Creates new forges, audits existing ones, catalogs the ecosystem.</p>
-            <span class="forge-skills">/forge-init · /forge-audit · /forge-catalog · /forge-sync</span>
-          </a>
-          <a href="https://github.com/eidos-agi/foss-forge" class="forge-card">
-            <h3>foss-forge</h3>
-            <p>Open-source release toolkit. Checks, initializes, releases, launches, and demos FOSS projects.</p>
-            <span class="forge-skills">/foss-check · /foss-init · /foss-release · /foss-launch · /foss-demo</span>
-          </a>
-          <a href="https://github.com/eidos-agi/demo-forge" class="forge-card">
-            <h3>demo-forge</h3>
-            <p>Demo creation and management. Build, audit, and clean up product demonstrations.</p>
-            <span class="forge-skills">/demo · /demo-audit · /demo-clean</span>
+            <p>The meta-forge. Creates new forges, audits the ecosystem.</p>
           </a>
           <a href="https://github.com/eidos-agi/test-forge" class="forge-card">
             <h3>test-forge</h3>
-            <p>Testing toolkit. Test files, test modules, diagnose failures, manage playbooks.</p>
-            <span class="forge-skills">/test_this · /test_these · /whats_wrong · /playbooks</span>
+            <p>Testing toolkit. Test files, diagnose failures, manage playbooks.</p>
+          </a>
+          <a href="https://github.com/eidos-agi/ship-forge" class="forge-card">
+            <h3>ship-forge</h3>
+            <p>Shipping pipeline. Build, verify, deploy, announce.</p>
+          </a>
+          <a href="https://github.com/eidos-agi/foss-forge" class="forge-card">
+            <h3>foss-forge</h3>
+            <p>Open-source release toolkit. Checks, releases, launches FOSS projects.</p>
+          </a>
+          <a href="https://github.com/eidos-agi/refactor-forge" class="forge-card">
+            <h3>refactor-forge</h3>
+            <p>Code refactoring patterns and safety checks.</p>
+          </a>
+          <a href="https://github.com/eidos-agi/security-forge" class="forge-card">
+            <h3>security-forge</h3>
+            <p>Security auditing, vulnerability scanning, hardening.</p>
+          </a>
+          <a href="https://github.com/eidos-agi/elt-forge" class="forge-card">
+            <h3>elt-forge</h3>
+            <p>Data pipeline patterns. Extract, load, transform.</p>
+          </a>
+          <a href="https://github.com/eidos-agi/connection-forge" class="forge-card">
+            <h3>connection-forge</h3>
+            <p>Vendor integration specs. Contract-driven data connections.</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>Knowledge forges</h2>
+        <p>Skills for creating, managing, and distributing content and knowledge.</p>
+        <div class="forge-grid">
+          <a href="https://github.com/eidos-agi/book-forge" class="forge-card">
+            <h3>book-forge</h3>
+            <p>Book authoring. Structure, write, edit, publish.</p>
+          </a>
+          <a href="https://github.com/eidos-agi/brand-forge" class="forge-card">
+            <h3>brand-forge</h3>
+            <p>Brand identity. Voice, visuals, consistency across properties.</p>
+          </a>
+          <a href="https://github.com/eidos-agi/demo-forge" class="forge-card">
+            <h3>demo-forge</h3>
+            <p>Product demonstrations. Build, audit, clean up.</p>
+          </a>
+          <a href="https://github.com/eidos-agi/image-forge" class="forge-card">
+            <h3>image-forge</h3>
+            <p>Image generation and management.</p>
+          </a>
+          <a href="https://github.com/eidos-agi/video-forge" class="forge-card">
+            <h3>video-forge</h3>
+            <p>Video creation workflows.</p>
+          </a>
+          <a href="https://github.com/eidos-agi/marketing-forge" class="forge-card">
+            <h3>marketing-forge</h3>
+            <p>Marketing content and campaign skills.</p>
+          </a>
+          <a href="https://github.com/eidos-agi/underwriting-forge" class="forge-card">
+            <h3>underwriting-forge</h3>
+            <p>Financial underwriting analysis.</p>
           </a>
         </div>
       </section>
