@@ -183,6 +183,17 @@ pre .param { color: var(--color-secondary); }
   .hamburger { display: block; }
   .mark-right { gap: var(--space-3); }
   .page { padding: 0 var(--space-4); }
+
+  /* Diagrams: allow horizontal scroll on mobile instead of shrinking */
+  .aid-diagram, .cdd-diagram, .trust-diagram {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .aid-diagram svg, .cdd-diagram svg, .trust-diagram svg {
+    min-width: 420px;
+  }
+
   .theme-switcher .theme-dot { display: none; }
   .theme-switcher .theme-dot:first-child { display: flex; }
   .theme-switcher .theme-dot:nth-child(5) { display: flex; }
