@@ -1,0 +1,29 @@
+<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="800" fill="#161210"/>
+  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter>
+  <rect width="800" height="800" filter="url(#n)" opacity="0.03"/>
+
+  <!-- Photo circle -->
+  <defs>
+    <clipPath id="circ">
+      <circle cx="400" cy="250" r="130"/>
+    </clipPath>
+  </defs>
+  <image href="daniel.jpg" x="270" y="120" width="260" height="260" clip-path="url(#circ)" preserveAspectRatio="xMidYMid slice"/>
+  <circle cx="400" cy="250" r="130" fill="none" stroke="#c4935a" stroke-width="3"/>
+
+  <!-- Name -->
+  <text x="400" y="440" fill="#dcd5cb" font-family="system-ui, sans-serif" font-size="48" font-weight="700" text-anchor="middle" letter-spacing="-0.02em">Daniel Shanklin</text>
+
+  <!-- Rule -->
+  <rect x="340" y="465" width="120" height="3" fill="#c4935a" rx="1"/>
+
+  <!-- Hook lines -->
+  <text x="400" y="520" fill="#8b8179" font-family="system-ui, sans-serif" font-size="24" font-weight="400" text-anchor="middle">Your agent has no identity.</text>
+  <text x="400" y="555" fill="#8b8179" font-family="system-ui, sans-serif" font-size="24" font-weight="400" text-anchor="middle">No memory. No governance.</text>
+  <text x="400" y="600" fill="#c4935a" font-family="system-ui, sans-serif" font-size="26" font-weight="700" text-anchor="middle">I'm fixing that.</text>
+
+  <!-- Bottom -->
+  <text x="400" y="700" fill="#8b8179" font-family="monospace" font-size="18" text-anchor="middle">eidos agi</text>
+  <text x="400" y="730" fill="#8b8179" font-family="monospace" font-size="14" text-anchor="middle">eidosagi.com</text>
+</svg>

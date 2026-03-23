@@ -1,0 +1,27 @@
+<svg width="1100" height="220" viewBox="0 0 1100 220" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <rect width="1100" height="220" fill="#161210"/>
+  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter>
+  <rect width="1100" height="220" filter="url(#n)" opacity="0.03"/>
+
+  <!-- Photo circle -->
+  <defs>
+    <clipPath id="circle">
+      <circle cx="90" cy="110" r="60"/>
+    </clipPath>
+  </defs>
+  <image href="daniel.jpg" x="30" y="50" width="120" height="120" clip-path="url(#circle)" preserveAspectRatio="xMidYMid slice"/>
+  <circle cx="90" cy="110" r="60" fill="none" stroke="#c4935a" stroke-width="2"/>
+
+  <!-- Name + title -->
+  <text x="180" y="95" fill="#dcd5cb" font-family="system-ui, sans-serif" font-size="36" font-weight="700" letter-spacing="-0.02em">Daniel Shanklin</text>
+  <text x="180" y="130" fill="#8b8179" font-family="system-ui, sans-serif" font-size="18" font-weight="400">Founder, Eidos AGI</text>
+
+  <!-- Tagline -->
+  <text x="180" y="165" fill="#c4935a" font-family="monospace" font-size="14">Building governance infrastructure for AI agents.</text>
+
+  <!-- Rule -->
+  <rect x="180" y="105" width="40" height="2" fill="#c4935a" rx="1"/>
+
+  <!-- URL -->
+  <text x="1060" y="195" fill="#8b8179" font-family="monospace" font-size="12" text-anchor="end">eidosagi.com</text>
+</svg>
