@@ -11,6 +11,7 @@ const tools = [
   { name: 'eidos-mcp-registry', pip: 'eidos-mcp-registry', repo: 'eidos-mcp-registry', role: 'MCP', desc: 'MCP server scoping.' },
   { name: 'resume-resume', pip: 'resume-resume', repo: 'resume-resume', role: 'Agent', desc: 'Post-crash session recovery.' },
   { name: 'apple-a-day', pip: 'apple-a-day', repo: 'apple-a-day', role: 'Agent', desc: 'Mac health. Zero deps.' },
+  { name: 'claude-session-commons', pip: 'claude-session-commons', repo: 'claude-session-commons', role: 'Library', desc: 'Shared session utilities for Claude Code tools.' },
 ];
 
 const stats = await Promise.all(tools.map(async t => {
