@@ -47,6 +47,15 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://eidosagi.com');
       <div class="mark">
         <a href="/">eidos agi</a>
         <div class="mark-right">
+          <div class="theme-switcher">
+            <button class="theme-dot" data-set-theme="workshop" style="background:#c4935a" title="Workshop"></button>
+            <button class="theme-dot" data-set-theme="midnight" style="background:#6c8aff" title="Midnight"></button>
+            <button class="theme-dot" data-set-theme="forest" style="background:#4ade80" title="Forest"></button>
+            <button class="theme-dot" data-set-theme="copper" style="background:#e88a48" title="Copper"></button>
+            <button class="theme-dot" data-set-theme="paper" style="background:#f0ebe4;border:1px solid #8a8078" title="Paper"></button>
+            <button class="theme-dot" data-set-theme="slate" style="background:#a78bfa" title="Slate"></button>
+            <button class="theme-dot theme-ai" data-set-theme="ai" title="AI Reader Mode">AI</button>
+          </div>
           <nav id="nav-menu">
             <a href="/contract-driven-development">contracts</a>
             <a href="/agent-identity">identity</a>
@@ -71,6 +80,24 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://eidosagi.com');
     </div>
 
     <script>
+      // Theme switcher
+      const saved = localStorage.getItem('eidos-theme');
+      document.querySelectorAll('[data-set-theme]').forEach(btn => {
+        if ((btn as HTMLElement).dataset.setTheme === (saved || 'workshop')) btn.classList.add('active');
+        btn.addEventListener('click', () => {
+          const theme = (btn as HTMLElement).dataset.setTheme!;
+          if (theme === 'workshop') {
+            document.documentElement.removeAttribute('data-theme');
+          } else {
+            document.documentElement.setAttribute('data-theme', theme);
+          }
+          localStorage.setItem('eidos-theme', theme);
+          document.querySelectorAll('[data-set-theme]').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        });
+      });
+
+      // Hamburger
       const hb = document.getElementById('hamburger');
       const nm = document.getElementById('nav-menu');
       if (hb && nm) {

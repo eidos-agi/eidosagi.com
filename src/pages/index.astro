@@ -7,16 +7,6 @@ import Base from '../layouts/Base.astro';
   description="Open-source infrastructure that makes existing AI go further. 9 packages on PyPI, all MIT."
 >
 
-    <!-- Theme switcher (landing page only) -->
-    <div class="theme-switcher">
-      <button class="theme-dot" data-set-theme="workshop" style="background:#c4935a" title="Workshop"></button>
-      <button class="theme-dot" data-set-theme="midnight" style="background:#6c8aff" title="Midnight"></button>
-      <button class="theme-dot" data-set-theme="forest" style="background:#4ade80" title="Forest"></button>
-      <button class="theme-dot" data-set-theme="copper" style="background:#e88a48" title="Copper"></button>
-      <button class="theme-dot" data-set-theme="paper" style="background:#f0ebe4;border:1px solid #8a8078" title="Paper"></button>
-      <button class="theme-dot" data-set-theme="slate" style="background:#a78bfa" title="Slate"></button>
-      <button class="theme-dot theme-ai" data-set-theme="ai" title="AI Reader Mode">AI</button>
-    </div>
 
     <!-- ═══ HERO ═══ -->
     <header class="hero">
@@ -252,27 +242,6 @@ ike.<span class="function">complete</span>(task, <span class="param">notes</span
       </div>
     </section>
 
-<script>
-  // ── Theme switcher ──
-  const saved = localStorage.getItem('eidos-theme');
-  if (saved && saved !== 'workshop') document.documentElement.setAttribute('data-theme', saved);
-
-  document.querySelectorAll('[data-set-theme]').forEach(btn => {
-    if (btn.dataset.setTheme === (saved || 'workshop')) btn.classList.add('active');
-    btn.addEventListener('click', () => {
-      const theme = btn.dataset.setTheme;
-      if (theme === 'workshop') {
-        document.documentElement.removeAttribute('data-theme');
-      } else {
-        document.documentElement.setAttribute('data-theme', theme);
-      }
-      localStorage.setItem('eidos-theme', theme);
-      document.querySelectorAll('[data-set-theme]').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
-
-</script>
 </Base>
 
 <style is:global>
@@ -714,37 +683,6 @@ ike.<span class="function">complete</span>(task, <span class="param">notes</span
     align-items: center;
     gap: var(--space-6);
   }
-  .theme-switcher {
-    display: flex;
-    gap: var(--space-2);
-    align-items: center;
-  }
-  .theme-dot {
-    width: var(--space-3);
-    height: var(--space-3);
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    transition: transform 150ms ease, box-shadow 150ms ease;
-    padding: 0;
-  }
-  .theme-dot:hover {
-    transform: scale(1.3);
-  }
-  .theme-ai {
-    background: var(--color-surface) !important;
-    border: var(--border-width) solid var(--color-muted) !important;
-    color: var(--color-muted);
-    font-family: var(--font-mono);
-    font-size: 7px;
-    font-weight: bold;
-    letter-spacing: 0.02em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-  }
 
   /* AI Reader Mode — structured text for LLM consumption */
   [data-theme="ai"] {
@@ -796,9 +734,6 @@ ike.<span class="function">complete</span>(task, <span class="param">notes</span
   [data-theme="ai"] .contribute-links { gap: 1rem; }
   [data-theme="ai"] .stats-strip { display: none; }
   [data-theme="ai"] .foot { border: none; padding: 0.5rem 0; }
-  .theme-dot.active {
-    box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
-  }
 
 
   /* ── RESPONSIVE (page-specific) ── */
@@ -812,10 +747,5 @@ ike.<span class="function">complete</span>(task, <span class="param">notes</span
     .ent-grid { grid-template-columns: 1fr; }
     .trilogy-cards { grid-template-columns: 1fr; }
 
-    /* Theme dots: only 2 on mobile */
-    .theme-switcher .theme-dot { display: none; }
-    .theme-switcher .theme-dot:first-child { display: flex; }
-    .theme-switcher .theme-dot:nth-child(5) { display: flex; }
-    .theme-switcher .theme-ai { display: flex; }
   }
 </style>
