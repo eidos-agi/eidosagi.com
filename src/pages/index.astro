@@ -197,6 +197,12 @@ ike.complete(task, notes=agent.summary)</code></pre>
       </table>
     </div>
 
+    <!-- ═══ QUICK START ═══ -->
+    <div class="quickstart reveal">
+      <pre><code>pip install visionlog-md research-md ike-md</code></pre>
+      <span class="qs-note">The whole trilogy. One line.</span>
+    </div>
+
     <!-- ═══ MORE TOOLS (compact) ═══ -->
     <div class="more-tools reveal">
       <span class="mt-label">Also:</span>
@@ -584,6 +590,27 @@ ike.complete(task, notes=agent.summary)</code></pre>
   }
 
   /* ── TOOLS GRID ── */
+  /* ── QUICK START ── */
+  .quickstart {
+    text-align: center;
+    padding: var(--space-8) 0;
+  }
+  .quickstart pre {
+    display: inline-block;
+    font-size: var(--text-base);
+    padding: var(--space-4) var(--space-8);
+  }
+  .quickstart code {
+    color: var(--color-command);
+  }
+  .qs-note {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-muted);
+    margin-top: var(--space-3);
+  }
+
   /* ── MORE TOOLS (compact) ── */
   .more-tools {
     display: flex;
