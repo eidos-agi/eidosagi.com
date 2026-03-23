@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="EidosOmni — Memory for AI Agents"
+  description="Agents forget everything between sessions. EidosOmni gives them memory — messages, files, photos, emails, all searchable, all vectorized."
+>
+    <article class="prose-page">
+      <header class="page-hero">
+        <h1>EidosOmni</h1>
+        <p class="subtitle">Memory for agents. Coming soon.</p>
+      </header>
+
+      <section class="content-section">
+        <h2>The problem</h2>
+        <p>AI agents are stateless. Every session starts from zero. The agent that helped you yesterday doesn't remember what it did, what it learned, or what you told it. It has no access to your messages, your files, your photos, your emails — the context that makes it useful.</p>
+        <p>Humans don't work this way. Humans remember. Agents should too.</p>
+      </section>
+
+      <section class="content-section">
+        <h2>What it does</h2>
+        <p>EidosOmni is a universal memory system for AI agents. It watches your device — messages, files, emails, photos — and makes everything searchable through a single interface. The agent doesn't need to know where data lives. It asks EidosOmni, and EidosOmni finds it.</p>
+
+        <!-- Memory flow diagram -->
+        <div class="omni-diagram">
+          <svg viewBox="0 0 500 200" fill="none" role="img" aria-label="EidosOmni: device sources (messages, files, email, photos) flow through adapters into a unified search layer that agents query">
+            <!-- Sources -->
+            <rect class="omni-src" x="10" y="10" width="90" height="36" rx="3"/>
+            <text class="omni-src-label" x="55" y="32" text-anchor="middle">Messages</text>
+
+            <rect class="omni-src" x="10" y="56" width="90" height="36" rx="3"/>
+            <text class="omni-src-label" x="55" y="78" text-anchor="middle">Files</text>
+
+            <rect class="omni-src" x="10" y="102" width="90" height="36" rx="3"/>
+            <text class="omni-src-label" x="55" y="124" text-anchor="middle">Email</text>
+
+            <rect class="omni-src" x="10" y="148" width="90" height="36" rx="3"/>
+            <text class="omni-src-label" x="55" y="170" text-anchor="middle">Photos</text>
+
+            <!-- Adapters -->
+            <rect class="omni-adapter" x="150" y="60" width="100" height="80" rx="3"/>
+            <text class="omni-adapter-label" x="200" y="95" text-anchor="middle">Adapters</text>
+            <text class="omni-adapter-sub" x="200" y="110" text-anchor="middle">VECTORIZE</text>
+
+            <!-- Arrows to adapter -->
+            <line class="omni-arrow" x1="100" y1="28" x2="150" y2="80"/>
+            <line class="omni-arrow" x1="100" y1="74" x2="150" y2="90"/>
+            <line class="omni-arrow" x1="100" y1="120" x2="150" y2="105"/>
+            <line class="omni-arrow" x1="100" y1="166" x2="150" y2="120"/>
+
+            <!-- Search layer -->
+            <rect class="omni-search" x="300" y="60" width="100" height="80" rx="3"/>
+            <text class="omni-search-label" x="350" y="95" text-anchor="middle">Search</text>
+            <text class="omni-search-sub" x="350" y="110" text-anchor="middle">RRF FUSION</text>
+
+            <!-- Arrow adapter to search -->
+            <line class="omni-arrow" x1="250" y1="100" x2="300" y2="100"/>
+            <polygon class="omni-head" points="294,94 304,100 294,106"/>
+
+            <!-- Agent -->
+            <rect class="omni-agent" x="440" y="75" width="50" height="50" rx="3"/>
+            <text class="omni-agent-label" x="465" y="104" text-anchor="middle">Agent</text>
+
+            <!-- Arrow search to agent -->
+            <line class="omni-arrow" x1="400" y1="100" x2="440" y2="100"/>
+            <polygon class="omni-head" points="434,94 444,100 434,106"/>
+          </svg>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>Portable</h2>
+        <p>EidosOmni isn't locked into infrastructure. Your agent's memory lives on your device — like a thumb drive, you can move it. Switch machines, switch providers, switch agents. The memory comes with you because it belongs to you, not to a platform.</p>
+      </section>
+
+      <section class="content-section">
+        <h2>Status</h2>
+        <p>EidosOmni is in active development. Message and file adapters are operational. Email and photo adapters are being built. The search layer uses Reciprocal Rank Fusion across multiple retrieval methods for accuracy.</p>
+        <p>When it ships, it will be the memory layer that the governance trilogy and agent identity stack depend on — the thing that lets an agent say "I remember what we decided last month" instead of "I have no context."</p>
+      </section>
+    </article>
+</Base>
+
+<style is:global>
+  .omni-diagram { margin: var(--space-8) 0; max-width: 500px; }
+  .omni-diagram svg { width: 100%; height: auto; }
+  .omni-src { fill: var(--color-surface); stroke: color-mix(in srgb, var(--color-muted) 25%, transparent); stroke-width: 1; }
+  .omni-src-label { font-family: var(--font-mono); font-size: 10px; fill: var(--color-muted); }
+  .omni-adapter { fill: var(--color-surface); stroke: var(--color-primary); stroke-width: 1; }
+  .omni-adapter-label { font-family: var(--font-heading); font-size: 13px; fill: var(--color-text); font-weight: 500; }
+  .omni-adapter-sub { font-family: var(--font-mono); font-size: 7px; fill: var(--color-primary); letter-spacing: 0.1em; }
+  .omni-search { fill: var(--color-surface); stroke: var(--color-command); stroke-width: 1; }
+  .omni-search-label { font-family: var(--font-heading); font-size: 13px; fill: var(--color-text); font-weight: 500; }
+  .omni-search-sub { font-family: var(--font-mono); font-size: 7px; fill: var(--color-command); letter-spacing: 0.1em; }
+  .omni-agent { fill: var(--color-surface); stroke: var(--color-secondary); stroke-width: 1; }
+  .omni-agent-label { font-family: var(--font-mono); font-size: 9px; fill: var(--color-text); }
+  .omni-arrow { stroke: var(--color-primary); stroke-width: 1; stroke-dasharray: 3 3; animation: omni-dash 1.5s linear infinite; }
+  .omni-head { fill: var(--color-primary); }
+  @keyframes omni-dash { to { stroke-dashoffset: -12; } }
+</style>
