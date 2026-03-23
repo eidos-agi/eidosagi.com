@@ -6,25 +6,6 @@ import Base from '../layouts/Base.astro';
   title="Agent Identity — Eidos AGI"
   description="Agents need their own identity — not a borrowed login, not a shared API key. Real accounts, real credentials, real audit trails."
 >
-  <div class="page">
-    <div class="mark">
-      <a href="/">eidos agi</a>
-      <div class="mark-right">
-        <nav id="nav-menu">
-          <a href="/contract-driven-development">methodology</a>
-          <a href="https://github.com/eidos-agi">github</a>
-          <a href="https://pypi.org/user/eidos-agi/">pypi</a>
-        </nav>
-        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-            <line x1="3" y1="5" x2="17" y2="5"/>
-            <line x1="3" y1="10" x2="17" y2="10"/>
-            <line x1="3" y1="15" x2="17" y2="15"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-
     <article class="aid-page">
       <header class="aid-hero">
         <h1>Agent Identity</h1>
@@ -49,41 +30,14 @@ import Base from '../layouts/Base.astro';
         <p>AID is designed and documented. Hancock is in early implementation. The governance trilogy is shipped today. Identity is the next layer.</p>
       </section>
     </article>
-
-    <footer class="foot">
-      <span>&copy; {new Date().getFullYear()} Eidos AGI</span>
-    </footer>
-  </div>
-
-  <script>
-    const hb = document.getElementById('hamburger');
-    const nm = document.getElementById('nav-menu');
-    if (hb && nm) {
-      hb.addEventListener('click', () => {
-        nm.classList.toggle('open');
-        hb.setAttribute('aria-expanded', nm.classList.contains('open'));
-      });
-      document.addEventListener('click', (e) => {
-        if (!hb.contains(e.target) && !nm.contains(e.target)) nm.classList.remove('open');
-      });
-    }
-  </script>
 </Base>
 
 <style is:global>
   .aid-page { max-width: var(--measure-prose); }
   .aid-hero { padding: var(--space-16) 0 var(--space-8); }
-  .aid-hero h1 {
-    font-size: clamp(2rem, 5vw, var(--text-4xl));
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    margin-bottom: var(--space-4);
-  }
+  .aid-hero h1 { font-size: clamp(2rem, 5vw, var(--text-4xl)); line-height: 0.95; letter-spacing: -0.03em; margin-bottom: var(--space-4); }
   .aid-sub { font-size: var(--text-lg); color: var(--color-primary); }
-  .aid-section {
-    padding: var(--space-12) 0;
-    border-top: var(--border-width) solid color-mix(in srgb, var(--color-muted) 15%, transparent);
-  }
+  .aid-section { padding: var(--space-12) 0; border-top: var(--border-width) solid color-mix(in srgb, var(--color-muted) 15%, transparent); }
   .aid-section h2 { margin-bottom: var(--space-4); }
   .aid-section p { line-height: var(--leading-relaxed); margin-bottom: var(--space-4); }
 </style>

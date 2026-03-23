@@ -6,24 +6,6 @@ import Base from '../layouts/Base.astro';
   title="Contract-Driven Development — Eidos AGI"
   description="Agents execute specs, not vibes. Every decision has a confidence level. Every action traces back to a contract."
 >
-  <div class="page">
-    <div class="mark">
-      <a href="/">eidos agi</a>
-      <div class="mark-right">
-        <nav id="nav-menu">
-          <a href="https://github.com/eidos-agi">github</a>
-          <a href="https://pypi.org/user/eidos-agi/">pypi</a>
-        </nav>
-        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-            <line x1="3" y1="5" x2="17" y2="5"/>
-            <line x1="3" y1="10" x2="17" y2="10"/>
-            <line x1="3" y1="15" x2="17" y2="15"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-
     <article class="cdd-page">
       <header class="cdd-hero">
         <h1>Contract-Driven<br />Development</h1>
@@ -88,17 +70,17 @@ import Base from '../layouts/Base.astro';
         <div class="cdd-trio">
           <div class="cdd-trio-item">
             <h3>visionlog</h3>
-            <p>Records the contracts — guardrails, goals, ADRs. These are the constraints all execution must honor. If an agent would violate a guardrail, the answer is already no.</p>
+            <p>Records the contracts — guardrails, goals, ADRs. These are the constraints all execution must honor.</p>
             <code>pip install visionlog-md</code>
           </div>
           <div class="cdd-trio-item">
             <h3>research.md</h3>
-            <p>Earns the decisions with evidence. Candidates are scored against locked criteria. Confidence levels are recorded. The research is the receipt.</p>
+            <p>Earns the decisions with evidence. Candidates scored against locked criteria. The research is the receipt.</p>
             <code>pip install research-md</code>
           </div>
           <div class="cdd-trio-item">
             <h3>ike.md</h3>
-            <p>Executes tasks within the contracts. Every task links to the goal it serves and the decision that authorized the approach. Definition of Done is explicit, not assumed.</p>
+            <p>Executes tasks within the contracts. Definition of Done is explicit, not assumed.</p>
             <code>pip install ike-md</code>
           </div>
         </div>
@@ -129,150 +111,39 @@ import Base from '../layouts/Base.astro';
       </section>
 
       <section class="cdd-section">
-        <p class="cdd-closing">Contract-driven development isn't a methodology to learn. It's three pip installs and a commitment to recording what matters. The agents do the work. The contracts make sure the work is trustworthy.</p>
+        <p class="cdd-closing">Contract-driven development isn't a methodology to learn. It's three pip installs and a commitment to recording what matters.</p>
         <pre><code>pip install visionlog-md research-md ike-md</code></pre>
       </section>
     </article>
-
-    <footer class="foot">
-      <span>&copy; {new Date().getFullYear()} Eidos AGI</span>
-    </footer>
-  </div>
-
-  <script>
-    const hb = document.getElementById('hamburger');
-    const nm = document.getElementById('nav-menu');
-    if (hb && nm) {
-      hb.addEventListener('click', () => {
-        nm.classList.toggle('open');
-        hb.setAttribute('aria-expanded', nm.classList.contains('open'));
-      });
-      document.addEventListener('click', (e) => {
-        if (!hb.contains(e.target) && !nm.contains(e.target)) nm.classList.remove('open');
-      });
-    }
-  </script>
 </Base>
 
 <style is:global>
-  .cdd-page {
-    max-width: var(--measure-prose);
-  }
-
-  .cdd-hero {
-    padding: var(--space-16) 0 var(--space-8);
-  }
-  .cdd-hero h1 {
-    font-size: clamp(2rem, 5vw, var(--text-4xl));
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    margin-bottom: var(--space-4);
-  }
-  .cdd-sub {
-    font-size: var(--text-lg);
-    color: var(--color-primary);
-  }
-
-  .cdd-section {
-    padding: var(--space-12) 0;
-    border-top: var(--border-width) solid color-mix(in srgb, var(--color-muted) 15%, transparent);
-  }
-  .cdd-section h2 {
-    margin-bottom: var(--space-4);
-  }
-  .cdd-section p {
-    line-height: var(--leading-relaxed);
-    margin-bottom: var(--space-4);
-  }
-
-  .cdd-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: var(--text-sm);
-    margin: var(--space-6) 0;
-  }
-  .cdd-table th {
-    text-align: left;
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    color: var(--color-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding: var(--space-2) var(--space-3);
-    border-bottom: 2px solid color-mix(in srgb, var(--color-muted) 20%, transparent);
-  }
-  .cdd-table td {
-    padding: var(--space-2) var(--space-3);
-    border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 10%, transparent);
-    color: var(--color-muted);
-  }
-  .cdd-level {
-    font-family: var(--font-mono);
-    font-weight: var(--weight-medium);
-  }
+  .cdd-page { max-width: var(--measure-prose); }
+  .cdd-hero { padding: var(--space-16) 0 var(--space-8); }
+  .cdd-hero h1 { font-size: clamp(2rem, 5vw, var(--text-4xl)); line-height: 0.95; letter-spacing: -0.03em; margin-bottom: var(--space-4); }
+  .cdd-sub { font-size: var(--text-lg); color: var(--color-primary); }
+  .cdd-section { padding: var(--space-12) 0; border-top: var(--border-width) solid color-mix(in srgb, var(--color-muted) 15%, transparent); }
+  .cdd-section h2 { margin-bottom: var(--space-4); }
+  .cdd-section p { line-height: var(--leading-relaxed); margin-bottom: var(--space-4); }
+  .cdd-table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); margin: var(--space-6) 0; }
+  .cdd-table th { text-align: left; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.06em; padding: var(--space-2) var(--space-3); border-bottom: 2px solid color-mix(in srgb, var(--color-muted) 20%, transparent); }
+  .cdd-table td { padding: var(--space-2) var(--space-3); border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 10%, transparent); color: var(--color-muted); }
+  .cdd-level { font-family: var(--font-mono); font-weight: var(--weight-medium); }
   .cdd-proven { color: var(--color-command); }
   .cdd-tested { color: var(--color-secondary); }
   .cdd-researched { color: var(--color-primary); }
   .cdd-inferred { color: var(--color-muted); }
   .cdd-unknown { color: var(--color-danger); }
   .cdd-blocked { color: var(--color-danger); }
-
-  .cdd-trio {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-4);
-    margin-top: var(--space-6);
-  }
-  .cdd-trio-item {
-    background: var(--color-surface);
-    padding: var(--space-6);
-    border-radius: var(--radius-md);
-  }
-  .cdd-trio-item h3 {
-    color: var(--color-primary);
-    margin-bottom: var(--space-2);
-  }
-  .cdd-trio-item p {
-    font-size: var(--text-sm);
-    color: var(--color-muted);
-    margin-bottom: var(--space-3);
-  }
-  .cdd-trio-item code {
-    font-size: var(--text-xs);
-    color: var(--color-command);
-  }
-
-  .cdd-changes {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-6);
-    margin-top: var(--space-6);
-  }
-  .cdd-changes h3 {
-    font-size: var(--text-base);
-    margin-bottom: var(--space-3);
-  }
-  .cdd-changes ul {
-    list-style: none;
-    padding: 0;
-  }
-  .cdd-changes li {
-    font-size: var(--text-sm);
-    color: var(--color-muted);
-    padding: var(--space-2) 0;
-    border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 8%, transparent);
-    line-height: var(--leading-normal);
-  }
-
-  .cdd-closing {
-    font-size: var(--text-md);
-    line-height: var(--leading-relaxed);
-    margin-bottom: var(--space-6);
-  }
-
-  @media (max-width: 768px) {
-    .cdd-trio { grid-template-columns: 1fr; }
-    .cdd-changes { grid-template-columns: 1fr; }
-    .cdd-table { font-size: var(--text-xs); }
-  }
+  .cdd-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-top: var(--space-6); }
+  .cdd-trio-item { background: var(--color-surface); padding: var(--space-6); border-radius: var(--radius-md); }
+  .cdd-trio-item h3 { color: var(--color-primary); margin-bottom: var(--space-2); }
+  .cdd-trio-item p { font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--space-3); }
+  .cdd-trio-item code { font-size: var(--text-xs); color: var(--color-command); }
+  .cdd-changes { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); margin-top: var(--space-6); }
+  .cdd-changes h3 { font-size: var(--text-base); margin-bottom: var(--space-3); }
+  .cdd-changes ul { list-style: none; padding: 0; }
+  .cdd-changes li { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-2) 0; border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 8%, transparent); line-height: var(--leading-normal); }
+  .cdd-closing { font-size: var(--text-md); line-height: var(--leading-relaxed); margin-bottom: var(--space-6); }
+  @media (max-width: 768px) { .cdd-trio { grid-template-columns: 1fr; } .cdd-changes { grid-template-columns: 1fr; } .cdd-table { font-size: var(--text-xs); } }
 </style>

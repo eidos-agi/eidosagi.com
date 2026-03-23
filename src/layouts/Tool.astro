@@ -23,25 +23,7 @@ const [stars, downloads, pypiInfo] = await Promise.all([
   title={`${name} — Eidos AGI`}
   description={description}
 >
-  <div class="page">
-    <div class="mark">
-      <a href="/">eidos agi</a>
-      <div class="mark-right">
-        <span class="tool-role">{role}</span>
-        <nav id="nav-menu">
-          <a href="https://github.com/eidos-agi">github</a>
-          <a href="https://pypi.org/user/eidos-agi/">pypi</a>
-        </nav>
-        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-            <line x1="3" y1="5" x2="17" y2="5"/>
-            <line x1="3" y1="10" x2="17" y2="10"/>
-            <line x1="3" y1="15" x2="17" y2="15"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-
+    <span class="tool-role-badge">{role}</span>
     <header class="tool-hero">
       <h1>{name}</h1>
       <p class="tool-desc">{description}</p>
@@ -59,25 +41,7 @@ const [stars, downloads, pypiInfo] = await Promise.all([
       <slot />
     </div>
 
-    <footer class="foot">
-      <span>&copy; {new Date().getFullYear()} Eidos AGI</span>
-    </footer>
-  </div>
-
   <script>
-    // Hamburger menu
-    const hb = document.getElementById('hamburger');
-    const nm = document.getElementById('nav-menu');
-    if (hb && nm) {
-      hb.addEventListener('click', () => {
-        nm.classList.toggle('open');
-        hb.setAttribute('aria-expanded', nm.classList.contains('open'));
-      });
-      document.addEventListener('click', (e) => {
-        if (!hb.contains(e.target) && !nm.contains(e.target)) nm.classList.remove('open');
-      });
-    }
-
     // Copy buttons
     document.querySelectorAll('.tool-content pre').forEach(pre => {
       const btn = document.createElement('button');

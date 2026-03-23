@@ -7,38 +7,16 @@ import Base from '../layouts/Base.astro';
   description="Open-source infrastructure that makes existing AI go further. 9 packages on PyPI, all MIT."
 >
 
-  <div class="page">
-
-    <!-- ═══ MARK ═══ -->
-    <div class="mark">
-      <a href="/">eidos agi</a>
-      <div class="mark-right">
-        <div class="theme-switcher">
-          <button class="theme-dot" data-set-theme="workshop" style="background:#c4935a" title="Workshop"></button>
-          <button class="theme-dot" data-set-theme="midnight" style="background:#6c8aff" title="Midnight"></button>
-          <button class="theme-dot" data-set-theme="forest" style="background:#4ade80" title="Forest"></button>
-          <button class="theme-dot" data-set-theme="copper" style="background:#e88a48" title="Copper"></button>
-          <button class="theme-dot" data-set-theme="paper" style="background:#f0ebe4;border:1px solid #8a8078" title="Paper"></button>
-          <button class="theme-dot" data-set-theme="slate" style="background:#a78bfa" title="Slate"></button>
-          <button class="theme-dot theme-ai" data-set-theme="ai" title="AI Reader Mode">AI</button>
-        </div>
-        <nav id="nav-menu">
-          <a href="/contract-driven-development">methodology</a>
-          <a href="/agent-identity">identity</a>
-          <a href="https://github.com/eidos-agi">github</a>
-          <a href="https://pypi.org/user/eidos-agi/">pypi</a>
-        </nav>
-        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-            <line x1="3" y1="5" x2="17" y2="5"/>
-            <line x1="3" y1="10" x2="17" y2="10"/>
-            <line x1="3" y1="15" x2="17" y2="15"/>
-          </svg>
-        </button>
-      </div>
+    <!-- Theme switcher (landing page only) -->
+    <div class="theme-switcher">
+      <button class="theme-dot" data-set-theme="workshop" style="background:#c4935a" title="Workshop"></button>
+      <button class="theme-dot" data-set-theme="midnight" style="background:#6c8aff" title="Midnight"></button>
+      <button class="theme-dot" data-set-theme="forest" style="background:#4ade80" title="Forest"></button>
+      <button class="theme-dot" data-set-theme="copper" style="background:#e88a48" title="Copper"></button>
+      <button class="theme-dot" data-set-theme="paper" style="background:#f0ebe4;border:1px solid #8a8078" title="Paper"></button>
+      <button class="theme-dot" data-set-theme="slate" style="background:#a78bfa" title="Slate"></button>
+      <button class="theme-dot theme-ai" data-set-theme="ai" title="AI Reader Mode">AI</button>
     </div>
-
-    <!-- Feedback drawer removed — ADR-001 (eidosagi.com): no thumbs-up/down UI, creates heft -->
 
     <!-- ═══ HERO ═══ -->
     <header class="hero">
@@ -274,12 +252,6 @@ ike.<span class="function">complete</span>(task, <span class="param">notes</span
       </div>
     </section>
 
-    <footer class="foot">
-      <span>&copy; {new Date().getFullYear()} Eidos AGI</span>
-    </footer>
-
-  </div>
-
 <script>
   // ── Theme switcher ──
   const saved = localStorage.getItem('eidos-theme');
@@ -300,21 +272,6 @@ ike.<span class="function">complete</span>(task, <span class="param">notes</span
     });
   });
 
-  // ── Feedback drawer ──
-  // Hamburger menu
-  const hamburgerBtn = document.getElementById('hamburger');
-  const navMenu = document.getElementById('nav-menu');
-  if (hamburgerBtn && navMenu) {
-    hamburgerBtn.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-      hamburgerBtn.setAttribute('aria-expanded', navMenu.classList.contains('open'));
-    });
-    document.addEventListener('click', (e) => {
-      if (!hamburgerBtn.contains(e.target) && !navMenu.contains(e.target)) {
-        navMenu.classList.remove('open');
-      }
-    });
-  }
 </script>
 </Base>
 
