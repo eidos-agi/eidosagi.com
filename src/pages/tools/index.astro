@@ -28,7 +28,8 @@ const stats = await Promise.all(tools.map(async t => {
 >
     <header class="tools-hero">
       <h1>Tools</h1>
-      <p>9 packages on PyPI. All open source. All MIT.</p>
+      <p>We build software for agents to use — not wrappers for humans to click. Every tool is an MCP server that agents call directly through tool calls. We chose this because agents that can govern themselves don't need dashboards. They need contracts they can read and APIs they can call.</p>
+      <p class="tools-count">9 packages on PyPI. All open source. All MIT.</p>
     </header>
 
     <div class="tools-list">
@@ -50,7 +51,8 @@ const stats = await Promise.all(tools.map(async t => {
 <style is:global>
   .tools-hero { padding: var(--space-16) 0 var(--space-8); }
   .tools-hero h1 { margin-bottom: var(--space-3); }
-  .tools-hero p { color: var(--color-muted); }
+  .tools-hero p { color: var(--color-muted); max-width: var(--measure-prose); line-height: var(--leading-relaxed); margin-bottom: var(--space-4); }
+  .tools-count { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-primary) !important; }
 
   .tools-list {
     display: flex;
