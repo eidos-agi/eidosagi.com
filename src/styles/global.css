@@ -142,6 +142,39 @@ pre code { background: none; padding: 0; }
 .mark nav a { color: var(--color-muted); }
 .mark nav a:hover { color: var(--color-primary); }
 
+/* Hamburger — hidden on desktop, shown on mobile */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2);
+  color: var(--color-muted);
+}
+.hamburger svg { display: block; }
+.hamburger:hover { color: var(--color-primary); }
+
+@media (max-width: 768px) {
+  .mark { position: relative; }
+  .mark nav { display: none; }
+  .mark nav.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: var(--space-4);
+    background: var(--color-surface);
+    border: var(--border-width) solid color-mix(in srgb, var(--color-muted) 15%, transparent);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    gap: var(--space-3);
+    z-index: var(--z-overlay);
+  }
+  .hamburger { display: block; }
+  .mark-right { gap: var(--space-3); }
+  .page { padding: 0 var(--space-4); }
+}
+
 /* Focus states — keyboard navigation */
 :focus-visible {
   outline: 2px solid var(--color-primary);

@@ -1,7 +1,7 @@
 ---
 id: TASK-0028
 title: Add before/after code block to landing page
-status: In Progress
+status: Done
 created: '2026-03-23'
 priority: high
 tags:
@@ -17,3 +17,5 @@ definition-of-done:
 updated: '2026-03-23'
 ---
 Show a real code example: left side is an agent task without governance (no guardrails checked, no decision recorded, no task tracked), right side is the same task using the trilogy. No drama — just the difference. Place between hero and trilogy cards. Moves URGENCY 4→7, TRUST 6→8.
+
+**Completion notes:** Two-column before/after code block between hero and trilogy. Left: agent without governance. Right: same task using visionlog/research/ike. No scare tactics — just the difference. Responsive (stacked on mobile).

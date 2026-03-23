@@ -1,6 +1,6 @@
 ---
 import Base from './Base.astro';
-import { getGitHubStars, getPyPIDownloads } from '../lib/stats';
+import { getGitHubStars, getPyPIDownloads, getPyPIInfo } from '../lib/stats';
 
 interface Props {
   name: string;
@@ -12,9 +12,10 @@ interface Props {
 
 const { name, pip, role, repo, description } = Astro.props;
 const pipPkg = pip.replace('pip install ', '');
-const [stars, downloads] = await Promise.all([
+const [stars, downloads, pypiInfo] = await Promise.all([
   getGitHubStars(repo),
   getPyPIDownloads(pipPkg),
+  getPyPIInfo(pipPkg),
 ]);
 ---
 
@@ -27,10 +28,17 @@ const [stars, downloads] = await Promise.all([
       <a href="/">eidos agi</a>
       <div class="mark-right">
         <span class="tool-role">{role}</span>
-        <nav>
+        <nav id="nav-menu">
           <a href="https://github.com/eidos-agi">github</a>
           <a href="https://pypi.org/user/eidos-agi/">pypi</a>
         </nav>
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="3" y1="5" x2="17" y2="5"/>
+            <line x1="3" y1="10" x2="17" y2="10"/>
+            <line x1="3" y1="15" x2="17" y2="15"/>
+          </svg>
+        </button>
       </div>
     </div>
 
@@ -42,6 +50,8 @@ const [stars, downloads] = await Promise.all([
         <a href={`https://github.com/eidos-agi/${repo}`} class="tool-gh">View on GitHub</a>
         {stars > 0 && <span class="tool-badge">{stars} stars</span>}
         {downloads > 0 && <span class="tool-badge">{downloads.toLocaleString()} downloads/mo</span>}
+        {pypiInfo && <span class="tool-badge">v{pypiInfo.version}</span>}
+        {pypiInfo?.releaseDate && <span class="tool-badge">{pypiInfo.releaseDate}</span>}
       </div>
     </header>
 
@@ -55,6 +65,20 @@ const [stars, downloads] = await Promise.all([
   </div>
 
   <script>
+    // Hamburger menu
+    const hb = document.getElementById('hamburger');
+    const nm = document.getElementById('nav-menu');
+    if (hb && nm) {
+      hb.addEventListener('click', () => {
+        nm.classList.toggle('open');
+        hb.setAttribute('aria-expanded', nm.classList.contains('open'));
+      });
+      document.addEventListener('click', (e) => {
+        if (!hb.contains(e.target) && !nm.contains(e.target)) nm.classList.remove('open');
+      });
+    }
+
+    // Copy buttons
     document.querySelectorAll('.tool-content pre').forEach(pre => {
       const btn = document.createElement('button');
       btn.className = 'copy-btn';

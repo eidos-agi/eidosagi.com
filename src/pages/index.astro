@@ -799,19 +799,7 @@ ike.complete(task, notes=agent.summary)</code></pre>
   }
 
 
-  /* ── RESPONSIVE ── */
-  /* ── HAMBURGER ── */
-  .hamburger {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: var(--space-2);
-    color: var(--color-muted);
-  }
-  .hamburger svg { display: block; }
-  .hamburger:hover { color: var(--color-primary); }
-
+  /* ── RESPONSIVE (page-specific) ── */
   @media (max-width: 768px) {
     .hero { grid-template-columns: 1fr; min-height: auto; padding-top: var(--space-12); }
     .hero h1 { font-size: clamp(2rem, 10vw, 3.5rem); }
@@ -821,21 +809,11 @@ ike.complete(task, notes=agent.summary)</code></pre>
     .trust-body { grid-template-columns: 1fr; }
     .ent-grid { grid-template-columns: 1fr; }
     .trilogy-cards { grid-template-columns: 1fr; }
-    .tools-grid { grid-template-columns: 1fr; }
 
-    /* Nav: hamburger on mobile */
-    .mark nav { display: none; }
-    .mark nav.open { display: flex; flex-direction: column; position: absolute; top: 100%; right: var(--space-8); background: var(--color-surface); border: var(--border-width) solid color-mix(in srgb, var(--color-muted) 15%, transparent); border-radius: var(--radius-md); padding: var(--space-4); gap: var(--space-3); z-index: var(--z-overlay); }
-    .hamburger { display: block; }
-
-    /* Only 2 theme dots on mobile */
+    /* Theme dots: only 2 on mobile */
     .theme-switcher .theme-dot { display: none; }
     .theme-switcher .theme-dot:first-child { display: flex; }
     .theme-switcher .theme-dot:nth-child(5) { display: flex; }
     .theme-switcher .theme-ai { display: flex; }
-
-    .mark { position: relative; }
-    .mark-right { gap: var(--space-3); }
-    .page { padding: 0 var(--space-4); }
   }
 </style>

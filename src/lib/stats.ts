@@ -24,3 +24,24 @@ export async function getPyPIDownloads(pkg: string): Promise<number> {
     return 0;
   }
 }
+
+export interface PyPIInfo {
+  version: string;
+  releaseDate: string;
+}
+
+export async function getPyPIInfo(pkg: string): Promise<PyPIInfo | null> {
+  try {
+    const res = await fetch(`https://pypi.org/pypi/${pkg}/json`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    const version = data?.info?.version || '';
+    const releases = data?.releases?.[version];
+    const releaseDate = releases?.[0]?.upload_time_iso_8601
+      ? new Date(releases[0].upload_time_iso_8601).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+      : '';
+    return { version, releaseDate };
+  } catch {
+    return null;
+  }
+}
