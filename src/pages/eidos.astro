@@ -1,0 +1,114 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Eidos — The Agent"
+  description="A persistent autonomous agent with its own identity, memory, and judgment. Not a chatbot. Not a tool. A participant."
+>
+    <article class="prose-page">
+      <header class="page-hero">
+        <h1>Eidos</h1>
+        <p class="subtitle">A user, not a feature.</p>
+      </header>
+
+      <section class="content-section">
+        <h2>What it is</h2>
+        <p>Eidos is a persistent autonomous agent. It has its own identity — real email, real OS user account, real audit trail. It has persistent memory — it learns from every task and becomes better over time. It makes deliberate decisions using structured multi-model reasoning before committing to action. It runs continuously, not as ephemeral sessions.</p>
+        <p>Most AI agents are stateless tools that forget everything, operate under borrowed credentials, and make decisions in isolation. Eidos is the opposite.</p>
+      </section>
+
+      <section class="content-section">
+        <h2>Three pillars</h2>
+        <div class="eidos-pillars">
+          <div class="eidos-pillar">
+            <h3>The Discipline</h3>
+            <p>The framework is simple — one core loop, ~500 lines. Simplicity is a structural constraint. The system stays general by refusing to bake in special cases.</p>
+          </div>
+          <div class="eidos-pillar">
+            <h3>The Separation</h3>
+            <p>Purpose flows inward — the human sets the mission. Capability flows outward — the agent executes. The agent doesn't invent its own goals. It executes yours with judgment, and surfaces when it sees a better path.</p>
+          </div>
+          <div class="eidos-pillar">
+            <h3>The Identity</h3>
+            <p>Eidos is a user, not a feature. Like onboarding a real team member: its own email, credentials, filesystem, and killswitch. This eliminates privilege escalation, attribution, recovery, and sandboxing problems.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>Pods</h2>
+        <p>Before acting, Eidos convenes three different models:</p>
+
+        <!-- Pod diagram -->
+        <div class="pod-diagram">
+          <svg viewBox="0 0 400 220" fill="none" role="img" aria-label="Pod deliberation: Dreamer expands possibilities, Doubter finds flaws, Decider commits. Same pattern as science, law, and business.">
+            <rect class="pod-node pod-dreamer" x="10" y="10" width="120" height="55" rx="3"/>
+            <text class="pod-label" x="70" y="42" text-anchor="middle">Dreamer</text>
+            <text class="pod-sub" x="70" y="27" text-anchor="middle">EXPANDS</text>
+
+            <rect class="pod-node pod-doubter" x="10" y="85" width="120" height="55" rx="3"/>
+            <text class="pod-label" x="70" y="117" text-anchor="middle">Doubter</text>
+            <text class="pod-sub" x="70" y="102" text-anchor="middle">CONTRACTS</text>
+
+            <rect class="pod-node pod-decider" x="250" y="45" width="120" height="55" rx="3"/>
+            <text class="pod-label" x="310" y="77" text-anchor="middle">Decider</text>
+            <text class="pod-sub" x="310" y="62" text-anchor="middle">COMMITS</text>
+
+            <line class="pod-arrow" x1="130" y1="37" x2="250" y2="62"/>
+            <polygon class="pod-head" points="244,56 254,62 244,68"/>
+            <line class="pod-arrow" x1="130" y1="112" x2="250" y2="82"/>
+            <polygon class="pod-head" points="244,76 254,82 244,88"/>
+
+            <!-- Analogies -->
+            <text class="pod-analogy" x="70" y="165" text-anchor="middle">hypothesis</text>
+            <text class="pod-analogy" x="70" y="180" text-anchor="middle">plaintiff</text>
+            <text class="pod-analogy" x="70" y="195" text-anchor="middle">R&amp;D</text>
+
+            <text class="pod-analogy" x="200" y="165" text-anchor="middle">peer review</text>
+            <text class="pod-analogy" x="200" y="180" text-anchor="middle">defense</text>
+            <text class="pod-analogy" x="200" y="195" text-anchor="middle">risk mgmt</text>
+
+            <text class="pod-analogy" x="330" y="165" text-anchor="middle">experiment</text>
+            <text class="pod-analogy" x="330" y="180" text-anchor="middle">judge</text>
+            <text class="pod-analogy" x="330" y="195" text-anchor="middle">executive</text>
+
+            <text class="pod-context" x="200" y="215" text-anchor="middle">Every robust institution humans built uses this pattern.</text>
+          </svg>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>Memory</h2>
+        <p>PEFM — Predictive Error-Free Memory — operates in three tiers: episodic (task-specific, decays), semantic (distilled knowledge, permanent), and procedural (learned patterns, highest weight). The system builds its own memory on the fly. No pre-built schemas. Hybrid retrieval — keyword and vector — so it finds what matters.</p>
+      </section>
+
+      <section class="content-section">
+        <h2>Status</h2>
+        <p>Eidos v5 is the current engine. The core loop, Pod deliberation, and PEFM memory are operational. The governance trilogy, agent identity (AID), and EidosOmni memory system are the infrastructure layers being built around it.</p>
+      </section>
+    </article>
+</Base>
+
+<style is:global>
+  .eidos-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-top: var(--space-6); }
+  .eidos-pillar { background: var(--color-surface); padding: var(--space-6); border-radius: var(--radius-md); }
+  .eidos-pillar h3 { color: var(--color-primary); margin-bottom: var(--space-2); font-size: var(--text-base); }
+  .eidos-pillar p { font-size: var(--text-sm); color: var(--color-muted); line-height: var(--leading-relaxed); }
+
+  .pod-diagram { margin: var(--space-6) 0; max-width: 420px; }
+  .pod-diagram svg { width: 100%; height: auto; }
+  .pod-node { fill: var(--color-surface); stroke-width: 1; }
+  .pod-dreamer { stroke: var(--color-primary); }
+  .pod-doubter { stroke: var(--color-danger); }
+  .pod-decider { stroke: var(--color-command); }
+  .pod-label { font-family: var(--font-heading); font-size: 14px; fill: var(--color-text); font-weight: 500; }
+  .pod-sub { font-family: var(--font-mono); font-size: 7px; fill: var(--color-primary); letter-spacing: 0.1em; }
+  .pod-arrow { stroke: var(--color-primary); stroke-width: 1.5; stroke-dasharray: 4 3; animation: pod-dash 1.5s linear infinite; }
+  .pod-head { fill: var(--color-primary); }
+  .pod-analogy { font-family: var(--font-mono); font-size: 8px; fill: var(--color-muted); }
+  .pod-context { font-family: var(--font-body); font-size: 9px; fill: var(--color-muted); font-style: italic; }
+  @keyframes pod-dash { to { stroke-dashoffset: -14; } }
+
+  @media (max-width: 768px) { .eidos-pillars { grid-template-columns: 1fr; } }
+</style>
