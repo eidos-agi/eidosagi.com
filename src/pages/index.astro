@@ -207,6 +207,27 @@ ike.<span class="function">complete</span>(task, <span class="param">notes</span
         <p>If the tools that govern your agents are closed, you're trusting the vendor. If they're open, you're trusting the code. We think that's a better deal. The core is MIT-licensed and always will be.</p>
         <p>We build enterprise products too — governance at scale, compliance, SLAs. But the foundation is public and auditable. Trust us because you read the source, not because we asked nicely.</p>
       </div>
+      <!-- Trust pipeline diagram -->
+      <div class="trust-diagram">
+        <svg viewBox="0 0 500 80" fill="none" role="img" aria-label="Trust pipeline: open source code leads to public audit, which leads to earned trust">
+          <rect class="td-node" x="10" y="15" width="130" height="50" rx="3"/>
+          <text class="td-label" x="75" y="45" text-anchor="middle">Open Source</text>
+          <text class="td-sub" x="75" y="32" text-anchor="middle">MIT-LICENSED</text>
+
+          <rect class="td-node" x="175" y="15" width="130" height="50" rx="3"/>
+          <text class="td-label" x="240" y="45" text-anchor="middle">Public Audit</text>
+          <text class="td-sub" x="240" y="32" text-anchor="middle">READ THE CODE</text>
+
+          <rect class="td-node td-node-end" x="340" y="15" width="130" height="50" rx="3"/>
+          <text class="td-label" x="405" y="45" text-anchor="middle">Earned Trust</text>
+          <text class="td-sub" x="405" y="32" text-anchor="middle">NOT ASKED</text>
+
+          <line class="td-arrow" x1="140" y1="40" x2="175" y2="40"/>
+          <polygon class="td-head" points="169,34 179,40 169,46"/>
+          <line class="td-arrow" x1="305" y1="40" x2="340" y2="40"/>
+          <polygon class="td-head" points="334,34 344,40 334,46"/>
+        </svg>
+      </div>
     </section>
 
     <blockquote class="urgency reveal">
@@ -425,6 +446,38 @@ ike.<span class="function">complete</span>(task, <span class="param">notes</span
     font-size: var(--text-base);
     line-height: var(--leading-relaxed);
   }
+
+  .trust-diagram {
+    margin-top: var(--space-8);
+    max-width: 500px;
+  }
+  .trust-diagram svg { width: 100%; height: auto; }
+  .td-node {
+    fill: var(--color-surface);
+    stroke: color-mix(in srgb, var(--color-muted) 30%, transparent);
+    stroke-width: 1;
+  }
+  .td-node-end { stroke: var(--color-command); }
+  .td-label {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    fill: var(--color-text);
+    font-weight: 500;
+  }
+  .td-sub {
+    font-family: var(--font-mono);
+    font-size: 7px;
+    fill: var(--color-primary);
+    letter-spacing: 0.1em;
+  }
+  .td-arrow {
+    stroke: var(--color-primary);
+    stroke-width: 1.5;
+    stroke-dasharray: 4 3;
+    animation: td-dash 1.5s linear infinite;
+  }
+  .td-head { fill: var(--color-primary); }
+  @keyframes td-dash { to { stroke-dashoffset: -14; } }
 
   /* ── URGENCY ── */
   .urgency {

@@ -34,11 +34,63 @@ import Base from '../layouts/Base.astro';
             <tr><td class="cdd-level cdd-blocked">blocked</td><td>Known to exist but can't verify</td><td>No — must unblock</td></tr>
           </tbody>
         </table>
+        <!-- Confidence spectrum -->
+        <div class="cdd-diagram">
+          <svg viewBox="0 0 500 100" fill="none" role="img" aria-label="Confidence spectrum from blocked (red) through unknown, inferred, researched, tested, to proven (green)">
+            <!-- Spectrum bar -->
+            <rect x="30" y="30" width="70" height="24" rx="2" fill="var(--color-danger)" opacity="0.7"/>
+            <rect x="102" y="30" width="70" height="24" rx="2" fill="var(--color-danger)" opacity="0.5"/>
+            <rect x="174" y="30" width="70" height="24" rx="2" fill="var(--color-muted)" opacity="0.5"/>
+            <rect x="246" y="30" width="70" height="24" rx="2" fill="var(--color-primary)" opacity="0.5"/>
+            <rect x="318" y="30" width="70" height="24" rx="2" fill="var(--color-secondary)" opacity="0.6"/>
+            <rect x="390" y="30" width="70" height="24" rx="2" fill="var(--color-command)" opacity="0.7"/>
+
+            <!-- Labels -->
+            <text class="conf-label" x="65" y="46" text-anchor="middle">blocked</text>
+            <text class="conf-label" x="137" y="46" text-anchor="middle">unknown</text>
+            <text class="conf-label" x="209" y="46" text-anchor="middle">inferred</text>
+            <text class="conf-label" x="281" y="46" text-anchor="middle">researched</text>
+            <text class="conf-label" x="353" y="46" text-anchor="middle">tested</text>
+            <text class="conf-label" x="425" y="46" text-anchor="middle">proven</text>
+
+            <!-- Direction arrow -->
+            <line class="conf-arrow" x1="30" y1="72" x2="460" y2="72"/>
+            <polygon class="conf-head" points="454,66 464,72 454,78"/>
+            <text class="conf-dir" x="245" y="90" text-anchor="middle">increasing confidence</text>
+
+            <!-- Threshold marker -->
+            <line x1="318" y1="25" x2="318" y2="58" stroke="var(--color-text)" stroke-width="1" stroke-dasharray="3 2"/>
+            <text class="conf-threshold" x="318" y="20" text-anchor="middle">can build</text>
+          </svg>
+        </div>
+
         <p>The readiness of a system is the lowest confidence level of its constituent parts. One "unknown" field means the system is not production-ready, even if 99% of fields are proven.</p>
       </section>
 
       <section class="content-section">
         <h2>The trilogy implements it</h2>
+
+        <!-- Trilogy pipeline -->
+        <div class="cdd-diagram">
+          <svg viewBox="0 0 500 80" fill="none" role="img" aria-label="Trilogy pipeline: research.md earns decisions, visionlog records contracts, ike.md executes within them">
+            <rect class="cdd-pipe-node" x="10" y="15" width="140" height="50" rx="3"/>
+            <text class="cdd-pipe-label" x="80" y="45" text-anchor="middle">research.md</text>
+            <text class="cdd-pipe-sub" x="80" y="32" text-anchor="middle">EARN DECISIONS</text>
+
+            <rect class="cdd-pipe-node" x="180" y="15" width="140" height="50" rx="3"/>
+            <text class="cdd-pipe-label" x="250" y="45" text-anchor="middle">visionlog</text>
+            <text class="cdd-pipe-sub" x="250" y="32" text-anchor="middle">RECORD CONTRACTS</text>
+
+            <rect class="cdd-pipe-node" x="350" y="15" width="140" height="50" rx="3"/>
+            <text class="cdd-pipe-label" x="420" y="45" text-anchor="middle">ike.md</text>
+            <text class="cdd-pipe-sub" x="420" y="32" text-anchor="middle">EXECUTE</text>
+
+            <line class="cdd-pipe-arrow" x1="150" y1="40" x2="180" y2="40"/>
+            <polygon class="cdd-pipe-head" points="174,34 184,40 174,46"/>
+            <line class="cdd-pipe-arrow" x1="320" y1="40" x2="350" y2="40"/>
+            <polygon class="cdd-pipe-head" points="344,34 354,40 344,46"/>
+          </svg>
+        </div>
         <div class="cdd-trio">
           <div class="cdd-trio-item">
             <h3>visionlog</h3>
@@ -111,5 +163,18 @@ import Base from '../layouts/Base.astro';
   .cdd-changes ul { list-style: none; padding: 0; }
   .cdd-changes li { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-2) 0; border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 8%, transparent); line-height: var(--leading-normal); }
   .cdd-closing { font-size: var(--text-md); line-height: var(--leading-relaxed); margin-bottom: var(--space-6); }
+  .cdd-diagram { margin: var(--space-8) 0; max-width: 500px; }
+  .cdd-diagram svg { width: 100%; height: auto; }
+  .conf-label { font-family: var(--font-mono); font-size: 9px; fill: var(--color-text); font-weight: 500; }
+  .conf-arrow { stroke: var(--color-muted); stroke-width: 1; stroke-dasharray: 4 3; animation: conf-dash 2s linear infinite; }
+  .conf-head { fill: var(--color-muted); }
+  .conf-dir { font-family: var(--font-mono); font-size: 8px; fill: var(--color-muted); letter-spacing: 0.06em; }
+  .conf-threshold { font-family: var(--font-mono); font-size: 7px; fill: var(--color-text); letter-spacing: 0.04em; }
+  .cdd-pipe-node { fill: var(--color-surface); stroke: var(--color-primary); stroke-width: 1; }
+  .cdd-pipe-label { font-family: var(--font-heading); font-size: 13px; fill: var(--color-text); font-weight: 500; }
+  .cdd-pipe-sub { font-family: var(--font-mono); font-size: 7px; fill: var(--color-primary); letter-spacing: 0.1em; }
+  .cdd-pipe-arrow { stroke: var(--color-primary); stroke-width: 1.5; stroke-dasharray: 4 3; animation: conf-dash 1.5s linear infinite; }
+  .cdd-pipe-head { fill: var(--color-primary); }
+  @keyframes conf-dash { to { stroke-dashoffset: -14; } }
   @media (max-width: 768px) { .cdd-trio { grid-template-columns: 1fr; } .cdd-changes { grid-template-columns: 1fr; } .cdd-table { font-size: var(--text-xs); } }
 </style>

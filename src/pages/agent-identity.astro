@@ -16,6 +16,30 @@ import Base from '../layouts/Base.astro';
         <h2>The problem</h2>
         <p>Most AI agents operate under borrowed identity. They use the developer's API key, the team's service account, the company's OAuth token. When the agent acts, the system sees the human. When something goes wrong, the audit trail points to a person who wasn't there.</p>
         <p>That worked when agents were copilots. It doesn't work when agents deploy code, send emails, and modify databases on their own.</p>
+
+        <!-- Borrowed identity diagram -->
+        <div class="aid-diagram">
+          <svg viewBox="0 0 500 140" fill="none" role="img" aria-label="Problem: agent borrows human's identity, system can't tell them apart">
+            <rect class="aid-node" x="10" y="45" width="120" height="50" rx="3"/>
+            <text class="aid-label" x="70" y="75" text-anchor="middle">Human</text>
+            <text class="aid-sublabel" x="70" y="62" text-anchor="middle">PRINCIPAL</text>
+
+            <rect class="aid-node" x="190" y="45" width="120" height="50" rx="3"/>
+            <text class="aid-label" x="250" y="75" text-anchor="middle">Agent</text>
+            <text class="aid-sublabel" x="250" y="62" text-anchor="middle">USES HUMAN'S KEY</text>
+
+            <rect class="aid-node" x="370" y="45" width="120" height="50" rx="3"/>
+            <text class="aid-label" x="430" y="75" text-anchor="middle">System</text>
+            <text class="aid-sublabel" x="430" y="62" text-anchor="middle">SEES HUMAN</text>
+
+            <line class="aid-arrow-bad" x1="130" y1="70" x2="190" y2="70"/>
+            <polygon class="aid-head-bad" points="184,64 194,70 184,76"/>
+            <line class="aid-arrow-bad" x1="310" y1="70" x2="370" y2="70"/>
+            <polygon class="aid-head-bad" points="364,64 374,70 364,76"/>
+
+            <text class="aid-question" x="250" y="125" text-anchor="middle">Who actually did this?</text>
+          </svg>
+        </div>
       </section>
 
       <section class="content-section">
@@ -26,8 +50,118 @@ import Base from '../layouts/Base.astro';
       <section class="content-section">
         <h2>What we're building</h2>
         <p>AID — Agent Identity Document — is a signed credential that establishes who an agent is, what it's authorized to do, and who delegated that authority. The human authorizes. The agent executes. The system knows the difference.</p>
+
+        <!-- Delegation flow diagram -->
+        <div class="aid-diagram">
+          <svg viewBox="0 0 500 200" fill="none" role="img" aria-label="AID delegation flow: human signs token, agent presents to system, system verifies independently">
+            <rect class="aid-node aid-node-human" x="10" y="10" width="120" height="50" rx="3"/>
+            <text class="aid-label" x="70" y="40" text-anchor="middle">Human</text>
+            <text class="aid-sublabel" x="70" y="27" text-anchor="middle">AUTHORIZES</text>
+
+            <rect class="aid-node aid-node-token" x="190" y="10" width="120" height="50" rx="3"/>
+            <text class="aid-label" x="250" y="40" text-anchor="middle">AID Token</text>
+            <text class="aid-sublabel" x="250" y="27" text-anchor="middle">SIGNED SCOPE</text>
+
+            <rect class="aid-node aid-node-agent" x="190" y="110" width="120" height="50" rx="3"/>
+            <text class="aid-label" x="250" y="140" text-anchor="middle">Agent</text>
+            <text class="aid-sublabel" x="250" y="127" text-anchor="middle">EXECUTES</text>
+
+            <rect class="aid-node aid-node-system" x="370" y="110" width="120" height="50" rx="3"/>
+            <text class="aid-label" x="430" y="140" text-anchor="middle">System</text>
+            <text class="aid-sublabel" x="430" y="127" text-anchor="middle">VERIFIES</text>
+
+            <!-- Human signs token -->
+            <line class="aid-arrow" x1="130" y1="35" x2="190" y2="35"/>
+            <polygon class="aid-head" points="184,29 194,35 184,41"/>
+
+            <!-- Token to agent -->
+            <line class="aid-arrow" x1="250" y1="60" x2="250" y2="110"/>
+            <polygon class="aid-head" points="244,104 250,114 256,104"/>
+
+            <!-- Agent presents to system -->
+            <line class="aid-arrow" x1="310" y1="135" x2="370" y2="135"/>
+            <polygon class="aid-head" points="364,129 374,135 364,141"/>
+
+            <!-- System verifies back to token (dashed feedback) -->
+            <path class="aid-feedback" d="M430 110 Q430 75 380 55 Q340 40 310 35"/>
+
+            <!-- Labels on arrows -->
+            <text class="aid-arrow-label" x="160" y="28">signs</text>
+            <text class="aid-arrow-label" x="258" y="88">carries</text>
+            <text class="aid-arrow-label" x="340" y="128">presents</text>
+            <text class="aid-arrow-label" x="400" y="72">verifies</text>
+          </svg>
+        </div>
+
         <p>Hancock is the authorization layer that implements it: scoped capabilities, step-up authentication when an agent exceeds its boundaries, and instant revocation without touching the human's credentials.</p>
         <p>AID is designed and documented. Hancock is in early implementation. The governance trilogy is shipped today. Identity is the next layer.</p>
       </section>
     </article>
 </Base>
+
+<style is:global>
+  .aid-diagram {
+    margin: var(--space-8) 0;
+    max-width: 500px;
+  }
+  .aid-diagram svg { width: 100%; height: auto; }
+  .aid-node {
+    fill: var(--color-surface);
+    stroke: color-mix(in srgb, var(--color-muted) 30%, transparent);
+    stroke-width: 1;
+  }
+  .aid-node-human { stroke: var(--color-primary); }
+  .aid-node-token { stroke: var(--color-command); }
+  .aid-node-agent { stroke: var(--color-primary); opacity: 0.8; }
+  .aid-node-system { stroke: var(--color-secondary); }
+  .aid-label {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    fill: var(--color-text);
+    font-weight: 500;
+  }
+  .aid-sublabel {
+    font-family: var(--font-mono);
+    font-size: 7px;
+    fill: var(--color-primary);
+    letter-spacing: 0.1em;
+  }
+  .aid-arrow {
+    stroke: var(--color-primary);
+    stroke-width: 1.5;
+    stroke-dasharray: 4 3;
+    animation: aid-dash 1.5s linear infinite;
+  }
+  .aid-head { fill: var(--color-primary); }
+  .aid-arrow-bad {
+    stroke: var(--color-danger);
+    stroke-width: 1.5;
+    stroke-dasharray: 4 3;
+    animation: aid-dash 1.5s linear infinite;
+  }
+  .aid-head-bad { fill: var(--color-danger); }
+  .aid-feedback {
+    stroke: color-mix(in srgb, var(--color-secondary) 50%, transparent);
+    stroke-width: 1;
+    stroke-dasharray: 3 4;
+    fill: none;
+    animation: aid-dash 3s linear infinite reverse;
+  }
+  .aid-arrow-label {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    fill: var(--color-muted);
+    letter-spacing: 0.04em;
+  }
+  .aid-question {
+    font-family: var(--font-body);
+    font-size: 12px;
+    fill: var(--color-danger);
+    font-style: italic;
+  }
+  @keyframes aid-dash { to { stroke-dashoffset: -14; } }
+
+  @media (max-width: 768px) {
+    .aid-diagram { max-width: 100%; overflow-x: auto; }
+  }
+</style>
