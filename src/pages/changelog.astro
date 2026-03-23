@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+import { getPyPIInfo } from '../lib/stats';
+
+const packages = [
+  'visionlog-md', 'research-md', 'ike-md', 'railguey', 'clawdflare',
+  'eidos-mcp-registry', 'resume-resume', 'apple-a-day', 'claude-session-commons'
+];
+
+const releases = await Promise.all(packages.map(async pkg => {
+  const info = await getPyPIInfo(pkg);
+  return { name: pkg, version: info?.version || '—', date: info?.releaseDate || '—' };
+}));
+
+// Sort by date descending (most recent first)
+releases.sort((a, b) => {
+  if (a.date === '—') return 1;
+  if (b.date === '—') return -1;
+  return new Date(b.date).getTime() - new Date(a.date).getTime();
+});
+---
+
+<Base
+  title="Changelog — Eidos AGI"
+  description="Latest releases across all Eidos AGI packages. Versions, dates, and what changed."
+>
+    <article class="prose-page">
+      <header class="page-hero">
+        <h1>Changelog</h1>
+        <p class="subtitle">Latest releases.</p>
+      </header>
+
+      <section class="content-section">
+        <table class="cl-table">
+          <thead>
+            <tr>
+              <th>Package</th>
+              <th>Version</th>
+              <th>Released</th>
+            </tr>
+          </thead>
+          <tbody>
+            {releases.map(r => (
+              <tr>
+                <td><a href={`/tools/${r.name === 'claude-session-commons' ? r.name : r.name.replace('-md', '').replace('visionlog', 'visionlog')}`}>{r.name}</a></td>
+                <td class="cl-version">v{r.version}</td>
+                <td class="cl-date">{r.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="cl-note">Versions fetched from PyPI at build time. For detailed changelogs, see each package's GitHub repo.</p>
+      </section>
+
+      <div class="related">
+        <span class="related-label">Related</span>
+        <div class="related-links">
+          <a href="/tools">Tools</a>
+          <a href="https://github.com/eidos-agi">GitHub</a>
+          <a href="https://pypi.org/user/eidos-agi/">PyPI</a>
+        </div>
+      </div>
+    </article>
+</Base>
+
+<style is:global>
+  .cl-table { width: 100%; border-collapse: collapse; margin: var(--space-4) 0; }
+  .cl-table th {
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: var(--space-3);
+    border-bottom: 2px solid color-mix(in srgb, var(--color-muted) 20%, transparent);
+  }
+  .cl-table td {
+    padding: var(--space-3);
+    border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 10%, transparent);
+  }
+  .cl-table a { color: var(--color-text); }
+  .cl-table a:hover { color: var(--color-primary); }
+  .cl-version { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-command); }
+  .cl-date { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-muted); }
+  .cl-note { font-size: var(--text-xs); color: var(--color-muted); margin-top: var(--space-4); }
+</style>
