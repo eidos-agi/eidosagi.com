@@ -83,22 +83,23 @@ result = agent.<span class="function">run</span>(<span class="string">"migrate t
 <span class="function">deploy</span>(result)</code></pre>
         </div>
         <div class="compare-col compare-after">
-          <span class="compare-label">With the trilogy</span>
-          <pre><code><span class="comment"># Guardrails say what's allowed</span>
-guardrails = visionlog.<span class="function">boot</span>(project)
+          <span class="compare-label">With the trilogy (real MCP tool calls)</span>
+          <pre><code><span class="comment"># 1. Boot governance — get active guardrails</span>
+<span class="function">visionlog_boot</span>  <span class="param">project_id</span>: <span class="string">"..."</span>
 
-<span class="comment"># Research earns the decision</span>
-decision = research.<span class="function">decide</span>(<span class="string">"migration strategy"</span>,
-  <span class="param">candidates</span>=[<span class="string">"blue-green"</span>, <span class="string">"rolling"</span>],
-  <span class="param">criteria</span>=guardrails)
+<span class="comment"># 2. Check: does this task violate any guardrail?</span>
+<span class="function">guardrail_inject</span>  <span class="param">project_id</span>: <span class="string">"..."</span>
 
-<span class="comment"># Execution tracks the work</span>
-task = ike.<span class="function">create</span>(<span class="string">"migrate schema"</span>,
-  <span class="param">strategy</span>=decision.winner,
-  <span class="param">definition_of_done</span>=[<span class="string">"tests pass"</span>, <span class="string">"rollback tested"</span>])
+<span class="comment"># 3. Research earns the decision</span>
+<span class="function">candidate_create</span>  <span class="param">title</span>: <span class="string">"blue-green"</span>
+<span class="function">candidate_create</span>  <span class="param">title</span>: <span class="string">"rolling"</span>
+<span class="function">criteria_lock</span>
+<span class="function">project_decide</span>  <span class="param">winner</span>: <span class="string">"blue-green"</span>
 
-agent.<span class="function">run</span>(task)
-ike.<span class="function">complete</span>(task, <span class="param">notes</span>=agent.summary)</code></pre>
+<span class="comment"># 4. Execute within the contract</span>
+<span class="function">task_create</span>  <span class="param">title</span>: <span class="string">"migrate schema"</span>
+  <span class="param">definition_of_done</span>: [<span class="string">"tests pass"</span>, <span class="string">"rollback tested"</span>]
+<span class="function">task_complete</span>  <span class="param">notes</span>: <span class="string">"deployed, verified"</span></code></pre>
         </div>
       </div>
     </section>
