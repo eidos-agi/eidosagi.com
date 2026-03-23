@@ -1,0 +1,41 @@
+---
+import Tool from '../../layouts/Tool.astro';
+---
+
+<Tool
+  name="claude-session-commons"
+  pip="pip install claude-session-commons"
+  role="Library"
+  repo="claude-session-commons"
+  description="Shared session discovery, caching, classification, and summarization for Claude Code tools."
+>
+  <h2>What it does</h2>
+  <p>claude-session-commons is the shared foundation that powers resume-resume and other Claude Code session tools. It handles the hard parts — finding sessions on disk, indexing them, generating summaries, caching results — so tools built on top can focus on their own job.</p>
+
+  <h2>Key features</h2>
+  <ul>
+    <li><strong>Session discovery</strong> — finds all Claude Code sessions across your machine</li>
+    <li><strong>Indexing</strong> — background daemon pre-indexes sessions as you work</li>
+    <li><strong>Summarization</strong> — generates and caches session summaries</li>
+    <li><strong>Classification</strong> — categorizes sessions by type and content</li>
+    <li><strong>Search</strong> — full-text search across all sessions via CLI</li>
+  </ul>
+
+  <h2>Install</h2>
+  <pre><code>pip install claude-session-commons</code></pre>
+
+  <h2>Standalone tools</h2>
+  <pre><code># Background daemon — indexes sessions as you work
+claude-session-daemon
+
+# Search sessions from terminal
+claude-find "database migration"
+
+# Local web UI for browsing history
+claude-session-web
+
+# Force full re-index
+claude-session-reindex</code></pre>
+
+  <p>Used by resume-resume, claude-boss, and claude-resume-duet. If you're building tools that need access to Claude Code session history, this is the foundation.</p>
+</Tool>

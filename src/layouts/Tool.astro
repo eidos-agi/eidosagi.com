@@ -41,6 +41,16 @@ const [stars, downloads, pypiInfo] = await Promise.all([
       <slot />
     </div>
 
+    <div class="related">
+      <span class="related-label">Related</span>
+      <div class="related-links">
+        <a href="/trilogy">Trilogy</a>
+        <a href="/tools">All Tools</a>
+        <a href="/contract-driven-development">Contracts</a>
+        <a href="/eidos">Eidos</a>
+      </div>
+    </div>
+
   <script>
     // Copy buttons
     document.querySelectorAll('.tool-content pre').forEach(pre => {
