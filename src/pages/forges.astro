@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Forges — Eidos AGI"
+  description="Reusable AI agent knowledge packaged as skills and templates. No software, no CLI — pure knowledge, portable via clone."
+>
+    <article class="prose-page">
+      <header class="page-hero">
+        <h1>Forges</h1>
+        <p class="subtitle">Reusable knowledge for AI agents.</p>
+      </header>
+
+      <section class="content-section">
+        <h2>The pattern</h2>
+        <p>A forge is a repo that packages reusable AI agent knowledge as Claude Code skills and templates. No software. No CLI. No packages to install. Pure knowledge — markdown files with instructions and templates with variable substitution. Portable via clone and copy.</p>
+        <p>When an agent needs to know how to do something — release a package, audit a repo, run a demo, write tests — it reads a forge skill. The skill tells it exactly what to do, in what order, with what checks. The agent doesn't improvise. It follows the forge.</p>
+      </section>
+
+      <!-- Forge flow diagram -->
+      <div class="forge-diagram">
+        <svg viewBox="0 0 500 120" fill="none" role="img" aria-label="Forge pattern: skills and templates in a repo, cloned into projects, read by agents at runtime">
+          <rect class="fg-node" x="10" y="30" width="120" height="60" rx="3"/>
+          <text class="fg-label" x="70" y="58" text-anchor="middle">Forge Repo</text>
+          <text class="fg-sub" x="70" y="73" text-anchor="middle">SKILLS + TEMPLATES</text>
+
+          <rect class="fg-node" x="180" y="30" width="120" height="60" rx="3"/>
+          <text class="fg-label" x="240" y="58" text-anchor="middle">Your Project</text>
+          <text class="fg-sub" x="240" y="73" text-anchor="middle">CLONE + COPY</text>
+
+          <rect class="fg-node fg-node-end" x="350" y="30" width="120" height="60" rx="3"/>
+          <text class="fg-label" x="410" y="58" text-anchor="middle">Agent</text>
+          <text class="fg-sub" x="410" y="73" text-anchor="middle">READS + EXECUTES</text>
+
+          <line class="fg-arrow" x1="130" y1="60" x2="180" y2="60"/>
+          <polygon class="fg-head" points="174,54 184,60 174,66"/>
+          <line class="fg-arrow" x1="300" y1="60" x2="350" y2="60"/>
+          <polygon class="fg-head" points="344,54 354,60 344,66"/>
+        </svg>
+      </div>
+
+      <section class="content-section">
+        <h2>Current forges</h2>
+        <div class="forge-grid">
+          <a href="https://github.com/eidos-agi/forge-forge" class="forge-card">
+            <h3>forge-forge</h3>
+            <p>The meta-forge. Creates new forges, audits existing ones, catalogs the ecosystem.</p>
+            <span class="forge-skills">/forge-init · /forge-audit · /forge-catalog · /forge-sync</span>
+          </a>
+          <a href="https://github.com/eidos-agi/foss-forge" class="forge-card">
+            <h3>foss-forge</h3>
+            <p>Open-source release toolkit. Checks, initializes, releases, launches, and demos FOSS projects.</p>
+            <span class="forge-skills">/foss-check · /foss-init · /foss-release · /foss-launch · /foss-demo</span>
+          </a>
+          <a href="https://github.com/eidos-agi/demo-forge" class="forge-card">
+            <h3>demo-forge</h3>
+            <p>Demo creation and management. Build, audit, and clean up product demonstrations.</p>
+            <span class="forge-skills">/demo · /demo-audit · /demo-clean</span>
+          </a>
+          <a href="https://github.com/eidos-agi/test-forge" class="forge-card">
+            <h3>test-forge</h3>
+            <p>Testing toolkit. Test files, test modules, diagnose failures, manage playbooks.</p>
+            <span class="forge-skills">/test_this · /test_these · /whats_wrong · /playbooks</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>Self-improving</h2>
+        <p>Forges audit each other. Running /foss-check on a real project reveals gaps in foss-forge, which reveals gaps in demo-forge, which reveals gaps in forge-forge. Each audit improves the auditor. The ecosystem gets better by using itself.</p>
+      </section>
+    </article>
+</Base>
+
+<style is:global>
+  .forge-diagram { margin: var(--space-4) 0 var(--space-8); max-width: 500px; }
+  .forge-diagram svg { width: 100%; height: auto; }
+  .fg-node { fill: var(--color-surface); stroke: color-mix(in srgb, var(--color-muted) 30%, transparent); stroke-width: 1; }
+  .fg-node-end { stroke: var(--color-command); }
+  .fg-label { font-family: var(--font-heading); font-size: 13px; fill: var(--color-text); font-weight: 500; }
+  .fg-sub { font-family: var(--font-mono); font-size: 7px; fill: var(--color-primary); letter-spacing: 0.1em; }
+  .fg-arrow { stroke: var(--color-primary); stroke-width: 1.5; stroke-dasharray: 4 3; animation: fg-dash 1.5s linear infinite; }
+  .fg-head { fill: var(--color-primary); }
+  @keyframes fg-dash { to { stroke-dashoffset: -14; } }
+
+  .forge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-6); }
+  .forge-card {
+    background: var(--color-surface);
+    padding: var(--space-6);
+    border-radius: var(--radius-md);
+    border: var(--border-width) solid color-mix(in srgb, var(--color-muted) 12%, transparent);
+    text-decoration: none;
+    transition: border-color 200ms ease;
+  }
+  .forge-card:hover { border-color: color-mix(in srgb, var(--color-primary) 40%, transparent); }
+  .forge-card h3 { font-family: var(--font-mono); font-size: var(--text-base); color: var(--color-text); margin-bottom: var(--space-2); }
+  .forge-card p { font-size: var(--text-sm); color: var(--color-muted); line-height: var(--leading-relaxed); margin-bottom: var(--space-3); }
+  .forge-skills { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-command); }
+
+  @media (max-width: 768px) { .forge-grid { grid-template-columns: 1fr; } }
+</style>
