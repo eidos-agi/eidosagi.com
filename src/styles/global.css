@@ -185,6 +185,29 @@ pre .param { color: var(--color-secondary); }
   .page { padding: 0 var(--space-4); }
 }
 
+/* Content primitives — shared across prose pages */
+.prose-page { max-width: var(--measure-prose); }
+
+.page-hero { padding: var(--space-16) 0 var(--space-8); }
+.page-hero h1 {
+  font-size: clamp(2rem, 5vw, var(--text-4xl));
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-4);
+}
+.page-hero .subtitle { font-size: var(--text-lg); color: var(--color-primary); }
+
+.content-section {
+  padding: var(--space-12) 0;
+  border-top: var(--border-width) solid color-mix(in srgb, var(--color-muted) 15%, transparent);
+}
+.content-section h2 { margin-bottom: var(--space-4); }
+.content-section p { line-height: var(--leading-relaxed); margin-bottom: var(--space-4); }
+
+.section-border {
+  border-top: var(--border-width) solid color-mix(in srgb, var(--color-muted) 15%, transparent);
+}
+
 /* Focus states — keyboard navigation */
 :focus-visible {
   outline: 2px solid var(--color-primary);
