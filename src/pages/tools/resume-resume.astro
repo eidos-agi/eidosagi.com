@@ -11,12 +11,14 @@ import Tool from '../../layouts/Tool.astro';
 >
   <h2>What it does</h2>
   <p>Claude Code sessions crash. Context is lost. Work has to be re-explained. resume-resume captures session state so that when a session dies, the next one picks up where the last left off — with full context of what was being worked on, what was decided, and what's next.</p>
+  <p>For developers managing many repos, resume-resume also provides a standing inventory of every repo with uncommitted changes — your dirty repos list. It only shrinks by committing.</p>
 
   <h2>Key features</h2>
   <ul>
-    <li><strong>Session capture</strong> — records what was happening when the session ended</li>
+    <li><strong>Dirty repos</strong> — see every repo with uncommitted changes across your machine, scored by urgency (file count + recency)</li>
+    <li><strong>Crash recovery</strong> — boot_up finds interrupted sessions AND scans all repos for dirty git state, with ready-to-paste resume commands</li>
     <li><strong>Context recovery</strong> — boot the next session with full prior context</li>
-    <li><strong>Session search</strong> — find past sessions by topic, file, or date</li>
+    <li><strong>Session search</strong> — BM25 full-text search across 5,000+ sessions in ~3 seconds</li>
     <li><strong>Session analytics</strong> — timeline, insights, data science on your work patterns</li>
     <li><strong>MCP server</strong> — agents read and write session state through tool calls</li>
   </ul>
@@ -32,9 +34,10 @@ cr 24                  # last 24 hours
 cr --all               # everything
 
 # MCP — from an agent
+dirty_repos                                          # what needs committing?
+boot_up          hours: 24                           # what crashed?
 search_sessions  query: "eidos test where we beat claude"
-merge_context    id: "session-123" mode: "hybrid"
-session_timeline id: "session-456"</code></pre>
+merge_context    id: "session-123" mode: "hybrid"</code></pre>
 
-  <p>Full-text search across 5,000+ sessions in ~3 seconds using parallelized RRF. Summaries cached permanently after first generation. Follows continuation links across multi-session work.</p>
+  <p>Parallel git status scans across 50+ repos. BM25 search across thousands of sessions. Dirty repos bypass time filters — uncommitted work doesn't age out. Summaries cached permanently after first generation.</p>
 </Tool>
