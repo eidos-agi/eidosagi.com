@@ -33,6 +33,13 @@ const stats = await Promise.all(tools.map(async t => {
       <p class="tools-count">9 packages on PyPI. All open source. All MIT.</p>
     </header>
 
+    <a href="/tools/eidos-marketplace" class="marketplace-banner">
+      <span class="mb-label">Plugin Store</span>
+      <span class="mb-title">Eidos Marketplace</span>
+      <span class="mb-desc">One-command install for all Eidos tools inside Claude Code</span>
+      <code class="mb-cmd">claude plugins marketplace add eidos-agi/eidos-marketplace</code>
+    </a>
+
     <div class="tools-list">
       {stats.map(t => (
         <a href={`/tools/${t.name === 'research.md' ? 'research' : t.name === 'ike.md' ? 'ike' : t.name}`} class="tl-row">
@@ -103,8 +110,29 @@ const stats = await Promise.all(tools.map(async t => {
     color: var(--color-muted);
   }
 
+  .marketplace-banner {
+    display: grid;
+    grid-template-columns: 80px 180px 1fr auto;
+    gap: var(--space-4);
+    align-items: baseline;
+    padding: var(--space-5) var(--space-4);
+    margin-bottom: var(--space-6);
+    border: var(--border-width) solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+    border-radius: var(--radius-md, 6px);
+    background: color-mix(in srgb, var(--color-primary) 5%, transparent);
+    text-decoration: none;
+    transition: background 150ms ease;
+  }
+  .marketplace-banner:hover { background: color-mix(in srgb, var(--color-primary) 10%, transparent); }
+  .mb-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.06em; }
+  .mb-title { font-family: var(--font-heading); font-size: var(--text-base); font-weight: var(--weight-medium); color: var(--color-text); }
+  .mb-desc { font-size: var(--text-sm); color: var(--color-muted); }
+  .mb-cmd { font-size: var(--text-xs); color: var(--color-command); white-space: nowrap; }
+
   @media (max-width: 768px) {
     .tl-row { grid-template-columns: 1fr; gap: var(--space-1); }
     .tl-pip, .tl-meta { display: none; }
+    .marketplace-banner { grid-template-columns: 1fr; }
+    .mb-cmd { display: none; }
   }
 </style>
