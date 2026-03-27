@@ -1,0 +1,37 @@
+---
+import Tool from '../../layouts/Tool.astro';
+---
+
+<Tool
+  name="Eidos Marketplace"
+  pip="claude plugins marketplace add eidos-agi/eidos-marketplace"
+  role="Plugin Store"
+  repo="eidos-marketplace"
+  description="One-command install for Eidos tools inside Claude Code."
+>
+  <h2>What it does</h2>
+  <p>A plugin marketplace for Claude Code. Add it once, then install any Eidos tool with a single command — no pip, no manual MCP config. Each plugin uses uvx to pull the package from PyPI on demand.</p>
+
+  <h2>Install</h2>
+  <pre><code>claude plugins marketplace add eidos-agi/eidos-marketplace</code></pre>
+
+  <p>Then install any plugin:</p>
+  <pre><code>claude plugins install resume-resume
+claude plugins install ike
+claude plugins install visionlog
+claude plugins install railguey
+claude plugins install clawdflare</code></pre>
+
+  <h2>Available plugins</h2>
+  <ul>
+    <li><strong>resume-resume</strong> — Post-crash session recovery, dirty repos inventory, full session search</li>
+    <li><strong>ike</strong> — Task and project management with milestones and Definition of Done</li>
+    <li><strong>visionlog</strong> — Vision, goals, guardrails, SOPs, ADRs</li>
+    <li><strong>railguey</strong> — Railway deployment management</li>
+    <li><strong>clawdflare</strong> — Cloudflare DNS, Workers, Pages, KV, R2 management</li>
+  </ul>
+
+  <h2>How it works</h2>
+  <p>The marketplace is a directory of pointers, not code. Each plugin is two small JSON files — a name/description and a command to start the MCP server. The actual code lives in each tool's own repo on PyPI. <a href="https://docs.astral.sh/uv/">uvx</a> handles installation transparently.</p>
+  <p>All plugins are tested with an automated MCP handshake test on every change. Only plugins that pass ship.</p>
+</Tool>
