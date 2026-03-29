@@ -4,187 +4,74 @@ import Base from '../layouts/Base.astro';
 
 <Base
   title="Contract-Driven Development — Eidos AGI"
-  description="Contracts define what we want. Skills define how to get there. Only one of those survives as AI improves."
+  description="Agents execute specs, not vibes. Every decision has a confidence level. Every action traces back to a contract."
 >
     <article class="prose-page">
       <header class="page-hero">
         <h1>Contract-Driven<br />Development</h1>
-        <p class="subtitle">Define what you want. Let the model figure out how.</p>
+        <p class="subtitle">Agents execute specs, not vibes.</p>
         <span class="status-badge status-shipped">Shipped</span>
       </header>
 
       <section class="content-section">
-        <h2>The bitter lesson</h2>
-        <p>Richard Sutton's greatest contribution to computer science: general methods that leverage computation always beat hand-crafted human knowledge as compute scales.</p>
-        <p>We taught a computer to play chess by giving it the rules (a contract) and a goal (win). We didn't give it opening theory, middlegame strategy, or endgame technique (skills). The system that learned without human strategy knowledge destroyed the one built on decades of human expertise.</p>
-        <p>Skills are chess strategy books. Contracts are the rules of chess. One decays with every improvement in reasoning. The other is permanent.</p>
-
-        <!-- Value over time diagram -->
-        <div class="cdd-diagram cdd-diagram-wide">
-          <svg viewBox="0 0 500 200" fill="none" role="img" aria-label="Graph showing contracts maintaining value as AI improves while skills decay">
-            <!-- Axes -->
-            <line x1="60" y1="170" x2="480" y2="170" stroke="var(--color-muted)" stroke-width="1" opacity="0.3"/>
-            <line x1="60" y1="170" x2="60" y2="20" stroke="var(--color-muted)" stroke-width="1" opacity="0.3"/>
-            <text class="cdd-axis" x="270" y="195" text-anchor="middle">AI capability</text>
-            <text class="cdd-axis" x="20" y="95" text-anchor="middle" transform="rotate(-90 20 95)">value</text>
-
-            <!-- Model markers on X axis -->
-            <text class="cdd-tick" x="120" y="185" text-anchor="middle">GPT-3</text>
-            <text class="cdd-tick" x="220" y="185" text-anchor="middle">GPT-4</text>
-            <text class="cdd-tick" x="320" y="185" text-anchor="middle">Opus 4</text>
-            <text class="cdd-tick" x="420" y="185" text-anchor="middle">AGI</text>
-
-            <!-- Contracts line (stays high) -->
-            <path d="M 80 50 Q 200 45 320 40 Q 400 38 460 35" stroke="var(--color-command)" stroke-width="2.5" fill="none"/>
-            <text class="cdd-line-label" x="465" y="30" fill="var(--color-command)">contracts</text>
-
-            <!-- Skills line (decays) -->
-            <path d="M 80 55 Q 200 80 280 110 Q 360 140 460 160" stroke="var(--color-danger)" stroke-width="2.5" fill="none" stroke-dasharray="6 3"/>
-            <text class="cdd-line-label" x="465" y="158" fill="var(--color-danger)">skills</text>
-          </svg>
-        </div>
-      </section>
-
-      <section class="content-section">
-        <h2>Skills vs contracts</h2>
-        <p>The AI ecosystem is building skills — step-by-step instructions that tell models how to accomplish goals. Skills work today. They compensate for what the model can't figure out on its own.</p>
-        <p>But skills are written based on today's weaknesses. Go back two years. A skills file for GPT-3 would be extremely verbose — spelling out every step, every edge case, every format detail. Today's models need less. Tomorrow's models need even less. <strong>Skills are technical debt that accrues as models improve.</strong></p>
-
-        <div class="cdd-changes">
-          <div>
-            <h3>A skill (150 lines)</h3>
-            <div class="cdd-code">
-              <pre><code>Step 1: Read CLAUDE.md
-Step 2: Read .visionlog/vision.md
-Step 3: Detect project type
-  - Knowledge forge: skip performance
-  - Software: check builds
-Step 4: Score each dimension 1-10
-  Use this rubric:
-  | Dimension | 1 | 5 | 10 |
-  | Reliability | ... | ... | ... |
-Step 5: Pick the highest-impact gap
-Step 6: Fix it
-Step 7: Run tests
-Step 8: Record the snapshot
-  Use this JSON format:
-  { "date": "...", "scores": {...} }</code></pre>
-            </div>
-          </div>
-          <div>
-            <h3>A contract (10 lines)</h3>
-            <div class="cdd-code">
-              <pre><code>{
-  "goal": "Leave the project measurably better",
-  "output": "improvement-snapshot.schema.json",
-  "constraints": [
-    "Every score cites specific evidence",
-    "Fix highest-impact gap, not easiest",
-    "Never violate the project's guardrails",
-    "Record every run"
-  ]
-}</code></pre>
-            </div>
-          </div>
-        </div>
-
-        <p>The skill tells the model <em>how</em>. The contract tells it <em>what</em>. Models get better at <em>how</em> every six months. <em>What</em> doesn't change.</p>
-      </section>
-
-      <section class="content-section">
-        <h2>A real example</h2>
-        <p><a href="https://github.com/eidos-agi/eidos-assistant">Eidos Assistant</a> is a voice notes app with a Mac frontend (Swift), a classification daemon (Python), and an omni search adapter (Python). Three languages. Three processes. Five JSON Schema contracts hold it together:</p>
-
-        <div class="cdd-contracts">
-          <div class="cdd-contract">
-            <h3>recording-bucket</h3>
-            <p>What a voice recording looks like on disk. Audio, transcript, classification — each with defined fields, types, and enums.</p>
-            <code>contracts/recording-bucket.schema.json</code>
-          </div>
-          <div class="cdd-contract">
-            <h3>daemon-protocol</h3>
-            <p>Request/response between the app and the classification daemon. What gets sent, what comes back.</p>
-            <code>contracts/daemon-protocol.schema.json</code>
-          </div>
-          <div class="cdd-contract">
-            <h3>adapter-manifest</h3>
-            <p>How the app registers itself with the search engine. The app writes this on launch. The search engine reads it. Neither knows about the other's code.</p>
-            <code>contracts/adapter-manifest.schema.json</code>
-          </div>
-          <div class="cdd-contract">
-            <h3>manifest-entry</h3>
-            <p>How recordings are tracked for discovery. The app appends entries. The search adapter reads them.</p>
-            <code>contracts/manifest-entry.schema.json</code>
-          </div>
-          <div class="cdd-contract">
-            <h3>performance-metric</h3>
-            <p>How transcription speed is tracked over time. Every transcription logs duration, model, and real-time factor.</p>
-            <code>contracts/performance-metric.schema.json</code>
-          </div>
-        </div>
-
-        <!-- Data flow diagram -->
-        <div class="cdd-diagram cdd-diagram-wide">
-          <svg viewBox="0 0 500 160" fill="none" role="img" aria-label="Data flow: voice recording flows through contracts between app, daemon, and search engine">
-            <!-- App -->
-            <rect class="cdd-pipe-node" x="10" y="20" width="100" height="50" rx="3"/>
-            <text class="cdd-pipe-label" x="60" y="42" text-anchor="middle">Mac App</text>
-            <text class="cdd-pipe-sub" x="60" y="56" text-anchor="middle">SWIFT</text>
-
-            <!-- Bucket -->
-            <rect class="cdd-pipe-node" x="145" y="20" width="100" height="50" rx="3"/>
-            <text class="cdd-pipe-label" x="195" y="42" text-anchor="middle">Bucket</text>
-            <text class="cdd-pipe-sub" x="195" y="56" text-anchor="middle">CONTRACT</text>
-
-            <!-- Daemon -->
-            <rect class="cdd-pipe-node" x="280" y="20" width="100" height="50" rx="3"/>
-            <text class="cdd-pipe-label" x="330" y="42" text-anchor="middle">Daemon</text>
-            <text class="cdd-pipe-sub" x="330" y="56" text-anchor="middle">PYTHON</text>
-
-            <!-- Search -->
-            <rect class="cdd-pipe-node" x="280" y="100" width="100" height="50" rx="3"/>
-            <text class="cdd-pipe-label" x="330" y="122" text-anchor="middle">Omni</text>
-            <text class="cdd-pipe-sub" x="330" y="136" text-anchor="middle">SEARCH</text>
-
-            <!-- Arrows -->
-            <line class="cdd-pipe-arrow" x1="110" y1="45" x2="145" y2="45"/>
-            <polygon class="cdd-pipe-head" points="139,39 149,45 139,51"/>
-
-            <line class="cdd-pipe-arrow" x1="245" y1="35" x2="280" y2="35"/>
-            <polygon class="cdd-pipe-head" points="274,29 284,35 274,41"/>
-
-            <line class="cdd-pipe-arrow" x1="245" y1="55" x2="280" y2="125" />
-            <polygon class="cdd-pipe-head" points="273,121 283,127 276,131"/>
-
-            <!-- Contract labels -->
-            <text class="cdd-contract-label" x="195" y="85" text-anchor="middle">recording-bucket.schema.json</text>
-            <text class="cdd-contract-label" x="330" y="85" text-anchor="middle">daemon-protocol.schema.json</text>
-            <text class="cdd-contract-label" x="220" y="105" text-anchor="start">adapter-manifest.schema.json</text>
-          </svg>
-        </div>
-
-        <p>Any AI model — current or future — can participate in this system by reading the contracts. The contracts tell it what data to produce. The model figures out how. The app also has skills. Those skills work today. They'll be unnecessary when models can infer the workflow from the contracts alone. The contracts will still be there.</p>
+        <h2>The problem</h2>
+        <p>When an AI agent runs a task, it makes decisions. Which approach to use, what to prioritize, when to stop. Most of those decisions happen in conversation — unrecorded, unreviewable, unreproducible. The agent improvises. Sometimes it improvises well. Sometimes it doesn't. Either way, there's no receipt.</p>
+        <p>Contract-driven development replaces improvisation with specification. Every decision has a confidence level. Every action traces back to a contract. Nothing runs on "inferred" — it runs on "proven."</p>
       </section>
 
       <section class="content-section">
         <h2>The confidence model</h2>
-        <p>Every fact an agent depends on carries a confidence level. The readiness of a system is the lowest confidence level of its parts. One "unknown" field means the system is not production-ready, even if 99% is proven.</p>
+        <p>Every fact an agent depends on carries a confidence level:</p>
         <table class="cdd-table">
           <thead>
             <tr><th>Level</th><th>Meaning</th><th>Can build on?</th></tr>
           </thead>
           <tbody>
             <tr><td class="cdd-level cdd-proven">proven</td><td>Tested in production, confirmed working</td><td>Yes</td></tr>
-            <tr><td class="cdd-level cdd-tested">tested</td><td>Validated against real system</td><td>Yes, with monitoring</td></tr>
+            <tr><td class="cdd-level cdd-tested">tested</td><td>Validated against real system, not yet production</td><td>Yes, with monitoring</td></tr>
             <tr><td class="cdd-level cdd-researched">researched</td><td>From documentation, not verified</td><td>Verify first</td></tr>
             <tr><td class="cdd-level cdd-inferred">inferred</td><td>Guessed from similar systems</td><td>No — must verify</td></tr>
             <tr><td class="cdd-level cdd-unknown">unknown</td><td>No information available</td><td>No — must discover</td></tr>
+            <tr><td class="cdd-level cdd-blocked">blocked</td><td>Known to exist but can't verify</td><td>No — must unblock</td></tr>
           </tbody>
         </table>
+        <!-- Confidence spectrum -->
+        <div class="cdd-diagram">
+          <svg viewBox="0 0 500 100" fill="none" role="img" aria-label="Confidence spectrum from blocked (red) through unknown, inferred, researched, tested, to proven (green)">
+            <!-- Spectrum bar -->
+            <rect x="30" y="30" width="70" height="24" rx="2" fill="var(--color-danger)" opacity="0.7"/>
+            <rect x="102" y="30" width="70" height="24" rx="2" fill="var(--color-danger)" opacity="0.5"/>
+            <rect x="174" y="30" width="70" height="24" rx="2" fill="var(--color-muted)" opacity="0.5"/>
+            <rect x="246" y="30" width="70" height="24" rx="2" fill="var(--color-primary)" opacity="0.5"/>
+            <rect x="318" y="30" width="70" height="24" rx="2" fill="var(--color-secondary)" opacity="0.6"/>
+            <rect x="390" y="30" width="70" height="24" rx="2" fill="var(--color-command)" opacity="0.7"/>
+
+            <!-- Labels -->
+            <text class="conf-label" x="65" y="46" text-anchor="middle">blocked</text>
+            <text class="conf-label" x="137" y="46" text-anchor="middle">unknown</text>
+            <text class="conf-label" x="209" y="46" text-anchor="middle">inferred</text>
+            <text class="conf-label" x="281" y="46" text-anchor="middle">researched</text>
+            <text class="conf-label" x="353" y="46" text-anchor="middle">tested</text>
+            <text class="conf-label" x="425" y="46" text-anchor="middle">proven</text>
+
+            <!-- Direction arrow -->
+            <line class="conf-arrow" x1="30" y1="72" x2="460" y2="72"/>
+            <polygon class="conf-head" points="454,66 464,72 454,78"/>
+            <text class="conf-dir" x="245" y="90" text-anchor="middle">increasing confidence</text>
+
+            <!-- Threshold marker -->
+            <line x1="318" y1="25" x2="318" y2="58" stroke="var(--color-text)" stroke-width="1" stroke-dasharray="3 2"/>
+            <text class="conf-threshold" x="318" y="20" text-anchor="middle">can build</text>
+          </svg>
+        </div>
+
+        <p>The readiness of a system is the lowest confidence level of its constituent parts. One "unknown" field means the system is not production-ready, even if 99% of fields are proven.</p>
       </section>
 
       <section class="content-section">
         <h2>The trilogy implements it</h2>
+
+        <!-- Trilogy pipeline -->
         <div class="cdd-diagram">
           <svg viewBox="0 0 500 80" fill="none" role="img" aria-label="Trilogy pipeline: research.md earns decisions, visionlog records contracts, ike.md executes within them">
             <rect class="cdd-pipe-node" x="10" y="15" width="140" height="50" rx="3"/>
@@ -208,12 +95,12 @@ Step 8: Record the snapshot
         <div class="cdd-trio">
           <div class="cdd-trio-item">
             <h3>visionlog</h3>
-            <p>Records the contracts — guardrails, goals, ADRs. The constraints all execution must honor.</p>
+            <p>Records the contracts — guardrails, goals, ADRs. These are the constraints all execution must honor.</p>
             <code>pip install visionlog-md</code>
           </div>
           <div class="cdd-trio-item">
             <h3>research.md</h3>
-            <p>Earns decisions with evidence. Candidates scored against locked criteria. The research is the receipt.</p>
+            <p>Earns the decisions with evidence. Candidates scored against locked criteria. The research is the receipt.</p>
             <code>pip install research-md</code>
           </div>
           <div class="cdd-trio-item">
@@ -225,35 +112,47 @@ Step 8: Record the snapshot
       </section>
 
       <section class="content-section">
-        <h2>The transition</h2>
-        <p>You don't have to abandon skills today. Current models still benefit from guidance. The shift is:</p>
-        <ol class="cdd-steps">
-          <li><strong>Define the contract first.</strong> What does the output look like? Write the JSON Schema.</li>
-          <li><strong>Write the skill second.</strong> Only if the model can't meet the contract from the schema alone.</li>
-          <li><strong>Test without the skill periodically.</strong> Give the model just the contract. If the output conforms, the skill is no longer needed.</li>
-          <li><strong>Let skills decay.</strong> Don't maintain them. They're temporary bridges.</li>
-        </ol>
-        <p>The <code>contracts/</code> directory is permanent infrastructure. The <code>skills/</code> directory is a construction site that eventually gets torn down.</p>
+        <h2>What changes</h2>
+        <div class="cdd-changes">
+          <div>
+            <h3>Without contracts</h3>
+            <ul>
+              <li>Agent picks an approach based on training data</li>
+              <li>Decisions happen in conversation, lost after session</li>
+              <li>No one knows why a choice was made</li>
+              <li>"It worked" is the only success criterion</li>
+            </ul>
+          </div>
+          <div>
+            <h3>With contracts</h3>
+            <ul>
+              <li>Agent reads guardrails before acting</li>
+              <li>Decisions are scored, recorded, reviewable</li>
+              <li>Every choice traces to evidence</li>
+              <li>Definition of Done is explicit and auditable</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
       <section class="content-section">
-        <p class="cdd-closing">Contracts define what we want, not how to deliver it. That's the primitive that survives AGI.</p>
+        <p class="cdd-closing">Contract-driven development isn't a methodology to learn. It's three pip installs and a commitment to recording what matters.</p>
         <pre><code>pip install visionlog-md research-md ike-md</code></pre>
       </section>
-
       <div class="related">
         <span class="related-label">Related</span>
         <div class="related-links">
           <a href="/trilogy">The Trilogy</a>
-          <a href="/forges">Forges</a>
-          <a href="/memory">Memory</a>
           <a href="/eidos">Eidos</a>
+          <a href="/agent-identity">Identity</a>
+          <a href="/tools">Tools</a>
         </div>
       </div>
     </article>
 </Base>
 
 <style is:global>
+  /* CDD-specific components (not shared) */
   .cdd-table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); margin: var(--space-6) 0; }
   .cdd-table th { text-align: left; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.06em; padding: var(--space-2) var(--space-3); border-bottom: 2px solid color-mix(in srgb, var(--color-muted) 20%, transparent); }
   .cdd-table td { padding: var(--space-2) var(--space-3); border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 10%, transparent); color: var(--color-muted); }
@@ -263,37 +162,29 @@ Step 8: Record the snapshot
   .cdd-researched { color: var(--color-primary); }
   .cdd-inferred { color: var(--color-muted); }
   .cdd-unknown { color: var(--color-danger); }
+  .cdd-blocked { color: var(--color-danger); }
   .cdd-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-top: var(--space-6); }
   .cdd-trio-item { background: var(--color-surface); padding: var(--space-6); border-radius: var(--radius-md); }
   .cdd-trio-item h3 { color: var(--color-primary); margin-bottom: var(--space-2); }
   .cdd-trio-item p { font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--space-3); }
   .cdd-trio-item code { font-size: var(--text-xs); color: var(--color-command); }
-  .cdd-changes { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); margin: var(--space-8) 0; }
-  .cdd-changes h3 { font-size: var(--text-base); margin-bottom: var(--space-3); color: var(--color-text); }
-  .cdd-code { background: var(--color-surface); border-radius: var(--radius-md); padding: var(--space-4); }
-  .cdd-code pre { margin: 0; font-size: var(--text-xs); line-height: var(--leading-relaxed); }
-  .cdd-code code { color: var(--color-muted); }
-  .cdd-contracts { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin: var(--space-6) 0; }
-  .cdd-contract { background: var(--color-surface); padding: var(--space-5); border-radius: var(--radius-md); }
-  .cdd-contract h3 { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-primary); margin-bottom: var(--space-2); }
-  .cdd-contract p { font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--space-3); line-height: var(--leading-normal); }
-  .cdd-contract code { font-size: var(--text-xs); color: var(--color-command); }
-  .cdd-steps { padding-left: var(--space-6); }
-  .cdd-steps li { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-2) 0; line-height: var(--leading-normal); }
+  .cdd-changes { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); margin-top: var(--space-6); }
+  .cdd-changes h3 { font-size: var(--text-base); margin-bottom: var(--space-3); }
+  .cdd-changes ul { list-style: none; padding: 0; }
+  .cdd-changes li { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-2) 0; border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 8%, transparent); line-height: var(--leading-normal); }
   .cdd-closing { font-size: var(--text-md); line-height: var(--leading-relaxed); margin-bottom: var(--space-6); }
   .cdd-diagram { margin: var(--space-8) 0; max-width: 500px; }
-  .cdd-diagram-wide { max-width: 540px; }
-  .cdd-axis { font-family: var(--font-mono); font-size: 9px; fill: var(--color-muted); letter-spacing: 0.05em; }
-  .cdd-tick { font-family: var(--font-mono); font-size: 8px; fill: var(--color-muted); }
-  .cdd-line-label { font-family: var(--font-mono); font-size: 10px; font-weight: 500; }
-  .cdd-contract-label { font-family: var(--font-mono); font-size: 7px; fill: var(--color-command); opacity: 0.7; }
   .cdd-diagram svg { width: 100%; height: auto; }
+  .conf-label { font-family: var(--font-mono); font-size: 9px; fill: var(--color-text); font-weight: 500; }
+  .conf-arrow { stroke: var(--color-muted); stroke-width: 1; stroke-dasharray: 4 3; animation: conf-dash 2s linear infinite; }
+  .conf-head { fill: var(--color-muted); }
+  .conf-dir { font-family: var(--font-mono); font-size: 8px; fill: var(--color-muted); letter-spacing: 0.06em; }
+  .conf-threshold { font-family: var(--font-mono); font-size: 7px; fill: var(--color-text); letter-spacing: 0.04em; }
   .cdd-pipe-node { fill: var(--color-surface); stroke: var(--color-primary); stroke-width: 1; }
   .cdd-pipe-label { font-family: var(--font-heading); font-size: 13px; fill: var(--color-text); font-weight: 500; }
   .cdd-pipe-sub { font-family: var(--font-mono); font-size: 7px; fill: var(--color-primary); letter-spacing: 0.1em; }
   .cdd-pipe-arrow { stroke: var(--color-primary); stroke-width: 1.5; stroke-dasharray: 4 3; animation: conf-dash 1.5s linear infinite; }
   .cdd-pipe-head { fill: var(--color-primary); }
   @keyframes conf-dash { to { stroke-dashoffset: -14; } }
-  @media (max-width: 768px) { .cdd-trio { grid-template-columns: 1fr; } .cdd-changes { grid-template-columns: 1fr; } .cdd-contracts { grid-template-columns: 1fr; } .cdd-table { font-size: var(--text-xs); } }
+  @media (max-width: 768px) { .cdd-trio { grid-template-columns: 1fr; } .cdd-changes { grid-template-columns: 1fr; } .cdd-table { font-size: var(--text-xs); } }
 </style>
-</Base>
