@@ -73,12 +73,12 @@ Step 8: Write the snapshot to improvements/
         <p>Three contracts that replace three skills files:</p>
 
         <div class="cdd-contracts-list">
-          <div class="cdd-contract-item"><strong>code-review.schema.json</strong> — defines what a reviewed file looks like: findings with severity, line numbers, and fixes. The model decides how to review. The contract defines what "reviewed" means.</div>
-          <div class="cdd-contract-item"><strong>deployment-record.schema.json</strong> — defines what a successful deployment looks like: service name, SHA, health check status, rollback plan. The model decides how to deploy. The contract defines what "deployed" means.</div>
-          <div class="cdd-contract-item"><strong>improvement-snapshot.schema.json</strong> — defines what a better project looks like: scores across 10 dimensions with evidence, delta from last run, next priority. The model decides how to improve. The contract defines what "better" means.</div>
+          <div class="cdd-contract-item"><a href="/contracts/code-review.schema.json"><strong>code-review.schema.json</strong></a> — what a reviewed file looks like. Findings with severity, line numbers, and fixes. A verdict: approve, request changes, or block. The model decides how to review. The contract defines what "reviewed" means.</div>
+          <div class="cdd-contract-item"><a href="/contracts/deployment-record.schema.json"><strong>deployment-record.schema.json</strong></a> — what a successful deployment looks like. Service, SHA, health checks, rollback plan. The model decides how to deploy. The contract defines what "deployed" means.</div>
+          <div class="cdd-contract-item"><a href="/contracts/improvement-snapshot.schema.json"><strong>improvement-snapshot.schema.json</strong></a> — what a better project looks like. Scores across 10 dimensions with evidence, delta from last run, next priority. The model decides how to improve. The contract defines what "better" means.</div>
         </div>
 
-        <p>Each contract is a JSON Schema. Any model — current or future — reads the schema and produces conforming output. A better model produces a sharper code review, a more thorough deployment check, a more insightful improvement. But the output still conforms to the same schema. The contract is the stable interface between human intent and AI capability.</p>
+        <p>These are real JSON Schemas — click to read them. Any model, current or future, reads the schema and produces conforming output. A better model produces a sharper review, a more thorough deployment check, a deeper improvement. But the output conforms to the same schema. The contract is the stable interface between human intent and AI capability.</p>
       </section>
 
       <section class="content-section">

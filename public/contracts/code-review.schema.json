@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eidosagi.com/contracts/code-review.schema.json",
+  "title": "Code Review",
+  "description": "What a reviewed file looks like. The model decides how to review. This defines what 'reviewed' means.",
+  "type": "object",
+  "required": ["file", "findings", "verdict"],
+  "properties": {
+    "file": {
+      "type": "string",
+      "description": "Path to the reviewed file"
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["line", "severity", "issue", "fix"],
+        "properties": {
+          "line": {
+            "type": "integer",
+            "description": "Line number where the issue occurs"
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["critical", "warning", "suggestion"],
+            "description": "How urgently this needs to be fixed"
+          },
+          "issue": {
+            "type": "string",
+            "description": "What's wrong — specific, not vague"
+          },
+          "fix": {
+            "type": "string",
+            "description": "How to fix it — actionable, not advisory"
+          }
+        }
+      }
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["approve", "request-changes", "block"],
+      "description": "Overall decision"
+    },
+    "summary": {
+      "type": "string",
+      "description": "One sentence: what's the most important thing about this file"
+    }
+  }
+}

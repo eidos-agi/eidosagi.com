@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eidosagi.com/contracts/improvement-snapshot.schema.json",
+  "title": "Improvement Snapshot",
+  "description": "What a better project looks like. The model decides how to improve. This defines what 'better' means.",
+  "type": "object",
+  "required": ["date", "project", "scores", "overall", "focus", "improvement", "files_changed", "delta", "next_priority"],
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the improvement was made"
+    },
+    "project": {
+      "type": "string",
+      "description": "Name of the project"
+    },
+    "scores": {
+      "type": "object",
+      "description": "1-10 score per dimension. null means not applicable.",
+      "properties": {
+        "reliability": { "type": ["integer", "null"], "minimum": 1, "maximum": 10 },
+        "performance": { "type": ["integer", "null"], "minimum": 1, "maximum": 10 },
+        "ux": { "type": ["integer", "null"], "minimum": 1, "maximum": 10 },
+        "security": { "type": ["integer", "null"], "minimum": 1, "maximum": 10 },
+        "code_quality": { "type": ["integer", "null"], "minimum": 1, "maximum": 10 },
+        "documentation": { "type": ["integer", "null"], "minimum": 1, "maximum": 10 },
+        "packaging": { "type": ["integer", "null"], "minimum": 1, "maximum": 10 },
+        "vision_alignment": { "type": ["integer", "null"], "minimum": 1, "maximum": 10 },
+        "production_readiness": { "type": ["integer", "null"], "minimum": 1, "maximum": 10 },
+        "contracts": { "type": ["integer", "null"], "minimum": 1, "maximum": 10 }
+      }
+    },
+    "overall": {
+      "type": "integer",
+      "description": "Sum of non-null scores"
+    },
+    "focus": {
+      "type": "string",
+      "description": "Which dimension was improved"
+    },
+    "improvement": {
+      "type": "string",
+      "description": "What was fixed, in one paragraph"
+    },
+    "files_changed": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "delta": {
+      "type": "object",
+      "description": "Before/after scores for changed dimensions",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "before": { "type": "integer" },
+          "after": { "type": "integer" }
+        }
+      }
+    },
+    "next_priority": {
+      "type": "string",
+      "description": "What the next run should focus on and why"
+    }
+  }
+}

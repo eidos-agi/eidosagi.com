@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eidosagi.com/contracts/deployment-record.schema.json",
+  "title": "Deployment Record",
+  "description": "What a successful deployment looks like. The model decides how to deploy. This defines what 'deployed' means.",
+  "type": "object",
+  "required": ["service", "sha", "environment", "status", "checks", "rollback"],
+  "properties": {
+    "service": {
+      "type": "string",
+      "description": "Name of the deployed service"
+    },
+    "sha": {
+      "type": "string",
+      "description": "Git commit SHA that was deployed"
+    },
+    "environment": {
+      "type": "string",
+      "enum": ["staging", "production"],
+      "description": "Where it was deployed"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["healthy", "degraded", "failed"],
+      "description": "Post-deploy health status"
+    },
+    "checks": {
+      "type": "object",
+      "required": ["health_endpoint", "smoke_test", "logs_clean"],
+      "properties": {
+        "health_endpoint": {
+          "type": "boolean",
+          "description": "Health check returns 200"
+        },
+        "smoke_test": {
+          "type": "boolean",
+          "description": "Core functionality verified post-deploy"
+        },
+        "logs_clean": {
+          "type": "boolean",
+          "description": "No errors in first 5 minutes of logs"
+        }
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "required": ["previous_sha", "command"],
+      "properties": {
+        "previous_sha": {
+          "type": "string",
+          "description": "Last known-good commit to roll back to"
+        },
+        "command": {
+          "type": "string",
+          "description": "Exact command to execute rollback"
+        },
+        "migration_reversible": {
+          "type": "boolean",
+          "description": "Whether database migrations can be reversed"
+        }
+      }
+    },
+    "deployed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
