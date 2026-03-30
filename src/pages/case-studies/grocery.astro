@@ -114,10 +114,50 @@ avoid_brands: []</code></pre>
       </section>
 
       <section class="content-section">
-        <h2>Why this matters</h2>
-        <p>A skills file for this task would be 200+ lines: which store to open, how to search, how to add to cart, how to handle out-of-stock items, how to check out. That skills file would break every time the store changes their website. It would need updating for every new AI model.</p>
-        <p>The contract is 30 lines. It hasn't changed since it was written. It works with Perplexity Computer today. It will work with whatever comes next. Because it says <em>what</em>, not <em>how</em>.</p>
-        <p>The preferences are stable — this person's diet doesn't change weekly. The pantry updates occasionally. The contract never changes. Git history is the audit trail.</p>
+        <h2>Contracts vs skills: the numbers</h2>
+        <p>We built this system both ways. First as a skills-based forge (shopping-forge) with step-by-step instructions. Then as a contracts-based repo (reeves-grocery) with schemas and data. Here's what happened:</p>
+
+        <div class="cs-comparison">
+          <div class="cs-comp-col">
+            <div class="cs-comp-header cs-comp-contract">Contracts</div>
+            <div class="cs-comp-num">372</div>
+            <div class="cs-comp-label">total lines</div>
+            <div class="cs-comp-breakdown">
+              <span>154 lines — 3 JSON Schema contracts</span>
+              <span>86 lines — 5 YAML preference files</span>
+              <span>72 lines — 2 pantry files</span>
+              <span>60 lines — CLAUDE.md</span>
+            </div>
+            <div class="cs-comp-facts">
+              <span>0 lines of software</span>
+              <span>Works with any AI agent</span>
+              <span>Never needs updating</span>
+            </div>
+          </div>
+          <div class="cs-comp-col">
+            <div class="cs-comp-header cs-comp-skill">Skills</div>
+            <div class="cs-comp-num">1,000+</div>
+            <div class="cs-comp-label">total lines</div>
+            <div class="cs-comp-breakdown">
+              <span>705 lines — 4 skill files</span>
+              <span>+ still needs the same data files</span>
+            </div>
+            <div class="cs-comp-facts">
+              <span>Requires Claude Code</span>
+              <span>Only works with one agent</span>
+              <span>Breaks when model changes</span>
+            </div>
+          </div>
+        </div>
+
+        <p><strong>64% less code.</strong> But the real difference isn't size — it's durability. The skills approach has 4 files totaling 705 lines of step-by-step instructions: "Step 1: read the profile. Step 2: generate a meal plan. Step 3: check Omni for past orders." Every model upgrade makes parts of those instructions redundant. Every store website change breaks the cart orchestration skill.</p>
+        <p>The contracts approach has 3 schemas that say what a valid shopping list, meal plan, and pantry update look like. The AI figures out the steps. A smarter model produces a better list from the same contract. The contract hasn't changed since it was written.</p>
+      </section>
+
+      <section class="content-section">
+        <h2>Why contracts are more accurate</h2>
+        <p>A skills file can't anticipate every store's UI, every out-of-stock scenario, every substitution logic. It prescribes a fixed procedure. When reality doesn't match the procedure, it fails.</p>
+        <p>A contract says: "produce a list where protein dominates, quantities are purchasable, and store brand is default." The AI applies this to whatever store it's looking at, whatever is in stock, whatever the current prices are. It reasons about the goal, not the steps. That's why it handles edge cases the skills file never imagined.</p>
       </section>
 
       <section class="content-section">
@@ -160,6 +200,17 @@ avoid_brands: []</code></pre>
   .cs-pref pre { margin: 0; padding: var(--space-4); }
   .cs-pref code { font-size: 11px; color: var(--color-muted); line-height: 1.6; }
   .cs-guardrails li { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-2) 0; line-height: var(--leading-normal); }
+  .cs-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin: var(--space-6) 0; }
+  .cs-comp-col { background: var(--color-surface); border-radius: var(--radius-md); padding: var(--space-6); text-align: center; }
+  .cs-comp-header { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.1em; padding: var(--space-1) var(--space-3); border-radius: 3px; display: inline-block; margin-bottom: var(--space-4); }
+  .cs-comp-contract { color: var(--color-command); background: color-mix(in srgb, var(--color-command) 12%, transparent); }
+  .cs-comp-skill { color: var(--color-danger); background: color-mix(in srgb, var(--color-danger) 12%, transparent); }
+  .cs-comp-num { font-family: var(--font-heading); font-size: 48px; font-weight: var(--weight-bold); color: var(--color-text); line-height: 1; }
+  .cs-comp-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); margin-bottom: var(--space-4); }
+  .cs-comp-breakdown { display: flex; flex-direction: column; gap: var(--space-1); margin-bottom: var(--space-4); border-top: var(--border-width) solid color-mix(in srgb, var(--color-muted) 10%, transparent); padding-top: var(--space-4); }
+  .cs-comp-breakdown span { font-size: var(--text-xs); color: var(--color-muted); text-align: left; }
+  .cs-comp-facts { display: flex; flex-direction: column; gap: var(--space-1); border-top: var(--border-width) solid color-mix(in srgb, var(--color-muted) 10%, transparent); padding-top: var(--space-4); }
+  .cs-comp-facts span { font-family: var(--font-mono); font-size: 10px; color: var(--color-primary); text-align: left; }
   .cs-closing { font-size: var(--text-md); line-height: var(--leading-relaxed); }
   @media (max-width: 768px) { .cs-prefs { grid-template-columns: 1fr; } }
 </style>
