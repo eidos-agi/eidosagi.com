@@ -1,0 +1,15 @@
+{
+  "id": "a10fef44-951e-42f5-ac35-54f080d70e01",
+  "version": "0.1.0",
+  "projectName": "minimum-viable-data",
+  "created": "2026-03-29",
+  "phase": "research",
+  "transitions": [
+    {
+      "phase": "research",
+      "date": "2026-03-29"
+    }
+  ],
+  "question": "Is the concept of Minimum Viable Data (MVD) \u2014 structured data that replaces code products \u2014 supported by evidence? Are products (code) becoming liabilities as AI improves? Do data-first approaches outperform code-first approaches?",
+  "context": "We're arguing that products (code) are dead because they're liabilities that get replaced, while structured data (contracts, preferences, state) compounds in value as AI improves. The grocery ordering example: 372 lines of data, zero code, groceries ordered weekly by any AI agent. The claim is radical: MVD replaces MVP. Research the data, let AI deliver the results. Need evidence from industry, academia, and real-world examples."
+}

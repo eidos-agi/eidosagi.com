@@ -77,6 +77,28 @@ import Base from '../layouts/Base.astro';
       </section>
 
       <section class="content-section">
+        <h2>The evidence</h2>
+
+        <div class="mvd-evidence">
+          <div class="mvd-evidence-item">
+            <h3>The bitter lesson</h3>
+            <p>Richard Sutton proved that general methods leveraging computation always beat hand-crafted human knowledge as compute scales. AlphaGo Zero — trained with zero human chess knowledge — destroyed Stockfish, the culmination of decades of hand-tuned expertise. Skills files are hand-crafted knowledge. Contracts are the general method.</p>
+            <cite>Sutton, "The Bitter Lesson" (2019). Confirmed across chess, Go, speech, and 20 years of computer vision research.</cite>
+          </div>
+          <div class="mvd-evidence-item">
+            <h3>Data-centric AI</h3>
+            <p>Andrew Ng's research shows improving data quality is more effective than improving models. In one study, the model-centric approach failed to improve accuracy while the data-centric approach boosted it by 16%. Ng argues: "all that progress in algorithms means it's actually time to spend more time on the data." MVD is this argument taken to its conclusion: the data is where the value is.</p>
+            <cite>Ng, IEEE Spectrum; MIT Sloan; Nature Scientific Reports (2024).</cite>
+          </div>
+          <div class="mvd-evidence-item">
+            <h3>Code as liability</h3>
+            <p>AI now writes 30% of Microsoft's code and over 25% of Google's. Anthropic's 2026 report shows agents building entire applications over days — creating code faster than humans can audit. The industry's response to too much code is more code (agents reviewing agents). MVD breaks the cycle: eliminate the code layer where structured data suffices.</p>
+            <cite>MIT Technology Review, "10 Breakthrough Technologies 2026"; Anthropic, "Agentic Coding Trends Report 2026".</cite>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section">
         <h2>The pattern</h2>
         <p>Every MVD has three parts:</p>
         <ol class="mvd-parts">
@@ -136,5 +158,10 @@ import Base from '../layouts/Base.astro';
   .mvd-steps { padding-left: var(--space-6); }
   .mvd-steps li { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-2) 0; line-height: var(--leading-normal); }
   .mvd-closing { font-size: var(--text-md); line-height: var(--leading-relaxed); }
+  .mvd-evidence { display: grid; grid-template-columns: 1fr; gap: var(--space-4); margin: var(--space-6) 0; }
+  .mvd-evidence-item { background: var(--color-surface); border-radius: var(--radius-md); padding: var(--space-5) var(--space-6); border-left: 3px solid var(--color-primary); }
+  .mvd-evidence-item h3 { font-size: var(--text-base); color: var(--color-text); margin-bottom: var(--space-2); }
+  .mvd-evidence-item p { font-size: var(--text-sm); color: var(--color-muted); line-height: var(--leading-relaxed); margin-bottom: var(--space-3); }
+  .mvd-evidence-item cite { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); opacity: 0.6; font-style: normal; display: block; }
   @media (max-width: 768px) { .mvd-compare { grid-template-columns: 1fr; } }
 </style>
