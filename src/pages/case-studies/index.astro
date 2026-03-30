@@ -1,0 +1,106 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Case Studies — Eidos AGI"
+  description="Real systems running on contracts, not skills. No demos. No mockups. Actual production use."
+>
+    <article class="prose-page">
+      <header class="page-hero">
+        <h1>Case Studies</h1>
+        <p class="subtitle">Real systems. Real contracts. No demos.</p>
+      </header>
+
+      <section class="content-section">
+        <p>These aren't hypothetical examples. They're systems running in production — AI agents fulfilling contracts from git repos, with no skills files, no step-by-step instructions, and often no software at all.</p>
+        <p>Each case study shows: the contract, the data, what the AI produces, and why it works without being told how.</p>
+      </section>
+
+      <section class="content-section">
+        <div class="cs-grid">
+
+          <a href="/case-studies/grocery" class="cs-card cs-card-featured">
+            <div class="cs-card-badge">Live</div>
+            <div class="cs-card-video">
+              <video autoplay loop muted playsinline>
+                <source src="/videos/grocery-order.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="cs-card-body">
+              <h2>Grocery ordering</h2>
+              <p>A GitHub repo with YAML preferences and JSON Schema contracts. An AI reads them and orders groceries weekly. No code. No skills file. Just schemas and data.</p>
+              <div class="cs-card-detail">
+                <span>3 contracts</span>
+                <span>5 preference files</span>
+                <span>0 lines of code</span>
+              </div>
+              <div class="cs-card-stack">Perplexity Computer + GitHub + JSON Schema</div>
+            </div>
+          </a>
+
+          <div class="cs-card cs-card-coming">
+            <div class="cs-card-badge cs-card-badge-soon">Coming</div>
+            <div class="cs-card-body">
+              <h2>Voice notes</h2>
+              <p>A Mac app that records voice, transcribes locally, classifies via AI, and stores in recording buckets that a search engine indexes. Five contracts define every data boundary.</p>
+              <div class="cs-card-detail">
+                <span>5 contracts</span>
+                <span>3 languages</span>
+                <span>3 processes</span>
+              </div>
+              <div class="cs-card-stack">Swift + Python + JSON Schema + Omni</div>
+            </div>
+          </div>
+
+          <div class="cs-card cs-card-coming">
+            <div class="cs-card-badge cs-card-badge-soon">Coming</div>
+            <div class="cs-card-body">
+              <h2>Project improvement</h2>
+              <p>A forge that scores any project across 10 dimensions, fixes the highest-impact gap, and records a snapshot. The snapshot schema is the contract — the model figures out how to improve.</p>
+              <div class="cs-card-detail">
+                <span>1 contract</span>
+                <span>3 projects improved</span>
+                <span>Ran on itself twice</span>
+              </div>
+              <div class="cs-card-stack">improve-forge + JSON Schema</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="content-section">
+        <p class="cs-principle">The pattern is the same in every case: define what you want as a schema. Give the AI the schema and the data. Let it figure out how.</p>
+        <p><a href="/contract-driven-development">Read the full argument: Contracts, Not Skills</a></p>
+      </section>
+
+      <div class="related">
+        <span class="related-label">Related</span>
+        <div class="related-links">
+          <a href="/contract-driven-development">Contracts, Not Skills</a>
+          <a href="/forges">Forges</a>
+          <a href="/trilogy">The Trilogy</a>
+        </div>
+      </div>
+    </article>
+</Base>
+
+<style is:global>
+  .cs-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
+  .cs-card { display: block; background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden; text-decoration: none; position: relative; transition: transform 0.15s ease; }
+  .cs-card:hover { transform: translateY(-2px); }
+  .cs-card-featured { border: 1px solid color-mix(in srgb, var(--color-command) 20%, transparent); }
+  .cs-card-coming { opacity: 0.7; pointer-events: none; }
+  .cs-card-video { width: 100%; }
+  .cs-card-video video { width: 100%; display: block; }
+  .cs-card-body { padding: var(--space-5) var(--space-6); }
+  .cs-card h2 { font-size: var(--text-lg); color: var(--color-text); margin-bottom: var(--space-2); }
+  .cs-card p { font-size: var(--text-sm); color: var(--color-muted); line-height: var(--leading-normal); margin-bottom: var(--space-3); }
+  .cs-card-badge { position: absolute; top: var(--space-4); right: var(--space-4); font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-command); background: color-mix(in srgb, var(--color-command) 12%, transparent); padding: 2px 10px; border-radius: 3px; z-index: 1; }
+  .cs-card-badge-soon { color: var(--color-muted); background: color-mix(in srgb, var(--color-muted) 10%, transparent); }
+  .cs-card-detail { display: flex; gap: var(--space-4); margin-bottom: var(--space-3); }
+  .cs-card-detail span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-primary); }
+  .cs-card-stack { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); opacity: 0.5; }
+  .cs-principle { font-size: var(--text-md); line-height: var(--leading-relaxed); }
+</style>

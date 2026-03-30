@@ -27,19 +27,33 @@ import Base from '../layouts/Base.astro';
           <div class="cdd-chart-contract">
             <div class="cdd-chart-header">shopping-list.schema.json</div>
             <pre><code>&#123;
+  "title": "Shopping List",
+
+  "purpose": "Produce a weekly grocery order
+    for one person. Every item must be a real,
+    purchasable product in the correct quantity.
+    This is a shopping cart, not a recipe list.",
+
+  "context": "Read preferences/dietary.yaml for
+    what this person eats (PSMF, high protein).
+    Read pantry/current.md for what's on hand.
+    Read pantry/reserve.md for the shelf-stable
+    buffer target.",
+
+  "constraints": [
+    "Protein items dominate",
+    "Reserve restocks when pantry looks thin",
+    "Quantities in purchasable units (3 lbs)",
+    "Store brand default",
+    "Optimize for protein per dollar"
+  ],
+
   "required": ["date", "store", "items"],
   "items": [&#123;
-    "name": "string",
-    "quantity": "string",
-    "category": "protein | vegetables | dairy | ...",
-    "reserve_restock": "boolean"
-  &#125;],
-  "constraints": [
-    "Protein items dominate the list",
-    "Reserve restocks when pantry looks thin",
-    "Quantities in purchasable units",
-    "Respects dietary.yaml and shopping.yaml"
-  ]
+    "name": "boneless skinless chicken breast",
+    "quantity": "5 lbs",
+    "category": "protein"
+  &#125;]
 &#125;</code></pre>
           </div>
           <div class="cdd-chart-arrow">+</div>
@@ -61,8 +75,8 @@ priorities:
           </div>
         </div>
 
-        <p>The contract defines what a valid shopping list looks like. The preferences define who the person is. The AI reads both and produces a list that conforms. No agent framework. No tool calls. No step-by-step playbook. Just a schema and data.</p>
-        <p>This is real. An actual grocery order placed weekly by an AI reading contracts from a git repo.</p>
+        <p>The contract tells the AI: what this is for (purpose), what to read first (context), and what matters (constraints). The preferences define who the person is. The AI reads both and produces a conforming list. No agent framework. No tool calls. No step-by-step playbook.</p>
+        <p>This is real. An actual grocery order placed weekly by an AI reading contracts from a git repo. <a href="/case-studies/grocery">Full case study</a>.</p>
 
         <div class="cdd-video">
           <p class="cdd-video-caption">Perplexity Computer reading contracts from a GitHub repo to order groceries. No code. No skills file. Just schemas and preferences.</p>
@@ -302,9 +316,9 @@ Step 8: Output summary...
       <div class="related">
         <span class="related-label">Related</span>
         <div class="related-links">
+          <a href="/case-studies">Case Studies</a>
           <a href="/trilogy">The Trilogy</a>
           <a href="/forges">Forges</a>
-          <a href="/memory">Memory</a>
           <a href="/eidos">Eidos</a>
         </div>
       </div>
