@@ -1,0 +1,21 @@
+---
+interface Props {
+  src: string;
+  caption?: string;
+  autoplay?: boolean;
+}
+const { src, caption, autoplay = true } = Astro.props;
+---
+
+<div class="video-embed">
+  {caption && <p class="video-caption">{caption}</p>}
+  <video autoplay={autoplay} loop muted playsinline>
+    <source src={src} type="video/mp4" />
+  </video>
+</div>
+
+<style>
+  .video-embed { margin: var(--space-8) 0 var(--space-4); border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); }
+  .video-embed video { width: 100%; display: block; }
+  .video-caption { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); padding: var(--space-3) var(--space-4); margin: 0; letter-spacing: 0.01em; }
+</style>

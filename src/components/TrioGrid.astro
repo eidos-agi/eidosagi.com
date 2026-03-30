@@ -1,0 +1,15 @@
+---
+---
+
+<div class="trio">
+  <slot />
+</div>
+
+<style>
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-top: var(--space-6); }
+  .trio :global(.trio-item) { background: var(--color-surface); padding: var(--space-6); border-radius: var(--radius-md); }
+  .trio :global(.trio-item h3) { color: var(--color-primary); margin-bottom: var(--space-2); }
+  .trio :global(.trio-item p) { font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--space-3); }
+  .trio :global(.trio-item code) { font-size: var(--text-xs); color: var(--color-command); }
+  @media (max-width: 768px) { .trio { grid-template-columns: 1fr; } }
+</style>

@@ -1,5 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
+import CompareTable from '../components/CompareTable.astro';
+import EvidenceCard from '../components/EvidenceCard.astro';
+import VideoEmbed from '../components/VideoEmbed.astro';
 ---
 
 <Base
@@ -39,63 +42,46 @@ import Base from '../layouts/Base.astro';
         <p>The contracts define what a valid grocery order looks like. The preferences describe the person — what they eat, how they cook, what they can spend. The pantry tracks what's on hand. An AI agent reads all of it, produces a shopping list that conforms to the contract, and places the order.</p>
         <p>The agent that does this has changed three times. Claude Code, then Perplexity Computer, then something else. The data has changed zero times. The repo doesn't care which AI reads it.</p>
 
-        <div class="mvd-video">
-          <p class="mvd-video-caption">Perplexity Computer ordering groceries from contracts in a GitHub repo.</p>
-          <video autoplay loop muted playsinline>
-            <source src="/videos/grocery-order.mp4" type="video/mp4" />
-          </video>
-        </div>
+        <VideoEmbed src="/videos/grocery-order.mp4" caption="Perplexity Computer ordering groceries from contracts in a GitHub repo." />
       </section>
 
       <section class="content-section">
         <h2>MVP vs MVD</h2>
         <p>Minimum Viable Product asks how little code you can write to ship something. Minimum Viable Data asks how little data you need to define the results you want.</p>
 
-        <div class="mvd-compare">
-          <div class="mvd-compare-item mvd-product">
-            <div class="mvd-compare-header">Product (code)</div>
-            <ul>
-              <li>You write code that does the thing</li>
-              <li>You maintain dependencies, deployments, versions</li>
-              <li>It works with one platform, one runtime</li>
-              <li>When the model improves, the code stays the same</li>
-              <li>When the platform changes, the code breaks</li>
-              <li>It gets replaced every few years</li>
-            </ul>
-          </div>
-          <div class="mvd-compare-item mvd-data">
-            <div class="mvd-compare-header">Data (MVD)</div>
-            <ul>
-              <li>You define what "done" looks like as a schema</li>
-              <li>You describe who you are as preferences</li>
-              <li>You capture current state as markdown or YAML</li>
-              <li>When the model improves, the results improve</li>
-              <li>When the platform changes, the data still works</li>
-              <li>It never needs replacing</li>
-            </ul>
-          </div>
-        </div>
+        <CompareTable leftLabel="Product (code)" rightLabel="Data (MVD)" leftVariant="danger" rightVariant="command">
+          <ul slot="left">
+            <li>You write code that does the thing</li>
+            <li>You maintain dependencies, deployments, versions</li>
+            <li>It works with one platform, one runtime</li>
+            <li>When the model improves, the code stays the same</li>
+            <li>When the platform changes, the code breaks</li>
+            <li>It gets replaced every few years</li>
+          </ul>
+          <ul slot="right">
+            <li>You define what "done" looks like as a schema</li>
+            <li>You describe who you are as preferences</li>
+            <li>You capture current state as markdown or YAML</li>
+            <li>When the model improves, the results improve</li>
+            <li>When the platform changes, the data still works</li>
+            <li>It never needs replacing</li>
+          </ul>
+        </CompareTable>
       </section>
 
       <section class="content-section">
         <h2>Why this works</h2>
 
-        <div class="mvd-evidence">
-          <div class="mvd-evidence-item">
-            <h3>The bitter lesson</h3>
+        <div class="evidence-stack">
+          <EvidenceCard title="The bitter lesson" cite='Sutton, "The Bitter Lesson" (2019). Confirmed across chess, Go, speech, and 20 years of computer vision.'>
             <p>Richard Sutton showed that general methods leveraging computation always beat hand-crafted human knowledge as compute scales. AlphaGo Zero — trained with no human chess knowledge — destroyed Stockfish, the product of decades of hand-tuned expertise. Detailed instructions (skills) are hand-crafted knowledge. Structured goals (contracts) are the general method.</p>
-            <cite>Sutton, "The Bitter Lesson" (2019). Confirmed across chess, Go, speech, and 20 years of computer vision.</cite>
-          </div>
-          <div class="mvd-evidence-item">
-            <h3>Data quality beats model quality</h3>
+          </EvidenceCard>
+          <EvidenceCard title="Data quality beats model quality" cite="Ng, IEEE Spectrum; MIT Sloan; Nature Scientific Reports (2024).">
             <p>Andrew Ng's data-centric AI research found that improving data quality is more effective than improving model architecture. In one manufacturing study, model changes produced zero improvement while data quality changes improved accuracy by 16%.</p>
-            <cite>Ng, IEEE Spectrum; MIT Sloan; Nature Scientific Reports (2024).</cite>
-          </div>
-          <div class="mvd-evidence-item">
-            <h3>Code is accumulating faster than it can be audited</h3>
+          </EvidenceCard>
+          <EvidenceCard title="Code is accumulating faster than it can be audited" cite='MIT Technology Review, "10 Breakthrough Technologies 2026"; Anthropic, "Agentic Coding Trends 2026".'>
             <p>AI now writes 30% of Microsoft's code and over 25% of Google's. Anthropic's 2026 report shows agents building entire applications over multiple days. The industry's response is to use agents to review agent-generated code — more code to manage code. MVD sidesteps this entirely for tasks where structured data is sufficient.</p>
-            <cite>MIT Technology Review, "10 Breakthrough Technologies 2026"; Anthropic, "Agentic Coding Trends 2026".</cite>
-          </div>
+          </EvidenceCard>
         </div>
       </section>
 
@@ -133,27 +119,8 @@ import Base from '../layouts/Base.astro';
 </Base>
 
 <style is:global>
-  /* Video */
-  .mvd-video { margin: var(--space-8) 0 var(--space-4); border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); }
-  .mvd-video video { width: 100%; display: block; }
-  .mvd-video-caption { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); padding: var(--space-3) var(--space-4); margin: 0; letter-spacing: 0.01em; }
-
-  /* Comparison table */
-  .mvd-compare { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin: var(--space-8) 0 var(--space-4); }
-  .mvd-compare-item { background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden; }
-  .mvd-compare-header { font-family: var(--font-mono); font-size: var(--text-xs); padding: var(--space-3) var(--space-5); font-weight: 500; letter-spacing: 0.02em; }
-  .mvd-product .mvd-compare-header { background: color-mix(in srgb, var(--color-danger) 10%, transparent); color: var(--color-danger); }
-  .mvd-data .mvd-compare-header { background: color-mix(in srgb, var(--color-command) 10%, transparent); color: var(--color-command); }
-  .mvd-compare-item ul { list-style: none; padding: var(--space-4) var(--space-5); margin: 0; }
-  .mvd-compare-item li { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-2) 0; line-height: var(--leading-relaxed); border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 6%, transparent); }
-  .mvd-compare-item li:last-child { border-bottom: none; }
-
-  /* Evidence cards */
-  .mvd-evidence { display: grid; grid-template-columns: 1fr; gap: var(--space-5); margin: var(--space-8) 0 var(--space-4); }
-  .mvd-evidence-item { background: var(--color-surface); border-radius: var(--radius-md); padding: var(--space-6); border-left: 3px solid color-mix(in srgb, var(--color-primary) 50%, transparent); }
-  .mvd-evidence-item h3 { font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--color-text); margin-bottom: var(--space-3); letter-spacing: -0.01em; }
-  .mvd-evidence-item p { font-size: var(--text-sm); color: var(--color-muted); line-height: var(--leading-relaxed); margin-bottom: var(--space-4); }
-  .mvd-evidence-item cite { font-family: var(--font-mono); font-size: 10px; color: var(--color-muted); opacity: 0.5; font-style: normal; display: block; line-height: var(--leading-relaxed); }
+  /* Page-specific (components handle video, compare, evidence) */
+  .evidence-stack { display: grid; grid-template-columns: 1fr; gap: var(--space-5); margin: var(--space-8) 0 var(--space-4); }
 
   /* MVD parts list */
   .mvd-parts { padding-left: var(--space-6); margin: var(--space-4) 0; }

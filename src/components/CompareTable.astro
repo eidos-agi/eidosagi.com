@@ -1,0 +1,41 @@
+---
+interface Props {
+  leftLabel: string;
+  rightLabel: string;
+  leftVariant?: 'danger' | 'muted';
+  rightVariant?: 'command' | 'primary';
+}
+const { leftLabel, rightLabel, leftVariant = 'danger', rightVariant = 'command' } = Astro.props;
+---
+
+<div class="compare">
+  <div class={`compare-col compare-${leftVariant}`}>
+    <div class="compare-header">{leftLabel}</div>
+    <div class="compare-body">
+      <slot name="left" />
+    </div>
+  </div>
+  <div class={`compare-col compare-${rightVariant}`}>
+    <div class="compare-header">{rightLabel}</div>
+    <div class="compare-body">
+      <slot name="right" />
+    </div>
+  </div>
+</div>
+
+<style>
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin: var(--space-8) 0 var(--space-4); }
+  .compare-col { background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden; }
+  .compare-header { font-family: var(--font-mono); font-size: var(--text-xs); padding: var(--space-3) var(--space-5); font-weight: 500; letter-spacing: 0.02em; }
+  .compare-danger .compare-header { background: color-mix(in srgb, var(--color-danger) 10%, transparent); color: var(--color-danger); }
+  .compare-muted .compare-header { background: color-mix(in srgb, var(--color-muted) 10%, transparent); color: var(--color-muted); }
+  .compare-command .compare-header { background: color-mix(in srgb, var(--color-command) 10%, transparent); color: var(--color-command); }
+  .compare-primary .compare-header { background: color-mix(in srgb, var(--color-primary) 10%, transparent); color: var(--color-primary); }
+  .compare-body { padding: var(--space-4) var(--space-5); }
+  .compare-body :global(ul) { list-style: none; padding: 0; margin: 0; }
+  .compare-body :global(li) { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-2) 0; line-height: var(--leading-relaxed); border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 6%, transparent); }
+  .compare-body :global(li:last-child) { border-bottom: none; }
+  .compare-body :global(pre) { margin: 0; }
+  .compare-body :global(code) { font-size: 11px; color: var(--color-muted); line-height: 1.6; }
+  @media (max-width: 768px) { .compare { grid-template-columns: 1fr; } }
+</style>

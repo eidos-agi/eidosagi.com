@@ -1,0 +1,26 @@
+---
+interface Props {
+  label?: string;
+  variant?: 'command' | 'primary' | 'danger' | 'muted';
+}
+const { label, variant = 'command' } = Astro.props;
+---
+
+<div class="codeblock">
+  {label && <div class={`codeblock-header codeblock-${variant}`}>{label}</div>}
+  <div class="codeblock-body">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .codeblock { background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden; margin: var(--space-4) 0; }
+  .codeblock-header { font-family: var(--font-mono); font-size: var(--text-xs); padding: var(--space-2) var(--space-4); font-weight: 500; letter-spacing: 0.02em; }
+  .codeblock-command { background: color-mix(in srgb, var(--color-command) 10%, transparent); color: var(--color-command); }
+  .codeblock-primary { background: color-mix(in srgb, var(--color-primary) 10%, transparent); color: var(--color-primary); }
+  .codeblock-danger { background: color-mix(in srgb, var(--color-danger) 10%, transparent); color: var(--color-danger); }
+  .codeblock-muted { background: color-mix(in srgb, var(--color-muted) 8%, transparent); color: var(--color-muted); }
+  .codeblock-body { padding: var(--space-4); }
+  .codeblock-body :global(pre) { margin: 0; }
+  .codeblock-body :global(code) { font-size: 12px; color: var(--color-muted); line-height: 1.7; }
+</style>
