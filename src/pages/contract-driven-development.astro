@@ -23,17 +23,59 @@ import ContractChart from '../components/ContractChart.astro';
         <h2>Code review</h2>
         <p>The contract defines what "reviewed" means. The model decides how to review. The skill it replaces is 150 lines of step-by-step instructions that will need rewriting when the next model ships.</p>
 
-        <ContractChart contractLabel="Contract" outputLabel="Example output" skillLabel="The skill this replaces" skillMeta="150 lines">
+        <ContractChart contractLabel="code-review.schema.json" outputLabel="Example output" skillLabel="The skill this replaces" skillMeta="150 lines">
           <pre slot="contract"><code>&#123;
-  "file": "string — path to file",
-  "findings": [&#123;
-    "line": "integer",
-    "severity": "critical | warning | suggestion",
-    "issue": "string — what's wrong",
-    "fix": "string — how to fix it"
-  &#125;],
-  "verdict": "approve | request-changes | block",
-  "summary": "string — one sentence"
+  "$schema": "https://json-schema.org/draft/2020-12",
+  "title": "Code Review",
+
+  "purpose": "Produce a structured review of a
+    source file. Every finding must be actionable
+    — if the developer can't fix it from the
+    review alone, the finding isn't specific
+    enough. The verdict gates the merge.",
+
+  "context": "Read the file in the context of the
+    full repo. Check imports, callers, and tests.
+    A finding that ignores how the file is used
+    is a false positive.",
+
+  "constraints": [
+    "Security findings always override style",
+    "Every finding must include a concrete fix",
+    "Verdict is block if any finding is critical",
+    "Do not flag style preferences as warnings",
+    "One summary sentence, not a paragraph"
+  ],
+
+  "required": ["file", "findings", "verdict",
+    "summary"],
+  "properties": &#123;
+    "file": &#123; "type": "string" &#125;,
+    "findings": &#123;
+      "type": "array",
+      "items": &#123;
+        "required": ["line", "severity",
+          "issue", "fix"],
+        "properties": &#123;
+          "line": &#123; "type": "integer" &#125;,
+          "severity": &#123;
+            "enum": ["critical", "warning",
+              "suggestion"]
+          &#125;,
+          "issue": &#123; "type": "string" &#125;,
+          "fix": &#123; "type": "string" &#125;
+        &#125;
+      &#125;
+    &#125;,
+    "verdict": &#123;
+      "enum": ["approve", "request-changes",
+        "block"]
+    &#125;,
+    "summary": &#123;
+      "type": "string",
+      "maxLength": 120
+    &#125;
+  &#125;
 &#125;</code></pre>
           <pre slot="output"><code>&#123;
   "file": "src/auth/session.py",
@@ -41,27 +83,40 @@ import ContractChart from '../components/ContractChart.astro';
     &#123;
       "line": 42,
       "severity": "critical",
-      "issue": "SQL injection — user input interpolated directly into query",
-      "fix": "Use parameterized query: cursor.execute('SELECT * FROM users WHERE id = %s', (user_id,))"
+      "issue": "SQL injection — user input
+        interpolated directly into query
+        string via f-string",
+      "fix": "cursor.execute(
+        'SELECT * FROM users WHERE id = %s',
+        (user_id,))"
     &#125;,
     &#123;
       "line": 87,
       "severity": "warning",
-      "issue": "Bare except swallows KeyboardInterrupt",
-      "fix": "Catch Exception, not BaseException"
+      "issue": "Bare except catches
+        KeyboardInterrupt and SystemExit",
+      "fix": "except Exception as e:"
     &#125;
   ],
   "verdict": "block",
-  "summary": "SQL injection in auth path. Must fix before merge."
+  "summary": "SQL injection in auth path.
+    Must fix before merge."
 &#125;</code></pre>
           <pre slot="skill"><code>Step 1: Read the file. Understand its role.
-Step 2: Check for security issues (OWASP top 10, injection, XSS...)
-Step 3: Check for performance (N+1, blocking calls, memory leaks...)
-Step 4: Check error handling (bare except, swallowed errors...)
-Step 5: Check logic (off-by-one, race conditions, null derefs...)
-Step 6: Format as line-by-line findings with severity...
-Step 7: Assign verdict: approve if 0 critical, request-changes if...
-...eight more steps with edge cases and format rules...</code></pre>
+Step 2: Check for security issues
+  (OWASP top 10, injection, XSS...)
+Step 3: Check for performance
+  (N+1, blocking calls, memory leaks...)
+Step 4: Check error handling
+  (bare except, swallowed errors...)
+Step 5: Check logic
+  (off-by-one, race conditions, null derefs...)
+Step 6: Format as line-by-line findings
+  with severity...
+Step 7: Assign verdict: approve if 0 critical,
+  request-changes if...
+...eight more steps with edge cases
+  and format rules...</code></pre>
         </ContractChart>
       </section>
 
@@ -70,21 +125,66 @@ Step 7: Assign verdict: approve if 0 critical, request-changes if...
         <h2>Deployment</h2>
         <p>The contract defines what "deployed" means. The model decides how to deploy.</p>
 
-        <ContractChart contractLabel="Contract" outputLabel="Example output" skillLabel="The skill this replaces" skillMeta="100 lines">
+        <ContractChart contractLabel="deployment.schema.json" outputLabel="Example output" skillLabel="The skill this replaces" skillMeta="100 lines">
           <pre slot="contract"><code>&#123;
-  "service": "string",
-  "sha": "string — git commit",
-  "environment": "staging | production",
-  "status": "healthy | degraded | failed",
-  "checks": &#123;
-    "health_endpoint": "boolean",
-    "smoke_test": "boolean",
-    "logs_clean": "boolean"
-  &#125;,
-  "rollback": &#123;
-    "previous_sha": "string",
-    "command": "string",
-    "migration_reversible": "boolean"
+  "$schema": "https://json-schema.org/draft/2020-12",
+  "title": "Deployment Verification",
+
+  "purpose": "Verify that a service is running
+    correctly after deploy. The output is a
+    receipt: what was deployed, whether it's
+    healthy, and exactly how to undo it if
+    something breaks at 2am.",
+
+  "context": "Check the running service, not just
+    the code. Hit the health endpoint. Read the
+    last 50 log lines. Confirm the correct SHA
+    is actually serving traffic.",
+
+  "constraints": [
+    "Status is healthy only if ALL checks pass",
+    "Rollback command must be copy-pasteable",
+    "If migration is irreversible, say so",
+    "Log window is 5 minutes post-deploy",
+    "Do not mark healthy if error rate > 0.1%"
+  ],
+
+  "required": ["service", "sha", "environment",
+    "status", "checks", "rollback"],
+  "properties": &#123;
+    "service": &#123; "type": "string" &#125;,
+    "sha": &#123;
+      "type": "string",
+      "pattern": "^[a-f0-9]&#123;7,40&#125;$"
+    &#125;,
+    "environment": &#123;
+      "enum": ["staging", "production"]
+    &#125;,
+    "status": &#123;
+      "enum": ["healthy", "degraded", "failed"]
+    &#125;,
+    "checks": &#123;
+      "required": ["health_endpoint",
+        "smoke_test", "logs_clean",
+        "correct_sha_serving"],
+      "properties": &#123;
+        "health_endpoint": &#123;"type":"boolean"&#125;,
+        "smoke_test": &#123;"type":"boolean"&#125;,
+        "logs_clean": &#123;"type":"boolean"&#125;,
+        "correct_sha_serving": &#123;
+          "type":"boolean"&#125;
+      &#125;
+    &#125;,
+    "rollback": &#123;
+      "required": ["previous_sha", "command",
+        "migration_reversible"],
+      "properties": &#123;
+        "previous_sha": &#123;"type":"string"&#125;,
+        "command": &#123;"type":"string"&#125;,
+        "migration_reversible": &#123;
+          "type":"boolean"&#125;
+      &#125;
+    &#125;
   &#125;
 &#125;</code></pre>
           <pre slot="output"><code>&#123;
@@ -95,7 +195,8 @@ Step 7: Assign verdict: approve if 0 critical, request-changes if...
   "checks": &#123;
     "health_endpoint": true,
     "smoke_test": true,
-    "logs_clean": true
+    "logs_clean": true,
+    "correct_sha_serving": true
   &#125;,
   "rollback": &#123;
     "previous_sha": "f015d50",
@@ -103,13 +204,17 @@ Step 7: Assign verdict: approve if 0 critical, request-changes if...
     "migration_reversible": true
   &#125;
 &#125;</code></pre>
-          <pre slot="skill"><code>Step 1: Detect service type (FastAPI, Flask, MCP...)
-Step 2: Check health endpoint exists, returns 200...
-Step 3: Verify SIGTERM handling for graceful shutdown...
+          <pre slot="skill"><code>Step 1: Detect service type
+  (FastAPI, Flask, MCP...)
+Step 2: Check health endpoint exists,
+  returns 200...
+Step 3: Verify SIGTERM handling for
+  graceful shutdown...
 Step 4: Audit environment variables...
 Step 5: Check Dockerfile or Procfile...
 Step 6: Document rollback strategy...
-...six more steps with Railway-specific checks...</code></pre>
+...six more steps with
+  Railway-specific checks...</code></pre>
         </ContractChart>
       </section>
 
@@ -118,21 +223,78 @@ Step 6: Document rollback strategy...
         <h2>Project improvement</h2>
         <p>The contract defines what "better" means. The model decides how to improve.</p>
 
-        <ContractChart contractLabel="Contract" outputLabel="Example output" skillLabel="The skill this replaces" skillMeta="150 lines">
+        <ContractChart contractLabel="improvement.schema.json" outputLabel="Example output" skillLabel="The skill this replaces" skillMeta="150 lines">
           <pre slot="contract"><code>&#123;
-  "project": "string",
-  "scores": &#123;
-    "reliability": "1-10 | null",
-    "performance": "1-10 | null",
-    "ux": "1-10 | null",
-    "security": "1-10 | null",
-    "code_quality": "1-10 | null",
-    "documentation": "1-10 | null"
-  &#125;,
-  "focus": "string — dimension improved",
-  "improvement": "string — what was fixed",
-  "delta": &#123; "dimension": &#123; "before": "int", "after": "int" &#125; &#125;,
-  "next_priority": "string — what to fix next"
+  "$schema": "https://json-schema.org/draft/2020-12",
+  "title": "Project Improvement Snapshot",
+
+  "purpose": "Score a project across six
+    dimensions, fix the highest-impact gap,
+    and record what changed. The snapshot is
+    the proof — diffable, auditable, and
+    comparable across runs.",
+
+  "context": "Read the entire project: source,
+    tests, docs, CI config, README, CLAUDE.md.
+    Score based on what exists, not what's
+    planned. A missing test suite is a 1, not
+    a null.",
+
+  "constraints": [
+    "Score honestly — 5 is average, not bad",
+    "Only improve one dimension per run",
+    "Delta must reflect a real, committed change",
+    "next_priority picks highest pain, not
+      easiest fix",
+    "null means not applicable, not unscored"
+  ],
+
+  "required": ["project", "scores", "focus",
+    "improvement", "delta", "next_priority"],
+  "properties": &#123;
+    "project": &#123; "type": "string" &#125;,
+    "scores": &#123;
+      "properties": &#123;
+        "reliability": &#123;
+          "type": ["integer", "null"],
+          "minimum": 1, "maximum": 10
+        &#125;,
+        "performance": &#123;
+          "type": ["integer", "null"],
+          "minimum": 1, "maximum": 10
+        &#125;,
+        "ux": &#123;
+          "type": ["integer", "null"],
+          "minimum": 1, "maximum": 10
+        &#125;,
+        "security": &#123;
+          "type": ["integer", "null"],
+          "minimum": 1, "maximum": 10
+        &#125;,
+        "code_quality": &#123;
+          "type": ["integer", "null"],
+          "minimum": 1, "maximum": 10
+        &#125;,
+        "documentation": &#123;
+          "type": ["integer", "null"],
+          "minimum": 1, "maximum": 10
+        &#125;
+      &#125;
+    &#125;,
+    "focus": &#123; "type": "string" &#125;,
+    "improvement": &#123; "type": "string" &#125;,
+    "delta": &#123;
+      "type": "object",
+      "additionalProperties": &#123;
+        "required": ["before", "after"],
+        "properties": &#123;
+          "before": &#123;"type":"integer"&#125;,
+          "after": &#123;"type":"integer"&#125;
+        &#125;
+      &#125;
+    &#125;,
+    "next_priority": &#123; "type": "string" &#125;
+  &#125;
 &#125;</code></pre>
           <pre slot="output"><code>&#123;
   "project": "eidos-mail",
@@ -145,19 +307,32 @@ Step 6: Document rollback strategy...
     "documentation": 2
   &#125;,
   "focus": "documentation",
-  "improvement": "Added README with install, usage, and architecture. Added CLAUDE.md with key files and gotchas.",
-  "delta": &#123; "documentation": &#123; "before": 2, "after": 5 &#125; &#125;,
-  "next_priority": "reliability — no tests for the IMAP connection handler"
+  "improvement": "Added README with install,
+    usage, and architecture diagram. Added
+    CLAUDE.md with key files, build commands,
+    and deployment gotchas.",
+  "delta": &#123;
+    "documentation": &#123;
+      "before": 2, "after": 5
+    &#125;
+  &#125;,
+  "next_priority": "reliability — no tests
+    for the IMAP connection handler, which
+    has crashed twice in production"
 &#125;</code></pre>
-          <pre slot="skill"><code>Step 1: Read CLAUDE.md, vision, README, guardrails...
-Step 2: Read directory structure, source files, tests...
-Step 3: Score each dimension using calibration rubric...
+          <pre slot="skill"><code>Step 1: Read CLAUDE.md, vision, README,
+  guardrails...
+Step 2: Read directory structure, source
+  files, tests...
+Step 3: Score each dimension using
+  calibration rubric...
 Step 4: Pick highest-impact gap...
 Step 5: Make the fix...
 Step 6: Run tests, verify build...
 Step 7: Write snapshot JSON...
 Step 8: Output summary...
-...plus rules for project type detection, previous runs, forge pipelines...</code></pre>
+...plus rules for project type detection,
+  previous runs, forge pipelines...</code></pre>
         </ContractChart>
       </section>
 
