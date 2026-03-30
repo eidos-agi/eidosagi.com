@@ -2,6 +2,13 @@
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import RelatedLinks from '../../components/RelatedLinks.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+import LogExcerpt from '../../components/LogExcerpt.astro';
+import Artifact from '../../components/Artifact.astro';
+import CallToAction from '../../components/CallToAction.astro';
+import StatRow from '../../components/StatRow.astro';
+import CompareTable from '../../components/CompareTable.astro';
 ---
 
 <Base
@@ -12,12 +19,7 @@ import RelatedLinks from '../../components/RelatedLinks.astro';
       <PageHero title="Groceries ordered<br />by contracts alone" subtitle="No code. No skills. No step-by-step instructions. Just a git repo." />
 
       <section class="content-section">
-        <div class="cs-video">
-          <p class="cs-video-caption">Perplexity Computer reading contracts from a GitHub repo to place a grocery order.</p>
-          <video autoplay loop muted playsinline>
-            <source src="/videos/grocery-order.mp4" type="video/mp4" />
-          </video>
-        </div>
+        <VideoEmbed src="/videos/grocery-order.mp4" caption="Perplexity Computer reading contracts from a GitHub repo to place a grocery order." />
       </section>
 
       <section class="content-section">
@@ -111,82 +113,61 @@ avoid_brands: []</code></pre>
         <p>On March 29, 2026, the agent (Perplexity Computer) cloned the repo, read every file, and understood the entire system in under two minutes. It asked three questions: what store, what scope, anything specific. Answers: Walmart delivery, weekly + reserve restock, dark chocolate.</p>
         <p>It built a 7-day PSMF meal plan hitting ~160g protein/day at 800-850 calories. Then it generated a 64-item shopping list, opened Walmart.com in the browser, and added everything to the cart in four batches. The human reviewed, removed 2 items, and placed the order. Express delivery, 80-110 minutes.</p>
 
-        <div class="cs-result">
-          <div class="cs-result-stat">
-            <span class="cs-result-num">$259.98</span>
-            <span class="cs-result-label">total (incl. delivery + tip)</span>
-          </div>
-          <div class="cs-result-stat">
-            <span class="cs-result-num">64</span>
-            <span class="cs-result-label">items ordered</span>
-          </div>
-          <div class="cs-result-stat">
-            <span class="cs-result-num">~2 min</span>
-            <span class="cs-result-label">agent onboarding time</span>
-          </div>
-          <div class="cs-result-stat">
-            <span class="cs-result-num">0</span>
-            <span class="cs-result-label">lines of code</span>
-          </div>
-        </div>
+        <StatRow stats={[
+          { value: "$259.98", label: "total (incl. delivery + tip)" },
+          { value: "64", label: "items ordered" },
+          { value: "~2 min", label: "agent onboarding" },
+          { value: "0", label: "lines of code" },
+        ]} />
       </section>
 
       <section class="content-section">
         <h2>The actual shopping list</h2>
-        <div class="cs-artifact">
-          <div class="cs-artifact-header">lists/2026-03-29-walmart.md</div>
-          <div class="cs-artifact-body">
-            <div class="cs-artifact-col">
-              <h4>Protein</h4>
-              <ul>
-                <li>Chicken breast, boneless skinless — 5 lbs</li>
-                <li>Ground turkey 93/7 — 3 lbs</li>
-                <li>Cod fillets, frozen — 1 lb</li>
-                <li>Tilapia fillets, frozen — 1 lb</li>
-                <li>Eggs, large — 2 dozen</li>
-                <li>Liquid egg whites — 32 oz</li>
-                <li>Canned tuna — 6 cans</li>
-                <li>Canned chicken breast — 4 cans</li>
-              </ul>
-              <h4>Vegetables</h4>
-              <ul>
-                <li>Broccoli crowns — 3 lbs</li>
-                <li>Fresh spinach — 1 lb</li>
-                <li>Green beans — 1 lb</li>
-                <li>Asparagus — 2 bunches</li>
-              </ul>
-            </div>
-            <div class="cs-artifact-col">
-              <h4>Reserve restock</h4>
-              <ul>
-                <li>Frozen broccoli, spinach, green beans, stir-fry</li>
-                <li>Frozen chicken, turkey, cod</li>
-                <li>Canned tomatoes, broth, salsa</li>
-                <li>Soy sauce, hot sauce, mustard, ACV, olive oil</li>
-                <li>Full spice rack (8 items)</li>
-                <li>Rice, oats, coffee, electrolytes</li>
-                <li>Whey protein isolate</li>
-                <li>Dark chocolate, almonds, jerky</li>
-              </ul>
-            </div>
+        <Artifact file="lists/2026-03-29-walmart.md" columns={2}>
+          <div>
+            <h4>Protein</h4>
+            <ul>
+              <li>Chicken breast, boneless skinless — 5 lbs</li>
+              <li>Ground turkey 93/7 — 3 lbs</li>
+              <li>Cod fillets, frozen — 1 lb</li>
+              <li>Tilapia fillets, frozen — 1 lb</li>
+              <li>Eggs, large — 2 dozen</li>
+              <li>Liquid egg whites — 32 oz</li>
+              <li>Canned tuna — 6 cans</li>
+              <li>Canned chicken breast — 4 cans</li>
+            </ul>
+            <h4>Vegetables</h4>
+            <ul>
+              <li>Broccoli crowns — 3 lbs</li>
+              <li>Fresh spinach — 1 lb</li>
+              <li>Green beans — 1 lb</li>
+              <li>Asparagus — 2 bunches</li>
+            </ul>
           </div>
-        </div>
+          <div>
+            <h4>Reserve restock</h4>
+            <ul>
+              <li>Frozen broccoli, spinach, green beans, stir-fry</li>
+              <li>Frozen chicken, turkey, cod</li>
+              <li>Canned tomatoes, broth, salsa</li>
+              <li>Soy sauce, hot sauce, mustard, ACV, olive oil</li>
+              <li>Full spice rack (8 items)</li>
+              <li>Rice, oats, coffee, electrolytes</li>
+              <li>Whey protein isolate</li>
+              <li>Dark chocolate, almonds, jerky</li>
+            </ul>
+          </div>
+        </Artifact>
       </section>
 
       <section class="content-section">
         <h2>The agent's own assessment</h2>
         <p>After completing the order, the agent wrote observations into the repo's log. These are excerpts:</p>
-        <div class="cs-log">
-          <div class="cs-log-header">
-            <span class="cs-log-file">logs/2026-03.md</span>
-            <span class="cs-log-attr">Perplexity Computer — March 29, 2026</span>
-          </div>
-          <div class="cs-log-body">
-            <p>This was the smoothest grocery shopping experience I've had as an agent. I cloned the repo and understood the entire domain in under two minutes. CLAUDE.md told me the structure, the preferences told me the constraints, the contracts told me what valid output looks like. No API docs, no database schema, no authentication flow. Just read files, understand intent, act.</p>
-            <p>The contract schema pattern is underrated. shopping-list.schema.json didn't tell me <em>how</em> to build a list — it told me what a <em>valid</em> list looks like. That's a much better interface for an agent. Procedural instructions are brittle. Structural contracts are composable.</p>
-            <p>This is a data-first system that treats agents as interchangeable executors and files as the source of truth. It's the right architecture. I'd use this pattern for more than groceries.</p>
-          </div>
-        </div>
+        <LogExcerpt file="logs/2026-03.md" attribution="Perplexity Computer — March 29, 2026">
+          <p>This was the smoothest grocery shopping experience I've had as an agent. I cloned the repo and understood the entire domain in under two minutes. CLAUDE.md told me the structure, the preferences told me the constraints, the contracts told me what valid output looks like. No API docs, no database schema, no authentication flow. Just read files, understand intent, act.</p>
+          <p>The contract schema pattern is underrated. shopping-list.schema.json didn't tell me <em>how</em> to build a list — it told me what a <em>valid</em> list looks like. That's a much better interface for an agent. Procedural instructions are brittle. Structural contracts are composable.</p>
+          <p>This is a data-first system that treats agents as interchangeable executors and files as the source of truth. It's the right architecture. I'd use this pattern for more than groceries.</p>
+        </LogExcerpt>
       </section>
 
       <section class="content-section">
@@ -249,10 +230,7 @@ avoid_brands: []</code></pre>
       <section class="content-section">
         <h2>Try it yourself</h2>
         <p>We published an example repo you can fork. Edit the preference files to match how you eat and shop, point any AI agent at it, and tell it to order your groceries.</p>
-        <div class="cs-try">
-          <a href="https://github.com/eidos-agi/example-grocery-shopping" class="cs-try-btn">Fork the repo on GitHub</a>
-          <p class="cs-try-detail">3 contracts. 5 preference files. 2 pantry files. Zero code. Works with any AI agent.</p>
-        </div>
+        <CallToAction href="https://github.com/eidos-agi/example-grocery-shopping" label="Fork the repo on GitHub" detail="3 contracts. 5 preference files. 2 pantry files. Zero code. Works with any AI agent." />
       </section>
 
       <section class="content-section">
@@ -280,26 +258,9 @@ avoid_brands: []</code></pre>
   .cs-pref-header { font-family: var(--font-mono); font-size: var(--text-xs); padding: var(--space-2) var(--space-4); background: color-mix(in srgb, var(--color-primary) 10%, transparent); color: var(--color-primary); font-weight: 500; }
   .cs-pref pre { margin: 0; padding: var(--space-4); }
   .cs-pref code { font-size: 11px; color: var(--color-muted); line-height: 1.6; }
+  /* Page-specific — components handle artifact, log, stats, CTA, video */
   .cs-guardrails li { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-2) 0; line-height: var(--leading-normal); }
-  .cs-result { display: flex; gap: var(--space-8); margin: var(--space-8) 0; padding: var(--space-6); background: var(--color-surface); border-radius: var(--radius-md); }
-  .cs-result-stat { display: flex; flex-direction: column; }
-  .cs-result-num { font-family: var(--font-heading); font-size: var(--text-xl); font-weight: var(--weight-bold); color: var(--color-text); line-height: 1; }
-  .cs-result-label { font-family: var(--font-mono); font-size: 10px; color: var(--color-muted); margin-top: var(--space-1); }
-  .cs-artifact { background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden; margin: var(--space-6) 0; }
-  .cs-artifact-header { font-family: var(--font-mono); font-size: var(--text-xs); padding: var(--space-2) var(--space-4); background: color-mix(in srgb, var(--color-command) 10%, transparent); color: var(--color-command); font-weight: 500; }
-  .cs-artifact-body { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); padding: var(--space-6); }
-  .cs-artifact-body h4 { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-primary); margin-bottom: var(--space-3); font-weight: var(--weight-medium); text-transform: uppercase; letter-spacing: 0.06em; }
-  .cs-artifact-body ul { list-style: none; padding: 0; margin: 0 0 var(--space-5) 0; }
-  .cs-artifact-body li { font-size: var(--text-xs); color: var(--color-muted); padding: var(--space-2) 0; line-height: var(--leading-normal); border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 6%, transparent); }
-  .cs-artifact-body li:last-child { border-bottom: none; }
-  .cs-log { background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden; margin: var(--space-6) 0; }
-  .cs-log-header { display: flex; justify-content: space-between; align-items: center; padding: var(--space-3) var(--space-5); border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 10%, transparent); }
-  .cs-log-file { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-command); font-weight: 500; }
-  .cs-log-attr { font-family: var(--font-mono); font-size: 10px; color: var(--color-muted); }
-  .cs-log-body { padding: var(--space-5) var(--space-6); }
-  .cs-log-body p { font-size: var(--text-sm); color: var(--color-muted); line-height: var(--leading-relaxed); margin-bottom: var(--space-4); }
-  .cs-log-body p:last-child { margin-bottom: 0; }
-  .cs-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin: var(--space-6) 0; }
+  .cs-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin: var(--space-8) 0; }
   .cs-comp-col { background: var(--color-surface); border-radius: var(--radius-md); padding: var(--space-6); text-align: center; }
   .cs-comp-header { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.1em; padding: var(--space-1) var(--space-3); border-radius: 3px; display: inline-block; margin-bottom: var(--space-4); }
   .cs-comp-contract { color: var(--color-command); background: color-mix(in srgb, var(--color-command) 12%, transparent); }
@@ -311,14 +272,8 @@ avoid_brands: []</code></pre>
   .cs-comp-facts { display: flex; flex-direction: column; gap: var(--space-1); border-top: var(--border-width) solid color-mix(in srgb, var(--color-muted) 10%, transparent); padding-top: var(--space-4); }
   .cs-comp-facts span { font-family: var(--font-mono); font-size: 10px; color: var(--color-primary); text-align: left; }
   .cs-closing { font-size: var(--text-md); line-height: var(--leading-relaxed); }
-  .cs-try { text-align: center; margin: var(--space-6) 0; padding: var(--space-8); background: var(--color-surface); border-radius: var(--radius-md); }
-  .cs-try-btn { display: inline-block; font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-bg); background: var(--color-text); padding: var(--space-3) var(--space-6); border-radius: var(--radius-md); text-decoration: none; font-weight: var(--weight-medium); transition: opacity 0.15s; }
-  .cs-try-btn:hover { opacity: 0.8; }
-  .cs-try-detail { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); margin-top: var(--space-3); }
   @media (max-width: 768px) {
     .cs-prefs { grid-template-columns: 1fr; }
-    .cs-result { flex-wrap: wrap; gap: var(--space-4); }
-    .cs-artifact-body { grid-template-columns: 1fr; }
     .cs-comparison { grid-template-columns: 1fr; }
   }
 </style>

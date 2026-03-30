@@ -1,0 +1,28 @@
+---
+interface Props {
+  file: string;
+  columns?: number;
+}
+const { file, columns = 1 } = Astro.props;
+const gridCols = columns > 1 ? `repeat(${columns}, 1fr)` : '1fr';
+---
+
+<div class="artifact">
+  <div class="artifact-header">{file}</div>
+  <div class="artifact-body" style={`grid-template-columns: ${gridCols}`}>
+    <slot />
+  </div>
+</div>
+
+<style>
+  .artifact { background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden; margin: var(--space-8) 0; border: var(--border-width) solid color-mix(in srgb, var(--color-muted) 8%, transparent); }
+  .artifact-header { font-family: var(--font-mono); font-size: var(--text-xs); padding: var(--space-3) var(--space-5); background: color-mix(in srgb, var(--color-command) 8%, transparent); color: var(--color-command); font-weight: 500; letter-spacing: 0.02em; }
+  .artifact-body { display: grid; gap: var(--space-6); padding: var(--space-6); }
+  .artifact-body :global(h4) { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-primary); margin-bottom: var(--space-3); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+  .artifact-body :global(ul) { list-style: none; padding: 0; margin: 0 0 var(--space-5) 0; }
+  .artifact-body :global(li) { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-2) 0; line-height: var(--leading-normal); border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 6%, transparent); }
+  .artifact-body :global(li:last-child) { border-bottom: none; }
+  .artifact-body :global(pre) { margin: 0; }
+  .artifact-body :global(code) { font-size: var(--text-xs); color: var(--color-muted); line-height: 1.7; }
+  @media (max-width: 768px) { .artifact-body { grid-template-columns: 1fr !important; } }
+</style>
