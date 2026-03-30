@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
 ---
 
 <Base
@@ -7,10 +9,7 @@ import Base from '../../layouts/Base.astro';
   description="A GitHub repo with YAML preferences and JSON Schema contracts. An AI reads them and orders groceries weekly. No code."
 >
     <article class="prose-page">
-      <header class="page-hero">
-        <h1>Groceries ordered<br />by contracts alone</h1>
-        <p class="subtitle">No code. No skills. No step-by-step instructions. Just a git repo.</p>
-      </header>
+      <PageHero title="Groceries ordered<br />by contracts alone" subtitle="No code. No skills. No step-by-step instructions. Just a git repo." />
 
       <section class="content-section">
         <div class="cs-video">
@@ -175,14 +174,11 @@ avoid_brands: []</code></pre>
         <p><a href="/contract-driven-development">Read more about contracts vs skills</a></p>
       </section>
 
-      <div class="related">
-        <span class="related-label">Related</span>
-        <div class="related-links">
-          <a href="/contract-driven-development">Contracts, Not Skills</a>
-          <a href="/forges">Forges</a>
-          <a href="/trilogy">The Trilogy</a>
-        </div>
-      </div>
+      <RelatedLinks links={[
+        { href: "/contract-driven-development", label: "Contracts, Not Skills" },
+        { href: "/forges", label: "Forges" },
+        { href: "/trilogy", label: "The Trilogy" },
+      ]} />
     </article>
 </Base>
 

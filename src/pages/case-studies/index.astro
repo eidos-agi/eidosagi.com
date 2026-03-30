@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
 ---
 
 <Base
@@ -7,10 +9,7 @@ import Base from '../../layouts/Base.astro';
   description="Real systems running on contracts, not skills. No demos. No mockups. Actual production use."
 >
     <article class="prose-page">
-      <header class="page-hero">
-        <h1>Case Studies</h1>
-        <p class="subtitle">Real systems. Real contracts. No demos.</p>
-      </header>
+      <PageHero title="Case Studies" subtitle="Real systems. Real contracts. No demos." />
 
       <section class="content-section">
         <p>These aren't hypothetical examples. They're systems running in production — AI agents fulfilling contracts from git repos, with no skills files, no step-by-step instructions, and often no software at all.</p>
@@ -98,14 +97,11 @@ import Base from '../../layouts/Base.astro';
         </div>
       </section>
 
-      <div class="related">
-        <span class="related-label">Related</span>
-        <div class="related-links">
-          <a href="/contract-driven-development">Contracts, Not Skills</a>
-          <a href="/forges">Forges</a>
-          <a href="/trilogy">The Trilogy</a>
-        </div>
-      </div>
+      <RelatedLinks links={[
+        { href: "/contract-driven-development", label: "Contracts, Not Skills" },
+        { href: "/forges", label: "Forges" },
+        { href: "/trilogy", label: "The Trilogy" },
+      ]} />
     </article>
 </Base>
 

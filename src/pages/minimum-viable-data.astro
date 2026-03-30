@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
 import CompareTable from '../components/CompareTable.astro';
 import EvidenceCard from '../components/EvidenceCard.astro';
 import VideoEmbed from '../components/VideoEmbed.astro';
@@ -10,10 +12,7 @@ import VideoEmbed from '../components/VideoEmbed.astro';
   description="Products are code. Code is a liability. The smallest structured dataset that produces results is worth more than the app that processes it."
 >
     <article class="prose-page">
-      <header class="page-hero">
-        <h1>Minimum Viable Data</h1>
-        <p class="subtitle">Products are code. Code is a liability.</p>
-      </header>
+      <PageHero title="Minimum Viable Data" subtitle="Products are code. Code is a liability." />
 
       <section class="content-section">
         <p>Minimum Viable Product was the right idea when delivery was expensive. When shipping software meant writing code, managing servers, hiring engineers, and burning months before you knew if anyone wanted what you built — the smart move was to build the smallest possible thing and test it. MVP reduced the cost of being wrong.</p>
@@ -106,15 +105,12 @@ import VideoEmbed from '../components/VideoEmbed.astro';
         <p class="mvd-closing">Minimum Viable Product asks how little code you can write. Minimum Viable Data asks how little data you need to define the results you want. One is a liability you maintain. The other is an asset that compounds. Research the data. Let AI deliver the results.</p>
       </section>
 
-      <div class="related">
-        <span class="related-label">Related</span>
-        <div class="related-links">
-          <a href="/contract-driven-development">Contracts, Not Skills</a>
-          <a href="/case-studies/grocery">Grocery Case Study</a>
-          <a href="/case-studies">Case Studies</a>
-          <a href="/forges">Forges</a>
-        </div>
-      </div>
+      <RelatedLinks links={[
+        { href: "/contract-driven-development", label: "Contracts, Not Skills" },
+        { href: "/case-studies/grocery", label: "Grocery Case Study" },
+        { href: "/case-studies", label: "Case Studies" },
+        { href: "/forges", label: "Forges" },
+      ]} />
     </article>
 </Base>
 

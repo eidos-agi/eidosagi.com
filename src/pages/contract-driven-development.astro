@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
 ---
 
 <Base
@@ -7,10 +9,7 @@ import Base from '../layouts/Base.astro';
   description="Contracts define what we want. Skills define how. Only one survives as AI improves."
 >
     <article class="prose-page">
-      <header class="page-hero">
-        <h1>Contracts, Not Skills</h1>
-        <p class="subtitle">The right primitive for AI systems.</p>
-      </header>
+      <PageHero title="Contracts, Not Skills" subtitle="The right primitive for AI systems." />
 
       <section class="content-section">
         <p>The AI ecosystem is building skills — step-by-step instructions that tell models how to accomplish goals. Skills work today. They compensate for what the model can't figure out on its own.</p>
@@ -313,15 +312,12 @@ Step 8: Output summary...
         <p class="cdd-closing">The <code>contracts/</code> directory is permanent infrastructure. The <code>skills/</code> directory is a construction site that eventually gets torn down. Build contracts. Let skills decay.</p>
       </section>
 
-      <div class="related">
-        <span class="related-label">Related</span>
-        <div class="related-links">
-          <a href="/case-studies">Case Studies</a>
-          <a href="/trilogy">The Trilogy</a>
-          <a href="/forges">Forges</a>
-          <a href="/eidos">Eidos</a>
-        </div>
-      </div>
+      <RelatedLinks links={[
+        { href: "/case-studies", label: "Case Studies" },
+        { href: "/trilogy", label: "The Trilogy" },
+        { href: "/forges", label: "Forges" },
+        { href: "/eidos", label: "Eidos" },
+      ]} />
     </article>
 </Base>
 
