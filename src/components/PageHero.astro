@@ -1,0 +1,16 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  status?: 'shipped' | 'dev' | 'thesis';
+}
+const { title, subtitle, status } = Astro.props;
+const statusLabel = status === 'shipped' ? 'Shipped' : status === 'dev' ? 'In Development' : status === 'thesis' ? 'Thesis' : null;
+const statusClass = status === 'shipped' ? 'status-shipped' : status === 'dev' ? 'status-dev' : status === 'thesis' ? 'status-thesis' : '';
+---
+
+<header class="page-hero">
+  <h1 set:html={title} />
+  {subtitle && <p class="subtitle">{subtitle}</p>}
+  {statusLabel && <span class={`status-badge ${statusClass}`}>{statusLabel}</span>}
+</header>
