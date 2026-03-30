@@ -1,77 +1,141 @@
-# /copy-audit — Voice & Copy Consistency Check
+# /copy-audit — Editorial Audit
 
 ## When to Use
-After writing or modifying any text content on the site. Before deploy. The copy IS the product for a landing page.
+After writing or modifying text on any page. Before deploy. The copy IS the product for a philosophy site.
 
 ## Voice Definition
-From CLAUDE.md: **Confident and unhurried.** We ship real software. We don't need to prove it with flashy animations. The repos speak for themselves.
 
-### What the Voice Sounds Like
-- Declarative, not persuasive. State facts, don't sell.
-- Short sentences. No filler. No "leverage synergies."
-- Technical fluency — we can say "MCP server" without explaining it.
-- Invitational, not exclusive — "You don't need to quit your job."
-- Specific, not vague — "9 packages on PyPI" not "a growing collection of tools."
+### Target Register
+Confident technical writing. Think well-edited blog post by someone who builds things — not a keynote, not a press release, not a LinkedIn post. The writer has opinions and evidence, and doesn't need rhetorical tricks to land them.
 
-### What the Voice Does NOT Sound Like
-- Marketing-speak: "Revolutionize your workflow with AI-powered solutions"
-- Startup hype: "We're building the future of X"
-- Corporate: "Our mission is to deliver world-class enterprise solutions"
-- Apologetic: "We're just a small team trying to..."
-- Over-explaining: paragraphs where a sentence would do
+### Voice Rules
+- Write real sentences. Combine related ideas into flowing prose.
+- Be specific — numbers, file names, tool names beat adjectives.
+- Be declarative. State what's true, don't sell.
+- Technical fluency assumed — say "MCP server" without explaining it.
+- Earn every sentence. If removing it changes nothing, remove it.
 
-## Canonical Copy (from CLAUDE.md)
+### Anti-Patterns (kill on sight)
+- **Staccato fragments**: "No software. No database. No code." → Join into a real sentence.
+- **Parallel triplets**: "Research earns. Visionlog records. Ike executes." → Write prose.
+- **"That's [noun]."** as dramatic punctuation.
+- **"Not X — Y"** used for false profundity: "Not a chatbot. A participant."
+- **Rhetorical laddering**: three short sentences building to a punchline.
+- **Hollow intensifiers**: "by a lot", "the real difference isn't X — it's Y", "that bet has never paid off."
+- **Em dash as dramatic pause** more than once per page.
+- **Marketing sentence starters**: "Imagine...", "What if...", "Here's the thing."
 
-### Tagline
-**Software for agents. Governance for reality.**
+### Rewrite Protocol
+When an anti-pattern is found, rewrite it as one clear sentence that carries the same information. Don't add words — restructure.
 
-### Mission
-We're a stealth group of engineers, AI researchers, and cybersecurity experts. Some of us have day jobs. We work under this banner because it gives us the freedom to build what industry won't.
-
-Our toolkit empowers you to leverage existing AI to go further than it otherwise could — governance, decisions, execution, and shipping standards that make agents reliable enough to trust with real work. Not new models. Not wrappers. The infrastructure that turns today's AI into tomorrow's workforce.
-
-### Urgency Line
-Agents are getting deployed into real systems right now — if you don't give them governed tools, explicit decisions, and agent-grade interfaces, you're shipping a probabilistic coworker with production access.
-
-### Join Us
-We're looking for engineers, researchers, and security people who want to build the infrastructure layer for agentic software. You don't need to quit your job. You don't need permission. If you see the gap between where AI is and where it could be with proper tooling — and you want to close it — reach out.
+**Before**: "No software. No database. No code. Just YAML preferences and three JSON Schema contracts."
+**After**: "A GitHub repo containing nothing but YAML preferences and three JSON Schema contracts."
 
 ## Execution Steps
 
-### 1. Extract All Text Content
-Read every `.astro` page and extract all visible text — headings, paragraphs, button labels, alt text, meta descriptions.
+### Pass 1: Redundancy Map
+Read every `.astro` page in `src/pages/`. Build a table:
 
-### 2. Check Against Canonical Copy
-For sections that have canonical copy defined above, verify exact match or intentional deviation.
-
-### 3. Voice Check
-For all text, flag:
-- **Jargon soup** — buzzwords stacked without meaning
-- **Passive voice** — "solutions are delivered" instead of "we ship X"
-- **Vague claims** — "powerful," "innovative," "cutting-edge" (say what it DOES)
-- **Filler phrases** — "In order to," "It's important to note that," "At the end of the day"
-- **Over-length** — any paragraph > 4 sentences (on a landing page, 2-3 is ideal)
-- **Missing specifics** — if we can replace a claim with a number, we should
-
-### 4. Package Descriptions Check
-Verify each package listed has:
-- A one-line description that says what it DOES (not what it IS)
-- A `pip install` command
-- A link to the repo
-
-### 5. Report
 ```
-  COPY AUDIT    <N> sections checked | <N> issues
+| Concept / Example        | Pages where it appears |
+|--------------------------|------------------------|
+| grocery ordering example | cdd, grocery, mvd, case-studies/index |
+| AlphaZero analogy        | cdd                    |
+| ...                      |                        |
+```
 
-  ISSUES:
-  - Hero subtitle: passive voice — "solutions are delivered" → "we ship X"
-  - About section: 6 sentences — trim to 3
-  - Missing: meta description for homepage
+Flag any concept that appears on 3+ pages. Propose which page OWNS it and where others should link instead of repeating.
+
+### Pass 2: "So What?" Test
+For every `<section class="content-section">` on every page, read it and ask: "so what?" If the section doesn't answer that — if removing it wouldn't change the reader's understanding — flag it for cut or rewrite.
+
+Output:
+```
+PAGE: /contract-driven-development
+  Section "The bitter lesson" — PASSES (core argument, earns the analogy)
+  Section "The transition" — WEAK (restates what prior sections already established)
+```
+
+### Pass 3: Cut 30%
+For each page, count total words. Target: remove 30% without losing meaning. Identify:
+- Paragraphs that restate the previous paragraph in different words
+- Throat-clearing openers ("The AI ecosystem is building skills — ...")
+- Sections that exist to transition rather than inform
+- Adjectives and adverbs that add no information
+
+Output word count before/after per page.
+
+### Pass 4: Progressive Disclosure
+For each page, check: does the most compelling content come first?
+- The hook (why should I care?) must be above the fold.
+- Evidence and examples before theory and philosophy.
+- If the page has a video or demo, it should be near the top, not buried.
+
+Flag pages where the interesting part requires 3+ scrolls to reach.
+
+### Pass 5: One Page, One Job
+For each page, state its single job in ≤10 words. If you can't, the page is doing too many things.
+
+```
+/contract-driven-development — Argue that contracts beat skills
+/forges — Catalog of available forges
+/trilogy — Explain the three-tool governance stack
+/case-studies/grocery — Prove contracts work with a real order
+/minimum-viable-data — Argue that data beats code
+```
+
+Flag pages whose job overlaps with another page. Propose consolidation or clearer differentiation.
+
+### Pass 6: Voice Consistency
+Read all pages back-to-back in one sitting. Flag where tone shifts — e.g., one page reads like documentation, another like a manifesto, another like marketing copy. All should match the voice definition above.
+
+### Pass 7: Anti-Pattern Grep
+Run pattern matching for known AI tells across all pages:
+- `. No [A-Z]` (staccato negation chains)
+- Sentences under 5 words that aren't headings
+- Three consecutive sentences starting with the same word
+- "That's" followed by a period within 15 characters
+- Paragraphs over 5 sentences (too long for web)
+
+## Report Format
+
+```
+EDITORIAL AUDIT — eidosagi.com
+<date>
+
+REDUNDANCY MAP
+  <concept>: owned by <page>, duplicated on <pages> — ACTION: <link/cut/rewrite>
+
+"SO WHAT?" FAILURES
+  <page> / <section> — <reason>
+
+CUT TARGETS (30% goal)
+  <page>: <before> words → <target> words
+    - <specific cut>
+    - <specific cut>
+
+PROGRESSIVE DISCLOSURE
+  <page>: <issue or PASS>
+
+ONE PAGE ONE JOB
+  <page>: <job> — <overlap concern or CLEAN>
+
+VOICE SHIFTS
+  <page>: <description of shift>
+
+ANTI-PATTERNS
+  <file>:<line> — <pattern found> → <suggested rewrite>
+
+SUMMARY: <N> issues across <N> pages. Top 3 fixes by impact:
+  1. ...
+  2. ...
+  3. ...
 ```
 
 ## Rules
-- Canonical copy from CLAUDE.md is the source of truth for core sections.
-- The tagline is exact. Do not rephrase it.
-- Numbers beat adjectives. "9 PyPI packages" > "many tools."
-- Every package gets a `pip install` command visible on the page.
-- Meta description must exist on every page and match the voice.
+- Be honest. Flag real problems, not nitpicks.
+- Every flag must include a specific fix, not just "this is bad."
+- Redundancy is the #1 problem on philosophy sites. Prioritize it.
+- The grocery example is powerful but loses impact when it appears on every page.
+- Don't add words to fix copy. Restructure or cut.
+- Run this before every deploy that touches text content.

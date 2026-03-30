@@ -24,6 +24,18 @@ Follow the book at `~/repos-eidos-agi/books/railway-websites/` — specifically:
 
 Emotional register: **confident and unhurried**. We ship real software. We don't need to prove it with flashy animations. The repos speak for themselves.
 
+### Editorial Rules
+Write real sentences, not keynote fragments. AI-generated copy has recognizable tells that undermine credibility on a site about AI architecture:
+
+- **No staccato negation chains**: "No software. No database. No code." → join into one sentence
+- **No parallel triplets**: "Research earns. Visionlog records. Ike executes." → write prose
+- **No rhetorical laddering**: three short sentences building to a punchline
+- **No "Not X — Y" profundity**: "Not a chatbot. A participant." → say what it IS
+- **One em dash per page max** as a dramatic pause
+- **Earn every sentence** — if removing it changes nothing, remove it
+
+The full editorial process is in `.claude/skills/copy-audit/skill.md`. Run `/copy-audit` before any deploy that touches text.
+
 ## Tech Stack
 
 - **Astro** — content-first, partial hydration, native performance
@@ -52,7 +64,7 @@ Emotional register: **confident and unhurried**. We ship real software. We don't
 ### Mission paragraph
 We're a stealth group of engineers, AI researchers, and cybersecurity experts. Some of us have day jobs. We work under this banner because it gives us the freedom to build what industry won't.
 
-Our toolkit empowers you to leverage existing AI to go further than it otherwise could — governance, decisions, execution, and shipping standards that make agents reliable enough to trust with real work. Not new models. Not wrappers. The infrastructure that turns today's AI into tomorrow's workforce.
+Our toolkit helps you get more out of existing AI — governance, decisions, execution, and shipping standards that make agents reliable enough to trust with real work. We're not building new models or wrappers; we're building the infrastructure that turns today's AI into tomorrow's workforce.
 
 ### Join Us copy
 We're looking for engineers, researchers, and security people who want to build the infrastructure layer for agentic software. You don't need to quit your job. You don't need permission. If you see the gap between where AI is and where it could be with proper tooling — and you want to close it — reach out.

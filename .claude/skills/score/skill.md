@@ -27,7 +27,7 @@ Does the voice earn trust?
 - 5: Clear but bland. Says what it does but not memorably.
 - 10: Every sentence earns its place. Numbers beat adjectives. Specific, declarative, unhurried.
 
-**Check**: Passive voice scan. Jargon detection. Paragraph length (≤3 sentences on landing). Specificity (numbers present). Voice match to "confident and unhurried." No sales pitch.
+**Check**: Run /copy-audit. AI-tell patterns (staccato fragments, parallel triplets, rhetorical laddering). Passive voice. Jargon. Paragraph length (≤4 sentences). Specificity (numbers present). Voice: confident technical writing, not keynote. Redundancy across pages (same example on 3+ pages = problem).
 
 ### 4. DX — Developer Experience (0–10)
 Can a developer go from landing to installing in under 30 seconds?
