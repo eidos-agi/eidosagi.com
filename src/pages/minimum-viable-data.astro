@@ -13,8 +13,10 @@ import Base from '../layouts/Base.astro';
       </header>
 
       <section class="content-section">
-        <p>A product is code that produces results. The code has dependencies, versions, deployment infrastructure, security patches, breaking changes. The results are what people actually want. The code is what you maintain in order to deliver them.</p>
-        <p>Minimum Viable Data skips the code. You define the results you want as structured data — contracts, preferences, state — and let an AI agent deliver them. The agent is replaceable. The data is not.</p>
+        <p>Minimum Viable Product was the right idea when delivery was expensive. When shipping software meant writing code, managing servers, hiring engineers, and burning months before you knew if anyone wanted what you built — the smart move was to build the smallest possible thing and test it. MVP reduced the cost of being wrong.</p>
+        <p>That constraint is dissolving. AI agents can build software in hours. Code generation, deployment, testing — the hard parts of delivery are becoming cheap. What remains hard is knowing what to deliver. What does the customer actually want? What does "done" look like? What are the constraints?</p>
+        <p>That's data. Structured data that describes the desired result, the person it's for, and the current situation. Given that data, AI can produce the result — without a product in between.</p>
+        <p>Data and orchestrated intelligence are now the substrates. The end product — what the customer actually wants — is produced from them directly. The code layer that used to sit in the middle is becoming optional.</p>
       </section>
 
       <section class="content-section">
@@ -108,9 +110,10 @@ import Base from '../layouts/Base.astro';
       </section>
 
       <section class="content-section">
-        <h2>When you still need code</h2>
-        <p>Some things need code today. A Mac app that captures audio from a microphone. A daemon that runs in the background. These exist because current AI agents can't directly access hardware or run as persistent processes. As AI capabilities expand, the code layer shrinks. The data layer doesn't.</p>
-        <p>The recording bucket schema that defines a voice note will outlive the Mac app that writes it. The grocery preferences will outlive every grocery app ever built. The data is the road. The code is the car.</p>
+        <h2>What MVD does not replace</h2>
+        <p>MVD applies to tasks where the output is a defined result for a specific person or team. Ordering groceries. Reviewing code. Planning a deployment. Filing a report. These are tasks with clear contracts — you can describe what "done" looks like.</p>
+        <p>It does not replace infrastructure software. The systems that Walmart uses to process millions of orders per second, the databases that store them, the networks that route them — these are engineering problems where code is the product. MVD is for the layer above: the part where someone decides what to order and how to describe what they want.</p>
+        <p>A voice recording app still needs code to access the microphone. A background daemon still needs code to run as a process. But the schema that defines what a voice recording looks like will outlive the app that writes it. The grocery preferences will outlive every grocery app. The data is the road. The code is the car.</p>
       </section>
 
       <section class="content-section">
