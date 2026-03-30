@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
 import { getPyPIInfo } from '../lib/stats';
 
 const packages = [
@@ -25,10 +27,7 @@ releases.sort((a, b) => {
   description="Latest releases across all Eidos AGI packages. Versions, dates, and what changed."
 >
     <article class="prose-page">
-      <header class="page-hero">
-        <h1>Changelog</h1>
-        <p class="subtitle">Latest releases.</p>
-      </header>
+      <PageHero title="Changelog" subtitle="Latest releases." />
 
       <section class="content-section">
         <table class="cl-table">
@@ -52,14 +51,11 @@ releases.sort((a, b) => {
         <p class="cl-note">Versions fetched from PyPI at build time. For detailed changelogs, see each package's GitHub repo.</p>
       </section>
 
-      <div class="related">
-        <span class="related-label">Related</span>
-        <div class="related-links">
-          <a href="/tools">Tools</a>
-          <a href="https://github.com/eidos-agi">GitHub</a>
-          <a href="https://pypi.org/user/eidos-agi/">PyPI</a>
-        </div>
-      </div>
+      <RelatedLinks links={[
+        { href: "/tools", label: "Tools" },
+        { href: "https://github.com/eidos-agi", label: "GitHub" },
+        { href: "https://pypi.org/user/eidos-agi/", label: "PyPI" },
+      ]} />
     </article>
 </Base>
 

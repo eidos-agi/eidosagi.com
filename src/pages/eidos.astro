@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
 ---
 
 <Base
@@ -7,11 +9,7 @@ import Base from '../layouts/Base.astro';
   description="A persistent autonomous agent with its own identity, memory, and judgment. Not a chatbot. Not a tool. A participant."
 >
     <article class="prose-page">
-      <header class="page-hero">
-        <h1>Eidos</h1>
-        <p class="subtitle">A user, not a feature.</p>
-        <span class="status-badge status-dev">In Development</span>
-      </header>
+      <PageHero title="Eidos" subtitle="A user, not a feature." status="dev" />
 
       <section class="content-section">
         <h2>What it is</h2>
@@ -123,15 +121,12 @@ import Base from '../layouts/Base.astro';
         <h2>Status</h2>
         <p>Eidos v5 is the current engine. The core loop, Pod deliberation, and PEFM memory are operational. The governance trilogy, agent identity (AID), and EidosOmni memory system are the infrastructure layers being built around it.</p>
       </section>
-      <div class="related">
-        <span class="related-label">Related</span>
-        <div class="related-links">
-          <a href="/trilogy">The Trilogy</a>
-          <a href="/agent-identity">Agent Identity</a>
-          <a href="/memory">Memory</a>
-          <a href="/contract-driven-development">Contracts</a>
-        </div>
-      </div>
+      <RelatedLinks links={[
+        { href: "/trilogy", label: "The Trilogy" },
+        { href: "/agent-identity", label: "Agent Identity" },
+        { href: "/memory", label: "Memory" },
+        { href: "/contract-driven-development", label: "Contracts" },
+      ]} />
     </article>
 </Base>
 

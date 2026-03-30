@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
 ---
 
 <Base
@@ -7,10 +9,7 @@ import Base from '../layouts/Base.astro';
   description="Who built this and why. The people behind the governance infrastructure for AI agents."
 >
     <article class="prose-page">
-      <header class="page-hero">
-        <h1>About</h1>
-        <p class="subtitle">Who built this.</p>
-      </header>
+      <PageHero title="About" subtitle="Who built this." />
 
       <section class="content-section">
         <div class="about-people">
@@ -33,15 +32,12 @@ import Base from '../layouts/Base.astro';
         <p>The trilogy came from running Claude Code sessions that forgot everything between restarts. The forges came from packaging the same setup instructions for the tenth time. The identity protocol came from watching agents operate under borrowed credentials with no audit trail. We build what we need, open-source what we build, and use everything we ship.</p>
       </section>
 
-      <div class="related">
-        <span class="related-label">Related</span>
-        <div class="related-links">
-          <a href="/eidos">Eidos</a>
-          <a href="/trilogy">The Trilogy</a>
-          <a href="/tools">Tools</a>
-          <a href="https://github.com/eidos-agi">GitHub</a>
-        </div>
-      </div>
+      <RelatedLinks links={[
+        { href: "/eidos", label: "Eidos" },
+        { href: "/trilogy", label: "The Trilogy" },
+        { href: "/tools", label: "Tools" },
+        { href: "https://github.com/eidos-agi", label: "GitHub" },
+      ]} />
     </article>
 </Base>
 

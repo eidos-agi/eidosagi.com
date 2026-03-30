@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
 ---
 
 <Base
@@ -7,11 +9,7 @@ import Base from '../layouts/Base.astro';
   description="Three tools enforce one contract: governance before action, evidence before decisions, tracking after execution."
 >
     <article class="prose-page">
-      <header class="page-hero">
-        <h1>The Trilogy</h1>
-        <p class="subtitle">Governance. Decisions. Execution.</p>
-        <span class="status-badge status-shipped">Shipped</span>
-      </header>
+      <PageHero title="The Trilogy" subtitle="Governance. Decisions. Execution." status="shipped" />
 
       <!-- Pipeline diagram -->
       <div class="tri-page-diagram">
@@ -70,16 +68,13 @@ import Base from '../layouts/Base.astro';
           <a href="/tools/ike">ike.md docs</a>
         </div>
       </section>
-      <div class="related">
-        <span class="related-label">Related</span>
-        <div class="related-links">
-          <a href="/tools/visionlog">visionlog docs</a>
-          <a href="/tools/research">research.md docs</a>
-          <a href="/tools/ike">ike.md docs</a>
-          <a href="/contract-driven-development">Contracts</a>
-          <a href="/eidos">Eidos</a>
-        </div>
-      </div>
+      <RelatedLinks links={[
+        { href: "/tools/visionlog", label: "visionlog docs" },
+        { href: "/tools/research", label: "research.md docs" },
+        { href: "/tools/ike", label: "ike.md docs" },
+        { href: "/contract-driven-development", label: "Contracts" },
+        { href: "/eidos", label: "Eidos" },
+      ]} />
     </article>
 </Base>
 

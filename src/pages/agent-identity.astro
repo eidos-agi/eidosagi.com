@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
 ---
 
 <Base
@@ -7,11 +9,7 @@ import Base from '../layouts/Base.astro';
   description="Agents need their own identity — not a borrowed login, not a shared API key. Real accounts, real credentials, real audit trails."
 >
     <article class="prose-page">
-      <header class="page-hero">
-        <h1>Agent Identity</h1>
-        <p class="subtitle">The security layer the governance stack depends on.</p>
-        <span class="status-badge status-dev">In Development</span>
-      </header>
+      <PageHero title="Agent Identity" subtitle="The security layer the governance stack depends on." status="dev" />
 
       <section class="content-section">
         <h2>The problem</h2>
@@ -97,15 +95,12 @@ import Base from '../layouts/Base.astro';
         <p>Hancock is the authorization layer that implements it: scoped capabilities, step-up authentication when an agent exceeds its boundaries, and instant revocation without touching the human's credentials.</p>
         <p>AID is designed and documented. Hancock is in early implementation. The governance trilogy is shipped today. Identity is the next layer.</p>
       </section>
-      <div class="related">
-        <span class="related-label">Related</span>
-        <div class="related-links">
-          <a href="/eidos">Eidos</a>
-          <a href="/trilogy">The Trilogy</a>
-          <a href="/contract-driven-development">Contracts</a>
-          <a href="/memory">Memory</a>
-        </div>
-      </div>
+      <RelatedLinks links={[
+        { href: "/eidos", label: "Eidos" },
+        { href: "/trilogy", label: "The Trilogy" },
+        { href: "/contract-driven-development", label: "Contracts" },
+        { href: "/memory", label: "Memory" },
+      ]} />
     </article>
 </Base>
 

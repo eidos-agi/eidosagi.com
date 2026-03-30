@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
 ---
 
 <Base
@@ -7,11 +9,7 @@ import Base from '../layouts/Base.astro';
   description="Agents forget everything between sessions. EidosOmni gives them memory — messages, files, photos, emails, all searchable, all vectorized."
 >
     <article class="prose-page">
-      <header class="page-hero">
-        <h1>EidosOmni</h1>
-        <p class="subtitle">Memory for agents.</p>
-        <span class="status-badge status-dev">In Development</span>
-      </header>
+      <PageHero title="EidosOmni" subtitle="Memory for agents." status="dev" />
 
       <section class="content-section">
         <h2>The problem</h2>
@@ -80,15 +78,12 @@ import Base from '../layouts/Base.astro';
         <p>EidosOmni is in active development. Message and file adapters are operational. Email and photo adapters are being built. The search layer uses Reciprocal Rank Fusion across multiple retrieval methods for accuracy.</p>
         <p>When it ships, it will be the memory layer that the governance trilogy and agent identity stack depend on — the thing that lets an agent say "I remember what we decided last month" instead of "I have no context."</p>
       </section>
-      <div class="related">
-        <span class="related-label">Related</span>
-        <div class="related-links">
-          <a href="/eidos">Eidos</a>
-          <a href="/agent-identity">Identity</a>
-          <a href="/trilogy">The Trilogy</a>
-          <a href="/tools">Tools</a>
-        </div>
-      </div>
+      <RelatedLinks links={[
+        { href: "/eidos", label: "Eidos" },
+        { href: "/agent-identity", label: "Identity" },
+        { href: "/trilogy", label: "The Trilogy" },
+        { href: "/tools", label: "Tools" },
+      ]} />
     </article>
 </Base>
 

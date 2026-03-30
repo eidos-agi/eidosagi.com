@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
 ---
 
 <Base
@@ -7,11 +9,7 @@ import Base from '../layouts/Base.astro';
   description="Reusable AI agent knowledge packaged as skills and templates. No software, no CLI — pure knowledge, portable via clone."
 >
     <article class="prose-page">
-      <header class="page-hero">
-        <h1>Forges</h1>
-        <p class="subtitle">Reusable knowledge for AI agents.</p>
-        <span class="status-badge status-shipped">Shipped</span>
-      </header>
+      <PageHero title="Forges" subtitle="Reusable knowledge for AI agents." status="shipped" />
 
       <section class="content-section">
         <h2>The pattern</h2>
@@ -127,14 +125,11 @@ import Base from '../layouts/Base.astro';
         <h2>Self-improving</h2>
         <p>Forges audit each other. Running /foss-check on a real project reveals gaps in foss-forge, which reveals gaps in demo-forge, which reveals gaps in forge-forge. Each audit improves the auditor. The ecosystem gets better by using itself.</p>
       </section>
-      <div class="related">
-        <span class="related-label">Related</span>
-        <div class="related-links">
-          <a href="/tools">Tools</a>
-          <a href="/eidos">Eidos</a>
-          <a href="/trilogy">The Trilogy</a>
-        </div>
-      </div>
+      <RelatedLinks links={[
+        { href: "/tools", label: "Tools" },
+        { href: "/eidos", label: "Eidos" },
+        { href: "/trilogy", label: "The Trilogy" },
+      ]} />
     </article>
 </Base>
 
