@@ -2,7 +2,14 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://eidosagi.com/contracts/deployment-record.schema.json",
   "title": "Deployment Record",
-  "description": "What a successful deployment looks like. The model decides how to deploy. This defines what 'deployed' means.",
+  "purpose": "Record the state of a service deployment so that any agent or human can determine: is it healthy, what was deployed, and how to roll back if something goes wrong. This is the receipt of a deploy — proof that it happened and proof that it's working.",
+  "context": "You are deploying a service to a container-based platform (Railway, Fly, ECS, etc.). After the deploy completes, verify health and record the result. If any check fails, the status is degraded or failed and the rollback plan becomes the next action. The deployment record is written to the project's deploy log — it's the audit trail.",
+  "constraints": [
+    "All three checks must pass for status 'healthy'. Any failure means 'degraded' or 'failed'.",
+    "The rollback section is mandatory — every deploy must have a way back. If migrations aren't reversible, say so explicitly.",
+    "The SHA must be a real git commit, not a branch name. The rollback SHA must be the last known-good deploy.",
+    "If you cannot verify health (endpoint unreachable, logs inaccessible), status is 'failed' not 'unknown'. Unknown is not a valid status."
+  ],
   "type": "object",
   "required": ["service", "sha", "environment", "status", "checks", "rollback"],
   "properties": {
@@ -12,17 +19,17 @@
     },
     "sha": {
       "type": "string",
-      "description": "Git commit SHA that was deployed"
+      "description": "Git commit SHA that was deployed — not a branch name"
     },
     "environment": {
       "type": "string",
       "enum": ["staging", "production"],
-      "description": "Where it was deployed"
+      "description": "Where it was deployed. Always deploy to staging first."
     },
     "status": {
       "type": "string",
       "enum": ["healthy", "degraded", "failed"],
-      "description": "Post-deploy health status"
+      "description": "Post-deploy health. Healthy = all checks pass. Degraded = partial. Failed = broken or unreachable."
     },
     "checks": {
       "type": "object",
@@ -30,15 +37,15 @@
       "properties": {
         "health_endpoint": {
           "type": "boolean",
-          "description": "Health check returns 200"
+          "description": "GET /healthz returns 200 within 100ms"
         },
         "smoke_test": {
           "type": "boolean",
-          "description": "Core functionality verified post-deploy"
+          "description": "One core operation verified post-deploy (e.g., create a record, send a request)"
         },
         "logs_clean": {
           "type": "boolean",
-          "description": "No errors in first 5 minutes of logs"
+          "description": "No errors or unhandled exceptions in the first 5 minutes of logs"
         }
       }
     },
@@ -48,15 +55,15 @@
       "properties": {
         "previous_sha": {
           "type": "string",
-          "description": "Last known-good commit to roll back to"
+          "description": "Last known-good commit — verified healthy in a previous deployment record"
         },
         "command": {
           "type": "string",
-          "description": "Exact command to execute rollback"
+          "description": "Exact command to execute rollback. Copy-paste ready."
         },
         "migration_reversible": {
           "type": "boolean",
-          "description": "Whether database migrations can be reversed"
+          "description": "Can the database migration be reversed? If false, rollback requires manual DB work."
         }
       }
     },

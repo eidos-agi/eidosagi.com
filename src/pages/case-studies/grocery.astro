@@ -1,0 +1,165 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Case Study: AI-Ordered Groceries — Eidos AGI"
+  description="A GitHub repo with YAML preferences and JSON Schema contracts. An AI reads them and orders groceries weekly. No code."
+>
+    <article class="prose-page">
+      <header class="page-hero">
+        <h1>Groceries ordered<br />by contracts alone</h1>
+        <p class="subtitle">No code. No skills. No step-by-step instructions. Just a git repo.</p>
+      </header>
+
+      <section class="content-section">
+        <div class="cs-video">
+          <p class="cs-video-caption">Perplexity Computer reading contracts from a GitHub repo to place a grocery order.</p>
+          <video autoplay loop muted playsinline>
+            <source src="/videos/grocery-order.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>The setup</h2>
+        <p>A private GitHub repo. No software. No database. No Python, no JavaScript, no package.json. Just structured files that any AI agent can read:</p>
+        <pre><code>reeves-grocery/
+  contracts/
+    shopping-list.schema.json     # what a valid order looks like
+    meal-plan.schema.json         # what a valid meal plan looks like
+    pantry-update.schema.json     # how to update what's on hand
+  preferences/
+    dietary.yaml                  # PSMF-influenced, high protein, lean
+    cooking.yaml                  # batch cook, low prep time
+    shopping.yaml                 # store brand default, budget-conscious
+    goals.yaml                    # $500 shelf-stable reserve target
+  pantry/
+    current.md                    # what's on hand (hints, not ledger)
+    reserve.md                    # shelf-stable buffer</code></pre>
+        <p>An AI agent — in this case Perplexity Computer — reads the contracts and preferences, produces a conforming shopping list, and places the order. No agent framework required. No tool calls. The agent uses whatever capabilities it has (browsing, clicking, typing) to fulfill the contract.</p>
+      </section>
+
+      <section class="content-section">
+        <h2>The contract</h2>
+        <p>This is the entire specification. The AI reads this and knows what to produce.</p>
+        <div class="cs-contract">
+          <div class="cs-contract-header">shopping-list.schema.json</div>
+          <pre><code>&#123;
+  "title": "Shopping List",
+  "purpose": "Produce a weekly grocery order for one person.
+    The list will be submitted to a store's ordering system —
+    every item must be a real, purchasable product.",
+
+  "context": "Read preferences/dietary.yaml for what this person
+    eats. Read pantry/current.md for what's on hand. Read
+    pantry/reserve.md to check the shelf-stable buffer.",
+
+  "constraints": [
+    "Protein items dominate — PSMF-influenced diet",
+    "Reserve restocks when pantry/reserve.md looks thin",
+    "Quantities in purchasable units (3 lbs, not 0.5 cups)",
+    "Store brand default unless specified",
+    "Optimize for protein per dollar"
+  ],
+
+  "required": ["date", "store", "items"],
+  "items": [&#123;
+    "name": "boneless skinless chicken breast",
+    "quantity": "5 lbs",
+    "category": "protein",
+    "reserve_restock": false
+  &#125;]
+&#125;</code></pre>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>The preferences</h2>
+        <p>The contract says "read preferences." Here's what it finds:</p>
+        <div class="cs-prefs">
+          <div class="cs-pref">
+            <div class="cs-pref-header">dietary.yaml</div>
+            <pre><code>dietary_lean: PSMF-influenced
+  # High protein, very low fat, very low carb
+  # Lean protein is the center of every meal
+
+priorities:
+  - high-protein
+  - lean-affordable-protein
+  - low-maintenance-prep
+  - budget-conscious
+
+# Staples: chicken breast, ground turkey,
+# tuna, egg whites, green vegetables</code></pre>
+          </div>
+          <div class="cs-pref">
+            <div class="cs-pref-header">shopping.yaml</div>
+            <pre><code>brand_strategy: store-brand-default
+  # Prefer generic unless specified
+
+fulfillment: null
+  # pickup | delivery | in-store
+
+prefer_brands: []
+avoid_brands: []</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>What the AI produces</h2>
+        <p>From the contract and preferences, the AI produces a shopping list. It figures out the items, quantities, and store on its own. Then it opens the store's website and adds them to the cart.</p>
+        <p>No step-by-step instructions told it how. No skills file said "Step 1: open HEB.com. Step 2: search for chicken breast." The contract said what a valid list looks like. The preferences said what this person eats. The AI handled the rest.</p>
+      </section>
+
+      <section class="content-section">
+        <h2>Why this matters</h2>
+        <p>A skills file for this task would be 200+ lines: which store to open, how to search, how to add to cart, how to handle out-of-stock items, how to check out. That skills file would break every time the store changes their website. It would need updating for every new AI model.</p>
+        <p>The contract is 30 lines. It hasn't changed since it was written. It works with Perplexity Computer today. It will work with whatever comes next. Because it says <em>what</em>, not <em>how</em>.</p>
+        <p>The preferences are stable — this person's diet doesn't change weekly. The pantry updates occasionally. The contract never changes. Git history is the audit trail.</p>
+      </section>
+
+      <section class="content-section">
+        <h2>The guardrails</h2>
+        <p>Three rules govern the entire repo:</p>
+        <ol class="cs-guardrails">
+          <li><strong>No software.</strong> No Python. No database. Just data files. If a file needs a parser, it's wrong.</li>
+          <li><strong>Human-readable above all else.</strong> A person can open any file and understand it without tools.</li>
+          <li><strong>Git is the audit trail.</strong> No timestamps in files. Git history shows what changed and when.</li>
+        </ol>
+      </section>
+
+      <section class="content-section">
+        <p class="cs-closing">This is contract-driven development in its purest form. A git repo. YAML preferences. JSON Schema contracts. An AI that reads them and acts. No code required.</p>
+        <p><a href="/contract-driven-development">Read more about contracts vs skills</a></p>
+      </section>
+
+      <div class="related">
+        <span class="related-label">Related</span>
+        <div class="related-links">
+          <a href="/contract-driven-development">Contracts, Not Skills</a>
+          <a href="/forges">Forges</a>
+          <a href="/trilogy">The Trilogy</a>
+        </div>
+      </div>
+    </article>
+</Base>
+
+<style is:global>
+  .cs-video { margin: var(--space-4) 0; border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); }
+  .cs-video video { width: 100%; display: block; }
+  .cs-video-caption { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); padding: var(--space-3) var(--space-4); margin: 0; }
+  .cs-contract { background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden; margin: var(--space-6) 0; }
+  .cs-contract-header { font-family: var(--font-mono); font-size: var(--text-xs); padding: var(--space-2) var(--space-4); background: color-mix(in srgb, var(--color-command) 15%, transparent); color: var(--color-command); font-weight: 500; }
+  .cs-contract pre { margin: 0; padding: var(--space-4); }
+  .cs-contract code { font-size: 12px; color: var(--color-muted); line-height: 1.7; }
+  .cs-prefs { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin: var(--space-6) 0; }
+  .cs-pref { background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden; }
+  .cs-pref-header { font-family: var(--font-mono); font-size: var(--text-xs); padding: var(--space-2) var(--space-4); background: color-mix(in srgb, var(--color-primary) 10%, transparent); color: var(--color-primary); font-weight: 500; }
+  .cs-pref pre { margin: 0; padding: var(--space-4); }
+  .cs-pref code { font-size: 11px; color: var(--color-muted); line-height: 1.6; }
+  .cs-guardrails li { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-2) 0; line-height: var(--leading-normal); }
+  .cs-closing { font-size: var(--text-md); line-height: var(--leading-relaxed); }
+  @media (max-width: 768px) { .cs-prefs { grid-template-columns: 1fr; } }
+</style>

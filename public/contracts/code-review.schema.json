@@ -2,7 +2,14 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://eidosagi.com/contracts/code-review.schema.json",
   "title": "Code Review",
-  "description": "What a reviewed file looks like. The model decides how to review. This defines what 'reviewed' means.",
+  "purpose": "Review a source file for bugs, security vulnerabilities, and quality issues. Every finding must be actionable — a problem paired with a fix. The review ends with a verdict: can this code ship?",
+  "context": "You are reviewing code that will be merged into a production codebase. Read the file in full before producing findings. Consider the file's role in the larger system — imports, callers, and data flow matter. If the project has a CLAUDE.md, read it first for conventions and known gotchas.",
+  "constraints": [
+    "Every finding must include the exact line number and a specific fix — not 'consider refactoring' but 'extract lines 42-87 into a function because they have a different responsibility'",
+    "Severity must reflect user impact: critical means users are affected or data is at risk, warning means code quality suffers, suggestion means it could be better",
+    "The verdict is a gate: block means do not merge, request-changes means fix these first, approve means ship it",
+    "If the file is clean, say so. An empty findings array with verdict 'approve' is a valid output."
+  ],
   "type": "object",
   "required": ["file", "findings", "verdict"],
   "properties": {
@@ -23,15 +30,15 @@
           "severity": {
             "type": "string",
             "enum": ["critical", "warning", "suggestion"],
-            "description": "How urgently this needs to be fixed"
+            "description": "critical = users affected or data at risk. warning = code quality. suggestion = could be better."
           },
           "issue": {
             "type": "string",
-            "description": "What's wrong — specific, not vague"
+            "description": "What's wrong — specific, not vague. Name the vulnerability, the bug, the smell."
           },
           "fix": {
             "type": "string",
-            "description": "How to fix it — actionable, not advisory"
+            "description": "How to fix it — actionable, not advisory. Show the code change or the exact step."
           }
         }
       }
@@ -39,11 +46,11 @@
     "verdict": {
       "type": "string",
       "enum": ["approve", "request-changes", "block"],
-      "description": "Overall decision"
+      "description": "The gate decision. Block if any critical finding. Request-changes if warnings. Approve if clean."
     },
     "summary": {
       "type": "string",
-      "description": "One sentence: what's the most important thing about this file"
+      "description": "One sentence: the most important thing about this file right now"
     }
   }
 }

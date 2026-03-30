@@ -2,22 +2,29 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://eidosagi.com/contracts/improvement-snapshot.schema.json",
   "title": "Improvement Snapshot",
-  "description": "What a better project looks like. The model decides how to improve. This defines what 'better' means.",
+  "purpose": "Record the result of systematically improving a project. Score it across multiple dimensions, fix the highest-impact gap, and leave a trail so the next agent knows what was done and what to do next. The improvement history of a project is the sequence of these snapshots.",
+  "context": "You are improving a project you may have never seen before. Read CLAUDE.md and .visionlog/vision.md to understand what it should be. Read the code to understand what it is. Score the gap. Fix the biggest one. Record everything. The next agent reads your snapshot before starting — your next_priority is their starting point.",
+  "constraints": [
+    "Every score must cite specific evidence — a file, a function, a behavior. '5/10 feels about right' is not evidence.",
+    "Fix the highest-impact gap, not the easiest. A reliability bug that affects users outranks a documentation gap.",
+    "Never violate the project's own guardrails. Read .visionlog/guardrails/ before changing anything.",
+    "The next_priority field is mandatory and must explain why — the next agent needs to understand your reasoning, not just the label.",
+    "One improvement per run. Depth over breadth. Do one thing well."
+  ],
   "type": "object",
   "required": ["date", "project", "scores", "overall", "focus", "improvement", "files_changed", "delta", "next_priority"],
   "properties": {
     "date": {
       "type": "string",
-      "format": "date",
-      "description": "When the improvement was made"
+      "format": "date"
     },
     "project": {
       "type": "string",
-      "description": "Name of the project"
+      "description": "Name of the project that was improved"
     },
     "scores": {
       "type": "object",
-      "description": "1-10 score per dimension. null means not applicable.",
+      "description": "1-10 per dimension. null means not applicable to this project type.",
       "properties": {
         "reliability": { "type": ["integer", "null"], "minimum": 1, "maximum": 10 },
         "performance": { "type": ["integer", "null"], "minimum": 1, "maximum": 10 },
@@ -37,11 +44,11 @@
     },
     "focus": {
       "type": "string",
-      "description": "Which dimension was improved"
+      "description": "Which dimension was improved in this run"
     },
     "improvement": {
       "type": "string",
-      "description": "What was fixed, in one paragraph"
+      "description": "What was fixed — one paragraph, specific enough that someone can verify it"
     },
     "files_changed": {
       "type": "array",
@@ -49,7 +56,7 @@
     },
     "delta": {
       "type": "object",
-      "description": "Before/after scores for changed dimensions",
+      "description": "Before/after for each dimension that changed",
       "additionalProperties": {
         "type": "object",
         "properties": {
@@ -60,7 +67,7 @@
     },
     "next_priority": {
       "type": "string",
-      "description": "What the next run should focus on and why"
+      "description": "What the next improvement run should focus on AND why. This is the handoff to the next agent."
     }
   }
 }
