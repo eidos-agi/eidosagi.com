@@ -2,6 +2,9 @@
 
 > The Eidos AGI website. Astro + Railway. Craft, not commodity.
 
+## MANDATORY: Read EDITORIAL.md before touching any page content.
+`EDITORIAL.md` is the site constitution — page jobs, concept ownership, reader journeys, shipped/unshipped rules, and tension register. It governs all editorial decisions. If CLAUDE.md and EDITORIAL.md conflict on editorial matters, EDITORIAL.md wins.
+
 ## What This Is
 
 The public face of Eidos AGI — a stealth group of engineers, AI researchers, and cybersecurity experts building agentic-first software. The site must communicate:

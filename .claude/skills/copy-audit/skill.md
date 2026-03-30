@@ -132,6 +132,41 @@ SUMMARY: <N> issues across <N> pages. Top 3 fixes by impact:
   3. ...
 ```
 
+## Structural Passes (from EDITORIAL.md)
+
+**MANDATORY: Read `EDITORIAL.md` before running these passes.** It defines page jobs, concept ownership, reader journeys, and tensions. These passes enforce that document.
+
+### Pass 8: Page Jobs
+For each page, check its job against the EDITORIAL.md page inventory. Is the page still doing exactly one job? If a page has drifted into a second job, flag it.
+
+### Pass 9: Concept Ownership
+Check the concept ownership table in EDITORIAL.md. For each owned concept, grep the site for retelling vs linking. Flag any page that re-argues a concept it doesn't own instead of linking to the owning page.
+
+### Pass 10: Reader Journey Audit
+For each of the three personas in EDITORIAL.md, walk the journey page by page. Check that each page's RelatedLinks includes the next page in the journey. Flag dead ends and missing links. Verify `pip install` is reachable within 2 clicks from any page.
+
+### Pass 11: Shipped/Unshipped
+Check that pages for unshipped features carry `status="dev"` badge, have an explicit Status section, and do not appear in main navigation.
+
+## Report Format (add to structural section)
+
+```
+STRUCTURAL (from EDITORIAL.md)
+  PAGE JOBS: <N> pages checked, <N> drifted
+    <page>: <drift description>
+
+  CONCEPT OWNERSHIP: <N> violations
+    <concept> retold on <page> — should link to <owner>
+
+  READER JOURNEYS:
+    Evaluating developer: <PASS or broken at step N>
+    Architecture thinker: <PASS or broken at step N>
+    Curious clicker: <PASS or broken at step N>
+
+  SHIPPED/UNSHIPPED: <N> issues
+    <page>: <issue>
+```
+
 ## Rules
 - Be honest. Flag real problems, not nitpicks.
 - Every flag must include a specific fix, not just "this is bad."
@@ -139,3 +174,4 @@ SUMMARY: <N> issues across <N> pages. Top 3 fixes by impact:
 - The grocery example is powerful but loses impact when it appears on every page.
 - Don't add words to fix copy. Restructure or cut.
 - Run this before every deploy that touches text content.
+- **Always read EDITORIAL.md first.** It changes. The skill is the process; the constitution is the source of truth.
