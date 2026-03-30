@@ -14,7 +14,7 @@ import TrioGrid from '../components/TrioGrid.astro';
 >
     <article class="prose-page">
       <PageHero title="Contracts, Not Skills" subtitle="The right primitive for AI systems." />
-      <Lede text="Skills tell AI how to work and decay every model generation. Contracts tell AI what you want and never need updating. Build contracts first." />
+      <Lede text="Skills tell AI how to do things and decay every model generation. Contracts tell AI what you want and survive unchanged. The difference compounds." />
 
       <section class="content-section">
         <p>The AI ecosystem is building skills — step-by-step instructions that tell models how to accomplish goals. Skills work today. They compensate for what the model can't figure out on its own.</p>
@@ -25,7 +25,7 @@ import TrioGrid from '../components/TrioGrid.astro';
 
       <section class="content-section">
         <h2>A grocery order placed by contracts alone</h2>
-        <p>A GitHub repo. No software. No database. No code. Just YAML preferences, a markdown pantry, and three JSON Schema contracts. An AI agent reads the contracts and preferences, produces a conforming shopping list, and orders the groceries. No skills file. No step-by-step instructions. The agent figures out how.</p>
+        <p>A GitHub repo containing nothing but YAML preferences, a markdown pantry, and three JSON Schema contracts — no software, no database, no code. An AI agent reads the contracts and preferences, produces a conforming shopping list, and orders the groceries without a skills file or step-by-step instructions.</p>
 
         <ContractChart contractLabel="shopping-list.schema.json" outputLabel="preferences/dietary.yaml" arrowText="+">
           <pre slot="contract"><code>&#123;
@@ -75,7 +75,7 @@ priorities:
         <p>The contract tells the AI: what this is for (purpose), what to read first (context), and what matters (constraints). The preferences define who the person is. The AI reads both and produces a conforming list. No agent framework. No tool calls. No step-by-step playbook.</p>
         <p>This is real. An actual grocery order placed weekly by an AI reading contracts from a git repo. <a href="/case-studies/grocery">Full case study</a>.</p>
 
-        <VideoEmbed src="/videos/grocery-order.mp4" caption="Perplexity Computer reading contracts from a GitHub repo to order groceries. No code. No skills file. Just schemas and preferences." />
+        <VideoEmbed src="/videos/grocery-order.mp4" caption="Perplexity Computer reading contracts from a GitHub repo to order groceries — schemas and preferences only, no code involved." />
       </section>
 
       <section class="content-section">
@@ -231,7 +231,7 @@ Step 8: Output summary...
         <h2>The bitter lesson</h2>
         <p>Richard Sutton's greatest contribution to computer science: general methods that leverage computation always beat hand-crafted human knowledge as compute scales. This is the bitter lesson — bitter because researchers keep re-learning it, and it keeps being true.</p>
         <p>We teach a computer to play chess by giving it two things: the rules of chess (a contract) and a goal (win). We don't give it opening theory. We don't give it middlegame strategy. We don't tell it to control the center, develop knights before bishops, or castle early. Those are skills. They work for beginners. They fail at grandmaster level.</p>
-        <p>AlphaZero — the system that learned to play chess with nothing but the rules and self-play — destroyed Stockfish, the system built on decades of hand-tuned human chess expertise. Not by a little. By a lot. Because Stockfish was a skills file. AlphaZero had a contract.</p>
+        <p>AlphaZero — the system that learned to play chess with nothing but the rules and self-play — destroyed Stockfish, the system built on decades of hand-tuned human chess expertise. The margin wasn't close. Stockfish was a skills file; AlphaZero had a contract.</p>
         <p>The same pattern applies to AI development tools. Skills files are chess strategy books — useful for today's model, obsolete for tomorrow's. Contracts are the rules of chess — permanent, terse, and more powerful as the player gets smarter.</p>
       </section>
 

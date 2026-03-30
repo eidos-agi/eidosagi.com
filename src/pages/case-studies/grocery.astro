@@ -17,7 +17,7 @@ import CompareTable from '../../components/CompareTable.astro';
   description="A GitHub repo with YAML preferences and JSON Schema contracts. An AI reads them and orders groceries weekly. No code."
 >
     <article class="prose-page">
-      <PageHero title="Groceries ordered<br />by contracts alone" subtitle="No code. No skills. No step-by-step instructions. Just a git repo." />
+      <PageHero title="Groceries ordered<br />by contracts alone" subtitle="A git repo with structured data files and nothing else." />
       <Lede text="A GitHub repo with zero code ordered $260 of groceries. The AI read 3 JSON Schema contracts and 5 YAML preference files, then placed the order autonomously." />
 
       <section class="content-section">
@@ -26,7 +26,7 @@ import CompareTable from '../../components/CompareTable.astro';
 
       <section class="content-section">
         <h2>The setup</h2>
-        <p>A private GitHub repo. No software. No database. No Python, no JavaScript, no package.json. Just structured files that any AI agent can read:</p>
+        <p>A private GitHub repo with no software, no database, and no programming language — just structured files that any AI agent can read:</p>
         <pre><code>reeves-grocery/
   contracts/
     shopping-list.schema.json     # what a valid order looks like
@@ -220,7 +220,7 @@ avoid_brands: []</code></pre>
         <h2>The guardrails</h2>
         <p>Three rules govern the entire repo:</p>
         <ol class="cs-guardrails">
-          <li><strong>No software.</strong> No Python. No database. Just data files. If a file needs a parser, it's wrong.</li>
+          <li><strong>No software.</strong> If a file needs a parser to be useful, it doesn't belong here.</li>
           <li><strong>Human-readable above all else.</strong> A person can open any file and understand it without tools.</li>
           <li><strong>Git is the audit trail.</strong> No timestamps in files. Git history shows what changed and when.</li>
         </ol>
