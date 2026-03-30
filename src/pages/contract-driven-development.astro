@@ -17,7 +17,57 @@ import Base from '../layouts/Base.astro';
         <p>But skills are written based on today's weaknesses. Imagine writing a skills file for GPT-3 two years ago. It would be extremely verbose — every step spelled out, every edge case handled, every format detail specified. Today's models need less of that. Tomorrow's models need even less.</p>
         <p><strong>Skills are technical debt that accrues as models improve.</strong> Every step-by-step instruction is a bet that future models will be as limited as today's. That bet has never paid off.</p>
         <p>Contracts are the alternative. A contract defines what we want — the end state, the constraints, the guardrails. It does not define how to get there, what order to do things, or what tools to use. A contract says <em>what</em>. A skill says <em>how</em>. Models get better at <em>how</em> every six months. <em>What</em> doesn't change.</p>
-        <p>Here are three real examples. Each shows the contract, what a model produces from it, and the skill it replaces.</p>
+      </section>
+
+      <section class="content-section">
+        <h2>A grocery order placed by contracts alone</h2>
+        <p>A GitHub repo. No software. No database. No code. Just YAML preferences, a markdown pantry, and three JSON Schema contracts. An AI agent reads the contracts and preferences, produces a conforming shopping list, and orders the groceries. No skills file. No step-by-step instructions. The agent figures out how.</p>
+
+        <div class="cdd-chart">
+          <div class="cdd-chart-contract">
+            <div class="cdd-chart-header">shopping-list.schema.json</div>
+            <pre><code>&#123;
+  "required": ["date", "store", "items"],
+  "items": [&#123;
+    "name": "string",
+    "quantity": "string",
+    "category": "protein | vegetables | dairy | ...",
+    "reserve_restock": "boolean"
+  &#125;],
+  "constraints": [
+    "Protein items dominate the list",
+    "Reserve restocks when pantry looks thin",
+    "Quantities in purchasable units",
+    "Respects dietary.yaml and shopping.yaml"
+  ]
+&#125;</code></pre>
+          </div>
+          <div class="cdd-chart-arrow">+</div>
+          <div class="cdd-chart-output">
+            <div class="cdd-chart-header">preferences/dietary.yaml</div>
+            <pre><code>dietary_lean: PSMF-influenced
+  # High protein, very low fat, very low carb
+  # Lean protein is the center of every meal
+
+priorities:
+  - high-protein
+  - lean-affordable-protein
+  - low-maintenance-prep
+  - budget-conscious
+
+# Staples: chicken breast, ground turkey,
+# tuna, egg whites, green vegetables,
+# sugar-free condiments</code></pre>
+          </div>
+        </div>
+
+        <p>The contract defines what a valid shopping list looks like. The preferences define who the person is. The AI reads both and produces a list that conforms. No agent framework. No tool calls. No step-by-step playbook. Just a schema and data.</p>
+        <p>This is real. An actual grocery order placed weekly by an AI reading contracts from a git repo.</p>
+      </section>
+
+      <section class="content-section">
+        <h2>Three more contracts</h2>
+        <p>The same pattern applied to software engineering. Each shows the contract, what a model produces from it, and the skill it replaces.</p>
       </section>
 
       <!-- ── CONTRACT 1: Code Review ─────────────────────── -->
