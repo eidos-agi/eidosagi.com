@@ -177,6 +177,7 @@ pre .param { color: var(--color-secondary); }
 }
 .nav-dropdown-menu a:hover { background: color-mix(in srgb, var(--color-primary) 8%, transparent); }
 .nav-dropdown.open .nav-dropdown-menu { display: flex; }
+.nav-dropdown:hover > .nav-dropdown-menu { display: flex; }
 
 /* Hamburger — hidden on desktop, shown on mobile */
 .hamburger {

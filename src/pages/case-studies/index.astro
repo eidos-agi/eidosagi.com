@@ -14,65 +14,88 @@ import Base from '../../layouts/Base.astro';
 
       <section class="content-section">
         <p>These aren't hypothetical examples. They're systems running in production — AI agents fulfilling contracts from git repos, with no skills files, no step-by-step instructions, and often no software at all.</p>
-        <p>Each case study shows: the contract, the data, what the AI produces, and why it works without being told how.</p>
+        <p>Each case study shows the contract, the data, what the AI produces, and why it works without being told how.</p>
       </section>
 
+      <!-- Featured: Grocery -->
       <section class="content-section">
+        <a href="/case-studies/grocery" class="cs-featured">
+          <div class="cs-featured-media">
+            <video autoplay loop muted playsinline>
+              <source src="/videos/grocery-order.mp4" type="video/mp4" />
+            </video>
+            <div class="cs-featured-badge">Live</div>
+          </div>
+          <div class="cs-featured-content">
+            <div class="cs-featured-label">Featured case study</div>
+            <h2>Grocery ordering</h2>
+            <p>A GitHub repo with YAML preferences and JSON Schema contracts. An AI reads them and orders groceries weekly. No code. No skills file. Just schemas and data.</p>
+            <div class="cs-featured-stats">
+              <div class="cs-stat">
+                <span class="cs-stat-num">3</span>
+                <span class="cs-stat-label">contracts</span>
+              </div>
+              <div class="cs-stat">
+                <span class="cs-stat-num">5</span>
+                <span class="cs-stat-label">preference files</span>
+              </div>
+              <div class="cs-stat">
+                <span class="cs-stat-num">0</span>
+                <span class="cs-stat-label">lines of code</span>
+              </div>
+            </div>
+            <div class="cs-featured-stack">Perplexity Computer + GitHub + JSON Schema</div>
+          </div>
+        </a>
+      </section>
+
+      <!-- Coming soon -->
+      <section class="content-section">
+        <h2>Coming next</h2>
         <div class="cs-grid">
-
-          <a href="/case-studies/grocery" class="cs-card cs-card-featured">
-            <div class="cs-card-badge">Live</div>
-            <div class="cs-card-video">
-              <video autoplay loop muted playsinline>
-                <source src="/videos/grocery-order.mp4" type="video/mp4" />
-              </video>
+          <div class="cs-card">
+            <div class="cs-card-number">01</div>
+            <h3>Voice notes</h3>
+            <p>A Mac app records voice, transcribes locally with Whisper, classifies via Claude Agent SDK, and stores in recording buckets that a search engine indexes.</p>
+            <div class="cs-card-stats">
+              <span>5 contracts</span>
+              <span>3 languages</span>
+              <span>3 processes</span>
             </div>
-            <div class="cs-card-body">
-              <h2>Grocery ordering</h2>
-              <p>A GitHub repo with YAML preferences and JSON Schema contracts. An AI reads them and orders groceries weekly. No code. No skills file. Just schemas and data.</p>
-              <div class="cs-card-detail">
-                <span>3 contracts</span>
-                <span>5 preference files</span>
-                <span>0 lines of code</span>
-              </div>
-              <div class="cs-card-stack">Perplexity Computer + GitHub + JSON Schema</div>
-            </div>
-          </a>
-
-          <div class="cs-card cs-card-coming">
-            <div class="cs-card-badge cs-card-badge-soon">Coming</div>
-            <div class="cs-card-body">
-              <h2>Voice notes</h2>
-              <p>A Mac app that records voice, transcribes locally, classifies via AI, and stores in recording buckets that a search engine indexes. Five contracts define every data boundary.</p>
-              <div class="cs-card-detail">
-                <span>5 contracts</span>
-                <span>3 languages</span>
-                <span>3 processes</span>
-              </div>
-              <div class="cs-card-stack">Swift + Python + JSON Schema + Omni</div>
-            </div>
+            <div class="cs-card-stack">Swift + Python + JSON Schema + Omni</div>
           </div>
 
-          <div class="cs-card cs-card-coming">
-            <div class="cs-card-badge cs-card-badge-soon">Coming</div>
-            <div class="cs-card-body">
-              <h2>Project improvement</h2>
-              <p>A forge that scores any project across 10 dimensions, fixes the highest-impact gap, and records a snapshot. The snapshot schema is the contract — the model figures out how to improve.</p>
-              <div class="cs-card-detail">
-                <span>1 contract</span>
-                <span>3 projects improved</span>
-                <span>Ran on itself twice</span>
-              </div>
-              <div class="cs-card-stack">improve-forge + JSON Schema</div>
+          <div class="cs-card">
+            <div class="cs-card-number">02</div>
+            <h3>Project improvement</h3>
+            <p>A forge scores any project across 10 dimensions, fixes the highest-impact gap, and records a snapshot. The snapshot schema is the contract.</p>
+            <div class="cs-card-stats">
+              <span>1 contract</span>
+              <span>3 projects improved</span>
+              <span>Self-improving</span>
             </div>
+            <div class="cs-card-stack">improve-forge + JSON Schema</div>
           </div>
 
+          <div class="cs-card">
+            <div class="cs-card-number">03</div>
+            <h3>Learning capture</h3>
+            <p>A forge that extracts learnings from sessions, routes project-level fixes directly and proposes forge-level improvements to the overseer.</p>
+            <div class="cs-card-stats">
+              <span>1 contract</span>
+              <span>15 learnings routed</span>
+              <span>10 proposals</span>
+            </div>
+            <div class="cs-card-stack">learning-forge + forge-forge governance</div>
+          </div>
         </div>
       </section>
 
       <section class="content-section">
-        <p class="cs-principle">The pattern is the same in every case: define what you want as a schema. Give the AI the schema and the data. Let it figure out how.</p>
-        <p><a href="/contract-driven-development">Read the full argument: Contracts, Not Skills</a></p>
+        <div class="cs-cta">
+          <p>The pattern is the same in every case. Define what you want as a schema. Give the AI the schema and the data. Let it figure out how.</p>
+          <a href="/contract-driven-development" class="cs-cta-link">Read the argument: Contracts, Not Skills</a>
+        </div>
       </section>
 
       <div class="related">
@@ -87,20 +110,57 @@ import Base from '../../layouts/Base.astro';
 </Base>
 
 <style is:global>
-  .cs-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
-  .cs-card { display: block; background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden; text-decoration: none; position: relative; transition: transform 0.15s ease; }
-  .cs-card:hover { transform: translateY(-2px); }
-  .cs-card-featured { border: 1px solid color-mix(in srgb, var(--color-command) 20%, transparent); }
-  .cs-card-coming { opacity: 0.7; pointer-events: none; }
-  .cs-card-video { width: 100%; }
-  .cs-card-video video { width: 100%; display: block; }
-  .cs-card-body { padding: var(--space-5) var(--space-6); }
-  .cs-card h2 { font-size: var(--text-lg); color: var(--color-text); margin-bottom: var(--space-2); }
-  .cs-card p { font-size: var(--text-sm); color: var(--color-muted); line-height: var(--leading-normal); margin-bottom: var(--space-3); }
-  .cs-card-badge { position: absolute; top: var(--space-4); right: var(--space-4); font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-command); background: color-mix(in srgb, var(--color-command) 12%, transparent); padding: 2px 10px; border-radius: 3px; z-index: 1; }
-  .cs-card-badge-soon { color: var(--color-muted); background: color-mix(in srgb, var(--color-muted) 10%, transparent); }
-  .cs-card-detail { display: flex; gap: var(--space-4); margin-bottom: var(--space-3); }
-  .cs-card-detail span { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-primary); }
-  .cs-card-stack { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); opacity: 0.5; }
-  .cs-principle { font-size: var(--text-md); line-height: var(--leading-relaxed); }
+  /* Featured card */
+  .cs-featured {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden;
+    text-decoration: none; transition: transform 0.2s ease;
+    border: var(--border-width) solid color-mix(in srgb, var(--color-command) 25%, transparent);
+  }
+  .cs-featured:hover { transform: translateY(-3px); }
+  .cs-featured-media { position: relative; }
+  .cs-featured-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cs-featured-badge {
+    position: absolute; top: var(--space-3); left: var(--space-3);
+    font-family: var(--font-mono); font-size: var(--text-xs);
+    color: var(--color-command);
+    background: color-mix(in srgb, var(--color-bg) 85%, transparent);
+    backdrop-filter: blur(4px);
+    padding: 2px 10px; border-radius: 3px;
+  }
+  .cs-featured-content { padding: var(--space-8); display: flex; flex-direction: column; justify-content: center; }
+  .cs-featured-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-command); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-3); }
+  .cs-featured h2 { font-size: var(--text-xl); color: var(--color-text); margin-bottom: var(--space-3); }
+  .cs-featured p { font-size: var(--text-sm); color: var(--color-muted); line-height: var(--leading-relaxed); margin-bottom: var(--space-5); }
+  .cs-featured-stats { display: flex; gap: var(--space-6); margin-bottom: var(--space-4); }
+  .cs-stat { display: flex; flex-direction: column; }
+  .cs-stat-num { font-family: var(--font-heading); font-size: var(--text-xl); color: var(--color-text); font-weight: var(--weight-bold); line-height: 1; }
+  .cs-stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); margin-top: var(--space-1); }
+  .cs-featured-stack { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); opacity: 0.5; }
+
+  /* Grid cards */
+  .cs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+  .cs-card {
+    background: var(--color-surface); border-radius: var(--radius-md); padding: var(--space-6);
+    border: var(--border-width) solid color-mix(in srgb, var(--color-muted) 12%, transparent);
+    position: relative;
+  }
+  .cs-card-number { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-primary); opacity: 0.4; margin-bottom: var(--space-3); }
+  .cs-card h3 { font-size: var(--text-base); color: var(--color-text); margin-bottom: var(--space-2); }
+  .cs-card p { font-size: var(--text-sm); color: var(--color-muted); line-height: var(--leading-normal); margin-bottom: var(--space-4); }
+  .cs-card-stats { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-3); }
+  .cs-card-stats span { font-family: var(--font-mono); font-size: 10px; color: var(--color-primary); background: color-mix(in srgb, var(--color-primary) 8%, transparent); padding: 2px 8px; border-radius: 3px; }
+  .cs-card-stack { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); opacity: 0.4; }
+
+  /* CTA */
+  .cs-cta { text-align: center; padding: var(--space-8) 0; }
+  .cs-cta p { font-size: var(--text-md); color: var(--color-muted); line-height: var(--leading-relaxed); margin-bottom: var(--space-4); }
+  .cs-cta-link { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-command); }
+  .cs-cta-link:hover { color: var(--color-primary); }
+
+  @media (max-width: 768px) {
+    .cs-featured { grid-template-columns: 1fr; }
+    .cs-grid { grid-template-columns: 1fr; }
+    .cs-featured-stats { gap: var(--space-4); }
+  }
 </style>
