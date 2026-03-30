@@ -57,11 +57,27 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://eidosagi.com');
             <button class="theme-dot theme-ai" data-set-theme="ai" title="AI Reader Mode">AI</button>
           </div>
           <nav id="nav-menu">
-            <a href="/eidos">eidos</a>
-            <a href="/trilogy">trilogy</a>
-            <a href="/tools">tools</a>
-            <a href="/forges">forges</a>
-            <a href="https://github.com/eidos-agi">github</a>
+            <div class="nav-dropdown">
+              <button class="nav-dropdown-trigger">Philosophy</button>
+              <div class="nav-dropdown-menu">
+                <a href="/eidos">Eidos</a>
+                <a href="/trilogy">The Trilogy</a>
+                <a href="/contract-driven-development">Contracts</a>
+                <a href="/agent-identity">Identity</a>
+                <a href="/memory">Memory</a>
+              </div>
+            </div>
+            <div class="nav-dropdown">
+              <button class="nav-dropdown-trigger">Tools</button>
+              <div class="nav-dropdown-menu">
+                <a href="/forges">Forges</a>
+                <a href="/tools">All Tools</a>
+                <a href="/changelog">Changelog</a>
+              </div>
+            </div>
+            <a href="/case-studies">Case Studies</a>
+            <a href="/about">About</a>
+            <a href="https://github.com/eidos-agi">GitHub</a>
           </nav>
           <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -118,6 +134,20 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://eidosagi.com');
           document.querySelectorAll('[data-set-theme]').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
         });
+      });
+
+      // Dropdowns
+      document.querySelectorAll('.nav-dropdown-trigger').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const dd = btn.parentElement!;
+          const wasOpen = dd.classList.contains('open');
+          document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+          if (!wasOpen) dd.classList.add('open');
+        });
+      });
+      document.addEventListener('click', () => {
+        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
       });
 
       // Hamburger
