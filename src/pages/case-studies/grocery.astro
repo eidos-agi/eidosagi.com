@@ -245,8 +245,16 @@ avoid_brands: []</code></pre>
       </section>
 
       <section class="content-section">
-        <p class="cs-closing">This is contract-driven development in its purest form. A git repo. YAML preferences. JSON Schema contracts. An AI that reads them and acts. No code required.</p>
-        <p><a href="/contract-driven-development">Read more about contracts vs skills</a></p>
+        <h2>Try it yourself</h2>
+        <p>We published an example repo you can fork. Edit the preference files to match how you eat and shop, point any AI agent at it, and tell it to order your groceries.</p>
+        <div class="cs-try">
+          <a href="https://github.com/eidos-agi/example-grocery-shopping" class="cs-try-btn">Fork the repo on GitHub</a>
+          <p class="cs-try-detail">3 contracts. 5 preference files. 2 pantry files. Zero code. Works with any AI agent.</p>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <p class="cs-closing"><a href="/contract-driven-development">Read more: Contracts, Not Skills</a> · <a href="/minimum-viable-data">Minimum Viable Data</a></p>
       </section>
 
       <RelatedLinks links={[
@@ -277,11 +285,12 @@ avoid_brands: []</code></pre>
   .cs-result-label { font-family: var(--font-mono); font-size: 10px; color: var(--color-muted); margin-top: var(--space-1); }
   .cs-artifact { background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden; margin: var(--space-6) 0; }
   .cs-artifact-header { font-family: var(--font-mono); font-size: var(--text-xs); padding: var(--space-2) var(--space-4); background: color-mix(in srgb, var(--color-command) 10%, transparent); color: var(--color-command); font-weight: 500; }
-  .cs-artifact-body { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); padding: var(--space-5); }
-  .cs-artifact-body h4 { font-size: var(--text-xs); color: var(--color-text); margin-bottom: var(--space-2); font-weight: var(--weight-medium); }
-  .cs-artifact-body ul { list-style: none; padding: 0; margin: 0 0 var(--space-4) 0; }
-  .cs-artifact-body li { font-size: 11px; color: var(--color-muted); padding: var(--space-1) 0; line-height: 1.5; }
-  .cs-quote { border-left: 3px solid color-mix(in srgb, var(--color-primary) 40%, transparent); padding: var(--space-3) var(--space-5); margin: var(--space-4) 0; font-size: var(--text-sm); color: var(--color-muted); line-height: var(--leading-relaxed); font-style: italic; }
+  .cs-artifact-body { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); padding: var(--space-6); }
+  .cs-artifact-body h4 { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-primary); margin-bottom: var(--space-3); font-weight: var(--weight-medium); text-transform: uppercase; letter-spacing: 0.06em; }
+  .cs-artifact-body ul { list-style: none; padding: 0; margin: 0 0 var(--space-5) 0; }
+  .cs-artifact-body li { font-size: var(--text-xs); color: var(--color-muted); padding: var(--space-2) 0; line-height: var(--leading-normal); border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 6%, transparent); }
+  .cs-artifact-body li:last-child { border-bottom: none; }
+  .cs-quote { border-left: 2px solid color-mix(in srgb, var(--color-primary) 30%, transparent); padding: 0 0 0 var(--space-5); margin: var(--space-6) 0; font-size: var(--text-sm); color: var(--color-muted); line-height: var(--leading-relaxed); font-style: normal; }
   .cs-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin: var(--space-6) 0; }
   .cs-comp-col { background: var(--color-surface); border-radius: var(--radius-md); padding: var(--space-6); text-align: center; }
   .cs-comp-header { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.1em; padding: var(--space-1) var(--space-3); border-radius: 3px; display: inline-block; margin-bottom: var(--space-4); }
@@ -294,5 +303,14 @@ avoid_brands: []</code></pre>
   .cs-comp-facts { display: flex; flex-direction: column; gap: var(--space-1); border-top: var(--border-width) solid color-mix(in srgb, var(--color-muted) 10%, transparent); padding-top: var(--space-4); }
   .cs-comp-facts span { font-family: var(--font-mono); font-size: 10px; color: var(--color-primary); text-align: left; }
   .cs-closing { font-size: var(--text-md); line-height: var(--leading-relaxed); }
-  @media (max-width: 768px) { .cs-prefs { grid-template-columns: 1fr; } }
+  .cs-try { text-align: center; margin: var(--space-6) 0; padding: var(--space-8); background: var(--color-surface); border-radius: var(--radius-md); }
+  .cs-try-btn { display: inline-block; font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-bg); background: var(--color-text); padding: var(--space-3) var(--space-6); border-radius: var(--radius-md); text-decoration: none; font-weight: var(--weight-medium); transition: opacity 0.15s; }
+  .cs-try-btn:hover { opacity: 0.8; }
+  .cs-try-detail { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); margin-top: var(--space-3); }
+  @media (max-width: 768px) {
+    .cs-prefs { grid-template-columns: 1fr; }
+    .cs-result { flex-wrap: wrap; gap: var(--space-4); }
+    .cs-artifact-body { grid-template-columns: 1fr; }
+    .cs-comparison { grid-template-columns: 1fr; }
+  }
 </style>
