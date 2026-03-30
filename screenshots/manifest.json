@@ -1,0 +1,177 @@
+{
+  "type": "baseline",
+  "timestamp": "2026-03-29T21:42:04.383618",
+  "base_url": "http://localhost:4321",
+  "pages": 12,
+  "viewports": 2,
+  "screenshots": [
+    {
+      "file": "home-desktop.png",
+      "path": "/",
+      "viewport": "desktop",
+      "sha": "1b61ad638b5e",
+      "status": "ok"
+    },
+    {
+      "file": "eidos-desktop.png",
+      "path": "/eidos",
+      "viewport": "desktop",
+      "sha": "ab5af6eff1ef",
+      "status": "ok"
+    },
+    {
+      "file": "trilogy-desktop.png",
+      "path": "/trilogy",
+      "viewport": "desktop",
+      "sha": "7e1687fc2110",
+      "status": "ok"
+    },
+    {
+      "file": "contracts-desktop.png",
+      "path": "/contract-driven-development",
+      "viewport": "desktop",
+      "sha": "ded4f6e6e323",
+      "status": "ok"
+    },
+    {
+      "file": "mvd-desktop.png",
+      "path": "/minimum-viable-data",
+      "viewport": "desktop",
+      "sha": "1cb7934b6e9e",
+      "status": "ok"
+    },
+    {
+      "file": "forges-desktop.png",
+      "path": "/forges",
+      "viewport": "desktop",
+      "sha": "d661612bb39b",
+      "status": "ok"
+    },
+    {
+      "file": "memory-desktop.png",
+      "path": "/memory",
+      "viewport": "desktop",
+      "sha": "653cd7b8019c",
+      "status": "ok"
+    },
+    {
+      "file": "identity-desktop.png",
+      "path": "/agent-identity",
+      "viewport": "desktop",
+      "sha": "933c1aed8276",
+      "status": "ok"
+    },
+    {
+      "file": "case-studies-desktop.png",
+      "path": "/case-studies",
+      "viewport": "desktop",
+      "sha": "64296ae2463e",
+      "status": "ok"
+    },
+    {
+      "file": "grocery-desktop.png",
+      "path": "/case-studies/grocery",
+      "viewport": "desktop",
+      "sha": "99e1446dafe8",
+      "status": "ok"
+    },
+    {
+      "file": "about-desktop.png",
+      "path": "/about",
+      "viewport": "desktop",
+      "sha": "cb1663d1e90c",
+      "status": "ok"
+    },
+    {
+      "file": "changelog-desktop.png",
+      "path": "/changelog",
+      "viewport": "desktop",
+      "sha": "fda2348cee88",
+      "status": "ok"
+    },
+    {
+      "file": "home-mobile.png",
+      "path": "/",
+      "viewport": "mobile",
+      "sha": "72449add2307",
+      "status": "ok"
+    },
+    {
+      "file": "eidos-mobile.png",
+      "path": "/eidos",
+      "viewport": "mobile",
+      "sha": "019426058e01",
+      "status": "ok"
+    },
+    {
+      "file": "trilogy-mobile.png",
+      "path": "/trilogy",
+      "viewport": "mobile",
+      "sha": "5200e578b009",
+      "status": "ok"
+    },
+    {
+      "file": "contracts-mobile.png",
+      "path": "/contract-driven-development",
+      "viewport": "mobile",
+      "sha": "2d589d96dd6b",
+      "status": "ok"
+    },
+    {
+      "file": "mvd-mobile.png",
+      "path": "/minimum-viable-data",
+      "viewport": "mobile",
+      "sha": "119285435890",
+      "status": "ok"
+    },
+    {
+      "file": "forges-mobile.png",
+      "path": "/forges",
+      "viewport": "mobile",
+      "sha": "7a3a4296a275",
+      "status": "ok"
+    },
+    {
+      "file": "memory-mobile.png",
+      "path": "/memory",
+      "viewport": "mobile",
+      "sha": "2c9a0b556e64",
+      "status": "ok"
+    },
+    {
+      "file": "identity-mobile.png",
+      "path": "/agent-identity",
+      "viewport": "mobile",
+      "sha": "b92cdee754d3",
+      "status": "ok"
+    },
+    {
+      "file": "case-studies-mobile.png",
+      "path": "/case-studies",
+      "viewport": "mobile",
+      "sha": "61f6db6fcc18",
+      "status": "ok"
+    },
+    {
+      "file": "grocery-mobile.png",
+      "path": "/case-studies/grocery",
+      "viewport": "mobile",
+      "sha": "8f40712e080a",
+      "status": "ok"
+    },
+    {
+      "file": "about-mobile.png",
+      "path": "/about",
+      "viewport": "mobile",
+      "sha": "f3cf015824d5",
+      "status": "ok"
+    },
+    {
+      "file": "changelog-mobile.png",
+      "path": "/changelog",
+      "viewport": "mobile",
+      "sha": "0e08c23baec8",
+      "status": "ok"
+    }
+  ]
+}
