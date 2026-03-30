@@ -1,6 +1,6 @@
 {
   "type": "baseline",
-  "timestamp": "2026-03-29T21:42:04.383618",
+  "timestamp": "2026-03-29T22:16:44.900921",
   "base_url": "http://localhost:4321",
   "pages": 12,
   "viewports": 2,
@@ -9,21 +9,21 @@
       "file": "home-desktop.png",
       "path": "/",
       "viewport": "desktop",
-      "sha": "1b61ad638b5e",
+      "sha": "d0f0e16ff20b",
       "status": "ok"
     },
     {
       "file": "eidos-desktop.png",
       "path": "/eidos",
       "viewport": "desktop",
-      "sha": "ab5af6eff1ef",
+      "sha": "cbee273051bb",
       "status": "ok"
     },
     {
       "file": "trilogy-desktop.png",
       "path": "/trilogy",
       "viewport": "desktop",
-      "sha": "7e1687fc2110",
+      "sha": "88b6ab2b1469",
       "status": "ok"
     },
     {
@@ -37,28 +37,28 @@
       "file": "mvd-desktop.png",
       "path": "/minimum-viable-data",
       "viewport": "desktop",
-      "sha": "1cb7934b6e9e",
+      "sha": "4d575eaf62d8",
       "status": "ok"
     },
     {
       "file": "forges-desktop.png",
       "path": "/forges",
       "viewport": "desktop",
-      "sha": "d661612bb39b",
+      "sha": "078ecc92f60d",
       "status": "ok"
     },
     {
       "file": "memory-desktop.png",
       "path": "/memory",
       "viewport": "desktop",
-      "sha": "653cd7b8019c",
+      "sha": "e9c1efbfeea2",
       "status": "ok"
     },
     {
       "file": "identity-desktop.png",
       "path": "/agent-identity",
       "viewport": "desktop",
-      "sha": "933c1aed8276",
+      "sha": "a161a5654d4a",
       "status": "ok"
     },
     {
@@ -72,7 +72,7 @@
       "file": "grocery-desktop.png",
       "path": "/case-studies/grocery",
       "viewport": "desktop",
-      "sha": "99e1446dafe8",
+      "sha": "e5e2b85632e3",
       "status": "ok"
     },
     {
@@ -93,21 +93,21 @@
       "file": "home-mobile.png",
       "path": "/",
       "viewport": "mobile",
-      "sha": "72449add2307",
+      "sha": "06199c1f8149",
       "status": "ok"
     },
     {
       "file": "eidos-mobile.png",
       "path": "/eidos",
       "viewport": "mobile",
-      "sha": "019426058e01",
+      "sha": "3628692cd3cc",
       "status": "ok"
     },
     {
       "file": "trilogy-mobile.png",
       "path": "/trilogy",
       "viewport": "mobile",
-      "sha": "5200e578b009",
+      "sha": "01f644153da7",
       "status": "ok"
     },
     {
@@ -121,7 +121,7 @@
       "file": "mvd-mobile.png",
       "path": "/minimum-viable-data",
       "viewport": "mobile",
-      "sha": "119285435890",
+      "sha": "7a3a2f592489",
       "status": "ok"
     },
     {
@@ -142,7 +142,7 @@
       "file": "identity-mobile.png",
       "path": "/agent-identity",
       "viewport": "mobile",
-      "sha": "b92cdee754d3",
+      "sha": "c2f103592c4a",
       "status": "ok"
     },
     {
@@ -156,7 +156,7 @@
       "file": "grocery-mobile.png",
       "path": "/case-studies/grocery",
       "viewport": "mobile",
-      "sha": "8f40712e080a",
+      "sha": "805f93a25479",
       "status": "ok"
     },
     {
