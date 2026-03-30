@@ -2,10 +2,11 @@
 interface Props {
   contractLabel: string;
   outputLabel: string;
+  arrowText?: string;
   skillLabel?: string;
   skillMeta?: string;
 }
-const { contractLabel, outputLabel, skillLabel, skillMeta } = Astro.props;
+const { contractLabel, outputLabel, arrowText = 'produces', skillLabel, skillMeta } = Astro.props;
 ---
 
 <div class="chart">
@@ -15,7 +16,7 @@ const { contractLabel, outputLabel, skillLabel, skillMeta } = Astro.props;
       <slot name="contract" />
     </div>
   </div>
-  <div class="chart-arrow">produces</div>
+  <div class="chart-arrow">{ arrowText }</div>
   <div class="chart-col">
     <div class="chart-header">{ outputLabel }</div>
     <div class="chart-body">

@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Lede from '../components/Lede.astro';
 import RelatedLinks from '../components/RelatedLinks.astro';
+import Card from '../components/Card.astro';
 ---
 
 <Base
@@ -45,46 +46,46 @@ import RelatedLinks from '../components/RelatedLinks.astro';
         <h2>Engineering forges</h2>
         <p>Skills for building, testing, shipping, and maintaining software.</p>
         <div class="forge-grid">
-          <a href="https://github.com/eidos-agi/forge-forge" class="forge-card">
+          <Card href="https://github.com/eidos-agi/forge-forge" bordered>
             <h3>forge-forge</h3>
             <p>The meta-forge. Creates new forges, audits the ecosystem.</p>
-          </a>
-          <a href="https://github.com/eidos-agi/test-forge" class="forge-card">
+          </Card>
+          <Card href="https://github.com/eidos-agi/test-forge" bordered>
             <h3>test-forge</h3>
             <p>Testing toolkit. Test files, diagnose failures, manage playbooks.</p>
-          </a>
-          <a href="https://github.com/eidos-agi/ship-forge" class="forge-card">
+          </Card>
+          <Card href="https://github.com/eidos-agi/ship-forge" bordered>
             <h3>ship-forge</h3>
             <p>Shipping pipeline. Build, verify, deploy, announce.</p>
-          </a>
-          <a href="https://github.com/eidos-agi/foss-forge" class="forge-card">
+          </Card>
+          <Card href="https://github.com/eidos-agi/foss-forge" bordered>
             <h3>foss-forge</h3>
             <p>Open-source release toolkit. Checks, releases, launches FOSS projects.</p>
-          </a>
-          <a href="https://github.com/eidos-agi/refactor-forge" class="forge-card">
+          </Card>
+          <Card href="https://github.com/eidos-agi/refactor-forge" bordered>
             <h3>refactor-forge</h3>
             <p>Code refactoring patterns and safety checks.</p>
-          </a>
-          <a href="https://github.com/eidos-agi/security-forge" class="forge-card">
+          </Card>
+          <Card href="https://github.com/eidos-agi/security-forge" bordered>
             <h3>security-forge</h3>
             <p>Security auditing, vulnerability scanning, hardening.</p>
-          </a>
-          <a href="https://github.com/eidos-agi/elt-forge" class="forge-card">
+          </Card>
+          <Card href="https://github.com/eidos-agi/elt-forge" bordered>
             <h3>elt-forge</h3>
             <p>Data pipeline patterns. Extract, load, transform.</p>
-          </a>
-          <a href="https://github.com/eidos-agi/connection-forge" class="forge-card">
+          </Card>
+          <Card href="https://github.com/eidos-agi/connection-forge" bordered>
             <h3>connection-forge</h3>
             <p>Vendor integration specs. Contract-driven data connections.</p>
-          </a>
-          <a href="https://github.com/eidos-agi/brutal-forge" class="forge-card">
+          </Card>
+          <Card href="https://github.com/eidos-agi/brutal-forge" bordered>
             <h3>brutal-forge</h3>
             <p>Zero-mercy software quality demolition. 5-angle attack ranked by user pain.</p>
-          </a>
-          <a href="https://github.com/eidos-agi/ml-forge" class="forge-card">
+          </Card>
+          <Card href="https://github.com/eidos-agi/ml-forge" bordered>
             <h3>ml-forge</h3>
             <p>Solve software problems with ML. Small local models shipped as static artifacts.</p>
-          </a>
+          </Card>
         </div>
       </section>
 
@@ -92,34 +93,34 @@ import RelatedLinks from '../components/RelatedLinks.astro';
         <h2>Knowledge forges</h2>
         <p>Skills for creating, managing, and distributing content and knowledge.</p>
         <div class="forge-grid">
-          <a href="https://github.com/eidos-agi/book-forge" class="forge-card">
+          <Card href="https://github.com/eidos-agi/book-forge" bordered>
             <h3>book-forge</h3>
             <p>Book authoring. Structure, write, edit, publish.</p>
-          </a>
-          <a href="https://github.com/eidos-agi/brand-forge" class="forge-card">
+          </Card>
+          <Card href="https://github.com/eidos-agi/brand-forge" bordered>
             <h3>brand-forge</h3>
             <p>Brand identity. Voice, visuals, consistency across properties.</p>
-          </a>
-          <a href="https://github.com/eidos-agi/demo-forge" class="forge-card">
+          </Card>
+          <Card href="https://github.com/eidos-agi/demo-forge" bordered>
             <h3>demo-forge</h3>
             <p>Product demonstrations. Build, audit, clean up.</p>
-          </a>
-          <a href="https://github.com/eidos-agi/image-forge" class="forge-card">
+          </Card>
+          <Card href="https://github.com/eidos-agi/image-forge" bordered>
             <h3>image-forge</h3>
             <p>Image generation and management.</p>
-          </a>
-          <a href="https://github.com/eidos-agi/video-forge" class="forge-card">
+          </Card>
+          <Card href="https://github.com/eidos-agi/video-forge" bordered>
             <h3>video-forge</h3>
             <p>Video creation workflows.</p>
-          </a>
-          <a href="https://github.com/eidos-agi/marketing-forge" class="forge-card">
+          </Card>
+          <Card href="https://github.com/eidos-agi/marketing-forge" bordered>
             <h3>marketing-forge</h3>
             <p>Marketing content and campaign skills.</p>
-          </a>
-          <a href="https://github.com/eidos-agi/underwriting-forge" class="forge-card">
+          </Card>
+          <Card href="https://github.com/eidos-agi/underwriting-forge" bordered>
             <h3>underwriting-forge</h3>
             <p>Financial underwriting analysis.</p>
-          </a>
+          </Card>
         </div>
       </section>
 
@@ -147,18 +148,6 @@ import RelatedLinks from '../components/RelatedLinks.astro';
   @keyframes fg-dash { to { stroke-dashoffset: -14; } }
 
   .forge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-6); }
-  .forge-card {
-    background: var(--color-surface);
-    padding: var(--space-6);
-    border-radius: var(--radius-md);
-    border: var(--border-width) solid color-mix(in srgb, var(--color-muted) 12%, transparent);
-    text-decoration: none;
-    transition: border-color 200ms ease;
-  }
-  .forge-card:hover { border-color: color-mix(in srgb, var(--color-primary) 40%, transparent); }
-  .forge-card h3 { font-family: var(--font-mono); font-size: var(--text-base); color: var(--color-text); margin-bottom: var(--space-2); }
-  .forge-card p { font-size: var(--text-sm); color: var(--color-muted); line-height: var(--leading-relaxed); margin-bottom: var(--space-3); }
-  .forge-skills { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-command); }
-
+  .forge-grid .card h3 { font-family: var(--font-mono); font-size: var(--text-base); }
   @media (max-width: 768px) { .forge-grid { grid-template-columns: 1fr; } }
 </style>
