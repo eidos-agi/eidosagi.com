@@ -1,6 +1,6 @@
 {
   "type": "baseline",
-  "timestamp": "2026-03-29T23:37:40.394320",
+  "timestamp": "2026-03-29T23:44:13.386958",
   "base_url": "http://localhost:4321",
   "pages": 12,
   "viewports": 2,
@@ -16,70 +16,70 @@
       "file": "eidos-desktop.png",
       "path": "/eidos",
       "viewport": "desktop",
-      "sha": "cbee273051bb",
+      "sha": "15136b03ffcf",
       "status": "ok"
     },
     {
       "file": "trilogy-desktop.png",
       "path": "/trilogy",
       "viewport": "desktop",
-      "sha": "b026fb1ab2ba",
+      "sha": "5bf3886fc342",
       "status": "ok"
     },
     {
       "file": "contracts-desktop.png",
       "path": "/contract-driven-development",
       "viewport": "desktop",
-      "sha": "ded4f6e6e323",
+      "sha": "935e173e05bc",
       "status": "ok"
     },
     {
       "file": "mvd-desktop.png",
       "path": "/minimum-viable-data",
       "viewport": "desktop",
-      "sha": "4d575eaf62d8",
+      "sha": "043ec6cab315",
       "status": "ok"
     },
     {
       "file": "forges-desktop.png",
       "path": "/forges",
       "viewport": "desktop",
-      "sha": "078ecc92f60d",
+      "sha": "3e1e2eb7f50b",
       "status": "ok"
     },
     {
       "file": "memory-desktop.png",
       "path": "/memory",
       "viewport": "desktop",
-      "sha": "e9c1efbfeea2",
+      "sha": "e8376f8eca10",
       "status": "ok"
     },
     {
       "file": "identity-desktop.png",
       "path": "/agent-identity",
       "viewport": "desktop",
-      "sha": "60d89b66f38e",
+      "sha": "fd5891de5fa3",
       "status": "ok"
     },
     {
       "file": "case-studies-desktop.png",
       "path": "/case-studies",
       "viewport": "desktop",
-      "sha": "64296ae2463e",
+      "sha": "40297e98f332",
       "status": "ok"
     },
     {
       "file": "grocery-desktop.png",
       "path": "/case-studies/grocery",
       "viewport": "desktop",
-      "sha": "28f0c3384fa1",
+      "sha": "283d8c8c7769",
       "status": "ok"
     },
     {
       "file": "about-desktop.png",
       "path": "/about",
       "viewport": "desktop",
-      "sha": "cb1663d1e90c",
+      "sha": "af662a542c9e",
       "status": "ok"
     },
     {
@@ -100,70 +100,70 @@
       "file": "eidos-mobile.png",
       "path": "/eidos",
       "viewport": "mobile",
-      "sha": "3628692cd3cc",
+      "sha": "830eca04cdca",
       "status": "ok"
     },
     {
       "file": "trilogy-mobile.png",
       "path": "/trilogy",
       "viewport": "mobile",
-      "sha": "e8d77cc9c1e3",
+      "sha": "f12f2f4d7002",
       "status": "ok"
     },
     {
       "file": "contracts-mobile.png",
       "path": "/contract-driven-development",
       "viewport": "mobile",
-      "sha": "2d589d96dd6b",
+      "sha": "7c2b91bfc27c",
       "status": "ok"
     },
     {
       "file": "mvd-mobile.png",
       "path": "/minimum-viable-data",
       "viewport": "mobile",
-      "sha": "7a3a2f592489",
+      "sha": "c854438ca14f",
       "status": "ok"
     },
     {
       "file": "forges-mobile.png",
       "path": "/forges",
       "viewport": "mobile",
-      "sha": "7a3a4296a275",
+      "sha": "cdca178a2705",
       "status": "ok"
     },
     {
       "file": "memory-mobile.png",
       "path": "/memory",
       "viewport": "mobile",
-      "sha": "a1a1fbdc06bd",
+      "sha": "5f4f022891c0",
       "status": "ok"
     },
     {
       "file": "identity-mobile.png",
       "path": "/agent-identity",
       "viewport": "mobile",
-      "sha": "339e24e965e5",
+      "sha": "0e0705cf0599",
       "status": "ok"
     },
     {
       "file": "case-studies-mobile.png",
       "path": "/case-studies",
       "viewport": "mobile",
-      "sha": "61f6db6fcc18",
+      "sha": "b8846b351711",
       "status": "ok"
     },
     {
       "file": "grocery-mobile.png",
       "path": "/case-studies/grocery",
       "viewport": "mobile",
-      "sha": "1e13d69669a1",
+      "sha": "db05686b4d3b",
       "status": "ok"
     },
     {
       "file": "about-mobile.png",
       "path": "/about",
       "viewport": "mobile",
-      "sha": "f3cf015824d5",
+      "sha": "0f484b7aa5f4",
       "status": "ok"
     },
     {

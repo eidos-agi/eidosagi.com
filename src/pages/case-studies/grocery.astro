@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
+import Lede from '../../components/Lede.astro';
 import RelatedLinks from '../../components/RelatedLinks.astro';
 import VideoEmbed from '../../components/VideoEmbed.astro';
 import CodeBlock from '../../components/CodeBlock.astro';
@@ -17,6 +18,7 @@ import CompareTable from '../../components/CompareTable.astro';
 >
     <article class="prose-page">
       <PageHero title="Groceries ordered<br />by contracts alone" subtitle="No code. No skills. No step-by-step instructions. Just a git repo." />
+      <Lede text="A GitHub repo with zero code ordered $260 of groceries. The AI read 3 JSON Schema contracts and 5 YAML preference files, then placed the order autonomously." />
 
       <section class="content-section">
         <VideoEmbed src="/videos/grocery-order.mp4" caption="Perplexity Computer reading contracts from a GitHub repo to place a grocery order." />
