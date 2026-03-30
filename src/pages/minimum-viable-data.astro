@@ -1,0 +1,139 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Minimum Viable Data — Eidos AGI"
+  description="Not the smallest product you can ship. The smallest data you can define. Products get replaced. Data compounds."
+>
+    <article class="prose-page">
+      <header class="page-hero">
+        <h1>Minimum Viable Data</h1>
+        <p class="subtitle">Not the smallest product. The smallest data.</p>
+      </header>
+
+      <section class="content-section">
+        <p>The startup world asks: what's the minimum viable product? What's the smallest thing we can build and ship?</p>
+        <p>That question assumes the product is the value. Build an app. Ship a feature. Deploy a service. The product is the deliverable.</p>
+        <p>But products are implementations. Implementations get replaced. The React app gets rewritten in Swift. The Python service gets rewritten in Rust. The CLI gets replaced by a GUI gets replaced by a voice interface. Every product is temporary.</p>
+        <p><strong>Data is the specification. Specifications compound.</strong></p>
+        <p>The right question isn't "what's the smallest product we can ship?" It's: <strong>what's the smallest structured dataset that lets any AI — current or future — do the job?</strong></p>
+      </section>
+
+      <section class="content-section">
+        <h2>A grocery order with no product</h2>
+        <p>A GitHub repo. No software. No database. No code of any kind.</p>
+        <pre><code>reeves-grocery/
+  contracts/
+    shopping-list.schema.json
+    meal-plan.schema.json
+    pantry-update.schema.json
+  preferences/
+    dietary.yaml
+    cooking.yaml
+    shopping.yaml
+    household.yaml
+    goals.yaml
+  pantry/
+    current.md
+    reserve.md</code></pre>
+        <p>Three schemas. Five preference files. Two pantry files. An AI reads them and orders groceries. Every week. No app, no API, no deployment, no infrastructure.</p>
+        <p>That's the MVD. 372 lines of structured data. Zero lines of code.</p>
+        <p>The "product" is whatever AI agent happens to read the data this week. Last month it was Claude Code. This week it's Perplexity Computer. Next month it might be something that doesn't exist yet. The product changed three times. The data changed zero times.</p>
+      </section>
+
+      <section class="content-section">
+        <h2>Product means code. MVD means results.</h2>
+        <p>When you build a product, you're writing code. Code has dependencies, runtimes, versions, breaking changes, security patches, CI pipelines, deployment infrastructure. Code is a liability that you maintain in exchange for results.</p>
+        <p>When you define data, you're writing a specification. A specification has none of those liabilities. It sits in a git repo. Any agent reads it. Better agents produce better results from the same specification. The specification gets more valuable as AI improves. The code gets less valuable.</p>
+
+        <div class="mvd-compare">
+          <div class="mvd-compare-item mvd-product">
+            <div class="mvd-compare-header">Product (MVP)</div>
+            <ul>
+              <li>Code that does the thing</li>
+              <li>Dependencies to maintain</li>
+              <li>Deployment to manage</li>
+              <li>Breaks when the model changes</li>
+              <li>Breaks when the platform changes</li>
+              <li>One AI agent can use it</li>
+              <li>Gets replaced every 2 years</li>
+            </ul>
+          </div>
+          <div class="mvd-compare-item mvd-data">
+            <div class="mvd-compare-header">Data (MVD)</div>
+            <ul>
+              <li>Schemas that define what "done" looks like</li>
+              <li>Preferences that define who you are</li>
+              <li>State that defines where things stand</li>
+              <li>Gets more valuable as models improve</li>
+              <li>Works with any AI, any platform</li>
+              <li>Every agent can use it</li>
+              <li>Never needs replacing</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>The pattern</h2>
+        <p>Every MVD has three parts:</p>
+        <ol class="mvd-parts">
+          <li><strong>Contracts</strong> — JSON Schemas that define what valid output looks like. The shopping list contract says what a grocery order must contain. The deployment contract says what "deployed" means. The contract is the goal with structure.</li>
+          <li><strong>Preferences</strong> — YAML or markdown files that define who the user is. Dietary restrictions, budget, cooking skill, brand preferences. These are stable — a person's diet doesn't change weekly.</li>
+          <li><strong>State</strong> — What's true right now. What's in the pantry. What was ordered last week. What's in stock. This changes often but the format doesn't.</li>
+        </ol>
+        <p>Contracts + preferences + state. That's the MVD. An AI reads all three and produces results. No product required.</p>
+      </section>
+
+      <section class="content-section">
+        <h2>Where products still matter</h2>
+        <p>MVD doesn't mean products are useless. It means products are a delivery mechanism, not the value. The Mac app that records your voice is a product. The recording bucket with its JSON Schema contract is the data. The app will be rewritten. The bucket schema will survive.</p>
+        <p>Build the data first. Define the contracts. Write the preferences. Capture the state. Then build whatever product delivers the best experience today — knowing that the product is temporary and the data is permanent.</p>
+        <p>The product is the car. The data is the road. Cars get replaced every few years. Roads last for centuries.</p>
+      </section>
+
+      <section class="content-section">
+        <h2>Start with MVD</h2>
+        <p>Before writing code, ask:</p>
+        <ol class="mvd-steps">
+          <li>What does "done" look like? Write the contract.</li>
+          <li>Who is this for? Write the preferences.</li>
+          <li>What's true right now? Capture the state.</li>
+          <li>Can an AI produce results from just these files?</li>
+          <li>If yes — you have your MVD. Ship the data. The product can come later.</li>
+          <li>If no — what's missing from the data? Add it. Don't add code.</li>
+        </ol>
+      </section>
+
+      <section class="content-section">
+        <p class="mvd-closing">Minimum Viable Product asks how little you can build. Minimum Viable Data asks how little you can define. One is a liability. The other is an asset. Define the data. Let AI be the product.</p>
+      </section>
+
+      <div class="related">
+        <span class="related-label">Related</span>
+        <div class="related-links">
+          <a href="/contract-driven-development">Contracts, Not Skills</a>
+          <a href="/case-studies/grocery">Grocery Case Study</a>
+          <a href="/case-studies">Case Studies</a>
+          <a href="/forges">Forges</a>
+        </div>
+      </div>
+    </article>
+</Base>
+
+<style is:global>
+  .mvd-compare { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin: var(--space-6) 0; }
+  .mvd-compare-item { background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden; }
+  .mvd-compare-header { font-family: var(--font-mono); font-size: var(--text-xs); padding: var(--space-3) var(--space-4); font-weight: 500; }
+  .mvd-product .mvd-compare-header { background: color-mix(in srgb, var(--color-danger) 12%, transparent); color: var(--color-danger); }
+  .mvd-data .mvd-compare-header { background: color-mix(in srgb, var(--color-command) 12%, transparent); color: var(--color-command); }
+  .mvd-compare-item ul { list-style: none; padding: var(--space-4); margin: 0; }
+  .mvd-compare-item li { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-1) 0; line-height: var(--leading-normal); }
+  .mvd-parts { padding-left: var(--space-6); }
+  .mvd-parts li { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-2) 0; line-height: var(--leading-normal); }
+  .mvd-steps { padding-left: var(--space-6); }
+  .mvd-steps li { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-2) 0; line-height: var(--leading-normal); }
+  .mvd-closing { font-size: var(--text-md); line-height: var(--leading-relaxed); }
+  @media (max-width: 768px) { .mvd-compare { grid-template-columns: 1fr; } }
+</style>
