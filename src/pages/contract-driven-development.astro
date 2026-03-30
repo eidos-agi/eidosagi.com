@@ -13,7 +13,11 @@ import Base from '../layouts/Base.astro';
       </header>
 
       <section class="content-section">
-        <p><strong>Skills are technical debt that accrues as models improve.</strong> Every step-by-step instruction is a bet that future models will be as limited as today's. That bet has never paid off. Contracts define what we want — not how to get there. That's the primitive that survives.</p>
+        <p>The AI ecosystem is building skills — step-by-step instructions that tell models how to accomplish goals. Skills work today. They compensate for what the model can't figure out on its own.</p>
+        <p>But skills are written based on today's weaknesses. Imagine writing a skills file for GPT-3 two years ago. It would be extremely verbose — every step spelled out, every edge case handled, every format detail specified. Today's models need less of that. Tomorrow's models need even less.</p>
+        <p><strong>Skills are technical debt that accrues as models improve.</strong> Every step-by-step instruction is a bet that future models will be as limited as today's. That bet has never paid off.</p>
+        <p>Contracts are the alternative. A contract defines what we want — the end state, the constraints, the guardrails. It does not define how to get there, what order to do things, or what tools to use. A contract says <em>what</em>. A skill says <em>how</em>. Models get better at <em>how</em> every six months. <em>What</em> doesn't change.</p>
+        <p>Here are three real examples. Each shows the contract, what a model produces from it, and the skill it replaces.</p>
       </section>
 
       <!-- ── CONTRACT 1: Code Review ─────────────────────── -->
@@ -195,9 +199,10 @@ Step 8: Output summary...
       <!-- ── The argument ────────────────────────────────── -->
       <section class="content-section">
         <h2>The bitter lesson</h2>
-        <p>Richard Sutton's greatest contribution to computer science: general methods that leverage computation always beat hand-crafted human knowledge as compute scales.</p>
-        <p>We teach a computer to play chess by giving it the rules (a contract) and a goal (win). We don't give it opening theory, middlegame strategy, or endgame technique. The system that learned without human strategy knowledge destroyed the one built on decades of human expertise.</p>
-        <p>Skills are chess strategy books. Contracts are the rules of chess. One decays with every improvement in reasoning. The other is permanent.</p>
+        <p>Richard Sutton's greatest contribution to computer science: general methods that leverage computation always beat hand-crafted human knowledge as compute scales. This is the bitter lesson — bitter because researchers keep re-learning it, and it keeps being true.</p>
+        <p>We teach a computer to play chess by giving it two things: the rules of chess (a contract) and a goal (win). We don't give it opening theory. We don't give it middlegame strategy. We don't tell it to control the center, develop knights before bishops, or castle early. Those are skills. They work for beginners. They fail at grandmaster level.</p>
+        <p>AlphaZero — the system that learned to play chess with nothing but the rules and self-play — destroyed Stockfish, the system built on decades of hand-tuned human chess expertise. Not by a little. By a lot. Because Stockfish was a skills file. AlphaZero had a contract.</p>
+        <p>The same pattern applies to AI development tools. Skills files are chess strategy books — useful for today's model, obsolete for tomorrow's. Contracts are the rules of chess — permanent, terse, and more powerful as the player gets smarter.</p>
       </section>
 
       <section class="content-section">
@@ -233,7 +238,8 @@ Step 8: Output summary...
       </section>
 
       <section class="content-section">
-        <p class="cdd-closing">Contracts define what we want, not how to deliver it. That's the primitive that survives AGI.</p>
+        <p class="cdd-closing">Contracts define what we want, not how to deliver it. A contract is a goal with structure. As long as humans have goals, contracts have value. As long as AI improves at reasoning, skills lose value.</p>
+        <p class="cdd-closing">The <code>contracts/</code> directory is permanent infrastructure. The <code>skills/</code> directory is a construction site that eventually gets torn down. Build contracts. Let skills decay.</p>
       </section>
 
       <div class="related">
