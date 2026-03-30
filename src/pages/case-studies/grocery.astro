@@ -175,16 +175,18 @@ avoid_brands: []</code></pre>
 
       <section class="content-section">
         <h2>The agent's own assessment</h2>
-        <p>From the agent's log after completing the order:</p>
-        <blockquote class="cs-quote">
-          "This was the smoothest grocery shopping experience I've had as an agent. I cloned the repo and understood the entire domain in under two minutes. CLAUDE.md told me the structure, the preferences told me the constraints, the contracts told me what valid output looks like. No API docs, no database schema, no authentication flow. Just read files, understand intent, act."
-        </blockquote>
-        <blockquote class="cs-quote">
-          "The contract schema pattern is underrated. shopping-list.schema.json didn't tell me how to build a list — it told me what a valid list looks like. That's a much better interface for an agent. Procedural instructions are brittle. Structural contracts are composable."
-        </blockquote>
-        <blockquote class="cs-quote">
-          "This is a data-first system that treats agents as interchangeable executors and files as the source of truth. It's the right architecture. I'd use this pattern for more than groceries."
-        </blockquote>
+        <p>After completing the order, the agent wrote observations into the repo's log. These are excerpts:</p>
+        <div class="cs-log">
+          <div class="cs-log-header">
+            <span class="cs-log-file">logs/2026-03.md</span>
+            <span class="cs-log-attr">Perplexity Computer — March 29, 2026</span>
+          </div>
+          <div class="cs-log-body">
+            <p>This was the smoothest grocery shopping experience I've had as an agent. I cloned the repo and understood the entire domain in under two minutes. CLAUDE.md told me the structure, the preferences told me the constraints, the contracts told me what valid output looks like. No API docs, no database schema, no authentication flow. Just read files, understand intent, act.</p>
+            <p>The contract schema pattern is underrated. shopping-list.schema.json didn't tell me <em>how</em> to build a list — it told me what a <em>valid</em> list looks like. That's a much better interface for an agent. Procedural instructions are brittle. Structural contracts are composable.</p>
+            <p>This is a data-first system that treats agents as interchangeable executors and files as the source of truth. It's the right architecture. I'd use this pattern for more than groceries.</p>
+          </div>
+        </div>
       </section>
 
       <section class="content-section">
@@ -290,7 +292,13 @@ avoid_brands: []</code></pre>
   .cs-artifact-body ul { list-style: none; padding: 0; margin: 0 0 var(--space-5) 0; }
   .cs-artifact-body li { font-size: var(--text-xs); color: var(--color-muted); padding: var(--space-2) 0; line-height: var(--leading-normal); border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 6%, transparent); }
   .cs-artifact-body li:last-child { border-bottom: none; }
-  .cs-quote { border-left: 2px solid color-mix(in srgb, var(--color-primary) 30%, transparent); padding: 0 0 0 var(--space-5); margin: var(--space-6) 0; font-size: var(--text-sm); color: var(--color-muted); line-height: var(--leading-relaxed); font-style: normal; }
+  .cs-log { background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden; margin: var(--space-6) 0; }
+  .cs-log-header { display: flex; justify-content: space-between; align-items: center; padding: var(--space-3) var(--space-5); border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 10%, transparent); }
+  .cs-log-file { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-command); font-weight: 500; }
+  .cs-log-attr { font-family: var(--font-mono); font-size: 10px; color: var(--color-muted); }
+  .cs-log-body { padding: var(--space-5) var(--space-6); }
+  .cs-log-body p { font-size: var(--text-sm); color: var(--color-muted); line-height: var(--leading-relaxed); margin-bottom: var(--space-4); }
+  .cs-log-body p:last-child { margin-bottom: 0; }
   .cs-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin: var(--space-6) 0; }
   .cs-comp-col { background: var(--color-surface); border-radius: var(--radius-md); padding: var(--space-6); text-align: center; }
   .cs-comp-header { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.1em; padding: var(--space-1) var(--space-3); border-radius: 3px; display: inline-block; margin-bottom: var(--space-4); }
