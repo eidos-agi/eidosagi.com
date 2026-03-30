@@ -63,6 +63,12 @@ priorities:
 
         <p>The contract defines what a valid shopping list looks like. The preferences define who the person is. The AI reads both and produces a list that conforms. No agent framework. No tool calls. No step-by-step playbook. Just a schema and data.</p>
         <p>This is real. An actual grocery order placed weekly by an AI reading contracts from a git repo.</p>
+
+        <div class="cdd-video">
+          <video controls playsinline preload="metadata">
+            <source src="/videos/grocery-order.mp4" type="video/mp4" />
+          </video>
+        </div>
       </section>
 
       <section class="content-section">
@@ -330,6 +336,8 @@ Step 8: Output summary...
   .cdd-trio-item code { font-size: var(--text-xs); color: var(--color-command); }
 
   .cdd-closing { font-size: var(--text-md); line-height: var(--leading-relaxed); }
+  .cdd-video { margin: var(--space-6) 0; border-radius: var(--radius-md); overflow: hidden; }
+  .cdd-video video { width: 100%; display: block; }
 
   @media (max-width: 768px) { .cdd-chart { grid-template-columns: 1fr; } .cdd-chart-arrow { padding: var(--space-2) 0; } .cdd-trio { grid-template-columns: 1fr; } }
 </style>
