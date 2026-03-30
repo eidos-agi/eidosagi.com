@@ -13,101 +13,202 @@ import Base from '../layouts/Base.astro';
       </header>
 
       <section class="content-section">
-        <p>The AI ecosystem is building skills — step-by-step instructions that tell models how to accomplish goals. Skills work today. They compensate for what the model can't figure out on its own.</p>
-        <p>But skills are written based on today's weaknesses. Imagine writing a skills file for GPT-3 two years ago. It would be extremely verbose — every step spelled out, every edge case handled, every format detail specified. Today's models need less of that. Tomorrow's models need even less.</p>
-        <p><strong>Skills are technical debt that accrues as models improve.</strong> Every step-by-step instruction is a bet that future models will be as limited as today's. That bet has never paid off.</p>
+        <p><strong>Skills are technical debt that accrues as models improve.</strong> Every step-by-step instruction is a bet that future models will be as limited as today's. That bet has never paid off. Contracts define what we want — not how to get there. That's the primitive that survives.</p>
       </section>
 
+      <!-- ── CONTRACT 1: Code Review ─────────────────────── -->
       <section class="content-section">
-        <h2>What survives</h2>
-        <p>A contract defines what we want — the end state, the constraints, the guardrails. It does not define how to get there, what order to do things, or what tools to use.</p>
-        <p>Compare these two ways of saying "improve a software project":</p>
+        <h2>Code review</h2>
+        <p>The contract defines what "reviewed" means. The model decides how to review.</p>
 
-        <div class="cdd-compare">
-          <div class="cdd-compare-item cdd-compare-skill">
-            <div class="cdd-compare-label">A skill <span class="cdd-compare-meta">150 lines</span></div>
-            <pre><code>Step 1: Read CLAUDE.md to understand the project
-Step 2: Read .visionlog/vision.md for stated purpose
-Step 3: Detect project type (forge vs software)
-  - Knowledge forge: skip performance, security
-  - Software: check builds, tests, dependencies
-Step 4: Score each dimension 1-10 using this rubric:
-  | Dimension | 1 (broken) | 5 (rough) | 10 (done) |
-  | Reliability | crashes | happy path | battle-tested |
-  | Performance | unusable | acceptable | profiled |
-  ...eight more dimensions with calibration...
-Step 5: Pick the highest-impact gap
-Step 6: Make the fix. Read before writing.
-Step 7: Run tests. Verify the build.
-Step 8: Write the snapshot to improvements/
-  Use this exact JSON format:
-  &#123; "date": "...", "scores": &#123;...&#125;, ... &#125;</code></pre>
-          </div>
-          <div class="cdd-compare-item cdd-compare-contract">
-            <div class="cdd-compare-label">A contract <span class="cdd-compare-meta">10 lines</span></div>
+        <div class="cdd-chart">
+          <div class="cdd-chart-contract">
+            <div class="cdd-chart-header">Contract</div>
             <pre><code>&#123;
-  "goal": "Leave the project measurably better",
-  "output": "improvement-snapshot.schema.json",
-  "constraints": [
-    "Every score cites specific evidence",
-    "Fix the highest-impact gap, not easiest",
-    "Never violate the project's guardrails",
-    "Record every run"
-  ]
+  "file": "string — path to file",
+  "findings": [&#123;
+    "line": "integer",
+    "severity": "critical | warning | suggestion",
+    "issue": "string — what's wrong",
+    "fix": "string — how to fix it"
+  &#125;],
+  "verdict": "approve | request-changes | block",
+  "summary": "string — one sentence"
+&#125;</code></pre>
+          </div>
+          <div class="cdd-chart-arrow">produces</div>
+          <div class="cdd-chart-output">
+            <div class="cdd-chart-header">Example output</div>
+            <pre><code>&#123;
+  "file": "src/auth/session.py",
+  "findings": [
+    &#123;
+      "line": 42,
+      "severity": "critical",
+      "issue": "SQL injection — user input interpolated directly into query",
+      "fix": "Use parameterized query: cursor.execute('SELECT * FROM users WHERE id = %s', (user_id,))"
+    &#125;,
+    &#123;
+      "line": 87,
+      "severity": "warning",
+      "issue": "Bare except swallows KeyboardInterrupt",
+      "fix": "Catch Exception, not BaseException"
+    &#125;
+  ],
+  "verdict": "block",
+  "summary": "SQL injection in auth path. Must fix before merge."
 &#125;</code></pre>
           </div>
         </div>
 
-        <p>The skill says <em>how</em>. The contract says <em>what</em>. Models get better at <em>how</em> every six months. <em>What</em> doesn't change.</p>
+        <div class="cdd-chart-skill">
+          <div class="cdd-chart-header cdd-chart-header-skill">The skill this replaces <span class="cdd-fade">150 lines</span></div>
+          <pre><code>Step 1: Read the file. Understand its role.
+Step 2: Check for security issues (OWASP top 10, injection, XSS...)
+Step 3: Check for performance (N+1, blocking calls, memory leaks...)
+Step 4: Check error handling (bare except, swallowed errors...)
+Step 5: Check logic (off-by-one, race conditions, null derefs...)
+Step 6: Format as line-by-line findings with severity...
+Step 7: Assign verdict: approve if 0 critical, request-changes if...
+...eight more steps with edge cases and format rules...</code></pre>
+        </div>
       </section>
 
+      <!-- ── CONTRACT 2: Deployment ──────────────────────── -->
+      <section class="content-section">
+        <h2>Deployment</h2>
+        <p>The contract defines what "deployed" means. The model decides how to deploy.</p>
+
+        <div class="cdd-chart">
+          <div class="cdd-chart-contract">
+            <div class="cdd-chart-header">Contract</div>
+            <pre><code>&#123;
+  "service": "string",
+  "sha": "string — git commit",
+  "environment": "staging | production",
+  "status": "healthy | degraded | failed",
+  "checks": &#123;
+    "health_endpoint": "boolean",
+    "smoke_test": "boolean",
+    "logs_clean": "boolean"
+  &#125;,
+  "rollback": &#123;
+    "previous_sha": "string",
+    "command": "string",
+    "migration_reversible": "boolean"
+  &#125;
+&#125;</code></pre>
+          </div>
+          <div class="cdd-chart-arrow">produces</div>
+          <div class="cdd-chart-output">
+            <div class="cdd-chart-header">Example output</div>
+            <pre><code>&#123;
+  "service": "eidos-mail",
+  "sha": "a4b39a7",
+  "environment": "production",
+  "status": "healthy",
+  "checks": &#123;
+    "health_endpoint": true,
+    "smoke_test": true,
+    "logs_clean": true
+  &#125;,
+  "rollback": &#123;
+    "previous_sha": "f015d50",
+    "command": "railway deploy --sha f015d50",
+    "migration_reversible": true
+  &#125;
+&#125;</code></pre>
+          </div>
+        </div>
+
+        <div class="cdd-chart-skill">
+          <div class="cdd-chart-header cdd-chart-header-skill">The skill this replaces <span class="cdd-fade">100 lines</span></div>
+          <pre><code>Step 1: Detect service type (FastAPI, Flask, MCP...)
+Step 2: Check health endpoint exists, returns 200...
+Step 3: Verify SIGTERM handling for graceful shutdown...
+Step 4: Audit environment variables...
+Step 5: Check Dockerfile or Procfile...
+Step 6: Document rollback strategy...
+...six more steps with Railway-specific checks...</code></pre>
+        </div>
+      </section>
+
+      <!-- ── CONTRACT 3: Improvement ─────────────────────── -->
+      <section class="content-section">
+        <h2>Project improvement</h2>
+        <p>The contract defines what "better" means. The model decides how to improve.</p>
+
+        <div class="cdd-chart">
+          <div class="cdd-chart-contract">
+            <div class="cdd-chart-header">Contract</div>
+            <pre><code>&#123;
+  "project": "string",
+  "scores": &#123;
+    "reliability": "1-10 | null",
+    "performance": "1-10 | null",
+    "ux": "1-10 | null",
+    "security": "1-10 | null",
+    "code_quality": "1-10 | null",
+    "documentation": "1-10 | null"
+  &#125;,
+  "focus": "string — dimension improved",
+  "improvement": "string — what was fixed",
+  "delta": &#123; "dimension": &#123; "before": "int", "after": "int" &#125; &#125;,
+  "next_priority": "string — what to fix next"
+&#125;</code></pre>
+          </div>
+          <div class="cdd-chart-arrow">produces</div>
+          <div class="cdd-chart-output">
+            <div class="cdd-chart-header">Example output</div>
+            <pre><code>&#123;
+  "project": "eidos-mail",
+  "scores": &#123;
+    "reliability": 3,
+    "performance": 5,
+    "ux": 4,
+    "security": 3,
+    "code_quality": 6,
+    "documentation": 2
+  &#125;,
+  "focus": "documentation",
+  "improvement": "Added README with install, usage, and architecture. Added CLAUDE.md with key files and gotchas.",
+  "delta": &#123; "documentation": &#123; "before": 2, "after": 5 &#125; &#125;,
+  "next_priority": "reliability — no tests for the IMAP connection handler"
+&#125;</code></pre>
+          </div>
+        </div>
+
+        <div class="cdd-chart-skill">
+          <div class="cdd-chart-header cdd-chart-header-skill">The skill this replaces <span class="cdd-fade">150 lines</span></div>
+          <pre><code>Step 1: Read CLAUDE.md, vision, README, guardrails...
+Step 2: Read directory structure, source files, tests...
+Step 3: Score each dimension using calibration rubric...
+Step 4: Pick highest-impact gap...
+Step 5: Make the fix...
+Step 6: Run tests, verify build...
+Step 7: Write snapshot JSON...
+Step 8: Output summary...
+...plus rules for project type detection, previous runs, forge pipelines...</code></pre>
+        </div>
+      </section>
+
+      <!-- ── The argument ────────────────────────────────── -->
       <section class="content-section">
         <h2>The bitter lesson</h2>
         <p>Richard Sutton's greatest contribution to computer science: general methods that leverage computation always beat hand-crafted human knowledge as compute scales.</p>
-        <p>We teach a computer to play chess by giving it the rules of chess (a contract) and a goal (win). We don't give it opening theory, middlegame strategy, or endgame technique. That's a skill. The system that learned to play chess without human strategy knowledge destroyed the one built on decades of human expertise.</p>
+        <p>We teach a computer to play chess by giving it the rules (a contract) and a goal (win). We don't give it opening theory, middlegame strategy, or endgame technique. The system that learned without human strategy knowledge destroyed the one built on decades of human expertise.</p>
         <p>Skills are chess strategy books. Contracts are the rules of chess. One decays with every improvement in reasoning. The other is permanent.</p>
       </section>
 
       <section class="content-section">
-        <h2>In practice</h2>
-        <p>Three contracts that replace three skills files:</p>
-
-        <div class="cdd-contracts-list">
-          <div class="cdd-contract-item"><a href="/contracts/code-review.schema.json"><strong>code-review.schema.json</strong></a> — what a reviewed file looks like. Findings with severity, line numbers, and fixes. A verdict: approve, request changes, or block. The model decides how to review. The contract defines what "reviewed" means.</div>
-          <div class="cdd-contract-item"><a href="/contracts/deployment-record.schema.json"><strong>deployment-record.schema.json</strong></a> — what a successful deployment looks like. Service, SHA, health checks, rollback plan. The model decides how to deploy. The contract defines what "deployed" means.</div>
-          <div class="cdd-contract-item"><a href="/contracts/improvement-snapshot.schema.json"><strong>improvement-snapshot.schema.json</strong></a> — what a better project looks like. Scores across 10 dimensions with evidence, delta from last run, next priority. The model decides how to improve. The contract defines what "better" means.</div>
-        </div>
-
-        <p>These are real JSON Schemas — click to read them. Any model, current or future, reads the schema and produces conforming output. A better model produces a sharper review, a more thorough deployment check, a deeper improvement. But the output conforms to the same schema. The contract is the stable interface between human intent and AI capability.</p>
-      </section>
-
-      <section class="content-section">
         <h2>The transition</h2>
-        <p>You don't have to abandon skills today. Current models still benefit from guidance. The shift is:</p>
-        <ol class="cdd-transition-steps">
-          <li><strong>Define the contract first.</strong> What does the output look like? Write the JSON Schema.</li>
-          <li><strong>Write the skill second.</strong> Only if the model can't meet the contract from the schema alone.</li>
-          <li><strong>Test without the skill periodically.</strong> Give the model just the contract. If the output conforms, the skill is done.</li>
+        <ol class="cdd-steps">
+          <li><strong>Define the contract first.</strong> What does the output look like? Write the schema.</li>
+          <li><strong>Write the skill second.</strong> Only if the model can't meet the contract alone.</li>
+          <li><strong>Test without the skill periodically.</strong> If the output conforms, the skill is done.</li>
           <li><strong>Let skills decay.</strong> Don't maintain them. They're temporary bridges.</li>
         </ol>
-        <p>The <code>contracts/</code> directory is permanent infrastructure. The <code>skills/</code> directory is a construction site that eventually gets torn down.</p>
-      </section>
-
-      <section class="content-section">
-        <h2>The confidence model</h2>
-        <p>Every fact an agent depends on carries a confidence level. The readiness of a system is the lowest confidence of its parts. One "unknown" means the whole system is not production-ready.</p>
-        <table class="cdd-table">
-          <thead>
-            <tr><th>Level</th><th>Meaning</th><th>Can build on?</th></tr>
-          </thead>
-          <tbody>
-            <tr><td class="cdd-level cdd-proven">proven</td><td>Tested in production, confirmed</td><td>Yes</td></tr>
-            <tr><td class="cdd-level cdd-tested">tested</td><td>Validated against real system</td><td>Yes, with monitoring</td></tr>
-            <tr><td class="cdd-level cdd-researched">researched</td><td>From docs, not verified</td><td>Verify first</td></tr>
-            <tr><td class="cdd-level cdd-inferred">inferred</td><td>Guessed from similar systems</td><td>No — verify</td></tr>
-            <tr><td class="cdd-level cdd-unknown">unknown</td><td>No information</td><td>No — discover</td></tr>
-          </tbody>
-        </table>
+        <p><code>contracts/</code> is permanent infrastructure. <code>skills/</code> is a construction site that eventually gets torn down.</p>
       </section>
 
       <section class="content-section">
@@ -148,33 +249,31 @@ Step 8: Write the snapshot to improvements/
 </Base>
 
 <style is:global>
-  .cdd-compare { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin: var(--space-8) 0; }
-  .cdd-compare-item { border-radius: var(--radius-md); overflow: hidden; }
-  .cdd-compare-label { font-family: var(--font-mono); font-size: var(--text-xs); padding: var(--space-3) var(--space-4); font-weight: var(--weight-medium); }
-  .cdd-compare-meta { opacity: 0.5; margin-left: var(--space-2); }
-  .cdd-compare-skill .cdd-compare-label { background: color-mix(in srgb, var(--color-danger) 15%, transparent); color: var(--color-danger); }
-  .cdd-compare-contract .cdd-compare-label { background: color-mix(in srgb, var(--color-command) 15%, transparent); color: var(--color-command); }
-  .cdd-compare-item pre { margin: 0; padding: var(--space-4); background: var(--color-surface); font-size: var(--text-xs); line-height: var(--leading-relaxed); }
-  .cdd-compare-item code { color: var(--color-muted); }
-  .cdd-contracts-list { margin: var(--space-6) 0; }
-  .cdd-contract-item { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-3) 0; border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 10%, transparent); }
-  .cdd-contract-item strong { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-primary); }
-  .cdd-transition-steps { padding-left: var(--space-6); }
-  .cdd-transition-steps li { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-2) 0; line-height: var(--leading-normal); }
-  .cdd-table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); margin: var(--space-6) 0; }
-  .cdd-table th { text-align: left; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.06em; padding: var(--space-2) var(--space-3); border-bottom: 2px solid color-mix(in srgb, var(--color-muted) 20%, transparent); }
-  .cdd-table td { padding: var(--space-2) var(--space-3); border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 10%, transparent); color: var(--color-muted); }
-  .cdd-level { font-family: var(--font-mono); font-weight: var(--weight-medium); }
-  .cdd-proven { color: var(--color-command); }
-  .cdd-tested { color: var(--color-secondary); }
-  .cdd-researched { color: var(--color-primary); }
-  .cdd-inferred { color: var(--color-muted); }
-  .cdd-unknown { color: var(--color-danger); }
+  /* Chart: contract → output, with skill below */
+  .cdd-chart { display: grid; grid-template-columns: 1fr auto 1fr; gap: var(--space-3); align-items: start; margin: var(--space-6) 0; }
+  .cdd-chart-contract, .cdd-chart-output { background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden; }
+  .cdd-chart-header { font-family: var(--font-mono); font-size: var(--text-xs); padding: var(--space-2) var(--space-4); background: color-mix(in srgb, var(--color-command) 15%, transparent); color: var(--color-command); font-weight: var(--weight-medium); }
+  .cdd-chart-arrow { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); padding-top: var(--space-8); text-align: center; }
+  .cdd-chart pre { margin: 0; padding: var(--space-4); }
+  .cdd-chart code { font-size: 11px; color: var(--color-muted); line-height: 1.6; }
+  .cdd-chart-skill { background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden; margin-top: var(--space-3); opacity: 0.6; }
+  .cdd-chart-header-skill { background: color-mix(in srgb, var(--color-danger) 10%, transparent); color: var(--color-danger); }
+  .cdd-chart-skill pre { margin: 0; padding: var(--space-4); }
+  .cdd-chart-skill code { font-size: 11px; color: var(--color-muted); line-height: 1.6; }
+  .cdd-fade { opacity: 0.5; margin-left: var(--space-2); }
+
+  /* Steps */
+  .cdd-steps { padding-left: var(--space-6); }
+  .cdd-steps li { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-2) 0; line-height: var(--leading-normal); }
+
+  /* Trio */
   .cdd-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-top: var(--space-6); }
   .cdd-trio-item { background: var(--color-surface); padding: var(--space-6); border-radius: var(--radius-md); }
   .cdd-trio-item h3 { color: var(--color-primary); margin-bottom: var(--space-2); }
   .cdd-trio-item p { font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--space-3); }
   .cdd-trio-item code { font-size: var(--text-xs); color: var(--color-command); }
+
   .cdd-closing { font-size: var(--text-md); line-height: var(--leading-relaxed); }
-  @media (max-width: 768px) { .cdd-compare { grid-template-columns: 1fr; } .cdd-trio { grid-template-columns: 1fr; } .cdd-table { font-size: var(--text-xs); } }
+
+  @media (max-width: 768px) { .cdd-chart { grid-template-columns: 1fr; } .cdd-chart-arrow { padding: var(--space-2) 0; } .cdd-trio { grid-template-columns: 1fr; } }
 </style>
