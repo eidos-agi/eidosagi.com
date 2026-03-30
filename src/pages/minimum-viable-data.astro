@@ -5,27 +5,24 @@ import Lede from '../components/Lede.astro';
 import RelatedLinks from '../components/RelatedLinks.astro';
 import CompareTable from '../components/CompareTable.astro';
 import EvidenceCard from '../components/EvidenceCard.astro';
-import VideoEmbed from '../components/VideoEmbed.astro';
 ---
 
 <Base
   title="Minimum Viable Data — Eidos AGI"
-  description="Products are code. Code is a liability. The smallest structured dataset that produces results is worth more than the app that processes it."
+  description="Data is the primitive now, not product. The smallest structured dataset that produces results outlasts every app built to process it."
 >
     <article class="prose-page">
-      <PageHero title="Minimum Viable Data" subtitle="Products are code, and code is a liability." />
+      <PageHero title="Minimum Viable Data" subtitle="Data is the primitive, not product." />
       <Lede text="The smallest structured dataset that produces the results you want is worth more than any app built to process it." />
 
       <section class="content-section">
-        <p>Minimum Viable Product was the right idea when delivery was expensive. When shipping software meant writing code, managing servers, hiring engineers, and burning months before you knew if anyone wanted what you built — the smart move was to build the smallest possible thing and test it. MVP reduced the cost of being wrong.</p>
-        <p>That constraint is dissolving. AI agents can build software in hours. Code generation, deployment, testing — the hard parts of delivery are becoming cheap. What remains hard is knowing what to deliver. What does the customer actually want? What does "done" look like? What are the constraints?</p>
-        <p>That's data. Structured data that describes the desired result, the person it's for, and the current situation. Given that data, AI can produce the result — without a product in between.</p>
-        <p>Data and orchestrated intelligence are now the substrates. The end product — what the customer actually wants — is produced from them directly. The code layer that used to sit in the middle is becoming optional.</p>
+        <p>Minimum Viable Product was the right idea when delivery was expensive. Shipping software meant writing code, managing servers, hiring engineers, and burning months before you knew if anyone wanted what you built. MVP reduced the cost of being wrong.</p>
+        <p>That constraint is dissolving. AI agents can build software in hours. The hard parts of delivery are becoming cheap. What remains hard is knowing what to deliver: what does the customer actually want, what does "done" look like, what are the constraints. That knowledge is structured data, and given the right data, AI can produce the result without a product in between.</p>
       </section>
 
       <section class="content-section">
-        <h2>372 lines, zero code, groceries every week</h2>
-        <p>There is a GitHub repo that orders groceries every week. It contains no software, no database, no API, and no deployment — just files:</p>
+        <h2>372 lines that order groceries</h2>
+        <p>There is a <a href="/case-studies/grocery">GitHub repo that orders groceries every week</a>. It contains no software, no database, and no deployment:</p>
         <pre><code>reeves-grocery/
   contracts/
     shopping-list.schema.json
@@ -40,15 +37,13 @@ import VideoEmbed from '../components/VideoEmbed.astro';
   pantry/
     current.md
     reserve.md</code></pre>
-        <p>The contracts define what a valid grocery order looks like. The preferences describe the person — what they eat, how they cook, what they can spend. The pantry tracks what's on hand. An AI agent reads all of it, produces a shopping list that conforms to the contract, and places the order.</p>
-        <p>The agent that does this has changed three times. Claude Code, then Perplexity Computer, then something else. The data has changed zero times. The repo doesn't care which AI reads it.</p>
-
-        <VideoEmbed src="/videos/grocery-order.mp4" caption="Perplexity Computer ordering groceries from contracts in a GitHub repo." />
+        <p>The contracts define what a valid grocery order looks like. The preferences describe who the person is. The pantry tracks what's on hand. The agent that reads this data has changed three times — Claude Code, then Perplexity Computer, then something else. The data hasn't changed once. The repo doesn't care which AI reads it.</p>
+        <p>That's what makes data the primitive. The software layer is interchangeable. The data layer is permanent.</p>
       </section>
 
       <section class="content-section">
         <h2>MVP vs MVD</h2>
-        <p>Minimum Viable Product asks how little code you can write to ship something. Minimum Viable Data asks how little data you need to define the results you want.</p>
+        <p>Minimum Viable Product asks how little software you can write to ship something. Minimum Viable Data asks how little data you need to define the results you want.</p>
 
         <CompareTable leftLabel="Product (code)" rightLabel="Data (MVD)" leftVariant="danger" rightVariant="command">
           <ul slot="left">
@@ -74,14 +69,11 @@ import VideoEmbed from '../components/VideoEmbed.astro';
         <h2>Why this works</h2>
 
         <div class="evidence-stack">
-          <EvidenceCard title="The bitter lesson" cite='Sutton, "The Bitter Lesson" (2019). Confirmed across chess, Go, speech, and 20 years of computer vision.'>
-            <p>Richard Sutton showed that general methods leveraging computation always beat hand-crafted human knowledge as compute scales. AlphaGo Zero — trained with no human chess knowledge — destroyed Stockfish, the product of decades of hand-tuned expertise. Detailed instructions (skills) are hand-crafted knowledge. Structured goals (contracts) are the general method.</p>
-          </EvidenceCard>
           <EvidenceCard title="Data quality beats model quality" cite="Ng, IEEE Spectrum; MIT Sloan; Nature Scientific Reports (2024).">
             <p>Andrew Ng's data-centric AI research found that improving data quality is more effective than improving model architecture. In one manufacturing study, model changes produced zero improvement while data quality changes improved accuracy by 16%.</p>
           </EvidenceCard>
           <EvidenceCard title="Code is accumulating faster than it can be audited" cite='MIT Technology Review, "10 Breakthrough Technologies 2026"; Anthropic, "Agentic Coding Trends 2026".'>
-            <p>AI now writes 30% of Microsoft's code and over 25% of Google's. Anthropic's 2026 report shows agents building entire applications over multiple days. The industry's response is to use agents to review agent-generated code — more code to manage code. MVD sidesteps this entirely for tasks where structured data is sufficient.</p>
+            <p>AI now writes 30% of Microsoft's code and over 25% of Google's. Anthropic's 2026 report shows agents building entire applications over multiple days. The industry's response is to use agents to review agent-generated code. MVD sidesteps this entirely for tasks where structured data is sufficient.</p>
           </EvidenceCard>
         </div>
       </section>
@@ -90,21 +82,16 @@ import VideoEmbed from '../components/VideoEmbed.astro';
         <h2>The three parts of an MVD</h2>
         <ol class="mvd-parts">
           <li><strong>Contracts</strong> — JSON Schemas defining what valid output looks like. A shopping list contract says what a grocery order must contain. A deployment contract says what "deployed" means.</li>
-          <li><strong>Preferences</strong> — YAML or markdown files describing who the user is. Dietary restrictions, budgets, brand preferences. These are stable — they change slowly if at all.</li>
-          <li><strong>State</strong> — What's true right now. What's in the pantry. What was deployed last. What's in stock. This changes often but the format doesn't.</li>
+          <li><strong>Preferences</strong> — YAML or markdown files describing who the user is. Dietary restrictions, budgets, brand preferences. These are stable and change slowly if at all.</li>
+          <li><strong>State</strong> — What's true right now. What's in the pantry, what was deployed last, what's in stock. This changes often but the format doesn't.</li>
         </ol>
-        <p>An AI reads all three and produces results. The contracts define what the results look like. The preferences define who they're for. The state defines the current situation. No code connects them — the AI figures that part out.</p>
+        <p>An AI reads all three and produces results. No code connects them. The contracts define the shape of valid output, the preferences define who it's for, and the state captures the current situation. The AI figures out the rest.</p>
       </section>
 
       <section class="content-section">
         <h2>What MVD does not replace</h2>
-        <p>MVD applies to tasks where the output is a defined result for a specific person or team. Ordering groceries. Reviewing code. Planning a deployment. Filing a report. These are tasks with clear contracts — you can describe what "done" looks like.</p>
-        <p>It does not replace infrastructure software. The systems that Walmart uses to process millions of orders per second, the databases that store them, the networks that route them — these are engineering problems where code is the product. MVD is for the layer above: the part where someone decides what to order and how to describe what they want.</p>
-        <p>A voice recording app still needs code to access the microphone. A background daemon still needs code to run as a process. But the schema that defines what a voice recording looks like will outlive the app that writes it. The grocery preferences will outlive every grocery app. The data is the road. The code is the car.</p>
-      </section>
-
-      <section class="content-section">
-        <p class="mvd-closing">Minimum Viable Product asks how little code you can write. Minimum Viable Data asks how little data you need to define the results you want. One is a liability you maintain. The other is an asset that compounds. Research the data. Let AI deliver the results.</p>
+        <p>MVD applies to tasks where the output is a defined result for a specific person or team: ordering groceries, reviewing code, planning a deployment, filing a report. These are tasks with clear contracts where you can describe what "done" looks like.</p>
+        <p>It does not replace infrastructure software. The systems that Walmart uses to process millions of orders per second, the databases that store them, the networks that route them — these are engineering problems where code is the product. MVD is for the layer above, where someone decides what to order and how to describe what they want. The schema that defines what a voice recording looks like will outlive the app that writes it. The grocery preferences will outlive every grocery app.</p>
       </section>
 
       <RelatedLinks links={[
@@ -117,16 +104,9 @@ import VideoEmbed from '../components/VideoEmbed.astro';
 </Base>
 
 <style is:global>
-  /* Page-specific (components handle video, compare, evidence) */
   .evidence-stack { display: grid; grid-template-columns: 1fr; gap: var(--space-5); margin: var(--space-8) 0 var(--space-4); }
 
-  /* MVD parts list */
   .mvd-parts { padding-left: var(--space-6); margin: var(--space-4) 0; }
   .mvd-parts li { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-3) 0; line-height: var(--leading-relaxed); border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 6%, transparent); }
   .mvd-parts li:last-child { border-bottom: none; }
-
-  /* Closing */
-  .mvd-closing { font-size: var(--text-base); line-height: var(--leading-relaxed); color: var(--color-text); margin-top: var(--space-4); }
-
-  @media (max-width: 768px) { .mvd-compare { grid-template-columns: 1fr; } }
 </style>

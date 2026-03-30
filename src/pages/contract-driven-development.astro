@@ -4,8 +4,6 @@ import PageHero from '../components/PageHero.astro';
 import Lede from '../components/Lede.astro';
 import RelatedLinks from '../components/RelatedLinks.astro';
 import ContractChart from '../components/ContractChart.astro';
-import VideoEmbed from '../components/VideoEmbed.astro';
-import TrioGrid from '../components/TrioGrid.astro';
 ---
 
 <Base
@@ -17,76 +15,13 @@ import TrioGrid from '../components/TrioGrid.astro';
       <Lede text="Skills tell AI how to do things and decay every model generation. Contracts tell AI what you want and survive unchanged. The difference compounds." />
 
       <section class="content-section">
-        <p>The AI ecosystem is building skills — step-by-step instructions that tell models how to accomplish goals. Skills work today. They compensate for what the model can't figure out on its own.</p>
-        <p>But skills are written based on today's weaknesses. Imagine writing a skills file for GPT-3 two years ago. It would be extremely verbose — every step spelled out, every edge case handled, every format detail specified. Today's models need less of that. Tomorrow's models need even less.</p>
-        <p><strong>Skills are technical debt that accrues as models improve.</strong> Every step-by-step instruction is a bet that future models will be as limited as today's. That bet has never paid off.</p>
-        <p>Contracts are the alternative. A contract defines what we want — the end state, the constraints, the guardrails. It does not define how to get there, what order to do things, or what tools to use. A contract says <em>what</em>. A skill says <em>how</em>. Models get better at <em>how</em> every six months. <em>What</em> doesn't change.</p>
+        <p>A contract defines what we want — the end state, the constraints, the guardrails — without prescribing how to get there. A skill is the opposite: step-by-step instructions tuned to today's model. As models improve, contracts become more powerful while skills become dead weight.</p>
       </section>
 
-      <section class="content-section">
-        <h2>A grocery order placed by contracts alone</h2>
-        <p>A GitHub repo containing nothing but YAML preferences, a markdown pantry, and three JSON Schema contracts — no software, no database, no code. An AI agent reads the contracts and preferences, produces a conforming shopping list, and orders the groceries without a skills file or step-by-step instructions.</p>
-
-        <ContractChart contractLabel="shopping-list.schema.json" outputLabel="preferences/dietary.yaml" arrowText="+">
-          <pre slot="contract"><code>&#123;
-  "title": "Shopping List",
-
-  "purpose": "Produce a weekly grocery order
-    for one person. Every item must be a real,
-    purchasable product in the correct quantity.
-    This is a shopping cart, not a recipe list.",
-
-  "context": "Read preferences/dietary.yaml for
-    what this person eats (PSMF, high protein).
-    Read pantry/current.md for what's on hand.
-    Read pantry/reserve.md for the shelf-stable
-    buffer target.",
-
-  "constraints": [
-    "Protein items dominate",
-    "Reserve restocks when pantry looks thin",
-    "Quantities in purchasable units (3 lbs)",
-    "Store brand default",
-    "Optimize for protein per dollar"
-  ],
-
-  "required": ["date", "store", "items"],
-  "items": [&#123;
-    "name": "boneless skinless chicken breast",
-    "quantity": "5 lbs",
-    "category": "protein"
-  &#125;]
-&#125;</code></pre>
-          <pre slot="output"><code>dietary_lean: PSMF-influenced
-  # High protein, very low fat, very low carb
-  # Lean protein is the center of every meal
-
-priorities:
-  - high-protein
-  - lean-affordable-protein
-  - low-maintenance-prep
-  - budget-conscious
-
-# Staples: chicken breast, ground turkey,
-# tuna, egg whites, green vegetables,
-# sugar-free condiments</code></pre>
-        </ContractChart>
-
-        <p>The contract tells the AI: what this is for (purpose), what to read first (context), and what matters (constraints). The preferences define who the person is. The AI reads both and produces a conforming list. No agent framework. No tool calls. No step-by-step playbook.</p>
-        <p>This is real. An actual grocery order placed weekly by an AI reading contracts from a git repo. <a href="/case-studies/grocery">Full case study</a>.</p>
-
-        <VideoEmbed src="/videos/grocery-order.mp4" caption="Perplexity Computer reading contracts from a GitHub repo to order groceries — schemas and preferences only, no code involved." />
-      </section>
-
-      <section class="content-section">
-        <h2>Three more contracts</h2>
-        <p>The same pattern applied to software engineering. Each shows the contract, what a model produces from it, and the skill it replaces.</p>
-      </section>
-
-      <!-- ── CONTRACT 1: Code Review ─────────────────────── -->
+      <!-- ── Lead with proof: Code Review ─────────────────── -->
       <section class="content-section">
         <h2>Code review</h2>
-        <p>The contract defines what "reviewed" means. The model decides how to review.</p>
+        <p>The contract defines what "reviewed" means. The model decides how to review. The skill it replaces is 150 lines of step-by-step instructions that will need rewriting when the next model ships.</p>
 
         <ContractChart contractLabel="Contract" outputLabel="Example output" skillLabel="The skill this replaces" skillMeta="150 lines">
           <pre slot="contract"><code>&#123;
@@ -226,65 +161,25 @@ Step 8: Output summary...
         </ContractChart>
       </section>
 
+      <!-- ── Real-world proof (brief, links to case study) ── -->
+      <section class="content-section">
+        <h2>This pattern orders groceries</h2>
+        <p>A GitHub repo with three JSON Schema contracts and five YAML preference files — no code at all — orders $260 of groceries weekly. The AI reads the schemas, understands the constraints, and places the order. The agent has changed three times; the contracts haven't changed once. <a href="/case-studies/grocery">Full case study with video and data</a>.</p>
+      </section>
+
       <!-- ── The argument ────────────────────────────────── -->
       <section class="content-section">
         <h2>The bitter lesson</h2>
-        <p>Richard Sutton's greatest contribution to computer science: general methods that leverage computation always beat hand-crafted human knowledge as compute scales. This is the bitter lesson — bitter because researchers keep re-learning it, and it keeps being true.</p>
-        <p>We teach a computer to play chess by giving it two things: the rules of chess (a contract) and a goal (win). We don't give it opening theory. We don't give it middlegame strategy. We don't tell it to control the center, develop knights before bishops, or castle early. Those are skills. They work for beginners. They fail at grandmaster level.</p>
-        <p>AlphaZero — the system that learned to play chess with nothing but the rules and self-play — destroyed Stockfish, the system built on decades of hand-tuned human chess expertise. The margin wasn't close. Stockfish was a skills file; AlphaZero had a contract.</p>
-        <p>The same pattern applies to AI development tools. Skills files are chess strategy books — useful for today's model, obsolete for tomorrow's. Contracts are the rules of chess — permanent, terse, and more powerful as the player gets smarter.</p>
-      </section>
-
-      <section class="content-section">
-        <h2>The transition</h2>
-        <ol class="cdd-steps">
-          <li><strong>Define the contract first.</strong> What does the output look like? Write the schema.</li>
-          <li><strong>Write the skill second.</strong> Only if the model can't meet the contract alone.</li>
-          <li><strong>Test without the skill periodically.</strong> If the output conforms, the skill is done.</li>
-          <li><strong>Let skills decay.</strong> Don't maintain them. They're temporary bridges.</li>
-        </ol>
-        <p><code>contracts/</code> is permanent infrastructure. <code>skills/</code> is a construction site that eventually gets torn down.</p>
-      </section>
-
-      <section class="content-section">
-        <h2>The tools</h2>
-        <TrioGrid>
-          <div class="trio-item">
-            <h3>visionlog</h3>
-            <p>Records the contracts — guardrails, goals, ADRs.</p>
-            <code>pip install visionlog-md</code>
-          </div>
-          <div class="trio-item">
-            <h3>research.md</h3>
-            <p>Earns decisions with evidence before they become contracts.</p>
-            <code>pip install research-md</code>
-          </div>
-          <div class="trio-item">
-            <h3>ike.md</h3>
-            <p>Executes tasks within the contracts.</p>
-            <code>pip install ike-md</code>
-          </div>
-        </TrioGrid>
-      </section>
-
-      <section class="content-section">
-        <p class="cdd-closing">Contracts define what we want, not how to deliver it. A contract is a goal with structure. As long as humans have goals, contracts have value. As long as AI improves at reasoning, skills lose value.</p>
-        <p class="cdd-closing">The <code>contracts/</code> directory is permanent infrastructure. The <code>skills/</code> directory is a construction site that eventually gets torn down. Build contracts. Let skills decay.</p>
+        <p>Richard Sutton's greatest contribution to computer science: general methods that leverage computation always beat hand-crafted human knowledge as compute scales. This is the bitter lesson, and researchers keep re-learning it.</p>
+        <p>We teach a computer to play chess by giving it two things: the rules (a contract) and a goal (win). We don't give it opening theory or middlegame strategy. Those are skills. They work for beginners and fail at grandmaster level. AlphaZero learned chess with nothing but the rules and self-play, then destroyed Stockfish — the system built on decades of hand-tuned human expertise. The margin wasn't close.</p>
+        <p>Skills files are chess strategy books: useful for today's model, obsolete for tomorrow's. Contracts are the rules of chess: permanent, terse, and more powerful as the player gets smarter.</p>
       </section>
 
       <RelatedLinks links={[
-        { href: "/case-studies", label: "Case Studies" },
+        { href: "/case-studies/grocery", label: "Grocery Case Study" },
+        { href: "/minimum-viable-data", label: "Minimum Viable Data" },
         { href: "/trilogy", label: "The Trilogy" },
         { href: "/forges", label: "Forges" },
-        { href: "/eidos", label: "Eidos" },
       ]} />
     </article>
 </Base>
-
-<style is:global>
-  /* Steps */
-  .cdd-steps { padding-left: var(--space-6); }
-  .cdd-steps li { font-size: var(--text-sm); color: var(--color-muted); padding: var(--space-2) 0; line-height: var(--leading-normal); }
-
-  .cdd-closing { font-size: var(--text-md); line-height: var(--leading-relaxed); }
-</style>

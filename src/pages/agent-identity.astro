@@ -7,7 +7,7 @@ import RelatedLinks from '../components/RelatedLinks.astro';
 
 <Base
   title="Agent Identity — Eidos AGI"
-  description="Agents need their own identity — not a borrowed login, not a shared API key. Real accounts, real credentials, real audit trails."
+  description="Agents operating under borrowed credentials create an audit trail that points to the wrong person. AID gives agents their own identity."
 >
     <article class="prose-page">
       <PageHero title="Agent Identity" subtitle="The security layer the governance stack depends on." status="dev" />
@@ -95,7 +95,7 @@ import RelatedLinks from '../components/RelatedLinks.astro';
         </div>
 
         <p>Hancock is the authorization layer that implements it: scoped capabilities, step-up authentication when an agent exceeds its boundaries, and instant revocation without touching the human's credentials.</p>
-        <p>AID is designed and documented. Hancock is in early implementation. The governance trilogy is shipped today. Identity is the next layer.</p>
+        <p>AID is designed and documented. Hancock is in early implementation. This page describes the architecture — neither is shipped yet. The governance trilogy is shipped today; identity is the next layer we're building.</p>
       </section>
       <RelatedLinks links={[
         { href: "/eidos", label: "Eidos" },
