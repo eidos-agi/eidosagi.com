@@ -7,16 +7,46 @@ import RelatedLinks from '../../components/RelatedLinks.astro';
 
 <Base
   title="Case Studies — Eidos AGI"
-  description="Real systems running on contracts, not skills — in production, not in a pitch deck."
+  description="Real-world tasks completed autonomously by AI agents using the Eidos system."
 >
     <article class="prose-page">
-      <PageHero title="Case Studies" subtitle="Production systems running on contracts." />
-      <Lede text="AI agents fulfilling contracts from git repos, without skills files, step-by-step instructions, or often any software at all." />
+      <PageHero title="Case Studies" subtitle="Real-world tasks. Autonomous agents." />
+      <Lede text="Each case study documents a real task that the Eidos system completed autonomously — the problem, the approach, the outcome, and what it reveals about how AI systems actually work." />
 
       <section class="content-section">
-        <p>These are production systems — AI agents fulfilling contracts from git repos, without skills files, step-by-step instructions, or often any software at all.</p>
-        <p>Each case study shows the contract, the data, what the AI produces, and why it works without being told how.</p>
+        <p>These are not demos. They are production systems where our team of Eidos agents read structured data, plan their own work, and produce results — from ordering groceries to securing enterprise software approval.</p>
       </section>
+
+      <!--
+        AGENT INSTRUCTIONS — Case Study Style Guide
+        =============================================
+        Read this before building a new case study page or card.
+
+        VOICE: Analytical, confident, evidence-based. Not sales-y. Not SaaS landing page.
+
+        DO NOT:
+        - Use StatRow or stat-number grids (the beat-beat-beat pattern)
+        - Use big bold numbers as visual badges
+        - Use "New!" or urgency labels
+        - Use marketing superlatives ("revolutionary", "game-changing")
+
+        DO:
+        - Put numbers inline in prose where they support a point
+        - Lead with what happened, not what the metrics are
+        - Use CompareTable with slots for structural comparisons
+        - Use CodeBlock for showing contracts/schemas
+        - Use the cs-featured-stack line for tech stack (mono, muted, bottom)
+        - Keep card descriptions to 1-2 sentences max
+        - Match the grocery case study tone: show the work, let it speak
+
+        COMPONENTS TO USE: PageHero, Lede, DagDiagram, CompareTable, CodeBlock,
+        CallToAction, RelatedLinks, LogExcerpt, Artifact
+
+        COMPONENTS TO AVOID ON CASE STUDIES: StatRow
+
+        DAG DIAGRAMS: Use DagDiagram component with actor icons (ai/human).
+        Every case study should show the graph the agent discovered.
+      -->
 
       <!-- Featured: Grocery -->
       <section class="content-section">
@@ -30,22 +60,20 @@ import RelatedLinks from '../../components/RelatedLinks.astro';
           <div class="cs-featured-content">
             <div class="cs-featured-label">Featured case study</div>
             <h2>Grocery ordering</h2>
-            <p>A GitHub repo with YAML preferences and JSON Schema contracts. An AI reads them and orders groceries weekly — schemas and data only, no code involved.</p>
-            <div class="cs-featured-stats">
-              <div class="cs-stat">
-                <span class="cs-stat-num">3</span>
-                <span class="cs-stat-label">contracts</span>
-              </div>
-              <div class="cs-stat">
-                <span class="cs-stat-num">5</span>
-                <span class="cs-stat-label">preference files</span>
-              </div>
-              <div class="cs-stat">
-                <span class="cs-stat-num">0</span>
-                <span class="cs-stat-label">lines of code</span>
-              </div>
-            </div>
+            <p>A GitHub repo with YAML preferences and JSON Schema contracts — 3 contracts, 5 preference files, zero lines of code. An AI reads them and orders groceries weekly.</p>
             <div class="cs-featured-stack">Perplexity Computer + GitHub + JSON Schema</div>
+          </div>
+        </a>
+      </section>
+
+      <!-- Enterprise Approval -->
+      <section class="content-section">
+        <a href="/case-studies/enterprise-approval" class="cs-featured cs-featured-secondary">
+          <div class="cs-featured-content" style="grid-column: 1 / -1;">
+            <div class="cs-featured-label">Case study</div>
+            <h2>Enterprise software approved by Eidos</h2>
+            <p>Eidos read the organization's contracts, planned a 10-stage approval pipeline, executed nine stages, and presented one decision to a human. No one drew the workflow. The graph emerged from the constraints.</p>
+            <div class="cs-featured-stack">Contracts + DAG + Claude Code</div>
           </div>
         </a>
       </section>
@@ -94,15 +122,15 @@ import RelatedLinks from '../../components/RelatedLinks.astro';
 
       <section class="content-section">
         <div class="cs-cta">
-          <p>The pattern is the same in every case. Define what you want as a schema. Give the AI the schema and the data. Let it figure out how.</p>
-          <a href="/contract-driven-development" class="cs-cta-link">Read the argument: Contracts, Not Skills</a>
+          <p>The pattern across every case study: structured data goes in, an agent figures out how to produce the result, and the system gets better each time it runs.</p>
+          <a href="/dag" class="cs-cta-link">How it works: The DAG of AI</a>
         </div>
       </section>
 
       <RelatedLinks links={[
-        { href: "/contract-driven-development", label: "Contracts, Not Skills" },
+        { href: "/dag", label: "The DAG of AI" },
         { href: "/forges", label: "Forges" },
-        { href: "/trilogy", label: "The Trilogy" },
+        { href: "/eidos", label: "Eidos" },
       ]} />
     </article>
 </Base>
@@ -134,7 +162,7 @@ import RelatedLinks from '../../components/RelatedLinks.astro';
   .cs-stat { display: flex; flex-direction: column; }
   .cs-stat-num { font-family: var(--font-heading); font-size: var(--text-xl); color: var(--color-text); font-weight: var(--weight-bold); line-height: 1; }
   .cs-stat-label { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); margin-top: var(--space-1); }
-  .cs-featured-stack { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); opacity: 0.5; }
+  .cs-featured-stack { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-muted); opacity: 0.5; margin-top: var(--space-6); }
 
   /* Grid cards */
   .cs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }

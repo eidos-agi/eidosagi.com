@@ -1,0 +1,211 @@
+---
+/**
+ * DagDiagram — Renders an animated directed acyclic graph from structured data.
+ *
+ * Usage:
+ *   <DagDiagram nodes={[
+ *     { id: "a", label: "Investigation", sub: "AGENT", x: 400, y: 40, actor: "ai" },
+ *     { id: "b", label: "Decision", sub: "HUMAN", x: 400, y: 280, actor: "human" },
+ *   ]} edges={[
+ *     { from: "a", to: "b" },
+ *   ]} width={800} height={360} />
+ */
+interface Node {
+  id: string;
+  label: string;
+  sub?: string;
+  x: number;
+  y: number;
+  actor?: 'ai' | 'human';
+  status?: 'done' | 'active' | 'waiting';
+}
+interface Edge {
+  from: string;
+  to: string;
+}
+interface Props {
+  nodes: Node[];
+  edges: Edge[];
+  width?: number;
+  height?: number;
+}
+const { nodes, edges, width = 800, height = 360 } = Astro.props;
+const nodeW = 140;
+const nodeH = 48;
+const hasActors = nodes.some(n => n.actor);
+
+function findNode(id: string) {
+  return nodes.find(n => n.id === id);
+}
+
+function edgePath(e: Edge) {
+  const from = findNode(e.from);
+  const to = findNode(e.to);
+  if (!from || !to) return '';
+  const x1 = from.x + nodeW / 2;
+  const y1 = from.y + nodeH;
+  const x2 = to.x + nodeW / 2;
+  const y2 = to.y;
+  const midY = (y1 + y2) / 2;
+  return `M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY}, ${x2} ${y2}`;
+}
+---
+
+<div class="dag-wrap">
+  <svg viewBox={`0 0 ${width} ${height}`} fill="none" role="img" aria-label="Directed acyclic graph">
+    {edges.map((e, i) => (
+      <path
+        class="dag-edge"
+        d={edgePath(e)}
+        style={`animation-delay: ${i * 0.15}s`}
+      />
+    ))}
+
+    {nodes.map((n, i) => (
+      <g class={`dag-node-g ${n.actor === 'human' ? 'dag-human' : ''} ${n.status === 'done' ? 'dag-done' : ''} ${n.status === 'active' ? 'dag-active' : ''}`}
+         style={`animation-delay: ${i * 0.12}s`}>
+        <rect
+          class="dag-node"
+          x={n.x}
+          y={n.y}
+          width={nodeW}
+          height={nodeH}
+          rx="3"
+        />
+        {n.actor && (
+          <circle
+            class={n.actor === 'human' ? 'dag-icon-human' : 'dag-icon-ai'}
+            cx={n.x + 16}
+            cy={n.y + nodeH / 2}
+            r="8"
+          />
+        )}
+        {n.actor && (
+          <text
+            class="dag-icon-label"
+            x={n.x + 16}
+            y={n.y + nodeH / 2 + 3}
+            text-anchor="middle"
+          >
+            {n.actor === 'human' ? 'H' : 'AI'}
+          </text>
+        )}
+        <text
+          class="dag-label"
+          x={n.x + (n.actor ? 34 : nodeW / 2)}
+          y={n.y + (n.sub ? 19 : 24)}
+          text-anchor={n.actor ? 'start' : 'middle'}
+        >
+          {n.label}
+        </text>
+        {n.sub && (
+          <text
+            class="dag-sub"
+            x={n.x + (n.actor ? 34 : nodeW / 2)}
+            y={n.y + 35}
+            text-anchor={n.actor ? 'start' : 'middle'}
+          >
+            {n.sub}
+          </text>
+        )}
+      </g>
+    ))}
+  </svg>
+  {hasActors && (
+    <p class="dag-legend">
+      <span><span class="dag-legend-dot dag-legend-dot-ai"></span> Eidos</span>
+      <span><span class="dag-legend-dot dag-legend-dot-human"></span> Human</span>
+    </p>
+  )}
+</div>
+
+<style is:global>
+  .dag-wrap { margin: var(--space-6) 0 var(--space-8); overflow-x: auto; }
+  .dag-wrap svg { width: 100%; height: auto; min-width: 600px; }
+
+  .dag-node {
+    fill: var(--color-surface);
+    stroke: color-mix(in srgb, var(--color-muted) 30%, transparent);
+    stroke-width: 1;
+  }
+  .dag-human .dag-node { stroke: var(--color-primary); stroke-width: 1.5; }
+  .dag-done .dag-node { stroke: var(--color-command); stroke-width: 1.5; }
+  .dag-active .dag-node { stroke: var(--color-primary); stroke-width: 2; }
+
+  .dag-label {
+    font-family: var(--font-heading);
+    font-size: 11px;
+    fill: var(--color-text);
+    font-weight: 500;
+  }
+  .dag-sub {
+    font-family: var(--font-mono);
+    font-size: 7px;
+    fill: var(--color-primary);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .dag-icon-ai {
+    fill: color-mix(in srgb, var(--color-command) 20%, transparent);
+    stroke: var(--color-command);
+    stroke-width: 1;
+  }
+  .dag-icon-human {
+    fill: color-mix(in srgb, var(--color-primary) 20%, transparent);
+    stroke: var(--color-primary);
+    stroke-width: 1;
+  }
+  .dag-icon-label {
+    font-family: var(--font-mono);
+    font-size: 7px;
+    fill: var(--color-text);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .dag-edge {
+    stroke: var(--color-primary);
+    stroke-width: 1.5;
+    stroke-dasharray: 4 3;
+    fill: none;
+    animation: dag-dash 1.5s linear infinite;
+  }
+
+  .dag-node-g {
+    animation: dag-appear 0.6s ease-out both;
+  }
+
+  @keyframes dag-dash { to { stroke-dashoffset: -14; } }
+  @keyframes dag-appear { from { opacity: 0.15; } to { opacity: 1; } }
+  .dag-legend {
+    display: flex;
+    gap: var(--space-6);
+    justify-content: center;
+    margin-top: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+  .dag-legend-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: var(--space-2);
+    vertical-align: middle;
+  }
+  .dag-legend-dot-ai {
+    background: color-mix(in srgb, var(--color-command) 30%, transparent);
+    border: 1px solid var(--color-command);
+  }
+  .dag-legend-dot-human {
+    background: color-mix(in srgb, var(--color-primary) 30%, transparent);
+    border: 1px solid var(--color-primary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dag-edge { animation: none; }
+    .dag-node-g { animation: none; opacity: 1; }
+  }
+</style>

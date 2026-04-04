@@ -1,0 +1,134 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Lede from '../components/Lede.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import CompareTable from '../components/CompareTable.astro';
+import DagDiagram from '../components/DagDiagram.astro';
+---
+
+<Base
+  title="The DAG of AI — Eidos AGI"
+  description="Every working AI system is a graph of contracts fulfilled by interchangeable agents."
+>
+    <article class="prose-page">
+      <PageHero title="The DAG of AI" subtitle="Every working AI system is a graph of contracts." />
+      <Lede text="Transcoders are the atoms. Forges are the molecules. Contracts govern both. The result is a directed acyclic graph — and every effective AI system converges on this shape." />
+
+      <!-- ── The shape ──────────────────────────────── -->
+      <section class="content-section">
+        <h2>The shape</h2>
+        <p>Strip away the branding from any AI system that actually works — grocery ordering, security auditing, content publishing, enterprise procurement — and you find the same structure. Nodes that do work. Edges that carry artifacts. Contracts that define what "done" means at each node.</p>
+        <p>This isn't a design choice. It's a convergence. Systems that don't converge on this shape break when the model changes, when the team scales, or when the requirements shift. Systems that do converge survive all three.</p>
+        <p>The shape is a directed acyclic graph. A DAG.</p>
+      </section>
+
+      <!-- ── Atoms and molecules ────────────────────── -->
+      <section class="content-section">
+        <h2>Atoms and molecules</h2>
+        <p>A <strong>transcoder</strong> converts content from one form to another. A document becomes a podcast. A YAML contract becomes a PDF. A briefing becomes a slide deck. Each transcoder has a contract that defines what the output must be — not how to produce it. The contract is durable. The model that fulfills it is replaceable.</p>
+        <p>A <strong>forge</strong> chains transcoders into a pipeline. A podcast forge runs a scriptwriter, then a voice renderer, then an audio producer, then mastering. Each node is a transcoder. Each edge is an artifact. The forge is the graph.</p>
+
+        <DagDiagram
+          nodes={[
+            { id: "contract", label: "Contract", sub: "WHAT DONE LOOKS LIKE", x: 280, y: 10, actor: undefined },
+            { id: "forge", label: "Forge", sub: "THE GRAPH", x: 280, y: 90, actor: undefined },
+            { id: "t1", label: "Transcoder", sub: "ATOM", x: 100, y: 170, actor: "ai" },
+            { id: "t2", label: "Transcoder", sub: "ATOM", x: 280, y: 170, actor: "ai" },
+            { id: "t3", label: "Transcoder", sub: "ATOM", x: 460, y: 170, actor: "ai" },
+          ]}
+          edges={[
+            { from: "contract", to: "forge" },
+            { from: "forge", to: "t1" },
+            { from: "forge", to: "t2" },
+            { from: "forge", to: "t3" },
+          ]}
+          width={700}
+          height={240}
+        />
+
+        <p>Contracts govern both levels. The forge has a contract (what the finished podcast sounds like). Each transcoder has a contract (what a valid script looks like, what a clean audio render sounds like). The contracts compose. The models are interchangeable at every node.</p>
+      </section>
+
+      <!-- ── Two kinds of output ────────────────────── -->
+      <section class="content-section">
+        <h2>Two kinds of output</h2>
+        <p>DAG nodes produce artifacts. But not all artifacts are the same.</p>
+
+        <CompareTable leftLabel="Terminal artifacts" rightLabel="Persistent artifacts" leftVariant="muted" rightVariant="command">
+          <ul slot="left">
+            <li>Consumed by humans</li>
+            <li>Podcasts, PDFs, emails, grocery orders</li>
+            <li>Pipeline ends</li>
+            <li>Value is in the output</li>
+            <li>Leaves of the graph</li>
+          </ul>
+          <ul slot="right">
+            <li>Consumed by agents</li>
+            <li>Schemas, DAGs, contracts, state files, memory</li>
+            <li>Pipeline continues</li>
+            <li>Value is in making the system smarter</li>
+            <li>Edges of the graph</li>
+          </ul>
+        </CompareTable>
+
+        <p>A podcast episode is a terminal artifact. The listener consumes it. A project DAG is a persistent artifact — the agent that built it left behind a map that makes every future agent session better. The forge didn't just do work. It built infrastructure.</p>
+      </section>
+
+      <!-- ── The protocol analogy ───────────────────── -->
+      <section class="content-section">
+        <h2>The protocol layer</h2>
+        <p>The internet is a DAG of protocols fulfilled by interchangeable machines. TCP/IP, HTTP, DNS — contracts that any server can fulfill. The machines are replaceable. The protocols are permanent. The web won because it got the contracts right, not because it got the servers right.</p>
+
+        <DagDiagram
+          nodes={[
+            { id: "p1", label: "Protocol", sub: "TCP/IP · HTTP · DNS", x: 40, y: 20, actor: undefined },
+            { id: "m1", label: "Machine", sub: "INTERCHANGEABLE", x: 260, y: 20, actor: undefined },
+            { id: "r1", label: "Response", sub: "THE OUTPUT", x: 480, y: 20, actor: undefined },
+            { id: "p2", label: "Contract", sub: "JSON SCHEMA · YAML", x: 40, y: 100, actor: undefined },
+            { id: "m2", label: "Agent", sub: "INTERCHANGEABLE", x: 260, y: 100, actor: "ai" },
+            { id: "r2", label: "Artifact", sub: "THE OUTPUT", x: 480, y: 100, actor: undefined },
+          ]}
+          edges={[
+            { from: "p1", to: "m1" },
+            { from: "m1", to: "r1" },
+            { from: "p2", to: "m2" },
+            { from: "m2", to: "r2" },
+          ]}
+          width={720}
+          height={170}
+        />
+
+        <p>Nobody remembers which server served them a web page. Everyone depends on DNS. Nobody will remember which model fulfilled a contract. Everyone will depend on the contract that defined what a valid output looks like.</p>
+        <p>Eidos is building the contract protocol layer for the agentic internet.</p>
+      </section>
+
+      <!-- ── The third leg ──────────────────────────── -->
+      <section class="content-section">
+        <h2>The third leg</h2>
+        <p><a href="/minimum-viable-data">Minimum Viable Data</a> says data is the primitive, not product. <a href="/contract-driven-development">Contracts, Not Skills</a> says define what, not how. The DAG says these compose into graphs that any agent can traverse.</p>
+        <p>Together they form a complete architecture for AI systems that get better as models improve, rather than breaking.</p>
+        <ul>
+          <li><strong>MVD</strong> — the data layer is permanent</li>
+          <li><strong>Contracts</strong> — the specification layer is durable</li>
+          <li><strong>DAGs</strong> — the composition layer is emergent</li>
+        </ul>
+        <p>The agent reads the contracts, discovers the graph, and traverses it. No human draws the workflow. The shape emerges from the constraints.</p>
+      </section>
+
+      <!-- ── What this replaces ─────────────────────── -->
+      <section class="content-section">
+        <h2>What this replaces</h2>
+        <p>Hand-configured workflows. n8n, Zapier, Make, GitHub Actions for AI orchestration, LangChain prompt chains. Every one of these requires a human to draw the graph. When requirements change, someone redraws it.</p>
+        <p>In a contract-driven system, the agent discovers the graph by reading the contracts. When the contracts change — new compliance requirements, new cost thresholds, new output formats — the agent adapts the pipeline. No one rebuilds the workflow. The graph reconfigures itself because the constraints reconfigured.</p>
+        <p>This is autonomous workflow. Not automated workflow. The difference is who draws the graph.</p>
+      </section>
+
+      <RelatedLinks links={[
+        { href: "/minimum-viable-data", label: "Minimum Viable Data" },
+        { href: "/contract-driven-development", label: "Contracts, Not Skills" },
+        { href: "/case-studies/enterprise-approval", label: "Case Study: Enterprise Approval" },
+        { href: "/forges", label: "Forges" },
+      ]} />
+    </article>
+</Base>

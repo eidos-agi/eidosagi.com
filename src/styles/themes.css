@@ -92,7 +92,7 @@
 [data-theme="ai"] .hero-viz, [data-theme="ai"] .tri-viz, [data-theme="ai"] .b-visual { display: none; }
 [data-theme="ai"] .aid-diagram, [data-theme="ai"] .cdd-diagram, [data-theme="ai"] .trust-diagram { display: none; }
 [data-theme="ai"] .pod-diagram, [data-theme="ai"] .pefm-chart, [data-theme="ai"] .forge-diagram { display: none; }
-[data-theme="ai"] .omni-diagram, [data-theme="ai"] .tri-page-diagram { display: none; }
+[data-theme="ai"] .omni-diagram, [data-theme="ai"] .tri-page-diagram, [data-theme="ai"] .dag-wrap { display: none; }
 /* Flatten grids and cards */
 [data-theme="ai"] .eidos-pillars, [data-theme="ai"] .cdd-trio, [data-theme="ai"] .cdd-changes { display: block; }
 [data-theme="ai"] .forge-grid, [data-theme="ai"] .ne-grid { display: block; }

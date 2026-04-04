@@ -1,0 +1,148 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Lede from '../../components/Lede.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import CompareTable from '../../components/CompareTable.astro';
+import DagDiagram from '../../components/DagDiagram.astro';
+import CallToAction from '../../components/CallToAction.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+---
+
+<Base
+  title="Case Study: Enterprise Software Approved by Eidos — Eidos AGI"
+  description="The Eidos system autonomously planned and executed a 10-step approval pipeline for enterprise software. The human made one decision. Eidos did everything else."
+>
+    <article class="prose-page">
+      <PageHero title="Enterprise software<br />approved by Eidos" subtitle="The system planned the workflow. No one drew it." />
+      <Lede text="The Eidos system autonomously planned and executed a 10-step approval pipeline for a $48,000/year security platform — investigation, competitive analysis, cost justification, compliance review, presentation, and rollout. The human approved the final decision. Eidos did everything else." />
+
+      <!-- ── The challenge ──────────────────────────── -->
+      <section class="content-section">
+        <h2>The challenge</h2>
+        <p>A team needed enterprise security software. The approval process at any organization is a gauntlet: cost justification, competitive analysis, standards compliance, executive presentation, procurement, rollout, verification. Each step produces documents that feed the next. Dependencies are implicit. The order matters.</p>
+        <p>Usually this takes a project manager, two to three weeks, and six meetings. Someone draws the workflow on a whiteboard. Someone else tracks status in a spreadsheet. Half the work is coordination.</p>
+        <p>This time, no one drew anything.</p>
+      </section>
+
+      <!-- ── The DAG ────────────────────────────────── -->
+      <section class="content-section">
+        <h2>What Eidos built</h2>
+        <p>Eidos read the organization's contracts — what "approved" means, what "compliant" means, what "justified" means — and planned the entire pipeline autonomously. It identified dependencies, parallelism, and the single human gate.</p>
+
+        <DagDiagram
+          nodes={[
+            { id: "investigate", label: "Investigation", sub: "RESEARCH", x: 330, y: 10, actor: "ai", status: "done" },
+            { id: "standards",   label: "Standards", sub: "COMPLIANCE", x: 80, y: 90, actor: "ai", status: "done" },
+            { id: "competitive", label: "Competitive", sub: "ANALYSIS", x: 310, y: 90, actor: "ai", status: "done" },
+            { id: "cost",        label: "Cost Analysis", sub: "ROI + TCO", x: 540, y: 90, actor: "ai", status: "done" },
+            { id: "scr",         label: "SCR Draft", sub: "FORMAL REQUEST", x: 330, y: 170, actor: "ai", status: "done" },
+            { id: "present",     label: "Presentation", sub: "EXEC SUMMARY", x: 330, y: 250, actor: "ai", status: "done" },
+            { id: "decision",    label: "Decision", sub: "APPROVE / REJECT", x: 330, y: 330, actor: "human", status: "active" },
+            { id: "procure",     label: "Procurement", sub: "EXECUTE", x: 120, y: 410, actor: "ai", status: "waiting" },
+            { id: "rollout",     label: "Rollout", sub: "DEPLOY + ONBOARD", x: 330, y: 410, actor: "ai", status: "waiting" },
+            { id: "verify",      label: "Verification", sub: "MEASURE", x: 540, y: 410, actor: "ai", status: "waiting" },
+          ]}
+          edges={[
+            { from: "investigate", to: "standards" },
+            { from: "investigate", to: "competitive" },
+            { from: "investigate", to: "cost" },
+            { from: "standards", to: "scr" },
+            { from: "competitive", to: "scr" },
+            { from: "cost", to: "scr" },
+            { from: "scr", to: "present" },
+            { from: "present", to: "decision" },
+            { from: "decision", to: "procure" },
+            { from: "decision", to: "rollout" },
+            { from: "decision", to: "verify" },
+          ]}
+          width={780}
+          height={480}
+        />
+      </section>
+
+      <!-- ── The critical insight ───────────────────── -->
+      <section class="content-section">
+        <h2>No one drew this</h2>
+        <p>Eidos was not given this workflow. No human sketched it on a whiteboard, configured it in a workflow tool, or wrote it in a project plan. The system read the contracts — what "approved" means, what "compliant" means, what "cost-justified" means — and planned the execution order itself.</p>
+        <p>It identified that investigation must come first. It recognized that standards, competitive, and cost analysis can run in parallel — they don't depend on each other, only on the investigation. It knew the SCR draft can't start until all three analyses complete. It placed the human decision gate at exactly the right point — after all evidence is assembled, before any money is spent.</p>
+        <p>This looks like n8n. It looks like Zapier. It looks like a workflow someone configured. But no one configured it. The graph emerged from the contracts.</p>
+      </section>
+
+      <!-- ── What the agent produced ────────────────── -->
+      <section class="content-section">
+        <h2>What Eidos produced</h2>
+        <p>Ten stages. Nine executed by Eidos. One human decision. At each node, the system produced a concrete deliverable — not summaries, but documents a decision-maker could act on.</p>
+        <ul>
+          <li><strong>Investigation:</strong> Product capabilities mapped to organizational gaps. What the tool does, why the team needs it, what happens without it.</li>
+          <li><strong>Standards alignment:</strong> Expert scorecard across SOC 2, NIST 800-53, ISO 27001, and CIS Controls. Not "we should do this" — "here's which controls require it."</li>
+          <li><strong>Competitive analysis:</strong> Four alternatives evaluated on capability, cost, and fit. Clear winner with rationale.</li>
+          <li><strong>Cost analysis:</strong> Total cost of ownership with context — this tool costs less per month than the organization's coffee budget. Framed for a non-technical decision-maker.</li>
+          <li><strong>SCR document:</strong> Formal spend case review. Executive summary, business justification, risk assessment, implementation plan. Print-ready.</li>
+          <li><strong>Presentation:</strong> One-page executive brief. The decision-maker reads this, not the 15-page SCR.</li>
+        </ul>
+      </section>
+
+      <!-- ── The comparison ─────────────────────────── -->
+      <section class="content-section">
+        <h2>Traditional vs. contract-driven</h2>
+
+        <CompareTable leftLabel="Traditional approval" rightLabel="Contract-driven" leftVariant="muted" rightVariant="command">
+          <ul slot="left">
+            <li>3 people, 2-3 weeks</li>
+            <li>6 meetings</li>
+            <li>Inconsistent documentation</li>
+            <li>Political navigation</li>
+            <li>Someone draws the workflow</li>
+            <li>Requirements change = redraw</li>
+          </ul>
+          <ul slot="right">
+            <li>1 agent, 2 days</li>
+            <li>1 human decision</li>
+            <li>Every deliverable follows a contract</li>
+            <li>Evidence-based presentation</li>
+            <li>Eidos discovers the workflow</li>
+            <li>Contracts change = graph adapts</li>
+          </ul>
+        </CompareTable>
+      </section>
+
+      <!-- ── Why this matters ───────────────────────── -->
+      <section class="content-section">
+        <h2>Contracts, not workflows</h2>
+        <p>Workflow tools require a human to design the graph in advance. When the process changes — new compliance requirements, new approval thresholds, new stakeholders — someone reconfigures the tool. The workflow is the bottleneck.</p>
+        <p>In a contract-driven system, Eidos reads the contracts and discovers the graph. When the contracts change, the graph changes. No one reconfigures anything. The system adapts because the constraints adapted.</p>
+        <p>This is the difference between automated workflow and autonomous workflow. Automated means a human designed the machine and it runs. Autonomous means the system reads the goal and figures out the machine.</p>
+      </section>
+
+      <!-- ── The contract that started it ───────────── -->
+      <section class="content-section">
+        <h2>The contract that started it</h2>
+        <p>The entire 10-stage pipeline grew from a three-line job:</p>
+
+        <CodeBlock label="job.yaml">
+          <pre><code>source: security-platform-evaluation.md
+transcoder: enterprise-approval
+context: "New security tool needed. Budget
+  requires director approval. Must align
+  to existing compliance frameworks."</code></pre>
+        </CodeBlock>
+
+        <p>Three lines. Eidos read the contract for what "approved" means, discovered the graph, executed nine stages autonomously, and presented one decision to a human. The human said yes.</p>
+      </section>
+
+      <CallToAction
+        text="Read more about how DAGs of contracts replace hand-drawn workflows."
+        href="/dag"
+        label="The DAG of AI"
+      />
+
+      <RelatedLinks links={[
+        { href: "/dag", label: "The DAG of AI" },
+        { href: "/contract-driven-development", label: "Contracts, Not Skills" },
+        { href: "/minimum-viable-data", label: "Minimum Viable Data" },
+        { href: "/case-studies/grocery", label: "Case Study: Groceries" },
+      ]} />
+    </article>
+</Base>
+

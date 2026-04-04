@@ -128,8 +128,12 @@ pre .param { color: var(--color-secondary); }
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: var(--space-6) 0;
+  padding: var(--space-3) 0;
   border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-muted) 20%, transparent);
+  position: sticky;
+  top: 0;
+  background: var(--color-bg);
+  z-index: var(--z-overlay);
 }
 .mark > a {
   font-family: var(--font-heading);
